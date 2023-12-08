@@ -94,9 +94,40 @@ relation between triadic closure and income within a sample of
 independent egocentric networks; in such a case, as the networks are
 independent, a simple regression analysis may suffice.
 
+## When the network is random
+
+### Deterministic behavior
+
+In this case, the behavior is treated as given, *i.e.*, a
+covariate/feature of the model. When such is the case, the method of
+choice is the Exponential Random Graph Model \[ERGM\] (Lusher, Koskinen,
+and Robins 2013; Krivitsky 2012 and others).
+
+### Random behavior
+
+## Non-parametric approaches
+
+Other common scenarios involve more convoluted/complex questions. For
+instance, in the case of dyadic behavior Bell et al. (2019).
+
+In Tanaka and Vega Yon (2024), we study the prevalence of
+perception-based network motifs. While the ERGM framework would be a
+natural choice, as a first approach, we used non-parametric tests for
+hypothesis testing.
+
 # References
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-bellSensingEatingMimicry2019" class="csl-entry">
+
+Bell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol,
+Ridwan Alam, Meiyi Ma, Ifat Emi, John Lach, John A. Stankovic, and Kayla
+De La Haye. 2019. “Sensing Eating Mimicry Among Family Members.”
+*Translational Behavioral Medicine*.
+<https://doi.org/10.1093/tbm/ibz051>.
+
+</div>
 
 <div id="ref-hayeSmokingDiffusionNetworks2019" class="csl-entry">
 
@@ -104,6 +135,15 @@ Haye, Kayla de la, Heesung Shin, George G. Vega Yon, and Thomas W.
 Valente. 2019. “Smoking Diffusion Through Networks of Diverse, Urban
 American Adolescents over the High School Period.” *Journal of Health
 and Social Behavior*. <https://doi.org/10.1177/0022146519870521>.
+
+</div>
+
+<div id="ref-krivitskyExponentialfamilyRandomGraph2012"
+class="csl-entry">
+
+Krivitsky, Pavel N. 2012. “Exponential-Family Random Graph Models for
+Valued Networks.” *Electronic Journal of Statistics* 6: 1100–1128.
+<https://doi.org/10.1214/12-EJS696>.
 
 </div>
 
@@ -121,6 +161,23 @@ d’économie Industrielle* 123 (123): 19–44.
 LeSage, James P., and R. Kelley Pace. 2014. “The Biggest Myth in Spatial
 Econometrics.” *Econometrics* 2 (4): 217–49.
 <https://doi.org/10.2139/ssrn.1725503>.
+
+</div>
+
+<div id="ref-lusherExponentialRandomGraph2013" class="csl-entry">
+
+Lusher, Dean, Johan Koskinen, and Garry Robins. 2013. *Exponential
+Random Graph Models for Social Networks: Theory, Methods, and
+Applications*. Cambridge University Press.
+
+</div>
+
+<div id="ref-tanakaImaginaryNetworkMotifs2024" class="csl-entry">
+
+Tanaka, Kyosuke, and George G. Vega Yon. 2024. “Imaginary Network
+Motifs: Structural Patterns of False Positives and Negatives in Social
+Networks.” *Social Networks* 78 (July): 65–80.
+<https://doi.org/10.1016/j.socnet.2023.11.005>.
 
 </div>
 
