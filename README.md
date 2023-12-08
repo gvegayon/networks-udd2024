@@ -30,6 +30,16 @@ The course contents are:
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
+<div id="ref-bellSensingEatingMimicry2019" class="csl-entry">
+
+Bell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol,
+Ridwan Alam, Meiyi Ma, Ifat Emi, John Lach, John A. Stankovic, and Kayla
+De La Haye. 2019. “Sensing Eating Mimicry Among Family Members.”
+*Translational Behavioral Medicine*.
+<https://doi.org/10.1093/tbm/ibz051>.
+
+</div>
+
 <div id="ref-brooksHandbookMarkovChain2011" class="csl-entry">
 
 Brooks, S., A. Gelman, G. Jones, and X. L. Meng. 2011. *Handbook of
@@ -121,6 +131,15 @@ Stivala, Alex, Garry Robins, and Alessandro Lomi. 2020. “Exponential
 Random Graph Model Parameter Estimation for Very Large Directed
 Networks.” *PLoS ONE* 15 (1): 1–23.
 <https://doi.org/10.1371/journal.pone.0227804>.
+
+</div>
+
+<div id="ref-tanakaImaginaryNetworkMotifs2024" class="csl-entry">
+
+Tanaka, Kyosuke, and George G. Vega Yon. 2024. “Imaginary Network
+Motifs: Structural Patterns of False Positives and Negatives in Social
+Networks.” *Social Networks* 78 (July): 65–80.
+<https://doi.org/10.1016/j.socnet.2023.11.005>.
 
 </div>
 
