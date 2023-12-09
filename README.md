@@ -184,7 +184,8 @@ Vega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021.
 
 This is an ongoing project. The course is being developed and will be
 updated as we go. If you have any comments or suggestions, please let me
-know.
+know. The generation of the course materials was assisted by AI tools,
+namely, GitHub copilot.
 
 ## Code of Conduct
 

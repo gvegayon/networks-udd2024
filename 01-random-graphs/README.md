@@ -126,4 +126,79 @@ nplot(
 
 ![](README_files/figure-commonmark/02-ws-random-2.png)
 
+# Scale-free networks
+
+Scale-free networks are networks where the degree distribution follows a
+power-law distribution. The power-law distribution is a heavy-tailed
+distribution, which means that it has a long tail of high-degree nodes.
+The power-law distribution is defined as follows:
+
+$$
+p(k) = C k^{-\gamma}
+$$
+
+where $C$ is a normalization constant and $\gamma$ is the power-law
+exponent. The power-law exponent is usually between 2 and 3, but it can
+be any value larger than 2. The power-law distribution is a special case
+of the more general class of distributions called the Pareto
+distribution.
+
+Scale-free networks are generated using the Barabási–Albert model, which
+was introduced by Albert-László Barabási and Réka Albert in 1999. The
+model is defined by two parameters: $n$ and $m$. The parameter $n$ is
+the number of nodes in the graph, and $m$ is the number of edges added
+at each time step. The model is generated as follows:
+
+1.  Start with a graph of $m$ nodes, where each node is connected to all
+    other nodes.
+
+2.  At each time step, add a new node to the graph and connect it to $m$
+    existing nodes. The probability that a new node is connected to an
+    existing node $i$ is proportional to the degree of $i$.
+
+## Code example
+
+``` r
+# Model parameters
+n <- 500
+m <- 2
+
+# Generating the graph
+set.seed(3312)
+g <- matrix(0, nrow = n, ncol = n)
+g[1:m, 1:m] <- 1
+diag(g) <- 0
+
+# Adding nodes
+for (i in (m + 1):n) {
+
+  # Selecting the nodes to connect to
+  ids <- sample(
+    x       = 1:(i-1), # Up to i-1
+    size    = m,       # m nodes
+    replace = FALSE,   # No replacement
+    # Probability proportional to the degree
+    prob    = colSums(g[, 1:(i-1), drop = FALSE])
+    )
+
+  # Adding the edges
+  g[i, ids] <- 1
+  g[ids, i] <- 1
+
+}
+
+# Visualizing the degree distribution
+library(ggplot2)
+data.frame(degree = colSums(g)) |>
+  ggplot(aes(degree)) +
+  geom_histogram() +
+  scale_x_log10() +
+  labs(
+    x = "Degree\n(log10 scale)",
+    y = "Count"
+  )
+```
+
+![](README_files/figure-commonmark/03-ba-random-1.png)
+
 # References
