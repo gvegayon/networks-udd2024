@@ -1,0 +1,26 @@
+---
+format: gfm
+bibliography: ../references.bib
+number-sections: true
+title: Behavior and coevolution
+---
+
+# Introduction
+
+This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, in this section we focus on two classes of analysis: When the network is fixed, and when both network and behavior influence each other.
+
+Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. If the focus of our research is on individual-level outcomes embedded in a network and not on the network itself, data analysis becomes much simpler. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) when individual observations are networks themselves, and (3) when network effects are contemporaneous. On the other hand, if network and behavior co-evolve, the most common approach is to use 
+
+# Network effects are lagged
+
+# Network effects are contemporaneous
+
+# Network effects are endogenous
+
+Here we have two different approaches: Spatial Autocorrelation [SAR], and 
+Autologistic actor attribute model [ALAAM]. The first one is a generalization of the linear regression model that accounts for spatial dependence. The second, is a close relative of ERGMs that treats covariates as endogenous and network as exogenous.
+
+## Spatial Autocorrelation
+
+The SAR model can be used to do statistical inference on network exposure effects. The general form is:
+
