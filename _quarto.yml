@@ -22,3 +22,7 @@ website:
 format:
   html:
     html-math-method: katex
+    bibliography: ../references.bib
+    toc: true
+    number-sections: true
+    embed-resources: true

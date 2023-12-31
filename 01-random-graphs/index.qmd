@@ -1,6 +1,4 @@
 ---
-bibliography: ../references.bib
-number-sections: true
 title: Random graphs
 ---
 

@@ -21,7 +21,7 @@ Whether we treat the network as given or endogenous sets the complexity of condu
 If we assume that network influence in the form of exposure is lagged, we have one of the simplest cases for network inference. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:
 
 $$
-y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right) + \tpose{\bm{ \theta }}\bm{w_i} + \varepsilon,\quad \varepsilon \sim \mbox{N}(0, \sigma^2)
+y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right) + \tpose{\bm{ \theta }}\bm{w_i} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
 $$
 
 where $y_{it}$ is the outcome of individual $i$ at time $t$, $X_{ij}$ is the $ij$-th entry of the adjacency matrix, $\bm{\theta}$ is a vector of coefficients, $\bm{w_i}$ is a vector of features/covariates of individual $i$, and $\varepsilon_i$ is a normally distributed error. Here, the key component is $\rho$: the coefficient associated with the network exposure effect.
@@ -38,7 +38,7 @@ Autologistic actor attribute model [ALAAM] [@robinsNetworkModelsSocial2001b]. Th
 **SAR** Formally, SAR models can be used to estimate network exposure effects. The general form is:
 
 $$
-\boldsymbol{y} = \rho \boldsymbol{W} \boldsymbol{y} + \boldsymbol{\theta}^{\mathbf{t}} \boldsymbol{X} + \epsilon,\quad \epsilon \sim \mbox{MVN}(0, \Sigma)
+\boldsymbol{y} = \rho \boldsymbol{W} \boldsymbol{y} + \boldsymbol{\theta}^{\mathbf{t}} \boldsymbol{X} + \epsilon,\quad \epsilon \sim \text{MVN}(0, \Sigma)
 $$
 
 where $\bm{y}\equiv \{y_i\}$ is a vector of outcomes the outcome, $\rho$ is an autocorrelation coefficient, $\bm{W} \in \{w_{ij}\}$ is a row-stochastic square matrix of size $n$, $\bm{\theta}$ is a vector of model parameters, $\bm{X}$ is the corresponding matrix with exogenous variables, and $\epsilon$ is a vector of errors that distributes multivariate normal with mean 0 and covariance $\Sigma$.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the `spdep` package in R [@Bivand2022].
