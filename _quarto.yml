@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+  render: 
+    - "*/index.qmd"
+    - "index.qmd"
+
+website:
+  title: UDD networks 2024
+  
+  navbar: 
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Overview
+        href: 00-overview/index.qmd
+      - text: Random graphs
+        href: 01-random-graphs/index.qmd
+      - text: Behavior and coevolution
+        href: 02-behavior-and-coevolution/index.qmd
+
+format:
+  html:
+    html-math-method: katex

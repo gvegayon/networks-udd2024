@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.298">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UDD networks 2024 - Behavior and coevolution</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">UDD networks 2024</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../00-overview/index.html" rel="" target="">
+ <span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../01-random-graphs/index.html" rel="" target="">
+ <span class="menu-text">Random graphs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../02-behavior-and-coevolution/index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Behavior and coevolution</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Behavior and coevolution</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- \newcommand{\bmi}[1]{\boldsymbol{#1}} -->
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, in this section we focus on two classes of analysis: When the network is fixed, and when both network and behavior influence each other.</p>
+<p>Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. If the focus of our research is on individual-level outcomes embedded in a network and not on the network itself, data analysis becomes much simpler. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous.</p>
+</section>
+<section id="lagged-exposure" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Lagged exposure</h1>
+<p>If we assume that network influence in the form of exposure is lagged, we have one of the simplest cases for network inference. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:</p>
+<p><span class="math display">
+y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right) + \bm{ \theta }^{\mathbf{t}}\bm{w_i} + \varepsilon,\quad \varepsilon \sim \mbox{N}(0, \sigma^2)
+</span></p>
+<p>where <span class="math inline">y_{it}</span> is the outcome of individual <span class="math inline">i</span> at time <span class="math inline">t</span>, <span class="math inline">X_{ij}</span> is the <span class="math inline">ij</span>-th entry of the adjacency matrix, <span class="math inline">\bm{\theta}</span> is a vector of coefficients, <span class="math inline">\bm{w_i}</span> is a vector of features/covariates of individual <span class="math inline">i</span>, and <span class="math inline">\varepsilon_i</span> is a normally distributed error. Here, the key component is <span class="math inline">\rho</span>: the coefficient associated with the network exposure effect.</p>
+<p>The exposure statistic, <span class="math inline">\left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right)</span>, is the weighted average of <span class="math inline">i</span>’s neighbors’ outcomes at time <span class="math inline">t-1</span>.</p>
+</section>
+<section id="egocentric-networks" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Egocentric networks</h1>
+</section>
+<section id="network-effects-are-endogenous" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Network effects are endogenous</h1>
+<p>Here we have two different approaches: Spatial Autocorrelation [SAR], and Autologistic actor attribute model [ALAAM] <span class="citation" data-cites="robinsNetworkModelsSocial2001b">(<a href="#ref-robinsNetworkModelsSocial2001b" role="doc-biblioref">Robins, Pattison, and Elliott 2001</a>)</span>. The first one is a generalization of the linear regression model that accounts for spatial dependence. The second is a close relative of ERGMs that treats covariates as endogenous and network as exogenous. Overall, ALAAMs are more flexible than SARs, but SARs are easier to estimate.</p>
+<p><strong>SAR</strong> Formally, SAR models can be used to estimate network exposure effects. The general form is:</p>
+<p><span class="math display">
+\boldsymbol{y} = \rho \boldsymbol{W} \boldsymbol{y} + \boldsymbol{\theta}^{\mathbf{t}} \boldsymbol{X} + \epsilon,\quad \epsilon \sim \mbox{MVN}(0, \Sigma)
+</span></p>
+<p>where <span class="math inline">\bm{y}\equiv \{y_i\}</span> is a vector of outcomes the outcome, <span class="math inline">\rho</span> is an autocorrelation coefficient, <span class="math inline">\bm{W} \in \{w_{ij}\}</span> is a row-stochastic square matrix of size <span class="math inline">n</span>, <span class="math inline">\bm{\theta}</span> is a vector of model parameters, <span class="math inline">\bm{X}</span> is the corresponding matrix with exogenous variables, and <span class="math inline">\epsilon</span> is a vector of errors that distributes multivariate normal with mean 0 and covariance <span class="math inline">\Sigma</span>.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the <code>spdep</code> package in R <span class="citation" data-cites="Bivand2022">(<a href="#ref-Bivand2022" role="doc-biblioref">Roger Bivand 2022</a>)</span>.</p>
+<p>Although the SAR model was developed for spatial data, it is easy to apply it to network data. Furthermore, each entry of the vector <span class="math inline">\bm{Wy}</span> has the same definition as network exposure, namely</p>
+<p><span class="math display">
+\bm{Wy} \equiv \left\{\sum_{j}y_j w_{ij}\right\}_i
+</span></p>
+<p>Since <span class="math inline">\bm{W}</span> is row-stochastic, <span class="math inline">\bm{Wy}</span> is a weighted average of the outcome of the neighbors of <span class="math inline">i</span>, <em>i.e.</em>, a vector of network exposures.</p>
+<p><strong>ALAAM</strong> While ALAAMs can also be used to estimate network exposure effects, we can use them to build more complex models beyond exposure. The general form is:</p>
+<p><span class="math display">
+\Pr\left(\bm{Y} = \bm{y}|\bm{W},\bm{X}\right) = \exp{\left(\bm{\theta}^{\mathbf{t}}s(\bm{y},\bm{W}, \bm{X})\right)}\times\eta(\bm{\theta})^{-1}
+</span></p>
+<p><span class="math display">
+\eta(\bm{\theta}) = \sum_{\bm{y}}\exp{\left(\bm{\theta}^{\mathbf{t}}s(\bm{y},\bm{W}, \bm{X})\right)}
+</span></p>
+<p>Where <span class="math inline">\bm{Y}\equiv \{y_i \in (0, 1)\}</span> is a vector of binary individual outcomes, <span class="math inline">\bm{W}</span> denotes the social network, <span class="math inline">\bm{X}</span> is a matrix of exogenous variables, <span class="math inline">\bm{\theta}</span> is a vector of model parameters, <span class="math inline">s(\bm{y},\bm{W}, \bm{X})</span> is a vector of sufficient statistics, and <span class="math inline">\eta(\bm{\theta})</span> is a normalizing constant.</p>
+<section id="code-example-sar" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="code-example-sar"><span class="header-section-number">4.1</span> Code example: SAR</h2>
+<p>The SAR model can be used to do statistical inference on network exposure effects. The general form is:</p>
+</section>
+<section id="code-example-alaam" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="code-example-alaam"><span class="header-section-number">4.2</span> Code example: ALAAM</h2>
+<p>This model, presented in <span class="citation" data-cites="robinsNetworkModelsSocial2001b">Robins, Pattison, and Elliott (<a href="#ref-robinsNetworkModelsSocial2001b" role="doc-biblioref">2001</a>)</span>,</p>
+</section>
+</section>
+<section id="references" class="level1" data-number="5">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">5 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-lusherExponentialRandomGraph2013" class="csl-entry" role="listitem">
+Lusher, Dean, Johan Koskinen, and Garry Robins. 2013. <em>Exponential <span>Random Graph Models</span> for <span>Social Networks</span>: <span>Theory</span>, <span>Methods</span>, and <span>Applications</span></em>. <span>Cambridge University Press</span>.
+</div>
+<div id="ref-robinsNetworkModelsSocial2001b" class="csl-entry" role="listitem">
+Robins, Garry, Philippa Pattison, and Peter Elliott. 2001. <span>“Network Models for Social Influence Processes.”</span> <em>Psychometrika</em> 66 (2): 161–89. <a href="https://doi.org/10.1007/BF02294834">https://doi.org/10.1007/BF02294834</a>.
+</div>
+<div id="ref-Bivand2022" class="csl-entry" role="listitem">
+Roger Bivand. 2022. <span>“R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.”</span> <em>Geographical Analysis</em> 54 (3): 488–518. <a href="https://doi.org/10.1111/gean.12319">https://doi.org/10.1111/gean.12319</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

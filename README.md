@@ -117,6 +117,22 @@ Networks.” *Science* 298 (5594): 824–27.
 
 </div>
 
+<div id="ref-robinsNetworkModelsSocial2001b" class="csl-entry">
+
+Robins, Garry, Philippa Pattison, and Peter Elliott. 2001. “Network
+Models for Social Influence Processes.” *Psychometrika* 66 (2): 161–89.
+<https://doi.org/10.1007/BF02294834>.
+
+</div>
+
+<div id="ref-Bivand2022" class="csl-entry">
+
+Roger Bivand. 2022. “R Packages for Analyzing Spatial Data: A
+Comparative Case Study with Areal Data.” *Geographical Analysis* 54 (3):
+488–518. <https://doi.org/10.1111/gean.12319>.
+
+</div>
+
 <div id="ref-snijdersNonParametricStandardErrors1999" class="csl-entry">
 
 Snijders, Tom A. B., and Stephen P. Borgatti. 1999. “Non-Parametric

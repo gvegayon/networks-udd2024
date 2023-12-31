@@ -1,5 +1,4 @@
 ---
-format: gfm
 bibliography: ../references.bib
 number-sections: true
 ---

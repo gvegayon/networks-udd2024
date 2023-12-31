@@ -1,8 +1,8 @@
 ---
-format: gfm
 nocite: |
   @*
 bibliography: references.bib
+embed-resources: true
 ---
 
 # Network modeling UDD 2024

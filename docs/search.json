@@ -1,0 +1,114 @@
+[
+  {
+    "objectID": "00-overview/index.html",
+    "href": "00-overview/index.html",
+    "title": "1 Fundamentals",
+    "section": "",
+    "text": "When networks are involved, statistical inference becomes tricky.\nThe IID assumption is violated by construction.\nAlthough it is tempting to use the same tools as in the IID case, they are not valid."
+  },
+  {
+    "objectID": "00-overview/index.html#when-the-network-is-deterministic",
+    "href": "00-overview/index.html#when-the-network-is-deterministic",
+    "title": "1 Fundamentals",
+    "section": "3.1 When the network is deterministic",
+    "text": "3.1 When the network is deterministic\n\n3.1.1 Single network\nIf the network is fixed (or treated as if it were fixed,) it is most likely that a traditional statistical analysis can be performed. For instance, if we are interested in influence behavior between adolescents, and we assume influence is a process that takes time, then a lagged regression may suffice (Haye et al. 2019; Valente and Vega Yon 2020; Valente, Wipfli, and Vega Yon 2019).\n\n\\mathbf{y}_t = \\rho \\mathbf{W} \\mathbf{y}_{t-1} + \\mathbf{X} \\bm{\\beta} + \\bm{\\varepsilon}, \\quad \\varepsilon_i \\sim \\mbox{N}\\left(0, \\sigma^2\\right)\n\\tag{1}\nwhere \\mathbf{y}_t is a vector of behaviors at time t, \\mathbf{W} is the row-stochastic adjacency matrix of the network, \\mathbf{X} is a matrix of covariates, and the elements of \\bm{\\varepsilon}\\equiv \\{\\varepsilon_i\\} distribute normal with mean zero and variance \\sigma^2.\nNonetheless, if assuming a lagged influence effect is no longer possible, then the regular regression model is no longer valid. Instead, we can resort to a Spatial Autocorrelation Regression Model [SAR] (see LeSage 2008):\n\n\\mathbf{y} = \\rho \\mathbf{W} \\mathbf{y} + \\mathbf{X} \\bm{\\beta} + \\bm{\\varepsilon},\\quad \\bm{\\varepsilon} \\sim \\mbox{MVN}\\left(0, \\Sigma^2\\right)\n\\tag{2}\nfurthermore\n\n\\mathbf{y} = \\left(I - \\rho\\mathbf{W}\\right)^{-1}\\left(\\mathbf{X}\\bm{\\beta} + \\bm{\\varepsilon}\\right)\n\nWhere \\bm{\\varepsilon} now distributes Multivariate Normal with mean zero and covariance matrix \\Sigma^2 \\mathbf{I}.\n\n\n\n\n\n\nTip\n\n\n\nWhat is the appropriate network to use in the SAR model? According to LeSage and Pace (2014), it is not very important. Since (I_n - \\rho \\mathbf{W})^{-1} = \\rho \\mathbf{W} + \\rho^2 \\mathbf{W}^2 + \\dots.\n\n\n\n\n3.1.2 Multiple networks\nSometimes, instead of a single network, we are interested in understanding how network-level properties affect the behavior of individuals. For instance, we may be interested in understanding the relation between triadic closure and income within a sample of independent egocentric networks; in such a case, as the networks are independent, a simple regression analysis may suffice."
+  },
+  {
+    "objectID": "00-overview/index.html#when-the-network-is-random",
+    "href": "00-overview/index.html#when-the-network-is-random",
+    "title": "1 Fundamentals",
+    "section": "3.2 When the network is random",
+    "text": "3.2 When the network is random\n\n3.2.1 Deterministic behavior\nIn this case, the behavior is treated as given, i.e., a covariate/feature of the model. When such is the case, the method of choice is the Exponential Random Graph Model [ERGM] (Lusher, Koskinen, and Robins 2013; Krivitsky 2012 and others).\n\n\n3.2.2 Random behavior"
+  },
+  {
+    "objectID": "00-overview/index.html#non-parametric-approaches",
+    "href": "00-overview/index.html#non-parametric-approaches",
+    "title": "1 Fundamentals",
+    "section": "3.3 Non-parametric approaches",
+    "text": "3.3 Non-parametric approaches\nOther common scenarios involve more convoluted/complex questions. For instance, in the case of dyadic behavior Bell et al. (2019).\nIn Tanaka and Vega Yon (2024), we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing."
+  },
+  {
+    "objectID": "01-random-graphs/index.html",
+    "href": "01-random-graphs/index.html",
+    "title": "Random graphs",
+    "section": "",
+    "text": "In this section, we will focus on reviewing the most common random graph models, how these are used, and what things are important to consider when using them. Later on in the course, we will focus on Exponential-Family Random Graph Models (ERGMs), which are a generalization of the models we will discuss here."
+  },
+  {
+    "objectID": "01-random-graphs/index.html#code-example",
+    "href": "01-random-graphs/index.html#code-example",
+    "title": "Random graphs",
+    "section": "2.1 Code example",
+    "text": "2.1 Code example\n\n# Model parameters\nn &lt;- 40\np &lt;- 0.1\n\n# Generating the graph, version 1\nset.seed(3312)\ng &lt;- matrix(as.integer(runif(n * n) &lt; p), nrow = n, ncol = n)\ndiag(g) &lt;- 0\n\n# Visualizing the network\nlibrary(igraph)\nlibrary(netplot)\nnplot(graph_from_adjacency_matrix(g))\n\n\n\n\nChallenge 1: How would you generate the graph using the two-step process described above?\nChallenge 2: Using a Generalized-Linear-Model [GLM], estimate p and its variance from the above network."
+  },
+  {
+    "objectID": "01-random-graphs/index.html#code-example-1",
+    "href": "01-random-graphs/index.html#code-example-1",
+    "title": "Random graphs",
+    "section": "3.1 Code example",
+    "text": "3.1 Code example\n\n# Creating a ring\nn &lt;- 10\nV &lt;- 1:n\nk &lt;- 3\np &lt;- .2\n\nE &lt;- NULL\nfor (i in 1:k) {\n  E &lt;- rbind(E, cbind(V, c(V[-c(1:i)], V[1:i])))\n}\n\n# Generating the ring layout\nlo &lt;- layout_in_circle(graph_from_edgelist(E))\n\n# Plotting with netplot\nnplot(\n  graph_from_edgelist(E),\n  layout = lo\n  )\n\n\n\n# Rewiring\nids &lt;- which(runif(nrow(E)) &lt; p)\nE[ids, 2] &lt;- sample(V, length(ids), replace = TRUE)\nnplot(\n  graph_from_edgelist(E),\n  layout = lo\n  )"
+  },
+  {
+    "objectID": "01-random-graphs/index.html#code-example-2",
+    "href": "01-random-graphs/index.html#code-example-2",
+    "title": "Random graphs",
+    "section": "4.1 Code example",
+    "text": "4.1 Code example\n\n# Model parameters\nn &lt;- 500\nm &lt;- 2\n\n# Generating the graph\nset.seed(3312)\ng &lt;- matrix(0, nrow = n, ncol = n)\ng[1:m, 1:m] &lt;- 1\ndiag(g) &lt;- 0\n\n# Adding nodes\nfor (i in (m + 1):n) {\n\n  # Selecting the nodes to connect to\n  ids &lt;- sample(\n    x       = 1:(i-1), # Up to i-1\n    size    = m,       # m nodes\n    replace = FALSE,   # No replacement\n    # Probability proportional to the degree\n    prob    = colSums(g[, 1:(i-1), drop = FALSE])\n    )\n\n  # Adding the edges\n  g[i, ids] &lt;- 1\n  g[ids, i] &lt;- 1\n\n}\n\n# Visualizing the degree distribution\nlibrary(ggplot2)\ndata.frame(degree = colSums(g)) |&gt;\n  ggplot(aes(degree)) +\n  geom_histogram() +\n  scale_x_log10() +\n  labs(\n    x = \"Degree\\n(log10 scale)\",\n    y = \"Count\"\n  )"
+  },
+  {
+    "objectID": "02-behavior-and-coevolution/index.html",
+    "href": "02-behavior-and-coevolution/index.html",
+    "title": "Behavior and coevolution",
+    "section": "",
+    "text": "This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, in this section we focus on two classes of analysis: When the network is fixed, and when both network and behavior influence each other.\nWhether we treat the network as given or endogenous sets the complexity of conducting statistical inference. If the focus of our research is on individual-level outcomes embedded in a network and not on the network itself, data analysis becomes much simpler. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous."
+  },
+  {
+    "objectID": "02-behavior-and-coevolution/index.html#code-example-sar",
+    "href": "02-behavior-and-coevolution/index.html#code-example-sar",
+    "title": "Behavior and coevolution",
+    "section": "4.1 Code example: SAR",
+    "text": "4.1 Code example: SAR\nThe SAR model can be used to do statistical inference on network exposure effects. The general form is:"
+  },
+  {
+    "objectID": "02-behavior-and-coevolution/index.html#code-example-alaam",
+    "href": "02-behavior-and-coevolution/index.html#code-example-alaam",
+    "title": "Behavior and coevolution",
+    "section": "4.2 Code example: ALAAM",
+    "text": "4.2 Code example: ALAAM\nThis model, presented in Robins, Pattison, and Elliott (2001),"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Network modeling UDD 2024",
+    "section": "",
+    "text": "If you are reading this, it is because you know that networks are everywhere. Network science is a rapidly growing field that has been applied to many different disciplines, from biology to sociology, from computer science to physics. In this course, we will go over advanced network science topics; particularly, statistical inference in networks. The course contents are:\n\nOverview of statistical inference.\nIntroduction to network science inference.\nMotif detection.\nGlobal statistics (e.g., modularity).\nRandom graphs (static).\nRandom graphs (dynamic).\nCo-evolution of networks and behavior.\nAdvanced topics (sampling and conditional models).\n\n\n\n\n\n\nBell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol, Ridwan Alam, Meiyi Ma, Ifat Emi, John Lach, John A. Stankovic, and Kayla De La Haye. 2019. “Sensing Eating Mimicry Among Family Members.” Translational Behavioral Medicine. https://doi.org/10.1093/tbm/ibz051.\n\n\nBrooks, S., A. Gelman, G. Jones, and X. L. Meng. 2011. Handbook of Markov Chain Monte Carlo. CRC Press.\n\n\nHaye, Kayla de la, Heesung Shin, George G. Vega Yon, and Thomas W. Valente. 2019. “Smoking Diffusion Through Networks of Diverse, Urban American Adolescents over the High School Period.” Journal of Health and Social Behavior. https://doi.org/10.1177/0022146519870521.\n\n\nKrivitsky, Pavel N. 2012. “Exponential-Family Random Graph Models for Valued Networks.” Electronic Journal of Statistics 6: 1100–1128. https://doi.org/10.1214/12-EJS696.\n\n\nKrivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023. “A Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks.” Journal of the American Statistical Association 0 (0): 1–21. https://doi.org/10.1080/01621459.2023.2242627.\n\n\nKrivitsky, Pavel N., David R. Hunter, Martina Morris, and Chad Klumb. 2023. “Ergm 4: New Features for Analyzing Exponential-Family Random Graph Models.” Journal of Statistical Software 105 (January): 1–44. https://doi.org/10.18637/jss.v105.i06.\n\n\nLeSage, James P. 2008. “An Introduction to Spatial Econometrics.” Revue d’économie Industrielle 123 (123): 19–44. https://doi.org/10.4000/rei.3887.\n\n\nLeSage, James P., and R. Kelley Pace. 2014. “The Biggest Myth in Spatial Econometrics.” Econometrics 2 (4): 217–49. https://doi.org/10.2139/ssrn.1725503.\n\n\nLusher, Dean, Johan Koskinen, and Garry Robins. 2013. Exponential Random Graph Models for Social Networks: Theory, Methods, and Applications. Cambridge University Press.\n\n\nMilo, R., S. Shen-Orr, S. Itzkovitz, N. Kashtan, D. Chklovskii, and U. Alon. 2002. “Network Motifs: Simple Building Blocks of Complex Networks.” Science 298 (5594): 824–27. https://doi.org/10.1126/science.298.5594.824.\n\n\nRobins, Garry, Philippa Pattison, and Peter Elliott. 2001. “Network Models for Social Influence Processes.” Psychometrika 66 (2): 161–89. https://doi.org/10.1007/BF02294834.\n\n\nRoger Bivand. 2022. “R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.” Geographical Analysis 54 (3): 488–518. https://doi.org/10.1111/gean.12319.\n\n\nSnijders, Tom A. B., and Stephen P. Borgatti. 1999. “Non-Parametric Standard Errors and Tests for Network Statistics.” Connections 22 (2): 1–10.\n\n\nStivala, Alex, Garry Robins, and Alessandro Lomi. 2020. “Exponential Random Graph Model Parameter Estimation for Very Large Directed Networks.” PLoS ONE 15 (1): 1–23. https://doi.org/10.1371/journal.pone.0227804.\n\n\nTanaka, Kyosuke, and George G. Vega Yon. 2024. “Imaginary Network Motifs: Structural Patterns of False Positives and Negatives in Social Networks.” Social Networks 78 (July): 65–80. https://doi.org/10.1016/j.socnet.2023.11.005.\n\n\nValente, Thomas W., and George G. Vega Yon. 2020. “Diffusion/Contagion Processes on Social Networks.” Health Education & Behavior 47 (2): 235–48. https://doi.org/10.1177/1090198120901497.\n\n\nValente, Thomas W., Heather Wipfli, and George G. Vega Yon. 2019. “Network Influences on Policy Implementation: Evidence from a Global Health Treaty.” Social Science and Medicine. https://doi.org/10.1016/j.socscimed.2019.01.008.\n\n\nVega Yon, George G. 2023. “Power and Multicollinearity in Small Networks: A Discussion of ‘Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks’ by Krivitsky, Coletti & Hens.” Journal Of The American Statistical Association.\n\n\nVega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. “Exponential Random Graph Models for Little Networks.” Social Networks 64 (August 2020): 225–38. https://doi.org/10.1016/j.socnet.2020.07.005.\n\n\n\n\n\nThis is an ongoing project. The course is being developed and will be updated as we go. If you have any comments or suggestions, please let me know. The generation of the course materials was assisted by AI tools, namely, GitHub copilot.\n\n\n\nPlease note that the networks-udd2024 project is released with a Contributor Code of Conduct. By contributing to this project, you agree to abide by its terms."
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "Network modeling UDD 2024",
+    "section": "",
+    "text": "If you are reading this, it is because you know that networks are everywhere. Network science is a rapidly growing field that has been applied to many different disciplines, from biology to sociology, from computer science to physics. In this course, we will go over advanced network science topics; particularly, statistical inference in networks. The course contents are:\n\nOverview of statistical inference.\nIntroduction to network science inference.\nMotif detection.\nGlobal statistics (e.g., modularity).\nRandom graphs (static).\nRandom graphs (dynamic).\nCo-evolution of networks and behavior.\nAdvanced topics (sampling and conditional models)."
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Network modeling UDD 2024",
+    "section": "",
+    "text": "Bell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol, Ridwan Alam, Meiyi Ma, Ifat Emi, John Lach, John A. Stankovic, and Kayla De La Haye. 2019. “Sensing Eating Mimicry Among Family Members.” Translational Behavioral Medicine. https://doi.org/10.1093/tbm/ibz051.\n\n\nBrooks, S., A. Gelman, G. Jones, and X. L. Meng. 2011. Handbook of Markov Chain Monte Carlo. CRC Press.\n\n\nHaye, Kayla de la, Heesung Shin, George G. Vega Yon, and Thomas W. Valente. 2019. “Smoking Diffusion Through Networks of Diverse, Urban American Adolescents over the High School Period.” Journal of Health and Social Behavior. https://doi.org/10.1177/0022146519870521.\n\n\nKrivitsky, Pavel N. 2012. “Exponential-Family Random Graph Models for Valued Networks.” Electronic Journal of Statistics 6: 1100–1128. https://doi.org/10.1214/12-EJS696.\n\n\nKrivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023. “A Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks.” Journal of the American Statistical Association 0 (0): 1–21. https://doi.org/10.1080/01621459.2023.2242627.\n\n\nKrivitsky, Pavel N., David R. Hunter, Martina Morris, and Chad Klumb. 2023. “Ergm 4: New Features for Analyzing Exponential-Family Random Graph Models.” Journal of Statistical Software 105 (January): 1–44. https://doi.org/10.18637/jss.v105.i06.\n\n\nLeSage, James P. 2008. “An Introduction to Spatial Econometrics.” Revue d’économie Industrielle 123 (123): 19–44. https://doi.org/10.4000/rei.3887.\n\n\nLeSage, James P., and R. Kelley Pace. 2014. “The Biggest Myth in Spatial Econometrics.” Econometrics 2 (4): 217–49. https://doi.org/10.2139/ssrn.1725503.\n\n\nLusher, Dean, Johan Koskinen, and Garry Robins. 2013. Exponential Random Graph Models for Social Networks: Theory, Methods, and Applications. Cambridge University Press.\n\n\nMilo, R., S. Shen-Orr, S. Itzkovitz, N. Kashtan, D. Chklovskii, and U. Alon. 2002. “Network Motifs: Simple Building Blocks of Complex Networks.” Science 298 (5594): 824–27. https://doi.org/10.1126/science.298.5594.824.\n\n\nRobins, Garry, Philippa Pattison, and Peter Elliott. 2001. “Network Models for Social Influence Processes.” Psychometrika 66 (2): 161–89. https://doi.org/10.1007/BF02294834.\n\n\nRoger Bivand. 2022. “R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.” Geographical Analysis 54 (3): 488–518. https://doi.org/10.1111/gean.12319.\n\n\nSnijders, Tom A. B., and Stephen P. Borgatti. 1999. “Non-Parametric Standard Errors and Tests for Network Statistics.” Connections 22 (2): 1–10.\n\n\nStivala, Alex, Garry Robins, and Alessandro Lomi. 2020. “Exponential Random Graph Model Parameter Estimation for Very Large Directed Networks.” PLoS ONE 15 (1): 1–23. https://doi.org/10.1371/journal.pone.0227804.\n\n\nTanaka, Kyosuke, and George G. Vega Yon. 2024. “Imaginary Network Motifs: Structural Patterns of False Positives and Negatives in Social Networks.” Social Networks 78 (July): 65–80. https://doi.org/10.1016/j.socnet.2023.11.005.\n\n\nValente, Thomas W., and George G. Vega Yon. 2020. “Diffusion/Contagion Processes on Social Networks.” Health Education & Behavior 47 (2): 235–48. https://doi.org/10.1177/1090198120901497.\n\n\nValente, Thomas W., Heather Wipfli, and George G. Vega Yon. 2019. “Network Influences on Policy Implementation: Evidence from a Global Health Treaty.” Social Science and Medicine. https://doi.org/10.1016/j.socscimed.2019.01.008.\n\n\nVega Yon, George G. 2023. “Power and Multicollinearity in Small Networks: A Discussion of ‘Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks’ by Krivitsky, Coletti & Hens.” Journal Of The American Statistical Association.\n\n\nVega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. “Exponential Random Graph Models for Little Networks.” Social Networks 64 (August 2020): 225–38. https://doi.org/10.1016/j.socnet.2020.07.005."
+  },
+  {
+    "objectID": "index.html#disclaimer",
+    "href": "index.html#disclaimer",
+    "title": "Network modeling UDD 2024",
+    "section": "",
+    "text": "This is an ongoing project. The course is being developed and will be updated as we go. If you have any comments or suggestions, please let me know. The generation of the course materials was assisted by AI tools, namely, GitHub copilot."
+  },
+  {
+    "objectID": "index.html#code-of-conduct",
+    "href": "index.html#code-of-conduct",
+    "title": "Network modeling UDD 2024",
+    "section": "",
+    "text": "Please note that the networks-udd2024 project is released with a Contributor Code of Conduct. By contributing to this project, you agree to abide by its terms."
+  }
+]
