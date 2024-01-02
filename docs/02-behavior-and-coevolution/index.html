@@ -4567,7 +4567,9 @@ vertical-align: -.125em;
   <li><a href="#code-example-sar" id="toc-code-example-sar" class="nav-link" data-scroll-target="#code-example-sar"><span class="header-section-number">4.1</span> Code example: SAR</a></li>
   <li><a href="#code-example-alaam" id="toc-code-example-alaam" class="nav-link" data-scroll-target="#code-example-alaam"><span class="header-section-number">4.2</span> Code example: ALAAM</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5</span> References</a></li>
+  <li><a href="#coevolution" id="toc-coevolution" class="nav-link" data-scroll-target="#coevolution"><span class="header-section-number">5</span> Coevolution</a></li>
+  <li><a href="#excercises" id="toc-excercises" class="nav-link" data-scroll-target="#excercises"><span class="header-section-number">6</span> Excercises</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -4594,12 +4596,12 @@ vertical-align: -.125em;
 <!-- \newcommand{\bmi}[1]{\boldsymbol{#1}} -->
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, in this section we focus on two classes of analysis: When the network is fixed, and when both network and behavior influence each other.</p>
-<p>Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. If the focus of our research is on individual-level outcomes embedded in a network and not on the network itself, data analysis becomes much simpler. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous.</p>
+<p>This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, this section focuses on two classes of analysis: When the network is fixed and when both network and behavior influence each other.</p>
+<p>Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. Data analysis becomes much more straightforward if our research focuses on individual-level outcomes embedded in a network and not on the network itself. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous.</p>
 </section>
 <section id="lagged-exposure" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Lagged exposure</h1>
-<p>If we assume that network influence in the form of exposure is lagged, we have one of the simplest cases for network inference. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:</p>
+<p>If we assume that network influence in the form of exposure is lagged, we have one of the most straightforward cases for network inference. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:</p>
 <p><span class="math display">
 y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right) + \bm{ \theta }^{\mathbf{t}}\bm{w_i} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
 </span></p>
@@ -4865,17 +4867,28 @@ test value: 0.051083, p-value: 0.82119</code></pre>
 </section>
 <section id="code-example-alaam" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="code-example-alaam"><span class="header-section-number">4.2</span> Code example: ALAAM</h2>
-<p>This model, presented in <span class="citation" data-cites="robinsNetworkModelsSocial2001b">Robins, Pattison, and Elliott (<a href="#ref-robinsNetworkModelsSocial2001b" role="doc-biblioref">2001</a>)</span>,</p>
+<p>To date, there is no R package implementing the ALAAM framework. Nevertheless, you can fit ALAAMs using the PNet software developed by the Melnet group at the University of Melbourne (click <a href="https://www.melnet.org.au/pnet/" target="_blank">here</a>).</p>
+<p>Because of the similarities, ALAAMs can be implemented using ERGMs. Because of the novelty of it, the coding example will be left as a potential class project. We will post a fully-featured example after the workshop.</p>
 </section>
 </section>
-<section id="references" class="level1" data-number="5">
+<section id="coevolution" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Coevolution</h1>
+<p>Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs <span class="citation" data-cites="wangUnderstandingNetworksExponentialfamily2023 ernmsFellows2023">(<a href="#ref-wangUnderstandingNetworksExponentialfamily2023" role="doc-biblioref">Wang, Fellows, and Handcock 2023</a>; <a href="#ref-ernmsFellows2023" role="doc-biblioref">Fellows 2012</a>)</span>.</p>
+</section>
+<section id="excercises" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Excercises</h1>
+</section>
+<section id="references" class="level1" data-number="7">
 
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">5 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">7 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-ernmsFellows2023" class="csl-entry" role="listitem">
+Fellows, Ian E. 2012. <span>“Exponential Family Random Network Models.”</span> <em>ProQuest Dissertations and Theses</em>. PhD thesis. <a href="https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/dissertations-theses/exponential-family-random-network-models/docview/1221548720/se-2">https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/dissertations-theses/exponential-family-random-network-models/docview/1221548720/se-2</a>.
+</div>
 <div id="ref-Handcock2023" class="csl-entry" role="listitem">
 Handcock, Mark S., David R. Hunter, Carter T. Butts, Steven M. Goodreau, Pavel N. Krivitsky, and Martina Morris. 2023. <em>Ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks</em>. The Statnet Project (<a href="https://statnet.org" class="uri">https://statnet.org</a>). <a href="https://CRAN.R-project.org/package=ergm">https://CRAN.R-project.org/package=ergm</a>.
 </div>
@@ -4890,6 +4903,9 @@ Robins, Garry, Philippa Pattison, and Peter Elliott. 2001. <span>“Network Mode
 </div>
 <div id="ref-Bivand2022" class="csl-entry" role="listitem">
 Roger Bivand. 2022. <span>“R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.”</span> <em>Geographical Analysis</em> 54 (3): 488–518. <a href="https://doi.org/10.1111/gean.12319">https://doi.org/10.1111/gean.12319</a>.
+</div>
+<div id="ref-wangUnderstandingNetworksExponentialfamily2023" class="csl-entry" role="listitem">
+Wang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. <span>“Understanding Networks with Exponential-Family Random Network Models.”</span> <em>Social Networks</em>, August, S0378873323000497. <a href="https://doi.org/10.1016/j.socnet.2023.07.003">https://doi.org/10.1016/j.socnet.2023.07.003</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

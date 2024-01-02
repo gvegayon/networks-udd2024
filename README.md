@@ -22,7 +22,7 @@ The course contents are:
 
 - Random graphs (dynamic).
 
-- Co-evolution of networks and behavior.
+- Coevolution of networks and behavior.
 
 - Advanced topics (sampling and conditional models).
 

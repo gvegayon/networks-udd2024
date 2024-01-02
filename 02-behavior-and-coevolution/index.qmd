@@ -11,13 +11,13 @@ nocite: |
 
 # Introduction
 
-This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, in this section we focus on two classes of analysis: When the network is fixed, and when both network and behavior influence each other.
+This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, this section focuses on two classes of analysis: When the network is fixed and when both network and behavior influence each other.
 
-Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. If the focus of our research is on individual-level outcomes embedded in a network and not on the network itself, data analysis becomes much simpler. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous.
+Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. Data analysis becomes much more straightforward if our research focuses on individual-level outcomes embedded in a network and not on the network itself. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous.
 
 # Lagged exposure
 
-If we assume that network influence in the form of exposure is lagged, we have one of the simplest cases for network inference. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:
+If we assume that network influence in the form of exposure is lagged, we have one of the most straightforward cases for network inference. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:
 
 $$
 y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right) + \tpose{\bm{ \theta }}\bm{w_i} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
@@ -216,6 +216,17 @@ summary(fit)
 
 ## Code example: ALAAM
 
-This model, presented in @robinsNetworkModelsSocial2001b,
+To date, there is no R package implementing the ALAAM framework. Nevertheless, you can fit ALAAMs using the PNet software developed by the Melnet group at the University of Melbourne (click [here](https://www.melnet.org.au/pnet/){target="_blank"}).
+
+Because of the similarities, ALAAMs can be implemented using ERGMs. Because of the novelty of it, the coding example will be left as a potential class project. We will post a fully-featured example after the workshop.
+
+# Coevolution
+
+Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs [@wangUnderstandingNetworksExponentialfamily2023; @ernmsFellows2023].
+
+# Excercises
+
+
+
 
 # References
