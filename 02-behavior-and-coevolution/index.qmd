@@ -4,7 +4,6 @@ number-sections: true
 title: Behavior and coevolution
 nocite: |
   @lusherExponentialRandomGraph2013
-# include-before-body: ["../notation.tex"]
 ---
 
 <!-- \newcommand{\bmi}[1]{\boldsymbol{#1}} -->
@@ -28,7 +27,109 @@ where $y_{it}$ is the outcome of individual $i$ at time $t$, $X_{ij}$ is the $ij
 
 The exposure statistic, $\left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right)$, is the weighted average of $i$'s neighbors' outcomes at time $t-1$. 
 
+## Code example: Lagged exposure
+
+The following code example shows how to estimate a lagged exposure effect using the `glm` function in R. The model we will simulate and estimate features a Bernoulli graph with 1,000 nodes and a density of 0.01.
+
+$$
+y_{it} = \theta_1 + \rho \text{Exposure}_{it} + \theta_2 w_i + \varepsilon
+$$
+  
+
+where $\text{Exposure}_{it}$ is the exposure statistic defined above, and $w_i$ is a vector of covariates. 
+
+```{r}
+#| label: lagged-exposure
+# Simulating data
+n <- 1000
+time <- 2
+theta <- c(-1, 3)
+
+# Sampling a bernoilli network
+set.seed(3132)
+p <- 0.01
+X <- matrix(rbinom(n^2, 1, p), nrow = n)
+diag(X) <- 0
+
+# Covariate
+W <- matrix(rnorm(n), nrow = n)
+
+# Simulating the outcome
+rho <- 0.5
+Y0 <- cbind(rnorm(n))
+
+# The lagged exposure
+expo <- (X %*% Y0)/rowSums(X)
+Y1 <- theta[1] + rho * expo + W * theta[2] + rnorm(n)
+```
+
+Now we fit the model using GLM, in this case, linear Regression
+
+```{r}
+#| label: lagged-exposure-fit
+fit <- glm(Y1 ~ expo + W, family = "gaussian")
+summary(fit)
+```
+
+
 # Egocentric networks
+
+Generally, when we use egocentric networks and egos' outcomes, we are thinking in a model where one observation is the pair $(y_i, X_i)$, this is, the outcome of individual $i$ and the egocentric network of individual $i$. When such is the case, since (a) networks are independent across egos and (b) the networks are fixed, like the previous case, a simple linear regression model is enough to conduct the analyses. A typical model looks like this:
+
+$$
+\bm{y} = \tpose{\bm{\theta}_{x}}s(\bm{X}) + \tpose{\bm{\theta}}\bm{w} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
+$$
+
+Where $\bm{y}$ is a vector of outcomes, $\bm{X}$ is a matrix of egocentric networks, $\bm{w}$ is a vector of covariates, $\bm{\theta}$ is a vector of coefficients, and $\varepsilon$ is a vector of errors. The key component here is $s(\bm{X})$, which is a vector of sufficient statistics of the egocentric networks. For example, if we are interested in the number of ties, $s(\bm{X})$ is a vector of the number of ties of each ego.
+
+## Code example: Egocentric networks
+
+For this example, we will simulate a stream of 1,000 Bernoulli graphs looking into the probability of school dropout. Each network will have between 4 and 10 nodes and have a density of 0.4. The data-generating process is as follows:
+
+$$
+{\Pr{}}_{\bm{\theta}}\left(Y_i=1\right) = \text{logit}^{-1}\left(\bm{\theta}_x s(\bm{X}_i) \right)
+$$
+
+Where $s(X) \equiv \left(\text{density}, \text{n mutual ties}\right)$, and $\bm{\theta}_x = (0.5, -1)$. This model only features sufficient statistics. We start by simulating the networks
+
+```{r}
+#| label: egocentric-networks
+set.seed(331)
+n <- 1000
+sizes <- sample(4:10, n, replace = TRUE)
+
+# Simulating the networks
+X <- lapply(sizes, function(x) matrix(rbinom(x^2, 1, 0.4), nrow = x))
+X <- lapply(X, \(x) {diag(x) <- 0; x})
+
+# Inspecting the first 5
+head(X, 5)
+```
+
+Using the `ergm` R package [@Handcock2023; @Hunter2008], we can extract the associated sufficient statistics of the egocentric networks:
+
+```{r}
+#| label: egocentric-networks-stats
+#| message: false
+#| warning: false
+library(ergm)
+stats <- lapply(X, \(x) summary_formula(x ~ density + mutual))
+
+# Turning the list into a matrix
+stats <- do.call(rbind, stats)
+
+# Inspecting the first 5
+head(stats, 5)
+```
+
+We now simulate the outcomes
+
+```{r}
+#| label: egocentric-networks-outcomes
+y <- rbinom(n, 1, plogis(stats %*% c(0.5, -1)))
+glm(y ~ stats, family = binomial(link = "logit")) |>
+  summary()
+```
 
 # Network effects are endogenous
 
@@ -41,7 +142,7 @@ $$
 \boldsymbol{y} = \rho \boldsymbol{W} \boldsymbol{y} + \boldsymbol{\theta}^{\mathbf{t}} \boldsymbol{X} + \epsilon,\quad \epsilon \sim \text{MVN}(0, \Sigma)
 $$
 
-where $\bm{y}\equiv \{y_i\}$ is a vector of outcomes the outcome, $\rho$ is an autocorrelation coefficient, $\bm{W} \in \{w_{ij}\}$ is a row-stochastic square matrix of size $n$, $\bm{\theta}$ is a vector of model parameters, $\bm{X}$ is the corresponding matrix with exogenous variables, and $\epsilon$ is a vector of errors that distributes multivariate normal with mean 0 and covariance $\Sigma$.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the `spdep` package in R [@Bivand2022].
+where $\bm{y}\equiv \{y_i\}$ is a vector of outcomes the outcome, $\rho$ is an autocorrelation coefficient, $\bm{W} \in \{w_{ij}\}$ is a row-stochastic square matrix of size $n$, $\bm{\theta}$ is a vector of model parameters, $\bm{X}$ is the corresponding matrix with exogenous variables, and $\epsilon$ is a vector of errors that distributes multivariate normal with mean 0 and covariance $\Sigma$.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the `spatialreg` package in R [@Bivand2022].
 
 
 Although the SAR model was developed for spatial data, it is easy to apply it to network data. Furthermore, each entry of the vector $\bm{Wy}$ has the same definition as network exposure, namely
@@ -67,7 +168,51 @@ Where $\bm{Y}\equiv \{y_i \in (0, 1)\}$ is a vector of binary individual outcome
 
 ## Code example: SAR
 
-The SAR model can be used to do statistical inference on network exposure effects. The general form is:
+Simulation of SAR models can be done using the following observation: Although the outcome shows on both sides of the equation, we can isolate it in one side and solve for it; formally:
+
+$$
+\bm{y} = \rho \bm{X} \bm{y} + \tpose{\bm{\theta}}\bm{W} + \varepsilon \implies \bm{y} = \left(\bm{I} - \rho \bm{X}\right)^{-1}\tpose{\bm{\theta}}\bm{W} + \left(\bm{I} - \rho \bm{X}\right)^{-1}\varepsilon
+$$
+
+
+
+```{r}
+#| label: sar
+#| cache: true
+set.seed(4114)
+n <- 1000
+
+# Simulating the network
+p <- 0.01
+X <- matrix(rbinom(n^2, 1, p), nrow = n)
+
+# Covariate
+W <- matrix(rnorm(n), nrow = n)
+
+# Simulating the outcome
+rho <- 0.5
+library(MASS) # For the mvrnorm function
+
+# Identity minus rho * X
+X_rowstoch <- X / rowSums(X)
+I <- diag(n) - rho * X_rowstoch
+
+# The outcome
+Y <- solve(I) %*% (2 * W) + solve(I) %*% mvrnorm(1, rep(0, n), diag(n))
+```
+
+Using the `spatialreg` R package:
+
+```{r}
+#| label: sar-fit
+#| cache: true
+#| warning: false
+#| message: false
+library(spdep) # for the function mat2listw
+library(spatialreg)
+fit <- lagsarlm(Y ~ W, data = as.data.frame(X), listw = mat2listw(X_rowstoch))
+summary(fit)
+```
 
 ## Code example: ALAAM
 

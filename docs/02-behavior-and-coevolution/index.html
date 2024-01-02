@@ -20,6 +20,40 @@ width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
 
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+
 div.csl-bib-body { }
 div.csl-entry {
 clear: both;
@@ -4520,8 +4554,14 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#lagged-exposure" id="toc-lagged-exposure" class="nav-link" data-scroll-target="#lagged-exposure"><span class="header-section-number">2</span> Lagged exposure</a></li>
-  <li><a href="#egocentric-networks" id="toc-egocentric-networks" class="nav-link" data-scroll-target="#egocentric-networks"><span class="header-section-number">3</span> Egocentric networks</a></li>
+  <li><a href="#lagged-exposure" id="toc-lagged-exposure" class="nav-link" data-scroll-target="#lagged-exposure"><span class="header-section-number">2</span> Lagged exposure</a>
+  <ul class="collapse">
+  <li><a href="#code-example-lagged-exposure" id="toc-code-example-lagged-exposure" class="nav-link" data-scroll-target="#code-example-lagged-exposure"><span class="header-section-number">2.1</span> Code example: Lagged exposure</a></li>
+  </ul></li>
+  <li><a href="#egocentric-networks" id="toc-egocentric-networks" class="nav-link" data-scroll-target="#egocentric-networks"><span class="header-section-number">3</span> Egocentric networks</a>
+  <ul class="collapse">
+  <li><a href="#code-example-egocentric-networks" id="toc-code-example-egocentric-networks" class="nav-link" data-scroll-target="#code-example-egocentric-networks"><span class="header-section-number">3.1</span> Code example: Egocentric networks</a></li>
+  </ul></li>
   <li><a href="#network-effects-are-endogenous" id="toc-network-effects-are-endogenous" class="nav-link" data-scroll-target="#network-effects-are-endogenous"><span class="header-section-number">4</span> Network effects are endogenous</a>
   <ul class="collapse">
   <li><a href="#code-example-sar" id="toc-code-example-sar" class="nav-link" data-scroll-target="#code-example-sar"><span class="header-section-number">4.1</span> Code example: SAR</a></li>
@@ -4565,9 +4605,178 @@ y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1}
 </span></p>
 <p>where <span class="math inline">y_{it}</span> is the outcome of individual <span class="math inline">i</span> at time <span class="math inline">t</span>, <span class="math inline">X_{ij}</span> is the <span class="math inline">ij</span>-th entry of the adjacency matrix, <span class="math inline">\bm{\theta}</span> is a vector of coefficients, <span class="math inline">\bm{w_i}</span> is a vector of features/covariates of individual <span class="math inline">i</span>, and <span class="math inline">\varepsilon_i</span> is a normally distributed error. Here, the key component is <span class="math inline">\rho</span>: the coefficient associated with the network exposure effect.</p>
 <p>The exposure statistic, <span class="math inline">\left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right)</span>, is the weighted average of <span class="math inline">i</span>’s neighbors’ outcomes at time <span class="math inline">t-1</span>.</p>
+<section id="code-example-lagged-exposure" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="code-example-lagged-exposure"><span class="header-section-number">2.1</span> Code example: Lagged exposure</h2>
+<p>The following code example shows how to estimate a lagged exposure effect using the <code>glm</code> function in R. The model we will simulate and estimate features a Bernoulli graph with 1,000 nodes and a density of 0.01.</p>
+<p><span class="math display">
+y_{it} = \theta_1 + \rho \text{Exposure}_{it} + \theta_2 w_i + \varepsilon
+</span></p>
+<p>where <span class="math inline">\text{Exposure}_{it}</span> is the exposure statistic defined above, and <span class="math inline">w_i</span> is a vector of covariates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sampling a bernoilli network</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3132</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, p), <span class="at">nrow =</span> n)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(X) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariate</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n), <span class="at">nrow =</span> n)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating the outcome</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Y0 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(n))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The lagged exposure</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>expo <span class="ot">&lt;-</span> (X <span class="sc">%*%</span> Y0)<span class="sc">/</span><span class="fu">rowSums</span>(X)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Y1 <span class="ot">&lt;-</span> theta[<span class="dv">1</span>] <span class="sc">+</span> rho <span class="sc">*</span> expo <span class="sc">+</span> W <span class="sc">*</span> theta[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we fit the model using GLM, in this case, linear Regression</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Y1 <span class="sc">~</span> expo <span class="sc">+</span> W, <span class="at">family =</span> <span class="st">&quot;gaussian&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Y1 ~ expo + W, family = &quot;gaussian&quot;)
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.07187    0.03284 -32.638  &lt; 2e-16 ***
+expo         0.61170    0.10199   5.998  2.8e-09 ***
+W            3.00316    0.03233  92.891  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for gaussian family taken to be 1.071489)
+
+    Null deviance: 10319.3  on 999  degrees of freedom
+Residual deviance:  1068.3  on 997  degrees of freedom
+AIC: 2911.9
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="egocentric-networks" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Egocentric networks</h1>
+<p>Generally, when we use egocentric networks and egos’ outcomes, we are thinking in a model where one observation is the pair <span class="math inline">(y_i, X_i)</span>, this is, the outcome of individual <span class="math inline">i</span> and the egocentric network of individual <span class="math inline">i</span>. When such is the case, since (a) networks are independent across egos and (b) the networks are fixed, like the previous case, a simple linear regression model is enough to conduct the analyses. A typical model looks like this:</p>
+<p><span class="math display">
+\bm{y} = \bm{\theta}_{x}^{\mathbf{t}}s(\bm{X}) + \bm{\theta}^{\mathbf{t}}\bm{w} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
+</span></p>
+<p>Where <span class="math inline">\bm{y}</span> is a vector of outcomes, <span class="math inline">\bm{X}</span> is a matrix of egocentric networks, <span class="math inline">\bm{w}</span> is a vector of covariates, <span class="math inline">\bm{\theta}</span> is a vector of coefficients, and <span class="math inline">\varepsilon</span> is a vector of errors. The key component here is <span class="math inline">s(\bm{X})</span>, which is a vector of sufficient statistics of the egocentric networks. For example, if we are interested in the number of ties, <span class="math inline">s(\bm{X})</span> is a vector of the number of ties of each ego.</p>
+<section id="code-example-egocentric-networks" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="code-example-egocentric-networks"><span class="header-section-number">3.1</span> Code example: Egocentric networks</h2>
+<p>For this example, we will simulate a stream of 1,000 Bernoulli graphs looking into the probability of school dropout. Each network will have between 4 and 10 nodes and have a density of 0.4. The data-generating process is as follows:</p>
+<p><span class="math display">
+{\Pr{}}_{\bm{\theta}}\left(Y_i=1\right) = \text{logit}^{-1}\left(\bm{\theta}_x s(\bm{X}_i) \right)
+</span></p>
+<p>Where <span class="math inline">s(X) \equiv \left(\text{density}, \text{n mutual ties}\right)</span>, and <span class="math inline">\bm{\theta}_x = (0.5, -1)</span>. This model only features sufficient statistics. We start by simulating the networks</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">331</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating the networks</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sizes, <span class="cf">function</span>(x) <span class="fu">matrix</span>(<span class="fu">rbinom</span>(x<span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">0.4</span>), <span class="at">nrow =</span> x))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(X, \(x) {<span class="fu">diag</span>(x) <span class="ot">&lt;-</span> <span class="dv">0</span>; x})</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the first 5</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    1    1    1    0
+[2,]    0    0    0    0    0
+[3,]    0    1    0    0    0
+[4,]    0    0    0    0    0
+[5,]    1    0    0    1    0
+
+[[2]]
+     [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    0    0    0    0
+[3,]    0    0    0    0
+[4,]    1    0    1    0
+
+[[3]]
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    0    1    0    1    0    0
+[2,]    0    0    0    0    0    0
+[3,]    0    1    0    0    0    1
+[4,]    0    0    0    0    1    0
+[5,]    0    0    0    0    0    0
+[6,]    0    0    0    0    0    0
+
+[[4]]
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    1    0    1    0
+[2,]    0    0    0    0    1
+[3,]    0    1    0    0    0
+[4,]    0    1    1    0    1
+[5,]    1    0    1    0    0
+
+[[5]]
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    0    0    0    0
+[2,]    1    0    0    0    0
+[3,]    1    0    0    0    0
+[4,]    0    0    0    0    0
+[5,]    1    0    0    0    0</code></pre>
+</div>
+</div>
+<p>Using the <code>ergm</code> R package <span class="citation" data-cites="Handcock2023 Hunter2008">(<a href="#ref-Handcock2023" role="doc-biblioref">Handcock et al. 2023</a>; <a href="#ref-Hunter2008" role="doc-biblioref">Hunter et al. 2008</a>)</span>, we can extract the associated sufficient statistics of the egocentric networks:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">lapply</span>(X, \(x) <span class="fu">summary_formula</span>(x <span class="sc">~</span> density <span class="sc">+</span> mutual))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Turning the list into a matrix</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, stats)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspecting the first 5</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       density mutual
+[1,] 0.3000000      0
+[2,] 0.1666667      0
+[3,] 0.1666667      0
+[4,] 0.4500000      0
+[5,] 0.1500000      0</code></pre>
+</div>
+</div>
+<p>We now simulate the outcomes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fu">plogis</span>(stats <span class="sc">%*%</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="dv">1</span>)))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> stats, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ stats, family = binomial(link = &quot;logit&quot;))
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   0.07319    0.41590   0.176    0.860    
+statsdensity  0.42568    1.26942   0.335    0.737    
+statsmutual  -1.14804    0.12166  -9.436   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 768.96  on 999  degrees of freedom
+Residual deviance: 518.78  on 997  degrees of freedom
+AIC: 524.78
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="network-effects-are-endogenous" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Network effects are endogenous</h1>
@@ -4576,7 +4785,7 @@ y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1}
 <p><span class="math display">
 \boldsymbol{y} = \rho \boldsymbol{W} \boldsymbol{y} + \boldsymbol{\theta}^{\mathbf{t}} \boldsymbol{X} + \epsilon,\quad \epsilon \sim \text{MVN}(0, \Sigma)
 </span></p>
-<p>where <span class="math inline">\bm{y}\equiv \{y_i\}</span> is a vector of outcomes the outcome, <span class="math inline">\rho</span> is an autocorrelation coefficient, <span class="math inline">\bm{W} \in \{w_{ij}\}</span> is a row-stochastic square matrix of size <span class="math inline">n</span>, <span class="math inline">\bm{\theta}</span> is a vector of model parameters, <span class="math inline">\bm{X}</span> is the corresponding matrix with exogenous variables, and <span class="math inline">\epsilon</span> is a vector of errors that distributes multivariate normal with mean 0 and covariance <span class="math inline">\Sigma</span>.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the <code>spdep</code> package in R <span class="citation" data-cites="Bivand2022">(<a href="#ref-Bivand2022" role="doc-biblioref">Roger Bivand 2022</a>)</span>.</p>
+<p>where <span class="math inline">\bm{y}\equiv \{y_i\}</span> is a vector of outcomes the outcome, <span class="math inline">\rho</span> is an autocorrelation coefficient, <span class="math inline">\bm{W} \in \{w_{ij}\}</span> is a row-stochastic square matrix of size <span class="math inline">n</span>, <span class="math inline">\bm{\theta}</span> is a vector of model parameters, <span class="math inline">\bm{X}</span> is the corresponding matrix with exogenous variables, and <span class="math inline">\epsilon</span> is a vector of errors that distributes multivariate normal with mean 0 and covariance <span class="math inline">\Sigma</span>.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the <code>spatialreg</code> package in R <span class="citation" data-cites="Bivand2022">(<a href="#ref-Bivand2022" role="doc-biblioref">Roger Bivand 2022</a>)</span>.</p>
 <p>Although the SAR model was developed for spatial data, it is easy to apply it to network data. Furthermore, each entry of the vector <span class="math inline">\bm{Wy}</span> has the same definition as network exposure, namely</p>
 <p><span class="math display">
 \bm{Wy} \equiv \left\{\sum_{j}y_j w_{ij}\right\}_i
@@ -4592,7 +4801,67 @@ y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1}
 <p>Where <span class="math inline">\bm{Y}\equiv \{y_i \in (0, 1)\}</span> is a vector of binary individual outcomes, <span class="math inline">\bm{W}</span> denotes the social network, <span class="math inline">\bm{X}</span> is a matrix of exogenous variables, <span class="math inline">\bm{\theta}</span> is a vector of model parameters, <span class="math inline">s(\bm{y},\bm{W}, \bm{X})</span> is a vector of sufficient statistics, and <span class="math inline">\eta(\bm{\theta})</span> is a normalizing constant.</p>
 <section id="code-example-sar" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="code-example-sar"><span class="header-section-number">4.1</span> Code example: SAR</h2>
-<p>The SAR model can be used to do statistical inference on network exposure effects. The general form is:</p>
+<p>Simulation of SAR models can be done using the following observation: Although the outcome shows on both sides of the equation, we can isolate it in one side and solve for it; formally:</p>
+<p><span class="math display">
+\bm{y} = \rho \bm{X} \bm{y} + \bm{\theta}^{\mathbf{t}}\bm{W} + \varepsilon \implies \bm{y} = \left(\bm{I} - \rho \bm{X}\right)^{-1}\bm{\theta}^{\mathbf{t}}\bm{W} + \left(\bm{I} - \rho \bm{X}\right)^{-1}\varepsilon
+</span></p>
+<div class="cell" data-hash="index_cache/html/sar_c72ee2f05b84ef049f41434ac4644c54">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4114</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating the network</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, p), <span class="at">nrow =</span> n)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariate</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n), <span class="at">nrow =</span> n)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating the outcome</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) <span class="co"># For the mvrnorm function</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Identity minus rho * X</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>X_rowstoch <span class="ot">&lt;-</span> X <span class="sc">/</span> <span class="fu">rowSums</span>(X)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> rho <span class="sc">*</span> X_rowstoch</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The outcome</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">solve</span>(I) <span class="sc">%*%</span> (<span class="dv">2</span> <span class="sc">*</span> W) <span class="sc">+</span> <span class="fu">solve</span>(I) <span class="sc">%*%</span> <span class="fu">mvrnorm</span>(<span class="dv">1</span>, <span class="fu">rep</span>(<span class="dv">0</span>, n), <span class="fu">diag</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using the <code>spatialreg</code> R package:</p>
+<div class="cell" data-hash="index_cache/html/sar-fit_c776e6294db9d65c3c324414b7e6e55a">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep) <span class="co"># for the function mat2listw</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatialreg)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lagsarlm</span>(Y <span class="sc">~</span> W, <span class="at">data =</span> <span class="fu">as.data.frame</span>(X), <span class="at">listw =</span> <span class="fu">mat2listw</span>(X_rowstoch))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lagsarlm(formula = Y ~ W, data = as.data.frame(X), listw = mat2listw(X_rowstoch))
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-2.971462 -0.659254 -0.019626  0.644577  2.915956 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept) -0.0084993  0.0304940 -0.2787   0.7805
+W            1.9737311  0.0297407 66.3647   &lt;2e-16
+
+Rho: 0.53961, LR test value: 168.32, p-value: &lt; 2.22e-16
+Asymptotic standard error: 0.039338
+    z-value: 13.717, p-value: &lt; 2.22e-16
+Wald statistic: 188.16, p-value: &lt; 2.22e-16
+
+Log likelihood: -1373.025 for lag model
+ML residual variance (sigma squared): 0.91028, (sigma: 0.95409)
+Number of observations: 1000 
+Number of parameters estimated: 4 
+AIC: NA (not available for weighted model), (AIC for lm: 2920.4)
+LM test for residual autocorrelation
+test value: 0.051083, p-value: 0.82119</code></pre>
+</div>
+</div>
 </section>
 <section id="code-example-alaam" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="code-example-alaam"><span class="header-section-number">4.2</span> Code example: ALAAM</h2>
@@ -4607,6 +4876,12 @@ y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1}
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">5 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Handcock2023" class="csl-entry" role="listitem">
+Handcock, Mark S., David R. Hunter, Carter T. Butts, Steven M. Goodreau, Pavel N. Krivitsky, and Martina Morris. 2023. <em>Ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks</em>. The Statnet Project (<a href="https://statnet.org" class="uri">https://statnet.org</a>). <a href="https://CRAN.R-project.org/package=ergm">https://CRAN.R-project.org/package=ergm</a>.
+</div>
+<div id="ref-Hunter2008" class="csl-entry" role="listitem">
+Hunter, David R., Mark S. Handcock, Carter T. Butts, Steven M. Goodreau, and Martina Morris. 2008. <span>“<span class="nocase">ergm</span>: A Package to Fit, Simulate and Diagnose Exponential-Family Models for Networks.”</span> <em>Journal of Statistical Software</em> 24 (3): 1–29. <a href="https://doi.org/10.18637/jss.v024.i03">https://doi.org/10.18637/jss.v024.i03</a>.
+</div>
 <div id="ref-lusherExponentialRandomGraph2013" class="csl-entry" role="listitem">
 Lusher, Dean, Johan Koskinen, and Garry Robins. 2013. <em>Exponential <span>Random Graph Models</span> for <span>Social Networks</span>: <span>Theory</span>, <span>Methods</span>, and <span>Applications</span></em>. <span>Cambridge University Press</span>.
 </div>
