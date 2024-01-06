@@ -14,10 +14,12 @@ website:
         href: index.qmd
       - text: Overview
         href: 00-overview/index.qmd
+      - text: Fundamentals
+        href: 01-fundamentals/index.qmd
       - text: Random graphs
-        href: 01-random-graphs/index.qmd
+        href: 02-random-graphs/index.qmd
       - text: Behavior and coevolution
-        href: 02-behavior-and-coevolution/index.qmd
+        href: 03-behavior-and-coevolution/index.qmd
 
 format:
   html:

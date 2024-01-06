@@ -28,64 +28,155 @@
     "text": "2.3 Non-parametric approaches\nOther common scenarios involve more convoluted/complex questions. For instance, in the case of dyadic behavior Bell et al. (2019).\nIn Tanaka and Vega Yon (2024), we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing."
   },
   {
-    "objectID": "01-random-graphs/index.html",
-    "href": "01-random-graphs/index.html",
+    "objectID": "01-fundamentals/index.html",
+    "href": "01-fundamentals/index.html",
+    "title": "Fundamentals",
+    "section": "",
+    "text": "Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you–we will be brief–but I want to ensure we are all on the same page."
+  },
+  {
+    "objectID": "01-fundamentals/index.html#getting-help",
+    "href": "01-fundamentals/index.html#getting-help",
+    "title": "Fundamentals",
+    "section": "1.1 Getting help",
+    "text": "1.1 Getting help\nUnlike other languages, R’s documentation is highly reliable. The Comprehensive R Archive Network [CRAN] is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation.\nTo get help on a function, we can use the help() function. For example, if we wanted to get help on the mean() function, we would do:\n\nhelp(\"mean\")"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#naming-conventions",
+    "href": "01-fundamentals/index.html#naming-conventions",
+    "title": "Fundamentals",
+    "section": "1.2 Naming conventions",
+    "text": "1.2 Naming conventions\nR has a set of naming conventions that we should follow to avoid confusion. The most important ones are:\n\nUse lowercase letters (optional)\nUse underscores to separate words (optional)\nDo not start with a number\nDo not use special characters\nDo not use reserved words\n\n\n\n\n\n\n\nQuestion\n\n\n\nOf the following list, which are valid names and which are valid but to be avoided?\n_my.var\nmy.var\nmy_var\nmyVar\nmyVar1\n1myVar\nmy var\nmy-var"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#assignment",
+    "href": "01-fundamentals/index.html#assignment",
+    "title": "Fundamentals",
+    "section": "1.3 Assignment",
+    "text": "1.3 Assignment\nIn R, we have two (four) ways of assigning values to objects: the &lt;- and = binary operators2. Although both are equivalent, the former is the preferred way of assigning values to objects since the latter can be confused with function arguments.\n\nx &lt;- 1\nx = 1\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the difference between the following two assignments? Use the help function to find out.\nx &lt;- 1\nx &lt;&lt;- 1\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat are other ways in which you can assign values to objects?"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#using-functions-and-piping",
+    "href": "01-fundamentals/index.html#using-functions-and-piping",
+    "title": "Fundamentals",
+    "section": "1.4 Using functions and piping",
+    "text": "1.4 Using functions and piping\nIn R, we use functions to perform operations on objects. Functions are implemented as function_name ( argument_1 , argument_2 , ... ). For example, the mean() function takes a vector of numbers and returns the mean of the values:\n\nx &lt;- c(1, 2, 3) # The c() function creates a vector\nmean(x)\n## [1] 2\n\nFurthermore, we can use the pipe operator (|&gt;) to improve readability. The pipe operator takes the output of the left-hand side expression and passes it as the first argument of the right-hand side expression. Our previous example could be rewritten as:\n\nc(1, 2, 3) |&gt; mean()\n## [1] 2"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#data-structures",
+    "href": "01-fundamentals/index.html#data-structures",
+    "title": "Fundamentals",
+    "section": "1.5 Data structures",
+    "text": "1.5 Data structures\nAtomic types are the minimal building blocks of R. They are logical, integer, double, character, complex, raw:\n\nx_logical   &lt;- TRUE\nx_integer   &lt;- 1L\nx_double    &lt;- 1.0\nx_character &lt;- \"a\"\nx_complex   &lt;- 1i\nx_raw       &lt;- charToRaw(\"a\")\n\nUnlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.\n\n\n\n\n\n\nPro-tip\n\n\n\nAdding the L suffix to the value is good practice when dealing with integers. Some R packages like data.table (Barrett, Dowle, and Srinivasan 2023) have internal checks that will throw an error if you are not explicit about the data type.\n\n\nThe next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the c() function:\n\nx_integer &lt;- c(1, 2, 3)\nx_double  &lt;- c(1.0, 2.0, 3.0)\nx_logical &lt;- c(TRUE, FALSE, TRUE)\n# etc.\n\nR will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical &lt; integer &lt; double &lt; character\n\n\n\n\n\n\nQuestion\n\n\n\nWhy is the coercion order logical &lt; integer &lt; double &lt; character?\n\n\nThe next data structure is the list. A list is a collection of elements of any type. We can create a list with the list() function:\n\nx_list       &lt;- list(1, 2.0, TRUE, \"a\")\nx_list_named &lt;- list(a = 1, b = 2.0, c = TRUE, d = \"a\")\n\nTo access elements in a list, we have two options: by position or by name, the latter only if the elements are named:\n\nx_list[[1]]\n## [1] 1\nx_list_named[[\"a\"]]\n## [1] 1\nx_list_named$a\n## [1] 1\n\nAfter lists, we have matrices. A matrix is a collection of elements of the same type arranged in a two-dimensional grid. We can create a matrix with the matrix() function:\n\nx_matrix &lt;- matrix(1:9, nrow = 3, ncol = 3)\nx_matrix\n##      [,1] [,2] [,3]\n## [1,]    1    4    7\n## [2,]    2    5    8\n## [3,]    3    6    9\n\n# We can access elements in a matrix by row column, or position:\nx_matrix[1, 2]\n## [1] 4\nx_matrix[cbind(1, 2)]\n## [1] 4\nx_matrix[4]\n## [1] 4\n\n\n\n\n\n\n\nMatrix is a vector\n\n\n\nMatrices in R are vectors with dimensions. In base R, matrices are stored in column-major order. This means that the elements are stored column by column. This is important to know when we are accessing elements in a matrix\n\n\nThe two last data structures are arrays and data frames. An array is a collection of elements of the same type arranged in a multi-dimensional grid. We can create an array with the array() function:\n\nx_array &lt;- array(1:27, dim = c(3, 3, 3))\n\n# We can access elements in an array by row, column, and dimension, or\n# position:\nx_array[1, 2, 3]\n## [1] 22\nx_array[cbind(1, 2, 3)]\n## [1] 22\nx_array[22]\n## [1] 22\n\nData frames are the most common data structure in R. In principle, these objects are lists of vectors of the same length, each vector representing a column. Columns (lists) in data frames can be of different types, but elements in each column must be of the same type. We can create a data frame with the data.frame() function:\n\nx_data_frame &lt;- data.frame(\n  a = 1:3,\n  b = c(\"a\", \"b\", \"c\"),\n  c = c(TRUE, FALSE, TRUE)\n)\n\n# We can access elements in a data frame by row, column, or position:\nx_data_frame[1, 2]\n## [1] \"a\"\nx_data_frame[cbind(1, 2)]\n## [1] \"a\"\nx_data_frame$b[1]    # Like a list\n## [1] \"a\"\nx_data_frame[[2]][1] # Like a list too\n## [1] \"a\""
+  },
+  {
+    "objectID": "01-fundamentals/index.html#functions",
+    "href": "01-fundamentals/index.html#functions",
+    "title": "Fundamentals",
+    "section": "1.6 Functions",
+    "text": "1.6 Functions\nFunctions are the most important building blocks of R. A function is a set of instructions that takes one or more inputs and returns one or more outputs. We can create a function with the function() function:\n\n# This function has two arguments (y is optional)\nf &lt;- function(x, y = 1) {\n  x + 1\n}\n\nf(1)\n## [1] 2\n\nStarting with R 4, we can use the lambda syntax to create functions:\n\nf &lt;- \\(x, y) x + 1\n\nf(1)\n## [1] 2"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#control-flow",
+    "href": "01-fundamentals/index.html#control-flow",
+    "title": "Fundamentals",
+    "section": "1.7 Control flow",
+    "text": "1.7 Control flow\nControl flow statements allow us to control the execution of the code. The most common control flow statements are if, for, while, and repeat. We can create a control flow statement with the if(), for(), while(), and repeat() functions:\n\n# if\nif (TRUE) {\n  \"a\"\n} else {\n  \"b\"\n}\n## [1] \"a\"\n\n# for\nfor (i in 1:3) {\n  cat(\"This is the number \", i, \"\\n\")\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# while\ni &lt;- 1\nwhile (i &lt;= 3) {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# repeat\ni &lt;- 1\nrepeat {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n  if (i &gt; 3) {\n    break\n  }\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#hypothesis-testing",
+    "href": "01-fundamentals/index.html#hypothesis-testing",
+    "title": "Fundamentals",
+    "section": "2.1 Hypothesis testing",
+    "text": "2.1 Hypothesis testing\nAccording to Wikipedia\n\nA statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. – Wiki\n\nIn a nutshell, hypothesis testing is performed by following these steps:\n\nState the null and alternative hypotheses. In general, the null hypothesis is a statement about the population parameter that challenges our research question; for example, given the question of whether two networks are different, the null hypothesis would be that the two networks are the same.\nCompute the corresponding test statistic. It is a data function that reduces the information to a single number.\nCompare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: ``[…] the probability that the chosen test statistic would have been at least as large as its observed value if every model assumption were correct, including the test hypothesis.’’ (Greenland et al. 2016) 3\n\n\nReport the observed effect and p-value, i.e., \\Pr(t \\in H_0)\n\nWe usually say that we either reject the null hypothesis or fail to reject it (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of “suggests evidence for” or “suggests evidence against.”\nWe will illustrate statistical concepts more concretely in the next section."
+  },
+  {
+    "objectID": "01-fundamentals/index.html#probability-distributions",
+    "href": "01-fundamentals/index.html#probability-distributions",
+    "title": "Fundamentals",
+    "section": "3.1 Probability distributions",
+    "text": "3.1 Probability distributions\nR has a standard way of naming probability functions. The naming structure is [type of function][distribution], where [type of function] can be d for density, p for cumulative distribution function, q for quantile function, and r for random generation. For example, the normal distribution has the following functions:\n\ndnorm(0, mean = 0, sd = 1)\n## [1] 0.3989423\npnorm(0, mean = 0, sd = 1)\n## [1] 0.5\nqnorm(0.5, mean = 0, sd = 1)\n## [1] 0\n\nCurrently, R has a wide range of probability distributions implemented.\n\n\n\n\n\n\nQuestion\n\n\n\nHow many probability distributions are implemented in R’s stats package?"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#random-number-generation",
+    "href": "01-fundamentals/index.html#random-number-generation",
+    "title": "Fundamentals",
+    "section": "3.2 Random number generation",
+    "text": "3.2 Random number generation\nRandom numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers. These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the r function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:\n\nset.seed(1)\n\n# Saving the current graphical parameters\nop &lt;- par(mfrow = c(2,2))\nrnorm(1000) |&gt; hist(main = \"Normal distribution\")\nrunif(1000) |&gt; hist(main = \"Uniform distribution\")\nrpois(1000, lambda = 1) |&gt; hist(main = \"Poisson distribution\")\nrbinom(1000, size = 10, prob = 0.1) |&gt; hist(main = \"Binomial distribution\")\n\n\n\npar(op)"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#simulations-and-sampling",
+    "href": "01-fundamentals/index.html#simulations-and-sampling",
+    "title": "Fundamentals",
+    "section": "3.3 Simulations and sampling",
+    "text": "3.3 Simulations and sampling\nSimulations are front and center in statistical programming. We can use them to test the properties of statistical methods, generate data, and perform statistical inference. The following example uses the sample function in R to compute the bootstrap standard error of the mean:\n\nset.seed(1)\nx &lt;- rnorm(1000)\n\n# Bootstrap standard error of the mean\nn &lt;- length(x)\nB &lt;- 1000\n\n# We will store the results in a vector\nres &lt;- numeric(B)\n\nfor (i in 1:B) {\n  # Sample with replacement\n  res[i] &lt;- sample(x, size = n, replace = TRUE) |&gt;\n    mean()\n}\n\n# Plot the results\nhist(res, main = \"Bootstrap standard error of the mean\")\n\n\n\n\nSince the previous example is rather extensive, let us review it in detail.\n\nset.seed(1) sets the seed of the PRNG to 1. It ensures we get the same results every time we run the code.\nrnorm() generates a sample of 1,000 standard-normal values.\nn &lt;- length(x) stores the length of the vector in the n variable.\nB &lt;- 1000 stores the number of bootstrap samples in the B variable.\nres &lt;- numeric(B) creates a vector of length B to store the results.\nfor (i in 1:B) is a for loop that iterates from 1 to B.\nres[i] &lt;- sample(x, size = n, replace = TRUE) |&gt; mean() samples n values from x with replacement and computes the mean of the sample.\nThe pipe operator (|&gt;) passes the output of the left-hand side expression as the first argument of the right-hand side expression.\nhist(res, main = \"Bootstrap standard error of the mean\") plots the histogram of the results."
+  },
+  {
+    "objectID": "01-fundamentals/index.html#footnotes",
+    "href": "01-fundamentals/index.html#footnotes",
+    "title": "Fundamentals",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAlthough, not for network science in general.↩︎\nIn mathematics and computer science, a binary operator is a function that takes two arguments. In R, binary operators are implemented as variable 1 [operator] variable 2. For example, 1 + 2 is a binary operation.↩︎\nThe discussion about interpreting p-values and hypothesis testing is vast and relevant. Although we will not review this here, I recommend looking into the work of Andrew Gelman Gelman (2018).↩︎"
+  },
+  {
+    "objectID": "02-random-graphs/index.html",
+    "href": "02-random-graphs/index.html",
     "title": "Random graphs",
     "section": "",
     "text": "In this section, we will focus on reviewing the most common random graph models, how these are used, and what things are important to consider when using them. Later on in the course, we will focus on Exponential-Family Random Graph Models (ERGMs), which are a generalization of the models we will discuss here."
   },
   {
-    "objectID": "01-random-graphs/index.html#code-example",
-    "href": "01-random-graphs/index.html#code-example",
+    "objectID": "02-random-graphs/index.html#code-example",
+    "href": "02-random-graphs/index.html#code-example",
     "title": "Random graphs",
     "section": "2.1 Code example",
     "text": "2.1 Code example\n\n# Model parameters\nn &lt;- 40\np &lt;- 0.1\n\n# Generating the graph, version 1\nset.seed(3312)\ng &lt;- matrix(as.integer(runif(n * n) &lt; p), nrow = n, ncol = n)\ndiag(g) &lt;- 0\n\n# Visualizing the network\nlibrary(igraph)\nlibrary(netplot)\nnplot(graph_from_adjacency_matrix(g))\n\n\n\n\nChallenge 1: How would you generate the graph using the two-step process described above?\nChallenge 2: Using a Generalized-Linear-Model [GLM], estimate p and its variance from the above network."
   },
   {
-    "objectID": "01-random-graphs/index.html#code-example-1",
-    "href": "01-random-graphs/index.html#code-example-1",
+    "objectID": "02-random-graphs/index.html#code-example-1",
+    "href": "02-random-graphs/index.html#code-example-1",
     "title": "Random graphs",
     "section": "3.1 Code example",
     "text": "3.1 Code example\n\n# Creating a ring\nn &lt;- 10\nV &lt;- 1:n\nk &lt;- 3\np &lt;- .2\n\nE &lt;- NULL\nfor (i in 1:k) {\n  E &lt;- rbind(E, cbind(V, c(V[-c(1:i)], V[1:i])))\n}\n\n# Generating the ring layout\nlo &lt;- layout_in_circle(graph_from_edgelist(E))\n\n# Plotting with netplot\nnplot(\n  graph_from_edgelist(E),\n  layout = lo\n  )\n\n\n\n# Rewiring\nids &lt;- which(runif(nrow(E)) &lt; p)\nE[ids, 2] &lt;- sample(V, length(ids), replace = TRUE)\nnplot(\n  graph_from_edgelist(E),\n  layout = lo\n  )"
   },
   {
-    "objectID": "01-random-graphs/index.html#code-example-2",
-    "href": "01-random-graphs/index.html#code-example-2",
+    "objectID": "02-random-graphs/index.html#code-example-2",
+    "href": "02-random-graphs/index.html#code-example-2",
     "title": "Random graphs",
     "section": "4.1 Code example",
     "text": "4.1 Code example\n\n# Model parameters\nn &lt;- 500\nm &lt;- 2\n\n# Generating the graph\nset.seed(3312)\ng &lt;- matrix(0, nrow = n, ncol = n)\ng[1:m, 1:m] &lt;- 1\ndiag(g) &lt;- 0\n\n# Adding nodes\nfor (i in (m + 1):n) {\n\n  # Selecting the nodes to connect to\n  ids &lt;- sample(\n    x       = 1:(i-1), # Up to i-1\n    size    = m,       # m nodes\n    replace = FALSE,   # No replacement\n    # Probability proportional to the degree\n    prob    = colSums(g[, 1:(i-1), drop = FALSE])\n    )\n\n  # Adding the edges\n  g[i, ids] &lt;- 1\n  g[ids, i] &lt;- 1\n\n}\n\n# Visualizing the degree distribution\nlibrary(ggplot2)\ndata.frame(degree = colSums(g)) |&gt;\n  ggplot(aes(degree)) +\n  geom_histogram() +\n  scale_x_log10() +\n  labs(\n    x = \"Degree\\n(log10 scale)\",\n    y = \"Count\"\n  )"
   },
   {
-    "objectID": "02-behavior-and-coevolution/index.html",
-    "href": "02-behavior-and-coevolution/index.html",
+    "objectID": "03-behavior-and-coevolution/index.html",
+    "href": "03-behavior-and-coevolution/index.html",
     "title": "Behavior and coevolution",
     "section": "",
     "text": "This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, this section focuses on two classes of analysis: When the network is fixed and when both network and behavior influence each other.\nWhether we treat the network as given or endogenous sets the complexity of conducting statistical inference. Data analysis becomes much more straightforward if our research focuses on individual-level outcomes embedded in a network and not on the network itself. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous."
   },
   {
-    "objectID": "02-behavior-and-coevolution/index.html#code-example-lagged-exposure",
-    "href": "02-behavior-and-coevolution/index.html#code-example-lagged-exposure",
+    "objectID": "03-behavior-and-coevolution/index.html#code-example-lagged-exposure",
+    "href": "03-behavior-and-coevolution/index.html#code-example-lagged-exposure",
     "title": "Behavior and coevolution",
     "section": "2.1 Code example: Lagged exposure",
     "text": "2.1 Code example: Lagged exposure\nThe following code example shows how to estimate a lagged exposure effect using the glm function in R. The model we will simulate and estimate features a Bernoulli graph with 1,000 nodes and a density of 0.01.\n\ny_{it} = \\theta_1 + \\rho \\text{Exposure}_{it} + \\theta_2 w_i + \\varepsilon\n\nwhere \\text{Exposure}_{it} is the exposure statistic defined above, and w_i is a vector of covariates.\n\n# Simulating data\nn &lt;- 1000\ntime &lt;- 2\ntheta &lt;- c(-1, 3)\n\n# Sampling a bernoilli network\nset.seed(3132)\np &lt;- 0.01\nX &lt;- matrix(rbinom(n^2, 1, p), nrow = n)\ndiag(X) &lt;- 0\n\n# Covariate\nW &lt;- matrix(rnorm(n), nrow = n)\n\n# Simulating the outcome\nrho &lt;- 0.5\nY0 &lt;- cbind(rnorm(n))\n\n# The lagged exposure\nexpo &lt;- (X %*% Y0)/rowSums(X)\nY1 &lt;- theta[1] + rho * expo + W * theta[2] + rnorm(n)\n\nNow we fit the model using GLM, in this case, linear Regression\n\nfit &lt;- glm(Y1 ~ expo + W, family = \"gaussian\")\nsummary(fit)\n\n\nCall:\nglm(formula = Y1 ~ expo + W, family = \"gaussian\")\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -1.07187    0.03284 -32.638  &lt; 2e-16 ***\nexpo         0.61170    0.10199   5.998  2.8e-09 ***\nW            3.00316    0.03233  92.891  &lt; 2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 1.071489)\n\n    Null deviance: 10319.3  on 999  degrees of freedom\nResidual deviance:  1068.3  on 997  degrees of freedom\nAIC: 2911.9\n\nNumber of Fisher Scoring iterations: 2"
   },
   {
-    "objectID": "02-behavior-and-coevolution/index.html#code-example-egocentric-networks",
-    "href": "02-behavior-and-coevolution/index.html#code-example-egocentric-networks",
+    "objectID": "03-behavior-and-coevolution/index.html#code-example-egocentric-networks",
+    "href": "03-behavior-and-coevolution/index.html#code-example-egocentric-networks",
     "title": "Behavior and coevolution",
     "section": "3.1 Code example: Egocentric networks",
     "text": "3.1 Code example: Egocentric networks\nFor this example, we will simulate a stream of 1,000 Bernoulli graphs looking into the probability of school dropout. Each network will have between 4 and 10 nodes and have a density of 0.4. The data-generating process is as follows:\n\n{\\Pr{}}_{\\bm{\\theta}}\\left(Y_i=1\\right) = \\text{logit}^{-1}\\left(\\bm{\\theta}_x s(\\bm{X}_i) \\right)\n\nWhere s(X) \\equiv \\left(\\text{density}, \\text{n mutual ties}\\right), and \\bm{\\theta}_x = (0.5, -1). This model only features sufficient statistics. We start by simulating the networks\n\nset.seed(331)\nn &lt;- 1000\nsizes &lt;- sample(4:10, n, replace = TRUE)\n\n# Simulating the networks\nX &lt;- lapply(sizes, function(x) matrix(rbinom(x^2, 1, 0.4), nrow = x))\nX &lt;- lapply(X, \\(x) {diag(x) &lt;- 0; x})\n\n# Inspecting the first 5\nhead(X, 5)\n\n[[1]]\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    0    1    1    1    0\n[2,]    0    0    0    0    0\n[3,]    0    1    0    0    0\n[4,]    0    0    0    0    0\n[5,]    1    0    0    1    0\n\n[[2]]\n     [,1] [,2] [,3] [,4]\n[1,]    0    0    0    0\n[2,]    0    0    0    0\n[3,]    0    0    0    0\n[4,]    1    0    1    0\n\n[[3]]\n     [,1] [,2] [,3] [,4] [,5] [,6]\n[1,]    0    1    0    1    0    0\n[2,]    0    0    0    0    0    0\n[3,]    0    1    0    0    0    1\n[4,]    0    0    0    0    1    0\n[5,]    0    0    0    0    0    0\n[6,]    0    0    0    0    0    0\n\n[[4]]\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    0    1    0    1    0\n[2,]    0    0    0    0    1\n[3,]    0    1    0    0    0\n[4,]    0    1    1    0    1\n[5,]    1    0    1    0    0\n\n[[5]]\n     [,1] [,2] [,3] [,4] [,5]\n[1,]    0    0    0    0    0\n[2,]    1    0    0    0    0\n[3,]    1    0    0    0    0\n[4,]    0    0    0    0    0\n[5,]    1    0    0    0    0\n\n\nUsing the ergm R package (Handcock et al. 2023; Hunter et al. 2008), we can extract the associated sufficient statistics of the egocentric networks:\n\nlibrary(ergm)\nstats &lt;- lapply(X, \\(x) summary_formula(x ~ density + mutual))\n\n# Turning the list into a matrix\nstats &lt;- do.call(rbind, stats)\n\n# Inspecting the first 5\nhead(stats, 5)\n\n       density mutual\n[1,] 0.3000000      0\n[2,] 0.1666667      0\n[3,] 0.1666667      0\n[4,] 0.4500000      0\n[5,] 0.1500000      0\n\n\nWe now simulate the outcomes\n\ny &lt;- rbinom(n, 1, plogis(stats %*% c(0.5, -1)))\nglm(y ~ stats, family = binomial(link = \"logit\")) |&gt;\n  summary()\n\n\nCall:\nglm(formula = y ~ stats, family = binomial(link = \"logit\"))\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)   0.07319    0.41590   0.176    0.860    \nstatsdensity  0.42568    1.26942   0.335    0.737    \nstatsmutual  -1.14804    0.12166  -9.436   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 768.96  on 999  degrees of freedom\nResidual deviance: 518.78  on 997  degrees of freedom\nAIC: 524.78\n\nNumber of Fisher Scoring iterations: 7"
   },
   {
-    "objectID": "02-behavior-and-coevolution/index.html#code-example-sar",
-    "href": "02-behavior-and-coevolution/index.html#code-example-sar",
+    "objectID": "03-behavior-and-coevolution/index.html#code-example-sar",
+    "href": "03-behavior-and-coevolution/index.html#code-example-sar",
     "title": "Behavior and coevolution",
     "section": "4.1 Code example: SAR",
     "text": "4.1 Code example: SAR\nSimulation of SAR models can be done using the following observation: Although the outcome shows on both sides of the equation, we can isolate it in one side and solve for it; formally:\n\n\\bm{y} = \\rho \\bm{X} \\bm{y} + \\bm{\\theta}^{\\mathbf{t}}\\bm{W} + \\varepsilon \\implies \\bm{y} = \\left(\\bm{I} - \\rho \\bm{X}\\right)^{-1}\\bm{\\theta}^{\\mathbf{t}}\\bm{W} + \\left(\\bm{I} - \\rho \\bm{X}\\right)^{-1}\\varepsilon\n\n\nset.seed(4114)\nn &lt;- 1000\n\n# Simulating the network\np &lt;- 0.01\nX &lt;- matrix(rbinom(n^2, 1, p), nrow = n)\n\n# Covariate\nW &lt;- matrix(rnorm(n), nrow = n)\n\n# Simulating the outcome\nrho &lt;- 0.5\nlibrary(MASS) # For the mvrnorm function\n\n# Identity minus rho * X\nX_rowstoch &lt;- X / rowSums(X)\nI &lt;- diag(n) - rho * X_rowstoch\n\n# The outcome\nY &lt;- solve(I) %*% (2 * W) + solve(I) %*% mvrnorm(1, rep(0, n), diag(n))\n\nUsing the spatialreg R package:\n\nlibrary(spdep) # for the function mat2listw\nlibrary(spatialreg)\nfit &lt;- lagsarlm(Y ~ W, data = as.data.frame(X), listw = mat2listw(X_rowstoch))\nsummary(fit)\n\n\nCall:\nlagsarlm(formula = Y ~ W, data = as.data.frame(X), listw = mat2listw(X_rowstoch))\n\nResiduals:\n      Min        1Q    Median        3Q       Max \n-2.971462 -0.659254 -0.019626  0.644577  2.915956 \n\nType: lag \nCoefficients: (asymptotic standard errors) \n              Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept) -0.0084993  0.0304940 -0.2787   0.7805\nW            1.9737311  0.0297407 66.3647   &lt;2e-16\n\nRho: 0.53961, LR test value: 168.32, p-value: &lt; 2.22e-16\nAsymptotic standard error: 0.039338\n    z-value: 13.717, p-value: &lt; 2.22e-16\nWald statistic: 188.16, p-value: &lt; 2.22e-16\n\nLog likelihood: -1373.025 for lag model\nML residual variance (sigma squared): 0.91028, (sigma: 0.95409)\nNumber of observations: 1000 \nNumber of parameters estimated: 4 \nAIC: NA (not available for weighted model), (AIC for lm: 2920.4)\nLM test for residual autocorrelation\ntest value: 0.051083, p-value: 0.82119"
   },
   {
-    "objectID": "02-behavior-and-coevolution/index.html#code-example-alaam",
-    "href": "02-behavior-and-coevolution/index.html#code-example-alaam",
+    "objectID": "03-behavior-and-coevolution/index.html#code-example-alaam",
+    "href": "03-behavior-and-coevolution/index.html#code-example-alaam",
     "title": "Behavior and coevolution",
     "section": "4.2 Code example: ALAAM",
     "text": "4.2 Code example: ALAAM\nTo date, there is no R package implementing the ALAAM framework. Nevertheless, you can fit ALAAMs using the PNet software developed by the Melnet group at the University of Melbourne (click here).\nBecause of the similarities, ALAAMs can be implemented using ERGMs. Because of the novelty of it, the coding example will be left as a potential class project. We will post a fully-featured example after the workshop."
@@ -109,7 +200,7 @@
     "href": "index.html#references",
     "title": "Home",
     "section": "2 References",
-    "text": "2 References\n\n\nBell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol, Ridwan Alam, Meiyi Ma, Ifat Emi, John Lach, John A. Stankovic, and Kayla De La Haye. 2019. “Sensing Eating Mimicry Among Family Members.” Translational Behavioral Medicine. https://doi.org/10.1093/tbm/ibz051.\n\n\nBrooks, S., A. Gelman, G. Jones, and X. L. Meng. 2011. Handbook of Markov Chain Monte Carlo. CRC Press.\n\n\nFellows, Ian E. 2012. “Exponential Family Random Network Models.” ProQuest Dissertations and Theses. PhD thesis. https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/dissertations-theses/exponential-family-random-network-models/docview/1221548720/se-2.\n\n\nHandcock, Mark S., David R. Hunter, Carter T. Butts, Steven M. Goodreau, Pavel N. Krivitsky, and Martina Morris. 2023. Ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks. The Statnet Project (https://statnet.org). https://CRAN.R-project.org/package=ergm.\n\n\nHaye, Kayla de la, Heesung Shin, George G. Vega Yon, and Thomas W. Valente. 2019. “Smoking Diffusion Through Networks of Diverse, Urban American Adolescents over the High School Period.” Journal of Health and Social Behavior. https://doi.org/10.1177/0022146519870521.\n\n\nHunter, David R., Mark S. Handcock, Carter T. Butts, Steven M. Goodreau, and Martina Morris. 2008. “ergm: A Package to Fit, Simulate and Diagnose Exponential-Family Models for Networks.” Journal of Statistical Software 24 (3): 1–29. https://doi.org/10.18637/jss.v024.i03.\n\n\nKrivitsky, Pavel N. 2012. “Exponential-Family Random Graph Models for Valued Networks.” Electronic Journal of Statistics 6: 1100–1128. https://doi.org/10.1214/12-EJS696.\n\n\nKrivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023. “A Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks.” Journal of the American Statistical Association 0 (0): 1–21. https://doi.org/10.1080/01621459.2023.2242627.\n\n\nKrivitsky, Pavel N., David R. Hunter, Martina Morris, and Chad Klumb. 2023. “Ergm 4: New Features for Analyzing Exponential-Family Random Graph Models.” Journal of Statistical Software 105 (January): 1–44. https://doi.org/10.18637/jss.v105.i06.\n\n\nLeSage, James P. 2008. “An Introduction to Spatial Econometrics.” Revue d’économie Industrielle 123 (123): 19–44. https://doi.org/10.4000/rei.3887.\n\n\nLeSage, James P., and R. Kelley Pace. 2014. “The Biggest Myth in Spatial Econometrics.” Econometrics 2 (4): 217–49. https://doi.org/10.2139/ssrn.1725503.\n\n\nLusher, Dean, Johan Koskinen, and Garry Robins. 2013. Exponential Random Graph Models for Social Networks: Theory, Methods, and Applications. Cambridge University Press.\n\n\nMilo, R., S. Shen-Orr, S. Itzkovitz, N. Kashtan, D. Chklovskii, and U. Alon. 2002. “Network Motifs: Simple Building Blocks of Complex Networks.” Science 298 (5594): 824–27. https://doi.org/10.1126/science.298.5594.824.\n\n\nRobins, Garry, Philippa Pattison, and Peter Elliott. 2001. “Network Models for Social Influence Processes.” Psychometrika 66 (2): 161–89. https://doi.org/10.1007/BF02294834.\n\n\nRoger Bivand. 2022. “R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.” Geographical Analysis 54 (3): 488–518. https://doi.org/10.1111/gean.12319.\n\n\nSnijders, Tom A. B., and Stephen P. Borgatti. 1999. “Non-Parametric Standard Errors and Tests for Network Statistics.” Connections 22 (2): 1–10.\n\n\nStivala, Alex, Garry Robins, and Alessandro Lomi. 2020. “Exponential Random Graph Model Parameter Estimation for Very Large Directed Networks.” PLoS ONE 15 (1): 1–23. https://doi.org/10.1371/journal.pone.0227804.\n\n\nTanaka, Kyosuke, and George G. Vega Yon. 2024. “Imaginary Network Motifs: Structural Patterns of False Positives and Negatives in Social Networks.” Social Networks 78 (July): 65–80. https://doi.org/10.1016/j.socnet.2023.11.005.\n\n\nValente, Thomas W., and George G. Vega Yon. 2020. “Diffusion/Contagion Processes on Social Networks.” Health Education & Behavior 47 (2): 235–48. https://doi.org/10.1177/1090198120901497.\n\n\nValente, Thomas W., Heather Wipfli, and George G. Vega Yon. 2019. “Network Influences on Policy Implementation: Evidence from a Global Health Treaty.” Social Science and Medicine. https://doi.org/10.1016/j.socscimed.2019.01.008.\n\n\nVega Yon, George G. 2023. “Power and Multicollinearity in Small Networks: A Discussion of ‘Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks’ by Krivitsky, Coletti & Hens.” Journal Of The American Statistical Association.\n\n\nVega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. “Exponential Random Graph Models for Little Networks.” Social Networks 64 (August 2020): 225–38. https://doi.org/10.1016/j.socnet.2020.07.005.\n\n\nWang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. “Understanding Networks with Exponential-Family Random Network Models.” Social Networks, August, S0378873323000497. https://doi.org/10.1016/j.socnet.2023.07.003."
+    "text": "2 References\n\n\n“1.1: Basic Definitions and Concepts.” 2014. Statistics LibreTexts. https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Shafer_and_Zhang)/01%3A_Introduction_to_Statistics/1.01%3A_Basic_Definitions_and_Concepts.\n\n\nBell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol, Ridwan Alam, Meiyi Ma, Ifat Emi, John Lach, John A. Stankovic, and Kayla De La Haye. 2019. “Sensing Eating Mimicry Among Family Members.” Translational Behavioral Medicine. https://doi.org/10.1093/tbm/ibz051.\n\n\nBrooks, S., A. Gelman, G. Jones, and X. L. Meng. 2011. Handbook of Markov Chain Monte Carlo. CRC Press.\n\n\nFellows, Ian E. 2012. “Exponential Family Random Network Models.” ProQuest Dissertations and Theses. PhD thesis. https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/dissertations-theses/exponential-family-random-network-models/docview/1221548720/se-2.\n\n\nGelman, Andrew. 2018. “The Failure of Null Hypothesis Significance Testing When Studying Incremental Changes, and What to Do About It.” Personality and Social Psychology Bulletin 44 (1): 16–23. https://doi.org/10.1177/0146167217729162.\n\n\nGreenland, Sander, Stephen J. Senn, Kenneth J. Rothman, John B. Carlin, Charles Poole, Steven N. Goodman, and Douglas G. Altman. 2016. “Statistical Tests, P Values, Confidence Intervals, and Power: A Guide to Misinterpretations.” European Journal of Epidemiology 31 (4): 337–50. https://doi.org/10.1007/s10654-016-0149-3.\n\n\nHandcock, Mark S., David R. Hunter, Carter T. Butts, Steven M. Goodreau, Pavel N. Krivitsky, and Martina Morris. 2023. Ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks. The Statnet Project (https://statnet.org). https://CRAN.R-project.org/package=ergm.\n\n\nHaye, Kayla de la, Heesung Shin, George G. Vega Yon, and Thomas W. Valente. 2019. “Smoking Diffusion Through Networks of Diverse, Urban American Adolescents over the High School Period.” Journal of Health and Social Behavior. https://doi.org/10.1177/0022146519870521.\n\n\nHunter, David R., Mark S. Handcock, Carter T. Butts, Steven M. Goodreau, and Martina Morris. 2008. “ergm: A Package to Fit, Simulate and Diagnose Exponential-Family Models for Networks.” Journal of Statistical Software 24 (3): 1–29. https://doi.org/10.18637/jss.v024.i03.\n\n\nKrivitsky, Pavel N. 2012. “Exponential-Family Random Graph Models for Valued Networks.” Electronic Journal of Statistics 6: 1100–1128. https://doi.org/10.1214/12-EJS696.\n\n\nKrivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023. “A Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks.” Journal of the American Statistical Association 0 (0): 1–21. https://doi.org/10.1080/01621459.2023.2242627.\n\n\nKrivitsky, Pavel N., David R. Hunter, Martina Morris, and Chad Klumb. 2023. “Ergm 4: New Features for Analyzing Exponential-Family Random Graph Models.” Journal of Statistical Software 105 (January): 1–44. https://doi.org/10.18637/jss.v105.i06.\n\n\nLeSage, James P. 2008. “An Introduction to Spatial Econometrics.” Revue d’économie Industrielle 123 (123): 19–44. https://doi.org/10.4000/rei.3887.\n\n\nLeSage, James P., and R. Kelley Pace. 2014. “The Biggest Myth in Spatial Econometrics.” Econometrics 2 (4): 217–49. https://doi.org/10.2139/ssrn.1725503.\n\n\nLusher, Dean, Johan Koskinen, and Garry Robins. 2013. Exponential Random Graph Models for Social Networks: Theory, Methods, and Applications. Cambridge University Press.\n\n\nMilo, R., S. Shen-Orr, S. Itzkovitz, N. Kashtan, D. Chklovskii, and U. Alon. 2002. “Network Motifs: Simple Building Blocks of Complex Networks.” Science 298 (5594): 824–27. https://doi.org/10.1126/science.298.5594.824.\n\n\nRobins, Garry, Philippa Pattison, and Peter Elliott. 2001. “Network Models for Social Influence Processes.” Psychometrika 66 (2): 161–89. https://doi.org/10.1007/BF02294834.\n\n\nRoger Bivand. 2022. “R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.” Geographical Analysis 54 (3): 488–518. https://doi.org/10.1111/gean.12319.\n\n\nSnijders, Tom A. B., and Stephen P. Borgatti. 1999. “Non-Parametric Standard Errors and Tests for Network Statistics.” Connections 22 (2): 1–10.\n\n\nStivala, Alex, Garry Robins, and Alessandro Lomi. 2020. “Exponential Random Graph Model Parameter Estimation for Very Large Directed Networks.” PLoS ONE 15 (1): 1–23. https://doi.org/10.1371/journal.pone.0227804.\n\n\nTanaka, Kyosuke, and George G. Vega Yon. 2024. “Imaginary Network Motifs: Structural Patterns of False Positives and Negatives in Social Networks.” Social Networks 78 (July): 65–80. https://doi.org/10.1016/j.socnet.2023.11.005.\n\n\nValente, Thomas W., and George G. Vega Yon. 2020. “Diffusion/Contagion Processes on Social Networks.” Health Education & Behavior 47 (2): 235–48. https://doi.org/10.1177/1090198120901497.\n\n\nValente, Thomas W., Heather Wipfli, and George G. Vega Yon. 2019. “Network Influences on Policy Implementation: Evidence from a Global Health Treaty.” Social Science and Medicine. https://doi.org/10.1016/j.socscimed.2019.01.008.\n\n\nVega Yon, George G. 2023. “Power and Multicollinearity in Small Networks: A Discussion of ‘Tale of Two Datasets: Representativeness and Generalisability of Inference for Samples of Networks’ by Krivitsky, Coletti & Hens.” Journal Of The American Statistical Association.\n\n\nVega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. “Exponential Random Graph Models for Little Networks.” Social Networks 64 (August 2020): 225–38. https://doi.org/10.1016/j.socnet.2020.07.005.\n\n\nWang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. “Understanding Networks with Exponential-Family Random Network Models.” Social Networks, August, S0378873323000497. https://doi.org/10.1016/j.socnet.2023.07.003."
   },
   {
     "objectID": "index.html#disclaimer",
@@ -126,94 +217,10 @@
     "text": "4 Code of Conduct\nPlease note that the networks-udd2024 project is released with a Contributor Code of Conduct. By contributing to this project, you agree to abide by its terms."
   },
   {
-    "objectID": "01-fundamentals/index.html",
-    "href": "01-fundamentals/index.html",
+    "objectID": "01-fundamentals/index.html#r-packages",
+    "href": "01-fundamentals/index.html#r-packages",
     "title": "Fundamentals",
-    "section": "",
-    "text": "Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you–we will be brief–but I want to ensure we are all on the same page."
-  },
-  {
-    "objectID": "01-fundamentals/index.html#data-structures",
-    "href": "01-fundamentals/index.html#data-structures",
-    "title": "Fundamentals",
-    "section": "1.5 Data structures",
-    "text": "1.5 Data structures\nAtomic types are the minimal building blocks of R. They are: logical, integer, double, character, complex, raw:\n\nx_logical   &lt;- TRUE\nx_integer   &lt;- 1L\nx_double    &lt;- 1.0\nx_character &lt;- \"a\"\nx_complex   &lt;- 1i\nx_raw       &lt;- charToRaw(\"a\")\n\nUnlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.\nThe next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the c() function:\n\nx_integer &lt;- c(1, 2, 3)\nx_double  &lt;- c(1.0, 2.0, 3.0)\nx_logical &lt;- c(TRUE, FALSE, TRUE)\n# etc.\n\nR will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical &lt; integer &lt; double &lt; character\n\n\n\n\n\n\nQuestion\n\n\n\nWhy is the coercion order logical &lt; integer &lt; double &lt; character?\n\n\nThe next data structure is the list. A list is a collection of elements of any type. We can create a list with the list() function:\n\nx_list       &lt;- list(1, 2.0, TRUE, \"a\")\nx_list_named &lt;- list(a = 1, b = 2.0, c = TRUE, d = \"a\")\n\nTo access elements in a list, we have two options: by position or by name, the latter only if the elements are named:\n\nx_list[[1]]\n## [1] 1\nx_list_named[[\"a\"]]\n## [1] 1\nx_list_named$a\n## [1] 1\n\nAfter lists, we have matrices. A matrix is a collection of elements of the same type arranged in a two-dimensional grid. We can create a matrix with the matrix() function:\n\nx_matrix &lt;- matrix(1:9, nrow = 3, ncol = 3)\nx_matrix\n##      [,1] [,2] [,3]\n## [1,]    1    4    7\n## [2,]    2    5    8\n## [3,]    3    6    9\n\n# We can access elements in a matrix by row column, or position:\nx_matrix[1, 2]\n## [1] 4\nx_matrix[cbind(1, 2)]\n## [1] 4\nx_matrix[4]\n## [1] 4\n\n\n\n\n\n\n\nMatrix is a vector\n\n\n\nMatrices in R are vectors with dimensions. In base R, matrices are stored in column-major order. This means that the elements are stored column by column. This is important to know when we are accessing elements in a matrix\n\n\nThe two last data structures are arrays and data frames. An array is a collection of elements of the same type arranged in a multi-dimensional grid. We can create an array with the array() function:\n\nx_array &lt;- array(1:27, dim = c(3, 3, 3))\n\n# We can access elements in an array by row, column, and dimension, or\n# position:\nx_array[1, 2, 3]\n## [1] 22\nx_array[cbind(1, 2, 3)]\n## [1] 22\nx_array[22]\n## [1] 22\n\nData frames are the most common data structure in R. In principle, these objects are lists of vectors of the same length, each vector representing a column. Columns (lists) in data frames can be of different types, but elements in each column must be of the same type. We can create a data frame with the data.frame() function:\n\nx_data_frame &lt;- data.frame(\n  a = 1:3,\n  b = c(\"a\", \"b\", \"c\"),\n  c = c(TRUE, FALSE, TRUE)\n)\n\n# We can access elements in a data frame by row, column, or position:\nx_data_frame[1, 2]\n## [1] \"a\"\nx_data_frame[cbind(1, 2)]\n## [1] \"a\"\nx_data_frame$b[1]    # Like a list\n## [1] \"a\"\nx_data_frame[[2]][1] # Like a list too\n## [1] \"a\""
-  },
-  {
-    "objectID": "01-fundamentals/index.html#footnotes",
-    "href": "01-fundamentals/index.html#footnotes",
-    "title": "Fundamentals",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nAlthough, not for network science in general.↩︎\nIn mathematics and computer science, a binary operator is a function that takes two arguments. In R, binary operators are implemented as variable 1 [operator] variable 2. For example, 1 + 2 is a binary operation.↩︎\nThe discussion about interpreting p-values and hypothesis testing is vast and relevant. Although we will not review this here, I recommend looking into the work of Andrew Gelman Gelman (2018).↩︎"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#functions",
-    "href": "01-fundamentals/index.html#functions",
-    "title": "Fundamentals",
-    "section": "1.6 Functions",
-    "text": "1.6 Functions\nFunctions are the most important building blocks of R. A function is a set of instructions that takes one or more inputs and returns one or more outputs. We can create a function with the function() function:\n\n# This function has two arguments (y is optional)\nf &lt;- function(x, y = 1) {\n  x + 1\n}\n\nf(1)\n## [1] 2\n\nStarting with R 4, we can use the lambda syntax to create functions:\n\nf &lt;- \\(x, y) x + 1\n\nf(1)\n## [1] 2"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#control-flow",
-    "href": "01-fundamentals/index.html#control-flow",
-    "title": "Fundamentals",
-    "section": "1.7 Control flow",
-    "text": "1.7 Control flow\nControl flow statements allow us to control the execution of the code. The most common control flow statements are if, for, while, and repeat. We can create a control flow statement with the if(), for(), while(), and repeat() functions:\n\n# if\nif (TRUE) {\n  \"a\"\n} else {\n  \"b\"\n}\n## [1] \"a\"\n\n# for\nfor (i in 1:3) {\n  cat(\"This is the number \", i, \"\\n\")\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# while\ni &lt;- 1\nwhile (i &lt;= 3) {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# repeat\ni &lt;- 1\nrepeat {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n  if (i &gt; 3) {\n    break\n  }\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#getting-help",
-    "href": "01-fundamentals/index.html#getting-help",
-    "title": "Fundamentals",
-    "section": "1.1 Getting help",
-    "text": "1.1 Getting help\nUnlike other languages, R’s documentation is highly reliable. The Comprehensive R Archive Network (CRAN) is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation.\nTo get help on a function, we can use the help() function. For example, if we wanted to get help on the mean() function, we would do:\n\nhelp(\"mean\")"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#probability-distributions",
-    "href": "01-fundamentals/index.html#probability-distributions",
-    "title": "Fundamentals",
-    "section": "3.1 Probability distributions",
-    "text": "3.1 Probability distributions\nR has a standard way of naming probability functions. The naming structure is [type of function][distribution], where [type of function] can be d for density, p for cumulative distribution function, q for quantile function, and r for random generation. For example, the normal distribution has the following functions:\n\ndnorm(0, mean = 0, sd = 1)\n## [1] 0.3989423\npnorm(0, mean = 0, sd = 1)\n## [1] 0.5\nqnorm(0.5, mean = 0, sd = 1)\n## [1] 0\n\nCurrently, R has a wide range of probability distributions implemented.\n\n\n\n\n\n\nQuestion\n\n\n\nHow many probability distributions are implemented in R’s stats package?"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#hypothesis-testing",
-    "href": "01-fundamentals/index.html#hypothesis-testing",
-    "title": "Fundamentals",
-    "section": "2.1 Hypothesis testing",
-    "text": "2.1 Hypothesis testing\nAccording to Wikipedia\n\nA statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. – Wiki\n\nIn a nutshell, hypothesis testing is performed by following these steps:\n\nState the null and alternative hypotheses. In general, the null hypothesis is a statement about the population parameter that challenges our research question; for example, given the question of whether two networks are different, the null hypothesis would be that the two networks are the same.\nCompute the corresponding test statistic. It is a data function that reduces the information to a single number.\nCompare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: ``[…] the probability that the chosen test statistic would have been at least as large as its observed value if every model assumption were correct, including the test hypothesis.’’ (Greenland et al. 2016) 3\n\n\nReport the observed effect and p-value, i.e., \\Pr(t \\in H_0)\n\nWe usually say that we either reject the null hypothesis or fail to reject it (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of “suggests evidence for” or “suggests evidence against.”\nWe will illustrate statistical concepts more concretely in the next section."
-  },
-  {
-    "objectID": "01-fundamentals/index.html#random-number-generation",
-    "href": "01-fundamentals/index.html#random-number-generation",
-    "title": "Fundamentals",
-    "section": "3.2 Random number generation",
-    "text": "3.2 Random number generation\nRandom numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers. These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the r function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:\n\nset.seed(1)\n\n# Saving the current graphical parameters\nop &lt;- par(mfrow = c(2,2))\nrnorm(1000) |&gt; hist(main = \"Normal distribution\")\nrunif(1000) |&gt; hist(main = \"Uniform distribution\")\nrpois(1000, lambda = 1) |&gt; hist(main = \"Poisson distribution\")\nrbinom(1000, size = 10, prob = 0.1) |&gt; hist(main = \"Binomial distribution\")\n\n\n\npar(op)"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#naming-conventions",
-    "href": "01-fundamentals/index.html#naming-conventions",
-    "title": "Fundamentals",
-    "section": "1.2 Naming conventions",
-    "text": "1.2 Naming conventions\nR has a set of naming conventions that we should follow to avoid confusion. The most important ones are:\n\nUse lowercase letters (optional)\nUse underscores to separate words (optional)\nDo not start with a number\nDo not use special characters\nDo not use reserved words\n\n\n\n\n\n\n\nQuestion\n\n\n\nOf the following list, which are valid names and which are valid but to be avoided?\n_my.var\nmy.var\nmy_var\nmyVar\nmyVar1\n1myVar\nmy var\nmy-var"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#assignment",
-    "href": "01-fundamentals/index.html#assignment",
-    "title": "Fundamentals",
-    "section": "1.3 Assignment",
-    "text": "1.3 Assignment\nIn R we have two (four) ways of assigning values to objects: the &lt;- and = binary operators2. Although both are equivalent, the former is the preferred way of assigning values to objects, since the latter can be confused with function arguments.\n\nx &lt;- 1\nx = 1\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the difference between the following two assignments? Use the help function to find out.\nx &lt;- 1\nx &lt;&lt;- 1\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat are other ways in which you can assign values to objects?"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#using-functions",
-    "href": "01-fundamentals/index.html#using-functions",
-    "title": "Fundamentals",
-    "section": "1.4 Using functions",
-    "text": "1.4 Using functions\nIn R, we use functions to perform operations on objects. Functions are implemented as function_name ( argument_1 , argument_2 , ... ). For example, the mean() function takes a vector of numbers and returns the mean of the values:\n\nx &lt;- c(1, 2, 3)\nmean(x)\n## [1] 2"
-  },
-  {
-    "objectID": "01-fundamentals/index.html#using-functions-and-piping",
-    "href": "01-fundamentals/index.html#using-functions-and-piping",
-    "title": "Fundamentals",
-    "section": "1.4 Using functions and piping",
-    "text": "1.4 Using functions and piping\nIn R, we use functions to perform operations on objects. Functions are implemented as function_name ( argument_1 , argument_2 , ... ). For example, the mean() function takes a vector of numbers and returns the mean of the values:\n\nx &lt;- c(1, 2, 3) # The c() function creates a vector\nmean(x)\n## [1] 2\n\nFurthermore, we can use the pipe operator (|&gt;) to improve readability. The pipe operator takes the output of the left-hand side expression and passes it as the first argument of the right-hand side expression. Our previous example could be rewritten as:\n\nc(1, 2, 3) |&gt; mean()\n## [1] 2"
+    "section": "1.8 R packages",
+    "text": "1.8 R packages\nR is so powerful because of its extensions. R extensions (different from other programming languages) are called packages. Packages are collections of functions, data, and documentation that provide additional functionality to R. Although anyone can create and distribute R packages to other users, the Comprehensive R Archive Network [CRAN] is the official repository of R packages. All packages posted on CRAN are thoroughly tested, so generally, their quality is high.\nTo install R packages, we use the install.packages() function; to load them, we use the library() function. For example, the following code chunk installs the ergm package and loads it:\n\ninstall.packages(\"ergm\")\nlibrary(ergm)"
   }
 ]

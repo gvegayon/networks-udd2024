@@ -1,18 +1,19 @@
 ---
 title: Fundamentals
+bibliography: ../references.bib
 ---
 
 Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you--we will be brief--but I want to ensure we are all on the same page.
 
 # Programming with R
 
-The R programming language is the defacto language for social network analysis[^notfornetsci]. Furthermore, R homes the most comprehensive collection of packages implementing the methods we will cover here. Let's start by the fundamentals
+The R programming language [@R] is the defacto language for social network analysis[^notfornetsci]. Furthermore, R homes the most comprehensive collection of packages implementing the methods we will cover here. Let's start by the fundamentals
 
 [^notfornetsci]: Although, not for network science in general.
 
 ## Getting help
 
-Unlike other languages, R's documentation is highly reliable. The Comprehensive R Archive Network (CRAN) is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation. 
+Unlike other languages, R's documentation is highly reliable. The Comprehensive R Archive Network [CRAN] is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation. 
 
 To get help on a function, we can use the `help()` function. For example, if we wanted to get help on the `mean()` function, we would do:
 
@@ -49,7 +50,7 @@ my-var
 
 ## Assignment
 
-In R we have two (four) ways of assigning values to objects: the `<-` and `=` binary operators[^binop]. Although both are equivalent, the former is the preferred way of assigning values to objects, since the latter can be confused with function arguments.
+In R, we have two (four) ways of assigning values to objects: the `<-` and `=` binary operators[^binop]. Although both are equivalent, the former is the preferred way of assigning values to objects since the latter can be confused with function arguments.
 
 [^binop]: In mathematics and computer science, a binary operator is a function that takes two arguments. In R, binary operators are implemented as `variable 1` `[operator]` `variable 2`. For example, `1 + 2` is a binary operation.
 
@@ -95,7 +96,7 @@ c(1, 2, 3) |> mean()
 
 ## Data structures
 
-Atomic types are the minimal building blocks of R. They are: logical, integer, double, character, complex, raw:
+Atomic types are the minimal building blocks of R. They are logical, integer, double, character, complex, raw:
 
 ```{r}
 #| label: data-structures
@@ -108,6 +109,10 @@ x_raw       <- charToRaw("a")
 ```
 
 Unlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.
+
+::: {.callout .callout-tip title="Pro-tip"}
+Adding the `L` suffix to the value is good practice when dealing with integers. Some R packages like `data.table` [@datatable] have internal checks that will throw an error if you are not explicit about the data type.
+:::
 
 The next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the `c()` function:
 
@@ -255,9 +260,24 @@ repeat {
 }
 ```
 
+## R packages
+
+R is so powerful because of its extensions. R extensions (different from other programming languages) are called packages. Packages are collections of functions, data, and documentation that provide additional functionality to R. Although anyone can create and distribute R packages to other users, the Comprehensive R Archive Network [CRAN] is the official repository of R packages. All packages posted on CRAN are thoroughly tested, so generally, their quality is high.
+
+To install R packages, we use the `install.packages()` function; to load them, we use the `library()` function. For example, the following code chunk installs the `ergm` package and loads it:
+
+```{r}
+#| label: packages
+#| collapse: true
+#| eval: false
+install.packages("ergm")
+library(ergm)
+```
+
+
 # Statistics
 
-Generally, statistics are used for two purposes: to describe and to infer. We observe data samples in descriptive statistics, recording and reporting the mean, median, and standard deviation, among other statistics. Statistical inference, on the other hand, is used to infer the properties of a population from a sample. 
+Generally, statistics are used for two purposes: to describe and to infer. We observe data samples in descriptive statistics, recording and reporting the mean, median, and standard deviation, among other statistics. Statistical inference, on the other hand, is used to infer the properties of a population from a sample, particularly, about population parameters.
 
 ![Grad view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](grand-view-stats.jpg){width=70%}
 
@@ -331,6 +351,54 @@ rpois(1000, lambda = 1) |> hist(main = "Poisson distribution")
 rbinom(1000, size = 10, prob = 0.1) |> hist(main = "Binomial distribution")
 par(op)
 ```
+
+## Simulations and sampling
+
+Simulations are front and center in statistical programming. We can use them to test the properties of statistical methods, generate data, and perform statistical inference. The following example uses the sample function in R to compute the bootstrap standard error of the mean:
+
+```{r}
+#| label: simulations
+#| collapse: true
+set.seed(1)
+x <- rnorm(1000)
+
+# Bootstrap standard error of the mean
+n <- length(x)
+B <- 1000
+
+# We will store the results in a vector
+res <- numeric(B)
+
+for (i in 1:B) {
+  # Sample with replacement
+  res[i] <- sample(x, size = n, replace = TRUE) |>
+    mean()
+}
+
+# Plot the results
+hist(res, main = "Bootstrap standard error of the mean")
+```
+
+Since the previous example is rather extensive, let us review it in detail. 
+
+- `set.seed(1)` sets the seed of the PRNG to 1. It ensures we get the same results every time we run the code.
+
+- `rnorm()` generates a sample of 1,000 standard-normal values. 
+
+- `n <- length(x)` stores the length of the vector in the `n` variable.
+
+- `B <- 1000` stores the number of bootstrap samples in the `B` variable.
+
+- `res <- numeric(B)` creates a vector of length `B` to store the results.
+
+- `for (i in 1:B)` is a for loop that iterates from 1 to `B`.
+
+- `res[i] <- sample(x, size = n, replace = TRUE) |> mean()` samples `n` values from `x` with replacement and computes the mean of the sample.
+
+- The pipe operator (`|>`) passes the output of the left-hand side expression as the first argument of the right-hand side expression.
+
+- `hist(res, main = "Bootstrap standard error of the mean")` plots the histogram of the results.
+
 
 
 
