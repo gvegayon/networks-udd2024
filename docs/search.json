@@ -124,5 +124,47 @@
     "title": "Home",
     "section": "4 Code of Conduct",
     "text": "4 Code of Conduct\nPlease note that the networks-udd2024 project is released with a Contributor Code of Conduct. By contributing to this project, you agree to abide by its terms."
+  },
+  {
+    "objectID": "01-fundamentals/index.html",
+    "href": "01-fundamentals/index.html",
+    "title": "Fundamentals",
+    "section": "",
+    "text": "Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you–we will be brief–but I want to ensure we are all on the same page."
+  },
+  {
+    "objectID": "01-fundamentals/index.html#data-structures",
+    "href": "01-fundamentals/index.html#data-structures",
+    "title": "Fundamentals",
+    "section": "1.2 Data structures",
+    "text": "1.2 Data structures\nAtomic types are the minimal building blocks of R. They are: logical, integer, double, character, complex, raw:\n\nx_logical   &lt;- TRUE\nx_integer   &lt;- 1L\nx_double    &lt;- 1.0\nx_character &lt;- \"a\"\nx_complex   &lt;- 1i\nx_raw       &lt;- charToRaw(\"a\")\n\nUnlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.\nThe next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the c() function:\n\nx_integer &lt;- c(1, 2, 3)\nx_double  &lt;- c(1.0, 2.0, 3.0)\nx_logical &lt;- c(TRUE, FALSE, TRUE)\n# etc.\n\nR will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical &lt; integer &lt; double &lt; character\n\n\n\n\n\n\nQuestion\n\n\n\nWhy is the coercion order logical &lt; integer &lt; double &lt; character?\n\n\nThe next data structure is the list. A list is a collection of elements of any type. We can create a list with the list() function:\n\nx_list       &lt;- list(1, 2.0, TRUE, \"a\")\nx_list_named &lt;- list(a = 1, b = 2.0, c = TRUE, d = \"a\")\n\nTo access elements in a list, we have two options: by position or by name, the latter only if the elements are named:\n\nx_list[[1]]\n## [1] 1\nx_list_named[[\"a\"]]\n## [1] 1\nx_list_named$a\n## [1] 1\n\nAfter lists, we have matrices. A matrix is a collection of elements of the same type arranged in a two-dimensional grid. We can create a matrix with the matrix() function:\n\nx_matrix &lt;- matrix(1:9, nrow = 3, ncol = 3)\nx_matrix\n##      [,1] [,2] [,3]\n## [1,]    1    4    7\n## [2,]    2    5    8\n## [3,]    3    6    9\n\n# We can access elements in a matrix by row column, or position:\nx_matrix[1, 2]\n## [1] 4\nx_matrix[cbind(1, 2)]\n## [1] 4\nx_matrix[4]\n## [1] 4\n\n\n\n\n\n\n\nMatrix is a vector\n\n\n\nMatrices in R are vectors with dimensions. In base R, matrices are stored in column-major order. This means that the elements are stored column by column. This is important to know when we are accessing elements in a matrix\n\n\nThe two last data structures are arrays and data frames. An array is a collection of elements of the same type arranged in a multi-dimensional grid. We can create an array with the array() function:\n\nx_array &lt;- array(1:27, dim = c(3, 3, 3))\n\n# We can access elements in an array by row, column, and dimension, or\n# position:\nx_array[1, 2, 3]\n## [1] 22\nx_array[cbind(1, 2, 3)]\n## [1] 22\nx_array[22]\n## [1] 22\n\nData frames are the most common data structure in R. In principle, these objects are lists of vectors of the same length, each vector representing a column. Columns (lists) in data frames can be of different types, but elements in each column must be of the same type. We can create a data frame with the data.frame() function:\n\nx_data_frame &lt;- data.frame(\n  a = 1:3,\n  b = c(\"a\", \"b\", \"c\"),\n  c = c(TRUE, FALSE, TRUE)\n)\n\n# We can access elements in a data frame by row, column, or position:\nx_data_frame[1, 2]\n## [1] \"a\"\nx_data_frame[cbind(1, 2)]\n## [1] \"a\"\nx_data_frame$b[1]    # Like a list\n## [1] \"a\"\nx_data_frame[[2]][1] # Like a list too\n## [1] \"a\""
+  },
+  {
+    "objectID": "01-fundamentals/index.html#footnotes",
+    "href": "01-fundamentals/index.html#footnotes",
+    "title": "Fundamentals",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAlthough, not for network science in general.↩︎"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#functions",
+    "href": "01-fundamentals/index.html#functions",
+    "title": "Fundamentals",
+    "section": "1.3 Functions",
+    "text": "1.3 Functions\nFunctions are the most important building blocks of R. A function is a set of instructions that takes one or more inputs and returns one or more outputs. We can create a function with the function() function:\n\n# This function has two arguments (y is optional)\nf &lt;- function(x, y = 1) {\n  x + 1\n}\n\nf(1)\n## [1] 2\n\nStarting with R 4, we can use the lambda syntax to create functions:\n\nf &lt;- \\(x, y) x + 1\n\nf(1)\n## [1] 2"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#control-flow",
+    "href": "01-fundamentals/index.html#control-flow",
+    "title": "Fundamentals",
+    "section": "1.4 Control flow",
+    "text": "1.4 Control flow\nControl flow statements allow us to control the execution of the code. The most common control flow statements are if, for, while, and repeat. We can create a control flow statement with the if(), for(), while(), and repeat() functions:\n\n# if\nif (TRUE) {\n  \"a\"\n} else {\n  \"b\"\n}\n## [1] \"a\"\n\n# for\nfor (i in 1:3) {\n  cat(\"This is the number \", i, \"\\n\")\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# while\ni &lt;- 1\nwhile (i &lt;= 3) {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# repeat\ni &lt;- 1\nrepeat {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n  if (i &gt; 3) {\n    break\n  }\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#getting-help",
+    "href": "01-fundamentals/index.html#getting-help",
+    "title": "Fundamentals",
+    "section": "1.1 Getting help",
+    "text": "1.1 Getting help\nUnlike other languages, R’s documentation is highly reliable. The Comprehensive R Archive Network (CRAN) is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation.\nTo get help on a function, we can use the help() function. For example, if we wanted to get help on the mean() function, we would do:\n\nhelp(\"mean\")"
   }
 ]

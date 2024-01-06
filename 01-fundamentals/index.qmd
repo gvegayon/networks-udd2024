@@ -1,0 +1,199 @@
+---
+title: Fundamentals
+---
+
+Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you--we will be brief--but I want to ensure we are all on the same page.
+
+# Programming with R
+
+The R programming language is the defacto language for social network analysis[^notfornetsci]. Furthermore, R homes the most comprehensive collection of packages implementing the methods we will cover here. Let's start by the fundamentals
+
+[^notfornetsci]: Although, not for network science in general.
+
+## Getting help
+
+Unlike other languages, R's documentation is highly reliable. The Comprehensive R Archive Network (CRAN) is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation. 
+
+To get help on a function, we can use the `help()` function. For example, if we wanted to get help on the `mean()` function, we would do:
+
+```{r}
+#| label: help
+#| eval: false
+help("mean")
+```
+
+
+
+## Data structures
+
+Atomic types are the minimal building blocks of R. They are: logical, integer, double, character, complex, raw:
+
+```{r}
+#| label: data-structures
+x_logical   <- TRUE
+x_integer   <- 1L
+x_double    <- 1.0
+x_character <- "a"
+x_complex   <- 1i
+x_raw       <- charToRaw("a")
+```
+
+Unlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.
+
+The next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the `c()` function:
+
+```{r}
+#| label: data-structures-vectors
+x_integer <- c(1, 2, 3)
+x_double  <- c(1.0, 2.0, 3.0)
+x_logical <- c(TRUE, FALSE, TRUE)
+# etc.
+```
+
+R will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical < integer < double < character
+
+::: {.callout title="Question"}
+Why is the coercion order logical < integer < double < character?
+:::
+
+The next data structure is the list. A list is a collection of elements of any type. We can create a list with the `list()` function:
+
+```{r}
+#| label: data-structures-lists
+x_list       <- list(1, 2.0, TRUE, "a")
+x_list_named <- list(a = 1, b = 2.0, c = TRUE, d = "a")
+```
+
+To access elements in a list, we have two options: by position or by name, the latter only if the elements are named:
+
+```{r}
+#| label: data-structures-lists-access
+#| collapse: true
+x_list[[1]]
+x_list_named[["a"]]
+x_list_named$a
+```
+
+After lists, we have matrices. A matrix is a collection of elements of the same type arranged in a two-dimensional grid. We can create a matrix with the `matrix()` function:
+
+```{r}
+#| label: data-structures-matrices
+#| collapse: true
+x_matrix <- matrix(1:9, nrow = 3, ncol = 3)
+x_matrix
+
+# We can access elements in a matrix by row column, or position:
+x_matrix[1, 2]
+x_matrix[cbind(1, 2)]
+x_matrix[4]
+```
+
+::: {.callout title="Matrix is a vector"}
+Matrices in R are vectors with dimensions. In base R, matrices are stored in column-major order. This means that the elements are stored column by column. This is important to know when we are accessing elements in a matrix
+:::
+
+The two last data structures are arrays and data frames. An array is a collection of elements of the same type arranged in a multi-dimensional grid. We can create an array with the `array()` function:
+
+```{r}
+#| label: data-structures-arrays
+#| collapse: true
+x_array <- array(1:27, dim = c(3, 3, 3))
+
+# We can access elements in an array by row, column, and dimension, or
+# position:
+x_array[1, 2, 3]
+x_array[cbind(1, 2, 3)]
+x_array[22]
+```
+
+Data frames are the most common data structure in R. In principle, these objects are lists of vectors of the same length, each vector representing a column. Columns (lists) in data frames can be of different types, but elements in each column must be of the same type. We can create a data frame with the `data.frame()` function:
+
+```{r}
+#| label: data-structures-data-frames
+#| collapse: true
+x_data_frame <- data.frame(
+  a = 1:3,
+  b = c("a", "b", "c"),
+  c = c(TRUE, FALSE, TRUE)
+)
+
+# We can access elements in a data frame by row, column, or position:
+x_data_frame[1, 2]
+x_data_frame[cbind(1, 2)]
+x_data_frame$b[1]    # Like a list
+x_data_frame[[2]][1] # Like a list too
+```
+
+## Functions
+
+Functions are the most important building blocks of R. A function is a set of instructions that takes one or more inputs and returns one or more outputs. We can create a function with the `function()` function:
+
+```{r}
+#| label: functions
+#| collapse: true
+# This function has two arguments (y is optional)
+f <- function(x, y = 1) {
+  x + 1
+}
+
+f(1)
+```
+
+Starting with R 4, we can use the lambda syntax to create functions:
+
+```{r}
+#| label: functions-lambda
+#| collapse: true
+f <- \(x, y) x + 1
+
+f(1)
+```
+
+## Control flow
+
+Control flow statements allow us to control the execution of the code. The most common control flow statements are `if`, `for`, `while`, and `repeat`. We can create a control flow statement with the `if()`, `for()`, `while()`, and `repeat()` functions:
+
+```{r}
+#| label: control-flow
+#| collapse: true
+# if
+if (TRUE) {
+  "a"
+} else {
+  "b"
+}
+
+# for
+for (i in 1:3) {
+  cat("This is the number ", i, "\n")
+}
+
+# while
+i <- 1
+while (i <= 3) {
+  cat("This is the number ", i, "\n")
+  i <- i + 1
+}
+
+# repeat
+i <- 1
+repeat {
+  cat("This is the number ", i, "\n")
+  i <- i + 1
+  if (i > 3) {
+    break
+  }
+}
+```
+
+# Statistics
+
+Generally, statistics are used for two purposes: to describe and to infer. We observe data samples in descriptive statistics, recording and reporting the mean, median, and standard deviation, among other statistics. Statistical inference, on the other hand, is used to infer the properties of a population from a sample. 
+
+![Grad view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](grand-view-stats.jpg){width=70%}
+
+From the perspective of network science, descriptive statistics are used to describe the properties of a network, such as the number of nodes and edges, the degree distribution, the clustering coefficient, etc. Statistical inference
+
+# Statistical programming
+
+# References
