@@ -4529,7 +4529,10 @@ vertical-align: -.125em;
   <li><a href="#control-flow" id="toc-control-flow" class="nav-link" data-scroll-target="#control-flow"><span class="header-section-number">1.4</span> Control flow</a></li>
   </ul></li>
   <li><a href="#statistics" id="toc-statistics" class="nav-link" data-scroll-target="#statistics"><span class="header-section-number">2</span> Statistics</a></li>
-  <li><a href="#statistical-programming" id="toc-statistical-programming" class="nav-link" data-scroll-target="#statistical-programming"><span class="header-section-number">3</span> Statistical programming</a></li>
+  <li><a href="#statistical-programming" id="toc-statistical-programming" class="nav-link" data-scroll-target="#statistical-programming"><span class="header-section-number">3</span> Statistical programming</a>
+  <ul class="collapse">
+  <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">3.1</span> Probability distributions</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
   </ul>
 </nav>
@@ -4749,9 +4752,56 @@ Matrix is a vector
 <p></p><figcaption class="figure-caption">Grad view of statistics – Reproduced from <span class="citation" data-cites="BasicDefinitionsConcepts2014"><span>“1.1: <span>Basic Definitions</span> and <span>Concepts</span>”</span> (<a href="#ref-BasicDefinitionsConcepts2014" role="doc-biblioref">2014</a>)</span></figcaption><p></p>
 </figure>
 </div>
+<p>From the perspective of network science, descriptive statistics are used to describe the properties of a network, such as the number of nodes and edges, the degree distribution, the clustering coefficient, etc. Statistical inference in network science has to do with addressing questions about the underlying properties of networked systems; some questions include the following:</p>
+<ul>
+<li>Are two networks different?</li>
+<li>Is the number of observed triangles in a network higher than expected by chance?</li>
+<li>Are individuals in a network more likely to be connected to individuals with similar characteristics?</li>
+<li>etc.</li>
+</ul>
+<p>Part of statistical inference is hypothesis testing. According to Wikipedia</p>
+<blockquote class="blockquote">
+<p>A statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. – <a href="https://en.wikipedia.org/w/index.php?title=Statistical_hypothesis_testing&amp;oldid=1193806218">Wiki</a></p>
+</blockquote>
+<p>The hypothesis testing procedure has the following steps:</p>
+<ol type="1">
+<li>State the null and alternative hypotheses</li>
+<li>Choose a significance level</li>
+<li>Compute the test statistic</li>
+<li>Compute the p-value</li>
+</ol>
+<p>The null hypothesis is the hypothesis we want to test. The alternative hypothesis is the hypothesis we want to accept if we reject the null hypothesis. The significance level is the probability of rejecting the null hypothesis when it is true. The test statistic is a function of the data that we use to test the null hypothesis. The p-value is the probability of observing a test statistic at least as extreme as the one observed, assuming the null hypothesis is true.</p>
+<p>We will illustrate statistical concepts more concretely in the next section.</p>
 </section>
 <section id="statistical-programming" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Statistical programming</h1>
+<p>Statistical programming (or computing) is the science of leveraging modern computing power to solve statistical problems. The R programming language is the defacto language for statistical programming, and so it has an extensive collection of packages implementing statistical methods and functions.</p>
+<section id="probability-distributions" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">3.1</span> Probability distributions</h2>
+<p>R has a standard way of naming probability functions. The naming structure is <code>[type of function][distribution]</code>, where <code>[type of function]</code> can be <code>d</code> for density, <code>p</code> for cumulative distribution function, <code>q</code> for quantile function, and <code>r</code> for random generation. For example, the normal distribution has the following functions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3989423</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.5</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Currently, R has a wide range of probability distributions implemented.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many probability distributions are implemented in R’s stats package?</p>
+</div>
+</div>
+</section>
 </section>
 <section id="references" class="level1" data-number="4">
 

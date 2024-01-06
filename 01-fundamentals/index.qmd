@@ -192,8 +192,53 @@ Generally, statistics are used for two purposes: to describe and to infer. We ob
 
 ![Grad view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](grand-view-stats.jpg){width=70%}
 
-From the perspective of network science, descriptive statistics are used to describe the properties of a network, such as the number of nodes and edges, the degree distribution, the clustering coefficient, etc. Statistical inference
+From the perspective of network science, descriptive statistics are used to describe the properties of a network, such as the number of nodes and edges, the degree distribution, the clustering coefficient, etc. Statistical inference in network science has to do with addressing questions about the underlying properties of networked systems; some questions include the following:
+
+- Are two networks different?
+- Is the number of observed triangles in a network higher than expected by chance?
+- Are individuals in a network more likely to be connected to individuals with similar characteristics?
+- etc.
+
+Part of statistical inference is hypothesis testing. According to Wikipedia
+
+> A statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. -- [Wiki](https://en.wikipedia.org/w/index.php?title=Statistical_hypothesis_testing&oldid=1193806218)
+
+In a nutshell, hypothesis testing is performed by following these steps:
+
+1. State the null and alternative hypotheses. In general, the null hypothesis is a statement about the population parameter that challenges our research question; for example, given the question of whether two networks are different, the null hypothesis would be that the two networks are the same. 
+
+2. Compute the corresponding test statistic. It is a data function that reduces the information to a single number.
+
+3. Compare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: The probability the observed statistic comes from the null.
+
+4. Report the observed p-value.
+
+As scientists, we either reject the null hypothesis or fail to reject it. We never accept the null hypothesis.
+
+We will illustrate statistical concepts more concretely in the next section.
 
 # Statistical programming
+
+Statistical programming (or computing) is the science of leveraging modern computing power to solve statistical problems. The R programming language is the defacto language for statistical programming, and so it has an extensive collection of packages implementing statistical methods and functions. 
+
+## Probability distributions
+
+R has a standard way of naming probability functions. The naming structure is `[type of function][distribution]`, where `[type of function]` can be `d` for density, `p` for cumulative distribution function, `q` for quantile function, and `r` for random generation. For example, the normal distribution has the following functions:
+
+```{r}
+#| label: probability-distributions
+#| collapse: true
+dnorm(0, mean = 0, sd = 1)
+pnorm(0, mean = 0, sd = 1)
+qnorm(0.5, mean = 0, sd = 1)
+```
+
+Currently, R has a wide range of probability distributions implemented. 
+
+::: {.callout title="Question"}
+How many probability distributions are implemented in R's stats package?
+:::
+
+
 
 # References

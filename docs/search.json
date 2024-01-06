@@ -166,5 +166,12 @@
     "title": "Fundamentals",
     "section": "1.1 Getting help",
     "text": "1.1 Getting help\nUnlike other languages, R’s documentation is highly reliable. The Comprehensive R Archive Network (CRAN) is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation.\nTo get help on a function, we can use the help() function. For example, if we wanted to get help on the mean() function, we would do:\n\nhelp(\"mean\")"
+  },
+  {
+    "objectID": "01-fundamentals/index.html#probability-distributions",
+    "href": "01-fundamentals/index.html#probability-distributions",
+    "title": "Fundamentals",
+    "section": "3.1 Probability distributions",
+    "text": "3.1 Probability distributions\nR has a standard way of naming probability functions. The naming structure is [type of function][distribution], where [type of function] can be d for density, p for cumulative distribution function, q for quantile function, and r for random generation. For example, the normal distribution has the following functions:\n\ndnorm(0, mean = 0, sd = 1)\n## [1] 0.3989423\npnorm(0, mean = 0, sd = 1)\n## [1] 0.5\nqnorm(0.5, mean = 0, sd = 1)\n## [1] 0\n\nCurrently, R has a wide range of probability distributions implemented.\n\n\n\n\n\n\nQuestion\n\n\n\nHow many probability distributions are implemented in R’s stats package?"
   }
 ]
