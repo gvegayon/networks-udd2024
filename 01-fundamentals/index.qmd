@@ -328,6 +328,14 @@ pnorm(0, mean = 0, sd = 1)
 qnorm(0.5, mean = 0, sd = 1)
 ```
 
+Now, if we wanted to know what is the probability of observing a value smaller than -2 comming from a standard normal distribution, we would do:
+
+```{r}
+#| label: probability-distributions-pnorm
+#| collapse: true
+pnorm(-2, mean = 0, sd = 1)
+```
+
 Currently, R has a wide range of probability distributions implemented. 
 
 ::: {.callout title="Question"}
@@ -354,7 +362,7 @@ par(op)
 
 ## Simulations and sampling
 
-Simulations are front and center in statistical programming. We can use them to test the properties of statistical methods, generate data, and perform statistical inference. The following example uses the sample function in R to compute the bootstrap standard error of the mean:
+Simulations are front and center in statistical programming. We can use them to test the properties of statistical methods, generate data, and perform statistical inference. The following example uses the sample function in R to compute the bootstrap standard error of the mean [see @casellaStatisticalInference2021]:
 
 ```{r}
 #| label: simulations
@@ -399,6 +407,36 @@ Since the previous example is rather extensive, let us review it in detail.
 
 - `hist(res, main = "Bootstrap standard error of the mean")` plots the histogram of the results.
 
+
+::: {.callout title="Question"}
+**Simulating convolutions**: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with $(\mu, \sigma^2) = (-3, 1)$ and the other with $(\mu, \sigma^2) = (2, 2)$. Plot the histogram of the results. Draw 1,000 samples.
+
+```{r}
+#| label: simulations-convolutions
+#| eval: false
+#| collapse: true
+#| code-fold: true
+set.seed(1)
+x <- rnorm(1000, mean = -3, sd = 1)
+y <- rnorm(1000, mean = 2, sd = 2)
+z <- x + y
+
+hist(z)
+```
+:::
+
+::: {.callout title="Question"}
+**Bimodal distribution**: Using the previous two normal distributions, simulate a bimodal distribution where the probability of sampling from the first distribution is 0.3 and the probability of sampling from the second distribution is 0.7. Plot the histogram of the results. (**Hint:** use a combination of `runif()` and `ifelse()`).
+
+```{r}
+#| label: simulations-bimodal
+#| eval: false
+#| collapse: true
+#| code-fold: true
+z <- ifelse(runif(1000) < 0.3, x, y)
+density(z) |> plot()
+```
+:::
 
 
 
