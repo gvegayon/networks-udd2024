@@ -4469,6 +4469,38 @@ vertical-align: -.125em;
   }
 }</script>
 
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var head = document.getElementsByTagName("head")[0];
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css";
+      head.appendChild(link);
+
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.js";
+      script.async = false;
+      script.addEventListener('load', function() {
+        var mathElements = document.getElementsByClassName("math");
+          var macros = [];
+          for (var i = 0; i < mathElements.length; i++) {
+            var texText = mathElements[i].firstChild;
+            if (mathElements[i].tagName == "SPAN") {
+              window.katex.render(texText.data, mathElements[i], {
+                displayMode: mathElements[i].classList.contains('display'),
+                throwOnError: false,
+                macros: macros,
+                fleqn: false
+              });
+            }
+          }
+      });
+      head.appendChild(script);
+    });
+  </script>
+  
 
 </head>
 
@@ -4524,14 +4556,21 @@ vertical-align: -.125em;
   <li><a href="#programming-with-r" id="toc-programming-with-r" class="nav-link active" data-scroll-target="#programming-with-r"><span class="header-section-number">1</span> Programming with R</a>
   <ul class="collapse">
   <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help"><span class="header-section-number">1.1</span> Getting help</a></li>
-  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="header-section-number">1.2</span> Data structures</a></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.3</span> Functions</a></li>
-  <li><a href="#control-flow" id="toc-control-flow" class="nav-link" data-scroll-target="#control-flow"><span class="header-section-number">1.4</span> Control flow</a></li>
+  <li><a href="#naming-conventions" id="toc-naming-conventions" class="nav-link" data-scroll-target="#naming-conventions"><span class="header-section-number">1.2</span> Naming conventions</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment"><span class="header-section-number">1.3</span> Assignment</a></li>
+  <li><a href="#using-functions-and-piping" id="toc-using-functions-and-piping" class="nav-link" data-scroll-target="#using-functions-and-piping"><span class="header-section-number">1.4</span> Using functions and piping</a></li>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="header-section-number">1.5</span> Data structures</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="header-section-number">1.6</span> Functions</a></li>
+  <li><a href="#control-flow" id="toc-control-flow" class="nav-link" data-scroll-target="#control-flow"><span class="header-section-number">1.7</span> Control flow</a></li>
   </ul></li>
-  <li><a href="#statistics" id="toc-statistics" class="nav-link" data-scroll-target="#statistics"><span class="header-section-number">2</span> Statistics</a></li>
+  <li><a href="#statistics" id="toc-statistics" class="nav-link" data-scroll-target="#statistics"><span class="header-section-number">2</span> Statistics</a>
+  <ul class="collapse">
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">2.1</span> Hypothesis testing</a></li>
+  </ul></li>
   <li><a href="#statistical-programming" id="toc-statistical-programming" class="nav-link" data-scroll-target="#statistical-programming"><span class="header-section-number">3</span> Statistical programming</a>
   <ul class="collapse">
   <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">3.1</span> Probability distributions</a></li>
+  <li><a href="#random-number-generation" id="toc-random-number-generation" class="nav-link" data-scroll-target="#random-number-generation"><span class="header-section-number">3.2</span> Random number generation</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
   </ul>
@@ -4569,24 +4608,106 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;mean&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data-structures" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">1.2</span> Data structures</h2>
+<section id="naming-conventions" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="naming-conventions"><span class="header-section-number">1.2</span> Naming conventions</h2>
+<p>R has a set of naming conventions that we should follow to avoid confusion. The most important ones are:</p>
+<ul>
+<li>Use lowercase letters (optional)</li>
+<li>Use underscores to separate words (optional)</li>
+<li>Do not start with a number</li>
+<li>Do not use special characters</li>
+<li>Do not use reserved words</li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Of the following list, which are valid names and which are valid but to be avoided?</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>_my.var</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my.var</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>my_var</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>myVar</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>myVar1</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>1myVar</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>my var</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>my<span class="sc">-</span>var</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="assignment" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="assignment"><span class="header-section-number">1.3</span> Assignment</h2>
+<p>In R we have two (four) ways of assigning values to objects: the <code>&lt;-</code> and <code>=</code> binary operators<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Although both are equivalent, the former is the preferred way of assigning values to objects, since the latter can be confused with function arguments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the difference between the following two assignments? Use the help function to find out.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;&lt;-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="Question">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What are other ways in which you can assign values to objects?</p>
+</div>
+</div>
+</section>
+<section id="using-functions-and-piping" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="using-functions-and-piping"><span class="header-section-number">1.4</span> Using functions and piping</h2>
+<p>In R, we use functions to perform operations on objects. Functions are implemented as <code>function_name</code> <code>(</code> <code>argument_1</code> <code>,</code> <code>argument_2</code> <code>,</code> <code>...</code> <code>)</code>. For example, the <code>mean()</code> function takes a vector of numbers and returns the mean of the values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># The c() function creates a vector</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Furthermore, we can use the pipe operator (<code>|&gt;</code>) to improve readability. The pipe operator takes the output of the left-hand side expression and passes it as the first argument of the right-hand side expression. Our previous example could be rewritten as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">mean</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-structures" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">1.5</span> Data structures</h2>
 <p>Atomic types are the minimal building blocks of R. They are: logical, integer, double, character, complex, raw:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x_logical   <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x_integer   <span class="ot">&lt;-</span> 1L</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>x_double    <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>x_character <span class="ot">&lt;-</span> <span class="st">&quot;a&quot;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x_complex   <span class="ot">&lt;-</span> 1i</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>x_raw       <span class="ot">&lt;-</span> <span class="fu">charToRaw</span>(<span class="st">&quot;a&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x_logical   <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x_integer   <span class="ot">&lt;-</span> 1L</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x_double    <span class="ot">&lt;-</span> <span class="fl">1.0</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x_character <span class="ot">&lt;-</span> <span class="st">&quot;a&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x_complex   <span class="ot">&lt;-</span> 1i</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>x_raw       <span class="ot">&lt;-</span> <span class="fu">charToRaw</span>(<span class="st">&quot;a&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Unlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.</p>
 <p>The next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the <code>c()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x_integer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x_double  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x_logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># etc.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x_integer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x_double  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x_logical <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># etc.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>R will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical &lt; integer &lt; double &lt; character</p>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Question">
@@ -4604,34 +4725,34 @@ Question
 </div>
 <p>The next data structure is the list. A list is a collection of elements of any type. We can create a list with the <code>list()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x_list       <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="fl">2.0</span>, <span class="cn">TRUE</span>, <span class="st">&quot;a&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x_list_named <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="fl">2.0</span>, <span class="at">c =</span> <span class="cn">TRUE</span>, <span class="at">d =</span> <span class="st">&quot;a&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x_list       <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="fl">2.0</span>, <span class="cn">TRUE</span>, <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x_list_named <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="fl">2.0</span>, <span class="at">c =</span> <span class="cn">TRUE</span>, <span class="at">d =</span> <span class="st">&quot;a&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To access elements in a list, we have two options: by position or by name, the latter only if the elements are named:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x_list[[<span class="dv">1</span>]]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x_list_named[[<span class="st">&quot;a&quot;</span>]]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>x_list_named<span class="sc">$</span>a</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x_list[[<span class="dv">1</span>]]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>x_list_named[[<span class="st">&quot;a&quot;</span>]]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>x_list_named<span class="sc">$</span>a</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After lists, we have matrices. A matrix is a collection of elements of the same type arranged in a two-dimensional grid. We can create a matrix with the <code>matrix()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x_matrix</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,1] [,2] [,3]</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    1    4    7</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    2    5    8</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    3    6    9</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># We can access elements in a matrix by row column, or position:</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>x_matrix[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>x_matrix[<span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>x_matrix[<span class="dv">4</span>]</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>x_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x_matrix</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">##      [,1] [,2] [,3]</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1,]    1    4    7</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [2,]    2    5    8</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [3,]    3    6    9</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># We can access elements in a matrix by row column, or position:</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>x_matrix[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>x_matrix[<span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>x_matrix[<span class="dv">4</span>]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Matrix is a vector">
 <div class="callout-header d-flex align-content-center">
@@ -4648,98 +4769,98 @@ Matrix is a vector
 </div>
 <p>The two last data structures are arrays and data frames. An array is a collection of elements of the same type arranged in a multi-dimensional grid. We can create an array with the <code>array()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">27</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We can access elements in an array by row, column, and dimension, or</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># position:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x_array[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>x_array[<span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>x_array[<span class="dv">22</span>]</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">27</span>, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We can access elements in an array by row, column, and dimension, or</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># position:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>x_array[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>x_array[<span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>x_array[<span class="dv">22</span>]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 22</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Data frames are the most common data structure in R. In principle, these objects are lists of vectors of the same length, each vector representing a column. Columns (lists) in data frames can be of different types, but elements in each column must be of the same type. We can create a data frame with the <code>data.frame()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x_data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We can access elements in a data frame by row, column, or position:</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>x_data_frame[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>x_data_frame[<span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>x_data_frame<span class="sc">$</span>b[<span class="dv">1</span>]    <span class="co"># Like a list</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>x_data_frame[[<span class="dv">2</span>]][<span class="dv">1</span>] <span class="co"># Like a list too</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x_data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We can access elements in a data frame by row, column, or position:</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>x_data_frame[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>x_data_frame[<span class="fu">cbind</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>x_data_frame<span class="sc">$</span>b[<span class="dv">1</span>]    <span class="co"># Like a list</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>x_data_frame[[<span class="dv">2</span>]][<span class="dv">1</span>] <span class="co"># Like a list too</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="functions" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.3</span> Functions</h2>
+<section id="functions" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.6</span> Functions</h2>
 <p>Functions are the most important building blocks of R. A function is a set of instructions that takes one or more inputs and returns one or more outputs. We can create a function with the <code>function()</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This function has two arguments (y is optional)</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">y =</span> <span class="dv">1</span>) {</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This function has two arguments (y is optional)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">y =</span> <span class="dv">1</span>) {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Starting with R 4, we can use the lambda syntax to create functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> \(x, y) x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> \(x, y) x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">1</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="control-flow" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="control-flow"><span class="header-section-number">1.4</span> Control flow</h2>
+<section id="control-flow" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="control-flow"><span class="header-section-number">1.7</span> Control flow</h2>
 <p>Control flow statements allow us to control the execution of the code. The most common control flow statements are <code>if</code>, <code>for</code>, <code>while</code>, and <code>repeat</code>. We can create a control flow statement with the <code>if()</code>, <code>for()</code>, <code>while()</code>, and <code>repeat()</code> functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">TRUE</span>) {</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;a&quot;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;b&quot;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># for</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is the number &quot;</span>, i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  1 </span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  2 </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  3</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># while</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (i <span class="sc">&lt;=</span> <span class="dv">3</span>) {</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is the number &quot;</span>, i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  1 </span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  2 </span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  3</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is the number &quot;</span>, i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  1 </span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  2 </span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># if</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;a&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;b&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;a&quot;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># for</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is the number &quot;</span>, i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  1 </span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  2 </span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  3</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co"># while</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (i <span class="sc">&lt;=</span> <span class="dv">3</span>) {</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is the number &quot;</span>, i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  1 </span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  2 </span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  3</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;This is the number &quot;</span>, i, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">3</span>) {</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  1 </span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  2 </span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="do">## This is the number  3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -4759,19 +4880,25 @@ Matrix is a vector
 <li>Are individuals in a network more likely to be connected to individuals with similar characteristics?</li>
 <li>etc.</li>
 </ul>
-<p>Part of statistical inference is hypothesis testing. According to Wikipedia</p>
+<p>Part of statistical inference is hypothesis testing.</p>
+<section id="hypothesis-testing" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">2.1</span> Hypothesis testing</h2>
+<p>According to Wikipedia</p>
 <blockquote class="blockquote">
 <p>A statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. – <a href="https://en.wikipedia.org/w/index.php?title=Statistical_hypothesis_testing&amp;oldid=1193806218">Wiki</a></p>
 </blockquote>
-<p>The hypothesis testing procedure has the following steps:</p>
+<p>In a nutshell, hypothesis testing is performed by following these steps:</p>
 <ol type="1">
-<li>State the null and alternative hypotheses</li>
-<li>Choose a significance level</li>
-<li>Compute the test statistic</li>
-<li>Compute the p-value</li>
+<li><p>State the null and alternative hypotheses. In general, the null hypothesis is a statement about the population parameter that challenges our research question; for example, given the question of whether two networks are different, the null hypothesis would be that the two networks are the same.</p></li>
+<li><p>Compute the corresponding test statistic. It is a data function that reduces the information to a single number.</p></li>
+<li><p>Compare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: ``[…] the probability that the chosen test statistic would have been at least as large as its observed value <em>if</em> every <strong>model assumption were correct</strong>, including the test hypothesis.’’ <span class="citation" data-cites="greenlandStatisticalTestsValues2016">(<a href="#ref-greenlandStatisticalTestsValues2016" role="doc-biblioref">Greenland et al. 2016</a>)</span> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p></li>
 </ol>
-<p>The null hypothesis is the hypothesis we want to test. The alternative hypothesis is the hypothesis we want to accept if we reject the null hypothesis. The significance level is the probability of rejecting the null hypothesis when it is true. The test statistic is a function of the data that we use to test the null hypothesis. The p-value is the probability of observing a test statistic at least as extreme as the one observed, assuming the null hypothesis is true.</p>
+<ol start="4" type="1">
+<li>Report the observed effect and p-value, <em>i.e.</em>, <span class="math inline">\Pr(t \in H_0)</span></li>
+</ol>
+<p>We usually say that we either <em>reject the null hypothesis</em> or <em>fail to reject it</em> (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of “suggests evidence for” or “suggests evidence against.”</p>
 <p>We will illustrate statistical concepts more concretely in the next section.</p>
+</section>
 </section>
 <section id="statistical-programming" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Statistical programming</h1>
@@ -4780,12 +4907,12 @@ Matrix is a vector
 <h2 data-number="3.1" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">3.1</span> Probability distributions</h2>
 <p>R has a standard way of naming probability functions. The naming structure is <code>[type of function][distribution]</code>, where <code>[type of function]</code> can be <code>d</code> for density, <code>p</code> for cumulative distribution function, <code>q</code> for quantile function, and <code>r</code> for random generation. For example, the normal distribution has the following functions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3989423</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.5</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.3989423</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0.5</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.5</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Currently, R has a wide range of probability distributions implemented.</p>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Question">
@@ -4802,6 +4929,24 @@ Question
 </div>
 </div>
 </section>
+<section id="random-number-generation" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="random-number-generation"><span class="header-section-number">3.2</span> Random number generation</h2>
+<p>Random numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers. These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the <code>r</code> function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Saving the current graphical parameters</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">1000</span>) <span class="sc">|&gt;</span> <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">&quot;Normal distribution&quot;</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">1000</span>) <span class="sc">|&gt;</span> <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">&quot;Uniform distribution&quot;</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rpois</span>(<span class="dv">1000</span>, <span class="at">lambda =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">&quot;Poisson distribution&quot;</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1000</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.1</span>) <span class="sc">|&gt;</span> <span class="fu">hist</span>(<span class="at">main =</span> <span class="st">&quot;Binomial distribution&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data:image/png;base64,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" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="references" class="level1" data-number="4">
 
@@ -4815,10 +4960,18 @@ Question
 <div id="ref-BasicDefinitionsConcepts2014" class="csl-entry" role="listitem">
 <span>“1.1: <span>Basic Definitions</span> and <span>Concepts</span>.”</span> 2014. <em>Statistics LibreTexts</em>. https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Shafer_and_Zhang)/01%3A_Introduction_to_Statistics/1.01%3A_Basic_Definitions_and_Concepts.
 </div>
+<div id="ref-gelmanFailureNullHypothesis2018" class="csl-entry" role="listitem">
+Gelman, Andrew. 2018. <span>“The <span>Failure</span> of <span>Null Hypothesis Significance Testing When Studying Incremental Changes</span>, and <span>What</span> to <span>Do About It</span>.”</span> <em>Personality and Social Psychology Bulletin</em> 44 (1): 16–23. <a href="https://doi.org/10.1177/0146167217729162">https://doi.org/10.1177/0146167217729162</a>.
+</div>
+<div id="ref-greenlandStatisticalTestsValues2016" class="csl-entry" role="listitem">
+Greenland, Sander, Stephen J. Senn, Kenneth J. Rothman, John B. Carlin, Charles Poole, Steven N. Goodman, and Douglas G. Altman. 2016. <span>“Statistical Tests, <span>P</span> Values, Confidence Intervals, and Power: A Guide to Misinterpretations.”</span> <em>European Journal of Epidemiology</em> 31 (4): 337–50. <a href="https://doi.org/10.1007/s10654-016-0149-3">https://doi.org/10.1007/s10654-016-0149-3</a>.
+</div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>Although, not for network science in general.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In mathematics and computer science, a binary operator is a function that takes two arguments. In R, binary operators are implemented as <code>variable 1</code> <code>[operator]</code> <code>variable 2</code>. For example, <code>1 + 2</code> is a binary operation.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The discussion about interpreting p-values and hypothesis testing is vast and relevant. Although we will not review this here, I recommend looking into the work of Andrew Gelman <span class="citation" data-cites="gelmanFailureNullHypothesis2018">Gelman (<a href="#ref-gelmanFailureNullHypothesis2018" role="doc-biblioref">2018</a>)</span>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

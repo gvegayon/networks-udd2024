@@ -22,6 +22,75 @@ To get help on a function, we can use the `help()` function. For example, if we 
 help("mean")
 ```
 
+## Naming conventions
+
+R has a set of naming conventions that we should follow to avoid confusion. The most important ones are:
+
+- Use lowercase letters (optional)
+- Use underscores to separate words (optional)
+- Do not start with a number
+- Do not use special characters 
+- Do not use reserved words
+
+::: {.callout title="Question"}
+Of the following list, which are valid names and which are valid but to be avoided?
+
+```r
+_my.var
+my.var
+my_var
+myVar
+myVar1
+1myVar
+my var
+my-var
+```
+:::
+
+## Assignment
+
+In R we have two (four) ways of assigning values to objects: the `<-` and `=` binary operators[^binop]. Although both are equivalent, the former is the preferred way of assigning values to objects, since the latter can be confused with function arguments.
+
+[^binop]: In mathematics and computer science, a binary operator is a function that takes two arguments. In R, binary operators are implemented as `variable 1` `[operator]` `variable 2`. For example, `1 + 2` is a binary operation.
+
+```{r}
+#| label: assignment
+#| collapse: true
+x <- 1
+x = 1
+```
+
+::: {.callout title="Question"}
+What is the difference between the following two assignments? Use the help function to find out.
+
+```r
+x <- 1
+x <<- 1
+```
+:::
+
+::: {.callout title="Question"}
+What are other ways in which you can assign values to objects?
+:::
+
+## Using functions and piping
+
+In R, we use functions to perform operations on objects. Functions are implemented as `function_name` `(` `argument_1` `,` `argument_2` `,` `...` `)`. For example, the `mean()` function takes a vector of numbers and returns the mean of the values:
+
+```{r}
+#| label: using-functions
+#| collapse: true
+x <- c(1, 2, 3) # The c() function creates a vector
+mean(x)
+```
+
+Furthermore, we can use the pipe operator (`|>`) to improve readability. The pipe operator takes the output of the left-hand side expression and passes it as the first argument of the right-hand side expression. Our previous example could be rewritten as:
+
+```{r}
+#| label: using-functions-pipe
+#| collapse: true
+c(1, 2, 3) |> mean()
+```
 
 
 ## Data structures
@@ -199,7 +268,11 @@ From the perspective of network science, descriptive statistics are used to desc
 - Are individuals in a network more likely to be connected to individuals with similar characteristics?
 - etc.
 
-Part of statistical inference is hypothesis testing. According to Wikipedia
+Part of statistical inference is hypothesis testing.
+
+## Hypothesis testing
+
+According to Wikipedia
 
 > A statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. -- [Wiki](https://en.wikipedia.org/w/index.php?title=Statistical_hypothesis_testing&oldid=1193806218)
 
@@ -209,11 +282,13 @@ In a nutshell, hypothesis testing is performed by following these steps:
 
 2. Compute the corresponding test statistic. It is a data function that reduces the information to a single number.
 
-3. Compare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: The probability the observed statistic comes from the null.
+3. Compare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: ``[...] the probability that the chosen test statistic would have been at least as large as its observed value *if* every **model assumption were correct**, including the test hypothesis.'' [@greenlandStatisticalTestsValues2016] [^pvaluegelman]
 
-4. Report the observed p-value.
+[^pvaluegelman]: The discussion about interpreting p-values and hypothesis testing is vast and relevant. Although we will not review this here, I recommend looking into the work of Andrew Gelman @gelmanFailureNullHypothesis2018.
 
-As scientists, we either reject the null hypothesis or fail to reject it. We never accept the null hypothesis.
+4. Report the observed effect and p-value, *i.e.*, $\Pr(t \in H_0)$
+
+We usually say that we either *reject the null hypothesis* or *fail to reject it* (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of "suggests evidence for" or "suggests evidence against."
 
 We will illustrate statistical concepts more concretely in the next section.
 
@@ -238,6 +313,24 @@ Currently, R has a wide range of probability distributions implemented.
 ::: {.callout title="Question"}
 How many probability distributions are implemented in R's stats package?
 :::
+
+## Random number generation
+
+Random numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers. These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the `r` function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:
+
+```{r}
+#| label: random-number-generation
+#| collapse: true
+set.seed(1)
+
+# Saving the current graphical parameters
+op <- par(mfrow = c(2,2))
+rnorm(1000) |> hist(main = "Normal distribution")
+runif(1000) |> hist(main = "Uniform distribution")
+rpois(1000, lambda = 1) |> hist(main = "Poisson distribution")
+rbinom(1000, size = 10, prob = 0.1) |> hist(main = "Binomial distribution")
+par(op)
+```
 
 
 
