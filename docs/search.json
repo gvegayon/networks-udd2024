@@ -250,5 +250,131 @@
     "title": "Introduction to ERGMs",
     "section": "1.2 The ratio of loglikelihoods",
     "text": "1.2 The ratio of loglikelihoods\nThe second significant result is that the ratio of loglikelihoods can be approximated through simulation. It is based on the following observation by Geyer and Thompson (1992):\n\n\\frac{\\kappa(\\bm{\\theta})}{\\kappa(\\bm{\\theta}_0)} = \\mathbb{E}_{\\mathcal{Y}, \\bm{\\theta}_0}\\left((\\bm{\\theta} - \\bm{\\theta}_0)s(\\bm{y})^{\\mathbf{t}}\\right),\n\nthen, using the latter, we can approximate the following loglikelihood ratio:\n\\begin{align*}\nl(\\bm{\\theta}) - l(\\bm{\\theta}_0) = & (\\bm{\\theta} - \\bm{\\theta}_0)^{\\mathbf{t}}s(\\bm{y}) - \\log\\left[\\frac{\\kappa(\\bm{\\theta})}{\\kappa(\\bm{\\theta}_0)}\\right]\\\\\n\\approx & (\\bm{\\theta} - \\bm{\\theta}_0)^{\\mathbf{t}}s(\\bm{y}) - \\log\\left[M^{-1}\\sum_{\\bm{y}^{(m)}} (\\bm{\\theta} - \\bm{\\theta}_0)^{\\mathbf{t}}s(\\bm{y}^{(m)})\\right]\n\\end{align*}\nWhere \\bm{\\theta}_0 is an arbitrary vector of parameters, and \\bm{y}^{(m)} are sampled from the distribution P_{\\mathcal{Y}, \\bm{\\theta}_0}. In the words of Geyer and Thompson (1992), “[…] it is possible to approximate \\bm{\\theta} by using simulations from one distribution P_{\\mathcal{Y}, \\bm{\\theta}_0} no matter which \\bm{\\theta}_0 in the parameter space is.”"
+  },
+  {
+    "objectID": "00-fundamentals/index.html",
+    "href": "00-fundamentals/index.html",
+    "title": "Fundamentals",
+    "section": "",
+    "text": "Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you–we will be brief–but I want to ensure we are all on the same page."
+  },
+  {
+    "objectID": "00-fundamentals/index.html#getting-help",
+    "href": "00-fundamentals/index.html#getting-help",
+    "title": "Fundamentals",
+    "section": "1.1 Getting help",
+    "text": "1.1 Getting help\nUnlike other languages, R’s documentation is highly reliable. The Comprehensive R Archive Network [CRAN] is the official repository of R packages. All packages posted on CRAN must pass a series of tests to ensure the quality of the code, including the documentation.\nTo get help on a function, we can use the help() function. For example, if we wanted to get help on the mean() function, we would do:\n\nhelp(\"mean\")"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#naming-conventions",
+    "href": "00-fundamentals/index.html#naming-conventions",
+    "title": "Fundamentals",
+    "section": "1.2 Naming conventions",
+    "text": "1.2 Naming conventions\nR has a set of naming conventions that we should follow to avoid confusion. The most important ones are:\n\nUse lowercase letters (optional)\nUse underscores to separate words (optional)\nDo not start with a number\nDo not use special characters\nDo not use reserved words\n\n\n\n\n\n\n\nQuestion\n\n\n\nOf the following list, which are valid names and which are valid but to be avoided?\n_my.var\nmy.var\nmy_var\nmyVar\nmyVar1\n1myVar\nmy var\nmy-var"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#assignment",
+    "href": "00-fundamentals/index.html#assignment",
+    "title": "Fundamentals",
+    "section": "1.3 Assignment",
+    "text": "1.3 Assignment\nIn R, we have two (four) ways of assigning values to objects: the &lt;- and = binary operators2. Although both are equivalent, the former is the preferred way of assigning values to objects since the latter can be confused with function arguments.\n\nx &lt;- 1\nx = 1\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat is the difference between the following two assignments? Use the help function to find out.\nx &lt;- 1\nx &lt;&lt;- 1\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nWhat are other ways in which you can assign values to objects?"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#using-functions-and-piping",
+    "href": "00-fundamentals/index.html#using-functions-and-piping",
+    "title": "Fundamentals",
+    "section": "1.4 Using functions and piping",
+    "text": "1.4 Using functions and piping\nIn R, we use functions to perform operations on objects. Functions are implemented as function_name ( argument_1 , argument_2 , ... ). For example, the mean() function takes a vector of numbers and returns the mean of the values:\n\nx &lt;- c(1, 2, 3) # The c() function creates a vector\nmean(x)\n## [1] 2\n\nFurthermore, we can use the pipe operator (|&gt;) to improve readability. The pipe operator takes the output of the left-hand side expression and passes it as the first argument of the right-hand side expression. Our previous example could be rewritten as:\n\nc(1, 2, 3) |&gt; mean()\n## [1] 2"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#data-structures",
+    "href": "00-fundamentals/index.html#data-structures",
+    "title": "Fundamentals",
+    "section": "1.5 Data structures",
+    "text": "1.5 Data structures\nAtomic types are the minimal building blocks of R. They are logical, integer, double, character, complex, raw:\n\nx_logical   &lt;- TRUE\nx_integer   &lt;- 1L\nx_double    &lt;- 1.0\nx_character &lt;- \"a\"\nx_complex   &lt;- 1i\nx_raw       &lt;- charToRaw(\"a\")\n\nUnlike other languages, we do not need to declare the data type before creating the object; R will infer it from the value.\n\n\n\n\n\n\nPro-tip\n\n\n\nAdding the L suffix to the value is good practice when dealing with integers. Some R packages like data.table (Barrett, Dowle, and Srinivasan 2023) have internal checks that will throw an error if you are not explicit about the data type.\n\n\nThe next type is the vector. A vector is a collection of elements of the same type. The most common way to create a vector is with the c() function:\n\nx_integer &lt;- c(1, 2, 3)\nx_double  &lt;- c(1.0, 2.0, 3.0)\nx_logical &lt;- c(TRUE, FALSE, TRUE)\n# etc.\n\nR will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical &lt; integer &lt; double &lt; character\n\n\n\n\n\n\nQuestion\n\n\n\nWhy is the coercion order logical &lt; integer &lt; double &lt; character?\n\n\nThe next data structure is the list. A list is a collection of elements of any type. We can create a list with the list() function:\n\nx_list       &lt;- list(1, 2.0, TRUE, \"a\")\nx_list_named &lt;- list(a = 1, b = 2.0, c = TRUE, d = \"a\")\n\nTo access elements in a list, we have two options: by position or by name, the latter only if the elements are named:\n\nx_list[[1]]\n## [1] 1\nx_list_named[[\"a\"]]\n## [1] 1\nx_list_named$a\n## [1] 1\n\nAfter lists, we have matrices. A matrix is a collection of elements of the same type arranged in a two-dimensional grid. We can create a matrix with the matrix() function:\n\nx_matrix &lt;- matrix(1:9, nrow = 3, ncol = 3)\nx_matrix\n##      [,1] [,2] [,3]\n## [1,]    1    4    7\n## [2,]    2    5    8\n## [3,]    3    6    9\n\n# We can access elements in a matrix by row column, or position:\nx_matrix[1, 2]\n## [1] 4\nx_matrix[cbind(1, 2)]\n## [1] 4\nx_matrix[4]\n## [1] 4\n\n\n\n\n\n\n\nMatrix is a vector\n\n\n\nMatrices in R are vectors with dimensions. In base R, matrices are stored in column-major order. This means that the elements are stored column by column. This is important to know when we are accessing elements in a matrix\n\n\nThe two last data structures are arrays and data frames. An array is a collection of elements of the same type arranged in a multi-dimensional grid. We can create an array with the array() function:\n\nx_array &lt;- array(1:27, dim = c(3, 3, 3))\n\n# We can access elements in an array by row, column, and dimension, or\n# position:\nx_array[1, 2, 3]\n## [1] 22\nx_array[cbind(1, 2, 3)]\n## [1] 22\nx_array[22]\n## [1] 22\n\nData frames are the most common data structure in R. In principle, these objects are lists of vectors of the same length, each vector representing a column. Columns (lists) in data frames can be of different types, but elements in each column must be of the same type. We can create a data frame with the data.frame() function:\n\nx_data_frame &lt;- data.frame(\n  a = 1:3,\n  b = c(\"a\", \"b\", \"c\"),\n  c = c(TRUE, FALSE, TRUE)\n)\n\n# We can access elements in a data frame by row, column, or position:\nx_data_frame[1, 2]\n## [1] \"a\"\nx_data_frame[cbind(1, 2)]\n## [1] \"a\"\nx_data_frame$b[1]    # Like a list\n## [1] \"a\"\nx_data_frame[[2]][1] # Like a list too\n## [1] \"a\""
+  },
+  {
+    "objectID": "00-fundamentals/index.html#functions",
+    "href": "00-fundamentals/index.html#functions",
+    "title": "Fundamentals",
+    "section": "1.6 Functions",
+    "text": "1.6 Functions\nFunctions are the most important building blocks of R. A function is a set of instructions that takes one or more inputs and returns one or more outputs. We can create a function with the function() function:\n\n# This function has two arguments (y is optional)\nf &lt;- function(x, y = 1) {\n  x + 1\n}\n\nf(1)\n## [1] 2\n\nStarting with R 4, we can use the lambda syntax to create functions:\n\nf &lt;- \\(x, y) x + 1\n\nf(1)\n## [1] 2"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#control-flow",
+    "href": "00-fundamentals/index.html#control-flow",
+    "title": "Fundamentals",
+    "section": "1.7 Control flow",
+    "text": "1.7 Control flow\nControl flow statements allow us to control the execution of the code. The most common control flow statements are if, for, while, and repeat. We can create a control flow statement with the if(), for(), while(), and repeat() functions:\n\n# if\nif (TRUE) {\n  \"a\"\n} else {\n  \"b\"\n}\n## [1] \"a\"\n\n# for\nfor (i in 1:3) {\n  cat(\"This is the number \", i, \"\\n\")\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# while\ni &lt;- 1\nwhile (i &lt;= 3) {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3\n\n# repeat\ni &lt;- 1\nrepeat {\n  cat(\"This is the number \", i, \"\\n\")\n  i &lt;- i + 1\n  if (i &gt; 3) {\n    break\n  }\n}\n## This is the number  1 \n## This is the number  2 \n## This is the number  3"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#r-packages",
+    "href": "00-fundamentals/index.html#r-packages",
+    "title": "Fundamentals",
+    "section": "1.8 R packages",
+    "text": "1.8 R packages\nR is so powerful because of its extensions. R extensions (different from other programming languages) are called packages. Packages are collections of functions, data, and documentation that provide additional functionality to R. Although anyone can create and distribute R packages to other users, the Comprehensive R Archive Network [CRAN] is the official repository of R packages. All packages posted on CRAN are thoroughly tested, so generally, their quality is high.\nTo install R packages, we use the install.packages() function; to load them, we use the library() function. For example, the following code chunk installs the ergm package and loads it:\n\ninstall.packages(\"ergm\")\nlibrary(ergm)"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#hypothesis-testing",
+    "href": "00-fundamentals/index.html#hypothesis-testing",
+    "title": "Fundamentals",
+    "section": "2.1 Hypothesis testing",
+    "text": "2.1 Hypothesis testing\nAccording to Wikipedia\n\nA statistical hypothesis test is a method of statistical inference used to decide whether the data at hand sufficiently support a particular hypothesis. More generally, hypothesis testing allows us to make probabilistic statements about population parameters. More informally, hypothesis testing is the processes of making decisions under uncertainty. Typically, hypothesis testing procedures involve a user selected tradeoff between false positives and false negatives. – Wiki\n\nIn a nutshell, hypothesis testing is performed by following these steps:\n\nState the null and alternative hypotheses. In general, the null hypothesis is a statement about the population parameter that challenges our research question; for example, given the question of whether two networks are different, the null hypothesis would be that the two networks are the same.\nCompute the corresponding test statistic. It is a data function that reduces the information to a single number.\nCompare the observed test statistic with the distribution of the test statistic under the null hypothesis. The sometimes infamous p-value: ``[…] the probability that the chosen test statistic would have been at least as large as its observed value if every model assumption were correct, including the test hypothesis.’’ (Greenland et al. 2016) 3\n\n\nReport the observed effect and p-value, i.e., \\Pr(t \\in H_0)\n\nWe usually say that we either reject the null hypothesis or fail to reject it (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of “suggests evidence for” or “suggests evidence against.”\nWe will illustrate statistical concepts more concretely in the next section."
+  },
+  {
+    "objectID": "00-fundamentals/index.html#probability-distributions",
+    "href": "00-fundamentals/index.html#probability-distributions",
+    "title": "Fundamentals",
+    "section": "3.1 Probability distributions",
+    "text": "3.1 Probability distributions\nR has a standard way of naming probability functions. The naming structure is [type of function][distribution], where [type of function] can be d for density, p for cumulative distribution function, q for quantile function, and r for random generation. For example, the normal distribution has the following functions:\n\ndnorm(0, mean = 0, sd = 1)\n## [1] 0.3989423\npnorm(0, mean = 0, sd = 1)\n## [1] 0.5\nqnorm(0.5, mean = 0, sd = 1)\n## [1] 0\n\nNow, if we wanted to know what is the probability of observing a value smaller than -2 comming from a standard normal distribution, we would do:\n\npnorm(-2, mean = 0, sd = 1)\n## [1] 0.02275013\n\nCurrently, R has a wide range of probability distributions implemented.\n\n\n\n\n\n\nQuestion\n\n\n\nHow many probability distributions are implemented in R’s stats package?"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#random-number-generation",
+    "href": "00-fundamentals/index.html#random-number-generation",
+    "title": "Fundamentals",
+    "section": "3.2 Random number generation",
+    "text": "3.2 Random number generation\nRandom numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers. These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the r function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:\n\nset.seed(1)\n\n# Saving the current graphical parameters\nop &lt;- par(mfrow = c(2,2))\nrnorm(1000) |&gt; hist(main = \"Normal distribution\")\nrunif(1000) |&gt; hist(main = \"Uniform distribution\")\nrpois(1000, lambda = 1) |&gt; hist(main = \"Poisson distribution\")\nrbinom(1000, size = 10, prob = 0.1) |&gt; hist(main = \"Binomial distribution\")\n\n\n\npar(op)"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#simulations-and-sampling",
+    "href": "00-fundamentals/index.html#simulations-and-sampling",
+    "title": "Fundamentals",
+    "section": "3.3 Simulations and sampling",
+    "text": "3.3 Simulations and sampling\nSimulations are front and center in statistical programming. We can use them to test the properties of statistical methods, generate data, and perform statistical inference. The following example uses the sample function in R to compute the bootstrap standard error of the mean (see Casella and Berger 2021):\n\nset.seed(1)\nx &lt;- rnorm(1000)\n\n# Bootstrap standard error of the mean\nn &lt;- length(x)\nB &lt;- 1000\n\n# We will store the results in a vector\nres &lt;- numeric(B)\n\nfor (i in 1:B) {\n  # Sample with replacement\n  res[i] &lt;- sample(x, size = n, replace = TRUE) |&gt;\n    mean()\n}\n\n# Plot the results\nhist(res, main = \"Bootstrap standard error of the mean\")\n\n\n\n\nSince the previous example is rather extensive, let us review it in detail.\n\nset.seed(1) sets the seed of the PRNG to 1. It ensures we get the same results every time we run the code.\nrnorm() generates a sample of 1,000 standard-normal values.\nn &lt;- length(x) stores the length of the vector in the n variable.\nB &lt;- 1000 stores the number of bootstrap samples in the B variable.\nres &lt;- numeric(B) creates a vector of length B to store the results.\nfor (i in 1:B) is a for loop that iterates from 1 to B.\nres[i] &lt;- sample(x, size = n, replace = TRUE) |&gt; mean() samples n values from x with replacement and computes the mean of the sample.\nThe pipe operator (|&gt;) passes the output of the left-hand side expression as the first argument of the right-hand side expression.\nhist(res, main = \"Bootstrap standard error of the mean\") plots the histogram of the results.\n\n\n\n\n\n\n\nQuestion\n\n\n\nSimulating convolutions: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with (\\mu, \\sigma^2) = (-3, 1) and the other with (\\mu, \\sigma^2) = (2, 2). Plot the histogram of the results. Draw 1,000 samples.\n\n\nCode\nset.seed(1)\nx &lt;- rnorm(1000, mean = -3, sd = 1)\ny &lt;- rnorm(1000, mean = 2, sd = 2)\nz &lt;- x + y\n\nhist(z)\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\n\nBimodal distribution: Using the previous two normal distributions, simulate a bimodal distribution where the probability of sampling from the first distribution is 0.3 and the probability of sampling from the second distribution is 0.7. Plot the histogram of the results. (Hint: use a combination of runif() and ifelse()).\n\n\nCode\nz &lt;- ifelse(runif(1000) &lt; 0.3, x, y)\ndensity(z) |&gt; plot()"
+  },
+  {
+    "objectID": "00-fundamentals/index.html#footnotes",
+    "href": "00-fundamentals/index.html#footnotes",
+    "title": "Fundamentals",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAlthough, not for network science in general.↩︎\nIn mathematics and computer science, a binary operator is a function that takes two arguments. In R, binary operators are implemented as variable 1 [operator] variable 2. For example, 1 + 2 is a binary operation.↩︎\nThe discussion about interpreting p-values and hypothesis testing is vast and relevant. Although we will not review this here, I recommend looking into the work of Andrew Gelman Gelman (2018).↩︎"
+  },
+  {
+    "objectID": "01-overview/index.html",
+    "href": "01-overview/index.html",
+    "title": "Overview",
+    "section": "",
+    "text": "When networks are involved, statistical inference becomes tricky.\nThe IID assumption is violated by construction.\nAlthough it is tempting to use the same tools as in the IID case, they are not valid."
+  },
+  {
+    "objectID": "01-overview/index.html#when-the-network-is-deterministic",
+    "href": "01-overview/index.html#when-the-network-is-deterministic",
+    "title": "Overview",
+    "section": "2.1 When the network is deterministic",
+    "text": "2.1 When the network is deterministic\n\n2.1.1 Single network\nIf the network is fixed (or treated as if it were fixed,) it is most likely that a traditional statistical analysis can be performed. For instance, if we are interested in influence behavior between adolescents, and we assume influence is a process that takes time, then a lagged regression may suffice (Haye et al. 2019; Valente and Vega Yon 2020; Valente, Wipfli, and Vega Yon 2019).\n\n\\mathbf{y}_t = \\rho \\mathbf{W} \\mathbf{y}_{t-1} + \\mathbf{X} \\bm{\\beta} + \\bm{\\varepsilon}, \\quad \\varepsilon_i \\sim \\text{N}\\left(0, \\sigma^2\\right)\n\\tag{1}\nwhere \\mathbf{y}_t is a vector of behaviors at time t, \\mathbf{W} is the row-stochastic adjacency matrix of the network, \\mathbf{X} is a matrix of covariates, and the elements of \\bm{\\varepsilon}\\equiv \\{\\varepsilon_i\\} distribute normal with mean zero and variance \\sigma^2.\nNonetheless, if assuming a lagged influence effect is no longer possible, then the regular regression model is no longer valid. Instead, we can resort to a Spatial Autocorrelation Regression Model [SAR] (see LeSage 2008):\n\n\\mathbf{y} = \\rho \\mathbf{W} \\mathbf{y} + \\mathbf{X} \\bm{\\beta} + \\bm{\\varepsilon},\\quad \\bm{\\varepsilon} \\sim \\text{MVN}\\left(0, \\Sigma^2\\right)\n\\tag{2}\nfurthermore\n\n\\mathbf{y} = \\left(I - \\rho\\mathbf{W}\\right)^{-1}\\left(\\mathbf{X}\\bm{\\beta} + \\bm{\\varepsilon}\\right)\n\nWhere \\bm{\\varepsilon} now distributes Multivariate Normal with mean zero and covariance matrix \\Sigma^2 \\mathbf{I}.\n\n\n\n\n\n\nTip\n\n\n\nWhat is the appropriate network to use in the SAR model? According to LeSage and Pace (2014), it is not very important. Since (I_n - \\rho \\mathbf{W})^{-1} = \\rho \\mathbf{W} + \\rho^2 \\mathbf{W}^2 + \\dots.\n\n\n\n\n2.1.2 Multiple networks\nSometimes, instead of a single network, we are interested in understanding how network-level properties affect the behavior of individuals. For instance, we may be interested in understanding the relation between triadic closure and income within a sample of independent egocentric networks; in such a case, as the networks are independent, a simple regression analysis may suffice."
+  },
+  {
+    "objectID": "01-overview/index.html#when-the-network-is-random",
+    "href": "01-overview/index.html#when-the-network-is-random",
+    "title": "Overview",
+    "section": "2.2 When the network is random",
+    "text": "2.2 When the network is random\n\n2.2.1 Deterministic behavior\nIn this case, the behavior is treated as given, i.e., a covariate/feature of the model. When such is the case, the method of choice is the Exponential Random Graph Model [ERGM] (Lusher, Koskinen, and Robins 2013; Krivitsky 2012 and others).\n\n\n2.2.2 Random behavior"
+  },
+  {
+    "objectID": "01-overview/index.html#non-parametric-approaches",
+    "href": "01-overview/index.html#non-parametric-approaches",
+    "title": "Overview",
+    "section": "2.3 Non-parametric approaches",
+    "text": "2.3 Non-parametric approaches\nOther common scenarios involve more convoluted/complex questions. For instance, in the case of dyadic behavior Bell et al. (2019).\nIn Tanaka and Vega Yon (2024), we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing."
   }
 ]
