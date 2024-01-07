@@ -1,0 +1,58 @@
+---
+title: Introduction to ERGMs
+references: ../references.bib
+---
+
+\newcommand{\tpose}[1]{#1^{\mathbf{t}}}
+
+Exponential-Family Random Graph Models, known as ERGMs or ERG Models, are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties. 
+
+The most common representation of ERGMs is the following:
+
+$$
+P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\tpose{\bm{\theta}} s(y)\right)\kappa(\bm{\theta})^{-1}
+$$
+
+where $\bm{Y}$ is a random graph, $\bm{y}\in \mathcal{Y}$ is a particular realization of $Y$, $\bm{\theta}$ is a vector of parameters, $s(\bm{y})$ is a vector of statistics, and $\kappa(\bm{\theta})$ is a normalizing constant. The normalizing constant is defined as:
+
+$$
+\kappa(\bm{\theta}) = \sum_{\bm{y} \in \mathcal{Y}} \exp\left(\tpose{\bm{\theta}} s(\bm{y})\right)
+$$
+
+From the statistical point of view, the normalizing constant makes this model attractive; only cases where $\mathcal{Y}$ is small enough to be enumerated are feasible [@vegayonExponentialRandomGraph2021]. Because of that reason, estimating ERGMs is a challenging task.
+
+# The most important results
+
+If we were able to say what are two of the most important results in ERGMs, I would say the following: (a) conditioning on the rest of the graph, the probability of a tie distributes Logistic (Bernoulli), and (b) the ratio between two loglikelihoods can be approximated through simulation.
+
+## The logistic distribution
+
+Let's start by stating the result: Conditioning on all graphs that are not $y_{ij}$, the probability of a tie $Y_{ij}$ is distributed Logistic; formally:
+
+\newcommand{\chng}[0]{\delta_{ij}(\bm{y})}
+
+$$
+P_{\mathcal{Y}, \bm{\theta}}(Y_{ij}=1 | \bm{y}_{-ij}) = \frac{1}{1 + \exp \left(\tpose{\bm{\theta}}\chng{}\right)},
+$$
+
+where $\chng{}\equiv s_{ij}^+(\bm{y}) - s_{ij}^-(\bm{y})$ is the change statistic, and $s_{ij}^+(\bm{y})$ and $s_{ij}^-(\bm{y})$ are the statistics of the graph with and without the tie $Y_{ij}$, respectively.
+
+The importance of this result is two-fold: (a) we can use this equation to interpret fitted models in the context of a single graph (like using odds,) and (b) we can use this equation to simulate from the model, **without touching the normalizing constant**. 
+
+## The ratio of loglikelihoods
+
+The second significant result is that the ratio of loglikelihoods can be approximated through simulation. It is based on the following observation by @geyerConstrainedMonteCarlo1992:
+
+$$
+\frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)} = \mathbb{E}_{\mathcal{Y}, \bm{\theta}_0}\left(\tpose{(\bm{\theta} - \bm{\theta}_0)s(\bm{y})}\right),
+$$
+
+then, using the latter, we can approximate the following loglikelihood ratio:
+
+\begin{align*}
+l(\bm{\theta}) - l(\bm{\theta}_0) = & \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}) - \log\left[\frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)}\right]\\
+\approx & \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}) - \log\left[M^{-1}\sum_{\bm{y}^{(m)}} \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}^{(m)})\right]
+\end{align*}
+
+
+Where $\bm{\theta}_0$ is an arbitrary vector of parameters, and $\bm{y}^{(m)}$ are sampled from the distribution $P_{\mathcal{Y}, \bm{\theta}_0}$. In the words of @geyerConstrainedMonteCarlo1992, "[...] it is possible to approximate $\bm{\theta}$ by using simulations from one distribution $P_{\mathcal{Y}, \bm{\theta}_0}$ no matter which $\bm{\theta}_0$ in the parameter space is."

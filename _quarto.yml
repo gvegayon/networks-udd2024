@@ -20,6 +20,8 @@ website:
         href: 02-random-graphs/index.qmd
       - text: Behavior and coevolution
         href: 03-behavior-and-coevolution/index.qmd
+      - text: ERGMs
+        href: 04-intro-to-ergms/index.qmd
 
 format:
   html:
