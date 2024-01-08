@@ -4,13 +4,19 @@ references: ../references.bib
 ---
 
 \newcommand{\tpose}[1]{#1^{\mathbf{t}}}
+\newcommand{\Prergm}[0]{P_{\mathcal{Y}, \bm{\theta}}}
+\newcommand{\Y}[0]{\bm{Y}}
+\newcommand{\y}[0]{\bm{y}}
+\newcommand{\thetas}[0]{\bm{\theta}}
+\newcommand{\isone}[1]{\mathbb{1}\left(#1\right)}
+
 
 Exponential-Family Random Graph Models, known as ERGMs or ERG Models, are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties. 
 
 The most common representation of ERGMs is the following:
 
 $$
-P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\tpose{\bm{\theta}} s(y)\right)\kappa(\bm{\theta})^{-1}
+\Prergm(\bm{Y}=\bm{y}) =  \exp\left(\tpose{\bm{\theta}} s(y)\right)\kappa(\bm{\theta})^{-1}
 $$
 
 where $\bm{Y}$ is a random graph, $\bm{y}\in \mathcal{Y}$ is a particular realization of $Y$, $\bm{\theta}$ is a vector of parameters, $s(\bm{y})$ is a vector of statistics, and $\kappa(\bm{\theta})$ is a normalizing constant. The normalizing constant is defined as:
@@ -20,6 +26,123 @@ $$
 $$
 
 From the statistical point of view, the normalizing constant makes this model attractive; only cases where $\mathcal{Y}$ is small enough to be enumerated are feasible [@vegayonExponentialRandomGraph2021]. Because of that reason, estimating ERGMs is a challenging task.
+
+# Bernoulli ERGMs
+
+The simplest ERG model we can fit is a Bernoulli (Erdos-Renyi) model. Here, the only statistic is the edgecount. Now, if we can write the function computing sufficient statistics as a sum over all edges, *i.e.*, $s(\y) = \sum_{ij}s'(y_{ij})$, the model reduces to a Logistic regression. 
+
+```{r}
+#| label: bernoulli-ergm
+#| message: false
+#| warning: false
+#| collapse: true
+library(ergm)
+
+# Simulating a Bernoulli network
+Y <- matrix(rbinom(100^2, 1, 0.1), 100, 100)
+diag(Y) <- NA
+
+cbind(
+  logit = glm(as.vector(Y) ~ 1, family = binomial) |> coef(),
+  ergm  = ergm(Y ~ edges) |> coef(),
+  avg   = mean(Y, na.rm = TRUE) |> qlogis()
+)
+```
+
+# A simple example
+
+Imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that, gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:
+
+$$
+\Prergm(y_{ij} = 1) = \text{Logit}^{-1}\left(\theta_{edges} + \theta_{homophily}\isone{X_i = X_j}\right)
+$$
+
+where $\isone{\cdot}$ is the indicator function, and $X_i$ equals one if the $ith$ individual is female, and zero otherwise. To see this, let's simulate some data
+
+```{r}
+#| label: simple-example
+#| message: false
+#| warning: false
+# Simulating data
+set.seed(7731)
+X <- rbinom(100, 1, 0.5)
+
+# Simulating the network with homophily
+library(ergm)
+Y <- network(100)
+Y %v% "X" <- X
+Y <- ergm::simulate_formula(Y ~ edges + nodematch("X"), coef = c(-3, 2))
+```
+
+```{r}
+#| label: simple-example-plot
+#| message: false
+#| cache: true
+# Plotting the network
+library(netplot)
+np <- nplot(Y, vertex.color = ~X)
+```
+
+Using the ERGM package, we can fit the model using code very similar to the one used to simulate the network:
+
+```{r}
+#| label: simple-example-fit
+#| message: false
+#| warning: false
+fit_homophily <- ergm(Y ~ edges + nodematch("X"))
+```
+
+We will check the results later and compare them against the following: the Logit model.
+
+```{r}
+#| label: simple-example-fit-glm
+#| message: false
+n <- 100
+sstats <- summary_formula(Y ~ edges + nodematch("X"))
+Y_mat <- as.matrix(Y)
+diag(Y_mat) <- NA
+
+# To speedup computations, we pre-compute this value
+X_vec <- outer(X, X, "==") |> as.numeric()
+
+# Function to compute the negative loglikelihood
+obj <- \(theta) {
+
+  # Compute the probability according to the value of Y
+  p <- ifelse(
+    Y_mat == 1,
+    plogis(theta[1] + X_vec * theta[2]),
+    1 - plogis(theta[1] + X_vec * theta[2])
+  )
+
+  # The -loglikelihood
+  -sum(log(p[!is.na(p)]))
+  
+
+}
+
+# Fitting the model
+fit_homophily_logit <- optim(c(0,0), obj, hessian = TRUE)
+```
+
+Now that we have the values, let's compare them:
+
+```{r}
+#| label: simple-example-fit-glm-coef
+#| message: false
+# The coefficients
+rbind(
+  ergm = coef(fit_homophily),
+  logit = fit_homophily_logit$par
+)
+
+# The standard errors
+rbind(
+  ergm = vcov(fit_homophily) |> diag() |> sqrt(),
+  logit = sqrt(diag(solve(fit_homophily_logit$hessian)))
+)
+
+```
 
 # The most important results
 
@@ -32,7 +155,7 @@ Let's start by stating the result: Conditioning on all graphs that are not $y_{i
 \newcommand{\chng}[0]{\delta_{ij}(\bm{y})}
 
 $$
-P_{\mathcal{Y}, \bm{\theta}}(Y_{ij}=1 | \bm{y}_{-ij}) = \frac{1}{1 + \exp \left(\tpose{\bm{\theta}}\chng{}\right)},
+\Prergm(Y_{ij}=1 | \bm{y}_{-ij}) = \frac{1}{1 + \exp \left(\tpose{\bm{\theta}}\chng{}\right)},
 $$
 
 where $\chng{}\equiv s_{ij}^+(\bm{y}) - s_{ij}^-(\bm{y})$ is the change statistic, and $s_{ij}^+(\bm{y})$ and $s_{ij}^-(\bm{y})$ are the statistics of the graph with and without the tie $Y_{ij}$, respectively.

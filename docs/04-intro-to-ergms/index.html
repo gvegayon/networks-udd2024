@@ -20,6 +20,40 @@ width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
 
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+
 div.csl-bib-body { }
 div.csl-entry {
 clear: both;
@@ -4491,10 +4525,6 @@ vertical-align: -.125em;
     <a class="nav-link" href="../index.html" rel target>
  <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../00-fundamentals/index.html" rel target>
- <span class="menu-text">Fundamentals</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-day-i" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel target>
  <span class="menu-text">Day I</span>
@@ -4518,8 +4548,24 @@ vertical-align: -.125em;
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-day-ii" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel target>
+ <span class="menu-text">Day II</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-day-ii">    
+        <li class="dropdown-header">ERGMs (cont.)</li>
+        <li class="dropdown-header">Odd balls</li>
+        <li class="dropdown-header">ERGM advances</li>
+    </ul>
+  </li>
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../00-fundamentals/index.html" rel target>
+ <span class="menu-text">Fundamentals</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -4534,10 +4580,12 @@ vertical-align: -.125em;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-most-important-results" id="toc-the-most-important-results" class="nav-link active" data-scroll-target="#the-most-important-results"><span class="header-section-number">1</span> The most important results</a>
+  <li><a href="#bernoulli-ergms" id="toc-bernoulli-ergms" class="nav-link active" data-scroll-target="#bernoulli-ergms"><span class="header-section-number">1</span> Bernoulli ERGMs</a></li>
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example"><span class="header-section-number">2</span> A simple example</a></li>
+  <li><a href="#the-most-important-results" id="toc-the-most-important-results" class="nav-link" data-scroll-target="#the-most-important-results"><span class="header-section-number">3</span> The most important results</a>
   <ul class="collapse">
-  <li><a href="#the-logistic-distribution" id="toc-the-logistic-distribution" class="nav-link" data-scroll-target="#the-logistic-distribution"><span class="header-section-number">1.1</span> The logistic distribution</a></li>
-  <li><a href="#the-ratio-of-loglikelihoods" id="toc-the-ratio-of-loglikelihoods" class="nav-link" data-scroll-target="#the-ratio-of-loglikelihoods"><span class="header-section-number">1.2</span> The ratio of loglikelihoods</a></li>
+  <li><a href="#the-logistic-distribution" id="toc-the-logistic-distribution" class="nav-link" data-scroll-target="#the-logistic-distribution"><span class="header-section-number">3.1</span> The logistic distribution</a></li>
+  <li><a href="#the-ratio-of-loglikelihoods" id="toc-the-ratio-of-loglikelihoods" class="nav-link" data-scroll-target="#the-ratio-of-loglikelihoods"><span class="header-section-number">3.2</span> The ratio of loglikelihoods</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -4572,11 +4620,111 @@ P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}
 \kappa(\bm{\theta}) = \sum_{\bm{y} \in \mathcal{Y}} \exp\left(\bm{\theta}^{\mathbf{t}} s(\bm{y})\right)
 </span></p>
 <p>From the statistical point of view, the normalizing constant makes this model attractive; only cases where <span class="math inline">\mathcal{Y}</span> is small enough to be enumerated are feasible <span class="citation" data-cites="vegayonExponentialRandomGraph2021">(<a href="#ref-vegayonExponentialRandomGraph2021" role="doc-biblioref">Vega Yon, Slaughter, and Haye 2021</a>)</span>. Because of that reason, estimating ERGMs is a challenging task.</p>
-<section id="the-most-important-results" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> The most important results</h1>
+<section id="bernoulli-ergms" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Bernoulli ERGMs</h1>
+<p>The simplest ERG model we can fit is a Bernoulli (Erdos-Renyi) model. Here, the only statistic is the edgecount. Now, if we can write the function computing sufficient statistics as a sum over all edges, <em>i.e.</em>, <span class="math inline">s(\bm{y}) = \sum_{ij}s&#39;(y_{ij})</span>, the model reduces to a Logistic regression.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating a Bernoulli network</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(<span class="dv">100</span><span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">0.1</span>), <span class="dv">100</span>, <span class="dv">100</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(Y) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">logit =</span> <span class="fu">glm</span>(<span class="fu">as.vector</span>(Y) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial) <span class="sc">|&gt;</span> <span class="fu">coef</span>(),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ergm  =</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges) <span class="sc">|&gt;</span> <span class="fu">coef</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg   =</span> <span class="fu">mean</span>(Y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">qlogis</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##                 logit      ergm       avg</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.177184 -2.177184 -2.177184</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-simple-example" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> A simple example</h1>
+<p>Imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that, gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:</p>
+<p><span class="math display">
+P_{\mathcal{Y}, \bm{\theta}}(y_{ij} = 1) = \text{Logit}^{-1}\left(\theta_{edges} + \theta_{homophily}\mathbb{1}\left(X_i = X_j\right)\right)
+</span></p>
+<p>where <span class="math inline">\mathbb{1}\left(\cdot\right)</span> is the indicator function, and <span class="math inline">X_i</span> equals one if the <span class="math inline">ith</span> individual is female, and zero otherwise. To see this, let’s simulate some data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">7731</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulating the network with homophily</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">network</span>(<span class="dv">100</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Y <span class="sc">%v%</span> <span class="st">&quot;X&quot;</span> <span class="ot">&lt;-</span> X</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> ergm<span class="sc">::</span><span class="fu">simulate_formula</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">&quot;X&quot;</span>), <span class="at">coef =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/html/simple-example-plot_746d72fddfe4ca36986d83a0ef37b9ac">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the network</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(netplot)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>np <span class="ot">&lt;-</span> <span class="fu">nplot</span>(Y, <span class="at">vertex.color =</span> <span class="sc">~</span>X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using the ERGM package, we can fit the model using code very similar to the one used to simulate the network:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit_homophily <span class="ot">&lt;-</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">&quot;X&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will check the results later and compare them against the following: the Logit model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sstats <span class="ot">&lt;-</span> <span class="fu">summary_formula</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">&quot;X&quot;</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Y_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Y)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(Y_mat) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To speedup computations, we pre-compute this value</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>X_vec <span class="ot">&lt;-</span> <span class="fu">outer</span>(X, X, <span class="st">&quot;==&quot;</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to compute the negative loglikelihood</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> \(theta) {</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Compute the probability according to the value of Y</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    Y_mat <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plogis</span>(theta[<span class="dv">1</span>] <span class="sc">+</span> X_vec <span class="sc">*</span> theta[<span class="dv">2</span>]),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">-</span> <span class="fu">plogis</span>(theta[<span class="dv">1</span>] <span class="sc">+</span> X_vec <span class="sc">*</span> theta[<span class="dv">2</span>])</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The -loglikelihood</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">sum</span>(<span class="fu">log</span>(p[<span class="sc">!</span><span class="fu">is.na</span>(p)]))</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting the model</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>fit_homophily_logit <span class="ot">&lt;-</span> <span class="fu">optim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), obj, <span class="at">hessian =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have the values, let’s compare them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The coefficients</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ergm =</span> <span class="fu">coef</span>(fit_homophily),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">logit =</span> fit_homophily_logit<span class="sc">$</span>par</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          edges nodematch.X
+ergm  -2.973331    1.926039
+logit -2.973829    1.926380</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The standard errors</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ergm =</span> <span class="fu">vcov</span>(fit_homophily) <span class="sc">|&gt;</span> <span class="fu">diag</span>() <span class="sc">|&gt;</span> <span class="fu">sqrt</span>(),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">logit =</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">solve</span>(fit_homophily_logit<span class="sc">$</span>hessian)))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           edges nodematch.X
+ergm  0.06659648  0.07395580
+logit 0.06661194  0.07397025</code></pre>
+</div>
+</div>
+</section>
+<section id="the-most-important-results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> The most important results</h1>
 <p>If we were able to say what are two of the most important results in ERGMs, I would say the following: (a) conditioning on the rest of the graph, the probability of a tie distributes Logistic (Bernoulli), and (b) the ratio between two loglikelihoods can be approximated through simulation.</p>
-<section id="the-logistic-distribution" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="the-logistic-distribution"><span class="header-section-number">1.1</span> The logistic distribution</h2>
+<section id="the-logistic-distribution" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="the-logistic-distribution"><span class="header-section-number">3.1</span> The logistic distribution</h2>
 <p>Let’s start by stating the result: Conditioning on all graphs that are not <span class="math inline">y_{ij}</span>, the probability of a tie <span class="math inline">Y_{ij}</span> is distributed Logistic; formally:</p>
 <p><span class="math display">
 P_{\mathcal{Y}, \bm{\theta}}(Y_{ij}=1 | \bm{y}_{-ij}) = \frac{1}{1 + \exp \left(\bm{\theta}^{\mathbf{t}}\delta_{ij}(\bm{y}){}\right)},
@@ -4584,8 +4732,8 @@ P_{\mathcal{Y}, \bm{\theta}}(Y_{ij}=1 | \bm{y}_{-ij}) = \frac{1}{1 + \exp \left(
 <p>where <span class="math inline">\delta_{ij}(\bm{y}){}\equiv s_{ij}^+(\bm{y}) - s_{ij}^-(\bm{y})</span> is the change statistic, and <span class="math inline">s_{ij}^+(\bm{y})</span> and <span class="math inline">s_{ij}^-(\bm{y})</span> are the statistics of the graph with and without the tie <span class="math inline">Y_{ij}</span>, respectively.</p>
 <p>The importance of this result is two-fold: (a) we can use this equation to interpret fitted models in the context of a single graph (like using odds,) and (b) we can use this equation to simulate from the model, <strong>without touching the normalizing constant</strong>.</p>
 </section>
-<section id="the-ratio-of-loglikelihoods" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="the-ratio-of-loglikelihoods"><span class="header-section-number">1.2</span> The ratio of loglikelihoods</h2>
+<section id="the-ratio-of-loglikelihoods" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-ratio-of-loglikelihoods"><span class="header-section-number">3.2</span> The ratio of loglikelihoods</h2>
 <p>The second significant result is that the ratio of loglikelihoods can be approximated through simulation. It is based on the following observation by <span class="citation" data-cites="geyerConstrainedMonteCarlo1992">Geyer and Thompson (<a href="#ref-geyerConstrainedMonteCarlo1992" role="doc-biblioref">1992</a>)</span>:</p>
 <p><span class="math display">
 \frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)} = \mathbb{E}_{\mathcal{Y}, \bm{\theta}_0}\left((\bm{\theta} - \bm{\theta}_0)s(\bm{y})^{\mathbf{t}}\right),
