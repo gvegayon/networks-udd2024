@@ -389,13 +389,48 @@
     "href": "04-intro-to-ergms/index.html#simplest-model-bernoulli-graph",
     "title": "Introduction to ERGMs",
     "section": "4.2 Simplest model: Bernoulli graph",
-    "text": "4.2 Simplest model: Bernoulli graph\nThe step is to check whether we can fit an ERGM or not. We can do so with the Bernoulli graph:\n\nmodel_1 &lt;- ergm(Y ~ edges)\n\nStarting maximum pseudolikelihood estimation (MPLE):\n\n\nObtaining the responsible dyads.\n\n\nEvaluating the predictor and response matrix.\n\n\nMaximizing the pseudolikelihood.\n\n\nFinished MPLE.\n\n\nEvaluating log-likelihood at the estimate. \n\nsummary(model_1)\n\nCall:\nergm(formula = Y ~ edges)\n\nMaximum Likelihood Results:\n\n      Estimate Std. Error MCMC % z value Pr(&gt;|z|)    \nedges -3.78885    0.06833      0  -55.45   &lt;1e-04 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n     Null Deviance: 13724  on 9900  degrees of freedom\n Residual Deviance:  2102  on 9899  degrees of freedom\n \nAIC: 2104  BIC: 2112  (Smaller is better. MC Std. Err. = 0)\n\n\n\n# Fitting two more models (output message suppressed)\nmodel_2 &lt;- ergm(Y ~ edges + mutual)\nmodel_3 &lt;- ergm(Y ~ edges + mutual + gwdsp(.5, fixed = TRUE))\n# model_4 &lt;- ergm(Y ~ edges + triangles) # bad idea\n\nRight after fitting a model, we want to inspect the results. An excellent tool for this is the R package texreg (Leifeld 2013):\nlibrary(texreg)\nknitreg(list(model_1, model_2, model_3))\n\n\n\nStatistical models\n\n\n\n\n \n\n\nModel 1\n\n\nModel 2\n\n\nModel 3\n\n\n\n\n\n\nedges\n\n\n-3.79***\n\n\n-3.93***\n\n\n-3.84***\n\n\n\n\n \n\n\n(0.07)\n\n\n(0.08)\n\n\n(0.21)\n\n\n\n\nmutual\n\n\n \n\n\n2.15***\n\n\n2.14***\n\n\n\n\n \n\n\n \n\n\n(0.32)\n\n\n(0.29)\n\n\n\n\ngwdsp.OTP.fixed.0.5\n\n\n \n\n\n \n\n\n-0.02\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.05)\n\n\n\n\nAIC\n\n\n2104.43\n\n\n2068.22\n\n\n2071.94\n\n\n\n\nBIC\n\n\n2111.63\n\n\n2082.62\n\n\n2093.54\n\n\n\n\nLog Likelihood\n\n\n-1051.22\n\n\n-1032.11\n\n\n-1032.97\n\n\n\n\n\n\n***p &lt; 0.001; **p &lt; 0.01; *p &lt; 0.05\n\n\n\n\n\nSo far, model_2 is winning. We will continue with this model."
+    "text": "4.2 Simplest model: Bernoulli graph\nThe step is to check whether we can fit an ERGM or not. We can do so with the Bernoulli graph:\n\nmodel_1 &lt;- ergm(Y ~ edges)\n\nStarting maximum pseudolikelihood estimation (MPLE):\n\n\nObtaining the responsible dyads.\n\n\nEvaluating the predictor and response matrix.\n\n\nMaximizing the pseudolikelihood.\n\n\nFinished MPLE.\n\n\nEvaluating log-likelihood at the estimate. \n\nsummary(model_1)\n\nCall:\nergm(formula = Y ~ edges)\n\nMaximum Likelihood Results:\n\n      Estimate Std. Error MCMC % z value Pr(&gt;|z|)    \nedges -3.78885    0.06833      0  -55.45   &lt;1e-04 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n     Null Deviance: 13724  on 9900  degrees of freedom\n Residual Deviance:  2102  on 9899  degrees of freedom\n \nAIC: 2104  BIC: 2112  (Smaller is better. MC Std. Err. = 0)\n\n\n\n# Fitting two more models (output message suppressed)\nmodel_2 &lt;- ergm(Y ~ edges + mutual) \nmodel_3 &lt;- ergm(Y ~ edges + mutual + gwdsp(.5, fixed = TRUE))\n# model_4 &lt;- ergm(Y ~ edges + triangles) # bad idea\n\nRight after fitting a model, we want to inspect the results. An excellent tool for this is the R package texreg (Leifeld 2013):\nlibrary(texreg)\nknitreg(list(model_1, model_2, model_3))\n\n\n\nStatistical models\n\n\n\n\n \n\n\nModel 1\n\n\nModel 2\n\n\nModel 3\n\n\n\n\n\n\nedges\n\n\n-3.79***\n\n\n-3.93***\n\n\n-3.84***\n\n\n\n\n \n\n\n(0.07)\n\n\n(0.08)\n\n\n(0.21)\n\n\n\n\nmutual\n\n\n \n\n\n2.15***\n\n\n2.14***\n\n\n\n\n \n\n\n \n\n\n(0.32)\n\n\n(0.29)\n\n\n\n\ngwdsp.OTP.fixed.0.5\n\n\n \n\n\n \n\n\n-0.02\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.05)\n\n\n\n\nAIC\n\n\n2104.43\n\n\n2068.22\n\n\n2071.94\n\n\n\n\nBIC\n\n\n2111.63\n\n\n2082.62\n\n\n2093.54\n\n\n\n\nLog Likelihood\n\n\n-1051.22\n\n\n-1032.11\n\n\n-1032.97\n\n\n\n\n\n\n***p &lt; 0.001; **p &lt; 0.01; *p &lt; 0.05\n\n\n\n\n\nSo far, model_2 is winning. We will continue with this model."
   },
   {
     "objectID": "04-intro-to-ergms/index.html#lets-add-a-little-bit-of-structure",
     "href": "04-intro-to-ergms/index.html#lets-add-a-little-bit-of-structure",
     "title": "Introduction to ERGMs",
     "section": "4.3 Let’s add a little bit of structure",
-    "text": "4.3 Let’s add a little bit of structure\n\nmodel_4 &lt;- ergm(Y ~ edges + mutual + nodematch(\"fav_music\"))\nmodel_5 &lt;- ergm(Y ~ edges + mutual + nodematch(\"fav_music\", diff = TRUE))\n\nNow, let’s inspect what do we have so far:\nknitreg(list(model_2, model_4, model_5))\n\n\n\nStatistical models\n\n\n\n\n \n\n\nModel 1\n\n\nModel 2\n\n\nModel 3\n\n\n\n\n\n\nedges\n\n\n-3.93***\n\n\n-4.29***\n\n\n-4.29***\n\n\n\n\n \n\n\n(0.08)\n\n\n(0.11)\n\n\n(0.11)\n\n\n\n\nmutual\n\n\n2.15***\n\n\n1.99***\n\n\n2.00***\n\n\n\n\n \n\n\n(0.32)\n\n\n(0.30)\n\n\n(0.30)\n\n\n\n\nnodematch.fav_music\n\n\n \n\n\n0.85***\n\n\n \n\n\n\n\n \n\n\n \n\n\n(0.14)\n\n\n \n\n\n\n\nnodematch.fav_music.jazz\n\n\n \n\n\n \n\n\n0.74**\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.25)\n\n\n\n\nnodematch.fav_music.pop\n\n\n \n\n\n \n\n\n0.82***\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.18)\n\n\n\n\nnodematch.fav_music.rock\n\n\n \n\n\n \n\n\n0.87***\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.17)\n\n\n\n\nAIC\n\n\n2068.22\n\n\n2030.85\n\n\n2033.57\n\n\n\n\nBIC\n\n\n2082.62\n\n\n2052.45\n\n\n2069.57\n\n\n\n\nLog Likelihood\n\n\n-1032.11\n\n\n-1012.42\n\n\n-1011.79\n\n\n\n\n\n\n***p &lt; 0.001; **p &lt; 0.01; *p &lt; 0.05"
+    "text": "4.3 Let’s add a little bit of structure\n\nmodel_4 &lt;- ergm(Y ~ edges + mutual + nodematch(\"fav_music\"))\nmodel_5 &lt;- ergm(Y ~ edges + mutual + nodematch(\"fav_music\", diff = TRUE))\n\nNow, let’s inspect what we have so far:\nknitreg(list(model_2, model_4, model_5))\n\n\n\nStatistical models\n\n\n\n\n \n\n\nModel 1\n\n\nModel 2\n\n\nModel 3\n\n\n\n\n\n\nedges\n\n\n-3.93***\n\n\n-4.29***\n\n\n-4.29***\n\n\n\n\n \n\n\n(0.08)\n\n\n(0.11)\n\n\n(0.11)\n\n\n\n\nmutual\n\n\n2.15***\n\n\n1.99***\n\n\n2.00***\n\n\n\n\n \n\n\n(0.32)\n\n\n(0.30)\n\n\n(0.30)\n\n\n\n\nnodematch.fav_music\n\n\n \n\n\n0.85***\n\n\n \n\n\n\n\n \n\n\n \n\n\n(0.14)\n\n\n \n\n\n\n\nnodematch.fav_music.jazz\n\n\n \n\n\n \n\n\n0.74**\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.25)\n\n\n\n\nnodematch.fav_music.pop\n\n\n \n\n\n \n\n\n0.82***\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.18)\n\n\n\n\nnodematch.fav_music.rock\n\n\n \n\n\n \n\n\n0.87***\n\n\n\n\n \n\n\n \n\n\n \n\n\n(0.17)\n\n\n\n\nAIC\n\n\n2068.22\n\n\n2030.85\n\n\n2033.57\n\n\n\n\nBIC\n\n\n2082.62\n\n\n2052.45\n\n\n2069.57\n\n\n\n\nLog Likelihood\n\n\n-1032.11\n\n\n-1012.42\n\n\n-1011.79\n\n\n\n\n\n\n***p &lt; 0.001; **p &lt; 0.01; *p &lt; 0.05"
+  },
+  {
+    "objectID": "06-new-topics/index.html",
+    "href": "06-new-topics/index.html",
+    "title": "New topics in network modeling",
+    "section": "",
+    "text": "With more economic and computational resources, the things that we can ask to networks and do with them is becoming increasingly interesting and complex.\nIn this section, I will introduce some of the latest advancements and forthcoming topics in network modeling."
+  },
+  {
+    "objectID": "06-new-topics/index.html#small-data",
+    "href": "06-new-topics/index.html#small-data",
+    "title": "New topics in network modeling",
+    "section": "1 Small data",
+    "text": "1 Small data\nPeople tend to think that big data is the next frontier, yet, in the last couple of years, small data, and particularly, small network data, has been amassing attention from the network science community.\nSamples of small network datasets are becoming increasingly common, which has two important implications: (a) the concept of statistical power is starting to enter in the ERGM community [] and (b)"
+  },
+  {
+    "objectID": "06-new-topics/index.html#multiplexity",
+    "href": "06-new-topics/index.html#multiplexity",
+    "title": "New topics in network modeling",
+    "section": "2 Multiplexity",
+    "text": "2 Multiplexity\nMore and more data means more and more complexity. Management sciences and other social sciences have been focusing an important amount of resources to multiplexity. With multiplexity we can widen our view point and study human behavior in a more holistic way."
+  },
+  {
+    "objectID": "06-new-topics/index.html#big-networks",
+    "href": "06-new-topics/index.html#big-networks",
+    "title": "New topics in network modeling",
+    "section": "3 Big networks",
+    "text": "3 Big networks\nYes, big data is still a thing in social network analysis. Which is why recent advancements of the ERGM framework have been focusing on the scalability of the model. A recent paper by [] implements a new algorithm for big ERGMs and illustrate its use with a network with over a million nodes; something currently unthinkable with the current implementations of the model."
+  },
+  {
+    "objectID": "06-new-topics/index.html#relational-events",
+    "href": "06-new-topics/index.html#relational-events",
+    "title": "New topics in network modeling",
+    "section": "4 Relational events",
+    "text": "4 Relational events\nRicher time-stamped data will allow us diving deeper into the dynamics between."
   }
 ]

@@ -1,0 +1,25 @@
+---
+title: New topics in network modeling
+---
+
+With more economic and computational resources, the things that we can ask to networks and do with them is becoming increasingly interesting and complex.
+
+In this section, I will introduce some of the latest advancements and forthcoming topics in network modeling.
+
+## Small data
+
+People tend to think that big data is the next frontier, yet, in the last couple of years, small data, and particularly, small network data, has been amassing attention from the network science community.
+
+Samples of small network datasets are becoming increasingly common, which has two important implications: (a) the concept of statistical power is starting to enter in the ERGM community [] and (b) 
+
+## Multiplexity
+
+More and more data means more and more complexity. Management sciences and other social sciences have been focusing an important amount of resources to multiplexity. With multiplexity we can widen our view point and study human behavior in a more holistic way. 
+
+## Big networks
+
+Yes, big data is still a thing in social network analysis. Which is why recent advancements of the ERGM framework have been focusing on the scalability of the model. A recent paper by [] implements a new algorithm for big ERGMs and illustrate its use with a network with over a million nodes; something currently unthinkable with the current implementations of the model.
+
+## Relational events
+
+Richer time-stamped data will allow us diving deeper into the dynamics between.

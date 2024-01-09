@@ -243,9 +243,8 @@ summary(model_1)
 #| label: first-models
 #| collapse: true
 #| message: false
-#| cache: true
 # Fitting two more models (output message suppressed)
-model_2 <- ergm(Y ~ edges + mutual)
+model_2 <- ergm(Y ~ edges + mutual) 
 model_3 <- ergm(Y ~ edges + mutual + gwdsp(.5, fixed = TRUE))
 # model_4 <- ergm(Y ~ edges + triangles) # bad idea
 ```
@@ -272,7 +271,7 @@ model_4 <- ergm(Y ~ edges + mutual + nodematch("fav_music"))
 model_5 <- ergm(Y ~ edges + mutual + nodematch("fav_music", diff = TRUE))
 ```
 
-Now, let's inspect what do we have so far:
+Now, let's inspect what we have so far:
 
 ```{r}
 #| label: working-homophily-table
@@ -281,6 +280,16 @@ Now, let's inspect what do we have so far:
 #| results: asis
 knitreg(list(model_2, model_4, model_5))
 ```
+
+# Conclusion
+
+We have shown here just a glimpse of what ERG models are. A large, active, collaborative community of social network scientists is working on new extensions and advances. If you want to learn more about ERGMs, I recommend the following resources:
+
+- The Statnet website [(link)](https://statnet.org/).
+
+- The book "Exponential Random Graph Models for Social Networks: Theory, Methods, and Applications" by @lusherExponentialRandomGraph2013.
+
+- Melnet's PNEt website [(link)](https://www.melnet.org.au/pnet/).
 
 # References
 

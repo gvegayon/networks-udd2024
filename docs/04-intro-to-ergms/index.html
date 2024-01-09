@@ -4593,7 +4593,8 @@ vertical-align: -.125em;
   <li><a href="#simplest-model-bernoulli-graph" id="toc-simplest-model-bernoulli-graph" class="nav-link" data-scroll-target="#simplest-model-bernoulli-graph"><span class="header-section-number">4.2</span> Simplest model: Bernoulli graph</a></li>
   <li><a href="#lets-add-a-little-bit-of-structure" id="toc-lets-add-a-little-bit-of-structure" class="nav-link" data-scroll-target="#lets-add-a-little-bit-of-structure"><span class="header-section-number">4.3</span> Let’s add a little bit of structure</a></li>
   </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">5</span> References</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5</span> Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -4643,7 +4644,7 @@ P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg   =</span> <span class="fu">mean</span>(Y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">qlogis</span>()</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                 logit      ergm       avg</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.182719 -2.182719 -2.182719</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.222163 -2.222164 -2.222164</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="no-markov-terms" class="level1" data-number="2">
@@ -4858,9 +4859,9 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 AIC: 2104  BIC: 2112  (Smaller is better. MC Std. Err. = 0)</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="index_cache/html/first-models_b7e28baa00641a26d5e5aa4e2a02ae9d">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting two more models (output message suppressed)</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> mutual)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> mutual) </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>model_3 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> mutual <span class="sc">+</span> <span class="fu">gwdsp</span>(.<span class="dv">5</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># model_4 &lt;- ergm(Y ~ edges + triangles) # bad idea</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -5033,7 +5034,7 @@ Log Likelihood
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>model_4 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> mutual <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">&quot;fav_music&quot;</span>))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>model_5 <span class="ot">&lt;-</span> <span class="fu">ergm</span>(Y <span class="sc">~</span> edges <span class="sc">+</span> mutual <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">&quot;fav_music&quot;</span>, <span class="at">diff =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, let’s inspect what do we have so far:</p>
+<p>Now, let’s inspect what we have so far:</p>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">knitreg</span>(<span class="fu">list</span>(model_2, model_4, model_5))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 <table class="texreg" style="margin: 10px auto;border-collapse: collapse;border-spacing: 0px;caption-side: bottom;color: #000000;border-top: 2px solid #000000;">
@@ -5279,19 +5280,31 @@ Log Likelihood
 </table>
 </section>
 </section>
-<section id="references" class="level1" data-number="5">
+<section id="conclusion" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Conclusion</h1>
+<p>We have shown here just a glimpse of what ERG models are. A large, active, collaborative community of social network scientists is working on new extensions and advances. If you want to learn more about ERGMs, I recommend the following resources:</p>
+<ul>
+<li><p>The Statnet website <a href="https://statnet.org/">(link)</a>.</p></li>
+<li><p>The book “Exponential Random Graph Models for Social Networks: Theory, Methods, and Applications” by <span class="citation" data-cites="lusherExponentialRandomGraph2013">Lusher, Koskinen, and Robins (<a href="#ref-lusherExponentialRandomGraph2013" role="doc-biblioref">2013</a>)</span>.</p></li>
+<li><p>Melnet’s PNEt website <a href="https://www.melnet.org.au/pnet/">(link)</a>.</p></li>
+</ul>
+</section>
+<section id="references" class="level1" data-number="6">
 
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">5 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">6 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-geyerConstrainedMonteCarlo1992" class="csl-entry" role="listitem">
 Geyer, Charles J., and Elizabeth A. Thompson. 1992. <span>“Constrained <span>Monte Carlo Maximum Likelihood</span> for <span>Dependent Data</span>.”</span> <em>Journal of the Royal Statistical Society. Series B (Methodological)</em> 54 (3): 657–99. <a href="https://www.jstor.org/stable/2345852">https://www.jstor.org/stable/2345852</a>.
 </div>
 <div id="ref-leifeldTexregConversionStatistical2013" class="csl-entry" role="listitem">
 Leifeld, Philip. 2013. <span>“<span><strong>Texreg</strong></span> : <span>Conversion</span> of <span>Statistical Model Output</span> in <span><em>R</em></span> to <span>L A T E X</span> and <span>HTML Tables</span>.”</span> <em>Journal of Statistical Software</em> 55 (8). <a href="https://doi.org/10.18637/jss.v055.i08">https://doi.org/10.18637/jss.v055.i08</a>.
+</div>
+<div id="ref-lusherExponentialRandomGraph2013" class="csl-entry" role="listitem">
+Lusher, Dean, Johan Koskinen, and Garry Robins. 2013. <em>Exponential <span>Random Graph Models</span> for <span>Social Networks</span>: <span>Theory</span>, <span>Methods</span>, and <span>Applications</span></em>. <span>Cambridge University Press</span>.
 </div>
 <div id="ref-vegayonExponentialRandomGraph2021" class="csl-entry" role="listitem">
 Vega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. <span>“Exponential Random Graph Models for Little Networks.”</span> <em>Social Networks</em> 64 (August 2020): 225–38. <a href="https://doi.org/10.1016/j.socnet.2020.07.005">https://doi.org/10.1016/j.socnet.2020.07.005</a>.
