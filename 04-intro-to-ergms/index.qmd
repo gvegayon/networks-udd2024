@@ -49,9 +49,9 @@ cbind(
 )
 ```
 
-# A simple example
+# No Markov terms
 
-Imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that, gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:
+Imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:
 
 $$
 \Prergm(y_{ij} = 1) = \text{Logit}^{-1}\left(\theta_{edges} + \theta_{homophily}\isone{X_i = X_j}\right)
@@ -125,7 +125,7 @@ obj <- \(theta) {
 fit_homophily_logit <- optim(c(0,0), obj, hessian = TRUE)
 ```
 
-Now that we have the values, let's compare them:
+Now that we have the values let's compare them:
 
 ```{r}
 #| label: simple-example-fit-glm-coef
@@ -146,7 +146,7 @@ rbind(
 
 # The most important results
 
-If we were able to say what are two of the most important results in ERGMs, I would say the following: (a) conditioning on the rest of the graph, the probability of a tie distributes Logistic (Bernoulli), and (b) the ratio between two loglikelihoods can be approximated through simulation.
+If we were able to say what two of the most important results in ERGMs are, I would say the following: (a) conditioning on the rest of the graph, the probability of a tie distributes Logistic (Bernoulli), and (b) the ratio between two loglikelihoods can be approximated through simulation.
 
 ## The logistic distribution
 
@@ -170,7 +170,7 @@ $$
 \frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)} = \mathbb{E}_{\mathcal{Y}, \bm{\theta}_0}\left(\tpose{(\bm{\theta} - \bm{\theta}_0)s(\bm{y})}\right),
 $$
 
-then, using the latter, we can approximate the following loglikelihood ratio:
+Using the latter, we can approximate the following loglikelihood ratio:
 
 \begin{align*}
 l(\bm{\theta}) - l(\bm{\theta}_0) = & \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}) - \log\left[\frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)}\right]\\
@@ -179,3 +179,108 @@ l(\bm{\theta}) - l(\bm{\theta}_0) = & \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm
 
 
 Where $\bm{\theta}_0$ is an arbitrary vector of parameters, and $\bm{y}^{(m)}$ are sampled from the distribution $P_{\mathcal{Y}, \bm{\theta}_0}$. In the words of @geyerConstrainedMonteCarlo1992, "[...] it is possible to approximate $\bm{\theta}$ by using simulations from one distribution $P_{\mathcal{Y}, \bm{\theta}_0}$ no matter which $\bm{\theta}_0$ in the parameter space is."
+
+# Start to finish example
+
+There is no silver bullet to fit ERGMs. However, the following steps are a good starting point:
+
+1. **Inspect the data**: Ensure the network you work with is processed correctly. Some common mistakes include isolates being excluded, vertex attributes not being properly aligned (mismatch), etc.
+
+2. **Start with endogenous effects first**: Before jumping into vertex/edge-covariates, try fitting models that only include structural terms such as edgecount, triangles (or their equivalent,) stars, reciprocity, etc.
+
+3. **After structure is controlled**: You can add vertex/edge-covariates. The most common ones are homophily, nodal-activity, etc.
+
+Although we could go ahead and use an existing dataset to play with, instead, we will simulate a directed graph with the following properties:
+
+- 100 nodes.
+- Homophily on Music taste.
+- Gender heterophily.
+- Reciprocity
+
+```{r}
+#| label: generating-data
+#| message: false
+# Simulating the covariates (vertex attribute)
+set.seed(1235)
+
+# Simulating the data
+Y <- network(100, directed = TRUE)
+Y %v% "fav_music" <- sample(c("rock", "jazz", "pop"), 100, replace = TRUE)
+Y %v% "female"    <- rbinom(100, 1, 0.5) 
+
+Y <- ergm::simulate_formula(
+  Y ~
+    edges +
+    nodematch("fav_music") + 
+    nodematch("female") +
+    mutual,
+  coef = c(-4, 1, -1, 2)
+  )
+```
+
+```{r}
+library(sna)
+gplot(
+  Y,
+  vertex.col = c("green", "red")[Y %v% "female" + 1] 
+  )
+```
+
+## Data
+
+## Simplest model: Bernoulli graph
+
+The step is to check whether we can fit an ERGM or not. We can do so with the Bernoulli graph:
+
+```{r}
+model_1 <- ergm(Y ~ edges)
+summary(model_1)
+```
+
+
+
+```{r}
+#| label: first-models
+#| collapse: true
+#| message: false
+#| cache: true
+# Fitting two more models (output message suppressed)
+model_2 <- ergm(Y ~ edges + mutual)
+model_3 <- ergm(Y ~ edges + mutual + gwdsp(.5, fixed = TRUE))
+# model_4 <- ergm(Y ~ edges + triangles) # bad idea
+```
+
+Right after fitting a model, we want to inspect the results. An excellent tool for this is the R package `texreg` [@leifeldTexregConversionStatistical2013]:
+
+```{r}
+#| label: simples-table
+#| message: false
+#| warning: false
+#| results: asis
+library(texreg)
+knitreg(list(model_1, model_2, model_3))
+```
+
+So far, `model_2` is winning. We will continue with this model.
+
+## Let's add a little bit of structure
+
+```{r}
+#| label: working-homophily
+#| message: false
+model_4 <- ergm(Y ~ edges + mutual + nodematch("fav_music"))
+model_5 <- ergm(Y ~ edges + mutual + nodematch("fav_music", diff = TRUE))
+```
+
+Now, let's inspect what do we have so far:
+
+```{r}
+#| label: working-homophily-table
+#| message: false
+#| warning: false
+#| results: asis
+knitreg(list(model_2, model_4, model_5))
+```
+
+# References
+

@@ -285,19 +285,6 @@ https://github.com/Rdatatable/data.table},
   doi = {10.1111/gean.12319},
 }
 
-@book{lusherExponentialRandomGraph2013,
-  title = {Exponential {{Random Graph Models}} for {{Social Networks}}: {{Theory}}, {{Methods}}, and {{Applications}}},
-  shorttitle = {Exponential {{Random Graph Models}} for {{Social Networks}}},
-  author = {Lusher, Dean and Koskinen, Johan and Robins, Garry},
-  year = {2013},
-  publisher = {{Cambridge University Press}},
-  abstract = {"Exponential random graph models (ERGMs) are a class of statistical models for social networks. They account for the presence (and absence) of network ties and so provide a model for network structure. An ERGM models a given network in terms of small local tie-based structures, such as reciprocated ties and triangles. A social network can be thought of as being built up of these local patterns of ties, called network configurations xe "network configurations" , which correspond to the parameters in the model. Moreover, these configurations can be considered to arise from local social processes, whereby actors in the network form connections in response to other ties in their social environment. ERGMs are a principled statistical approach to modeling social networks. They are theory-driven in that their use requires the researcher to consider the complex, intersecting and indeed potentially competing theoretical reasons why the social ties in the observed network have arisen. For instance, does a given network structure occur due to processes of homophily xe "actor-relation effects:homophily" , xe "homophily" {\textbackslash}t "see actor-relation effects" reciprocity xe "reciprocity" , transitivity xe "transitivity" , or indeed a combination of these? By including such parameters together in the one model a researcher can test these effects one against the other, and so infer the social processes that have built the network. Being a statistical model, an ERGM permits inferences about whether, in our network of interest, there are significantly more (or fewer) reciprocated ties, or triangles (for instance), than we would expect"--},
-  googlebooks = {gyKypohCjDcC},
-  isbn = {978-0-521-19356-6},
-  langid = {english},
-  keywords = {Business \& Economics / Organizational Behavior,FAMILY \& RELATIONSHIPS,Social Science / Research}
-}
-
 @Manual{Handcock2023,
   author = {Mark S. Handcock and David R. Hunter and Carter T. Butts and Steven M. Goodreau and Pavel N. Krivitsky and Martina Morris},
   title = {ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks},
@@ -424,4 +411,53 @@ url={https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/disse
   abstract = {Maximum likelihood estimates (MLEs) in autologistic models and other exponential family models for dependent data can be calculated with Markov chain Monte Carlo methods (the Metropolis algorithm or the Gibbs sampler), which simulate ergodic Markov chains having equilibrium distributions in the model. From one realization of such a Markov chain, a Monte Carlo approximant to the whole likelihood function can be constructed. The parameter value (if any) maximizing this function approximates the MLE. When no parameter point in the model maximizes the likelihood, the MLE in the closure of the exponential family may exist and can be calculated by a two-phase algorithm, first finding the support of the MLE by linear programming and then finding the distribution within the family conditioned on the support by maximizing the likelihood for that family. These methods are illustrated by a constrained autologistic model for DNA fingerprint data. MLEs are compared with maximum pseudolikelihood estimates (MPLEs) and with maximum conditional likelihood estimates (MCLEs), neither of which produce acceptable estimates, the MPLE because it overestimates dependence, and the MCLE because conditioning removes the constraints.},
   file = {/home/george/Zotero/storage/F2EKQLP2/Geyer and Thompson - 1992 - Constrained Monte Carlo Maximum Likelihood for Dep.pdf}
 }
+
+@article{koskinenOutliersInfluentialObservations2018,
+  title = {Outliers and {{Influential Observations}} in {{Exponential Random Graph Models}}},
+  author = {Koskinen, Johan and Wang, Peng and Robins, Garry and Pattison, Philippa},
+  year = {2018},
+  month = dec,
+  journal = {Psychometrika},
+  volume = {83},
+  number = {4},
+  pages = {809--830},
+  issn = {0033-3123, 1860-0980},
+  doi = {10.1007/s11336-018-9635-8},
+  urldate = {2024-01-09},
+  langid = {english},
+  file = {/home/george/Zotero/storage/FV9MDZM6/Koskinen et al. - 2018 - Outliers and Influential Observations in Exponenti.pdf}
+}
+
+@article{koskinenAnalysingNetworksNetworks2023,
+  title = {Analysing Networks of Networks},
+  author = {Koskinen, Johan and Jones, Pete and Medeuov, Darkhan and Antonyuk, Artem and Puzyreva, Kseniia and Basov, Nikita},
+  year = {2023},
+  month = jul,
+  journal = {Social Networks},
+  volume = {74},
+  pages = {102--117},
+  issn = {0378-8733},
+  doi = {10.1016/j.socnet.2023.02.002},
+  urldate = {2024-01-09},
+  abstract = {We consider data with multiple observations or reports on a network in the case when these networks themselves are connected through some form of network ties. We could take the example of a cognitive social structure where there is another type of tie connecting the actors that provide the reports; or the study of interpersonal spillover effects from one cultural domain to another facilitated by the social ties. Another example is when the individual semantic structures are represented as semantic networks of a group of actors and connected through these actors' social ties to constitute knowledge of a social group. How to jointly represent the two types of networks is not trivial as the layers and not the nodes of the layers of the reported networks are coupled through a network on the reports. We propose to transform the different multiple networks using line graphs, where actors are affiliated with ties represented as nodes, and represent the totality of the different types of ties as a multilevel network. This affords studying the associations between the social network and the reports as well as the alignment of the reports to a criterion graph. We illustrate how the procedure can be applied to studying the social construction of knowledge in local flood management groups. Here we use multilevel exponential random graph models but the representation also lends itself to stochastic actor-oriented models, multilevel blockmodels, and any model capable of handling multilevel networks.},
+  keywords = {Multigraphs,Multilevel networks,Multiplex networks,Sociosemantic networks},
+  file = {/home/george/Zotero/storage/KPU8REVQ/Koskinen et al. - 2023 - Analysing networks of networks.pdf}
+}
+
+@article{leifeldTexregConversionStatistical2013,
+  title = {{\textbf{Texreg}} : {{Conversion}} of {{Statistical Model Output}} in {{{\emph{R}}}} to {{L A T E X}} and {{HTML Tables}}},
+  shorttitle = {{\textbf{Texreg}}},
+  author = {Leifeld, Philip},
+  year = {2013},
+  journal = {Journal of Statistical Software},
+  volume = {55},
+  number = {8},
+  issn = {1548-7660},
+  doi = {10.18637/jss.v055.i08},
+  urldate = {2024-01-09},
+  abstract = {A recurrent task in applied statistics is the (mostly manual) preparation of model output for inclusion in LATEX, Microsoft Word, or HTML documents {\textendash} usually with more than one model presented in a single table along with several goodness-of-fit statistics. However, statistical models in R have diverse object structures and summary methods, which makes this process cumbersome. This article first develops a set of guidelines for converting statistical model output to LATEX and HTML tables, then assesses to what extent existing packages meet these requirements, and finally presents the texreg package as a solution that meets all of the criteria set out in the beginning. After providing various usage examples, a blueprint for writing custom model extensions is proposed.},
+  langid = {english},
+  file = {/home/george/Zotero/storage/J2E7L5H9/Leifeld - 2013 - texreg  Conversion of Statistical Model Ou.pdf}
+}
+
 
