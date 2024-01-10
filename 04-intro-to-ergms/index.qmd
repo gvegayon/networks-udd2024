@@ -245,7 +245,7 @@ There is no silver bullet to fit ERGMs. However, the following steps are a good 
 
 3. **After structure is controlled**: You can add vertex/edge-covariates. The most common ones are homophily, nodal-activity, etc.
 
-Once you have a model you are happy with, the last couple of steps are (a) assess convergence (which is usually done automagically by the `ergm` package,) and (b) assess goodness-of-fit, which in this context means how good was our model to capture (not-controlled for) properties of the network.
+4. **Evaluate your results**: Once you have a model you are happy with, the last couple of steps are (a) assess convergence (which is usually done automagically by the `ergm` package,) and (b) assess goodness-of-fit, which in this context means how good was our model to capture (not-controlled for) properties of the network.
 
 Although we could go ahead and use an existing dataset to play with, instead, we will simulate a directed graph with the following properties:
 
@@ -342,11 +342,24 @@ So far, `model_2` is winning. We will continue with this model.
 
 ## Let's add a little bit of structure
 
+Now that we only have a model featuring endogenous terms, we can add vertex/edge-covariates. Starting with `"fav_music"`, there are a couple of different ways to use this node feature:
+
+a. Directly through homophily (assortative mixing): Using the `nodematch` term, we can control for the propensity of individuals to connect based on shared music taste.
+
+b. Homophily (v2): We could activate the option `diff = TRUE` using the same term. By doing this, the homophily term is operationalized differently, adding as many terms as options in the vertex attribute.
+
+c. Mixing: We can use the term `nodemix` for individuals' tendency to mix between musical tastes.
+
+::: {.callout title="Question"}
+In this context, what would be the different hypotheses behind each decision?
+:::
+
 ```{r}
 #| label: working-homophily
 #| message: false
 model_4 <- ergm(Y ~ edges + mutual + nodematch("fav_music"))
 model_5 <- ergm(Y ~ edges + mutual + nodematch("fav_music", diff = TRUE))
+model_6 <- ergm(Y ~ edges + mutual + nodemix("fav_music"))
 ```
 
 Now, let's inspect what we have so far:
@@ -356,7 +369,55 @@ Now, let's inspect what we have so far:
 #| message: false
 #| warning: false
 #| results: asis
-knitreg(list(model_2, model_4, model_5))
+knitreg(list(`2` = model_2, `4` = model_4, `5` = model_5, `6` = model_6))
+```
+
+Although model 5 has a higher loglikelihood, using AIC or BIC suggests model 4 is a better candidate. For the sake of time, we will jump ahead and add `nodematch("female")` as the last term of our model. The next step is to assess (a) convergence and (b) goodness-of-fit.
+
+```{r}
+#| label: last-model
+#| message: false
+#| results: asis
+model_final <- ergm(Y ~ edges + mutual + nodematch("fav_music") + nodematch("female"))
+
+# Printing the pretty table
+knitreg(list(`2` = model_2, `4` = model_4, `Final` = model_final))
+```
+
+## Evaluate your results
+
+### Convergence
+
+As our model was fitted using MCMC, we must ensure the chains converged. We can use the `mcmc.diagnostics` function from the `ergm` package to check model convergence. This function looks at the last set of simulations of the MCMC model and generates various diagnostics for the user.
+
+Under the hood, the fitting algorithm generates a stream of networks based on those parameters for each new proposed set of model parameters. The last stream of networks is thus simulated using the final state of the model. The `mcmc.diagnostics` function takes that stream of networks and plots the sequence of the sufficient statistics included in the model. A converged model should show a stationary statistics sequence, moving around a fixed value without (a) becoming stuck at any point and (b) chaining the tendency. This model shows both:
+
+```{r}
+#| label: convergence
+#| message: false
+mcmc.diagnostics(model_final, which   = c("plots"))
+```
+
+
+### Goodness-of-fit
+
+```{r}
+#| label: gof-calc
+#| message: false
+#| warning: false
+#| collapse: true
+gof_final <- gof(model_final)
+print(gof_final)
+```
+
+```{r}
+#| label: gof-plot
+#| message: false
+#| fig.height: 10
+# Plotting the result (5 figures)
+op <- par(mfrow = c(3,2))
+plot(gof_final)
+par(op)
 ```
 
 # Conclusion
