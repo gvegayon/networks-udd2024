@@ -4599,7 +4599,8 @@ vertical-align: -.125em;
   </ul></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5</span> Conclusion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
+  <li><a href="#group-activity" id="toc-group-activity" class="nav-link" data-scroll-target="#group-activity"><span class="header-section-number">6</span> Group activity</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
   </ul>
 </nav>
     </div>
@@ -4662,7 +4663,7 @@ P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg   =</span> <span class="fu">mean</span>(Y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">qlogis</span>()</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                 logit      ergm       avg</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.238298 -2.238298 -2.238298</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.189393 -2.189393 -2.189393</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we see this, we say that dyads are independent of each other; this is also called <em>p1</em> models <span class="citation" data-cites="Holland1981">(<a href="#ref-Holland1981" role="doc-biblioref">Holland and Leinhardt 1981</a>)</span>. As a second example, imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:</p>
 <p><span class="math display">
@@ -5985,7 +5986,17 @@ Note: MCMC diagnostics shown here are from the last round of
 <li><p>Melnet’s PNEt website <a href="https://www.melnet.org.au/pnet/">(link)</a>.</p></li>
 </ul>
 </section>
-<section id="references" class="level1" data-number="6">
+<section id="group-activity" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Group activity</h1>
+<p>The <code>ergm</code> package comes with a handful of vignettes (extended R examples) that you can use to learn more about the package. The vignette with the same name as the package shows an example fitting a model to the network <code>faux.mesa.high</code>. Address the following questions:</p>
+<ol type="a">
+<li><p>What type of ERG model is this?</p></li>
+<li><p>Looking at the plot in the vignette, what other term(s) could you consider worth adding to the model? Why?</p></li>
+<li><p>The vignette did not include a goodness-of-fit analysis. Can you add one? What do you find?</p></li>
+<li><p><strong>Challenge</strong>: without using <code>ergm</code> to fit the model, estimate the following <span class="math inline">p1</span> model: <code>~ edges + nodefactor(&quot;Race&quot;)</code>. Compare your results with what you get using <code>ergm</code>.</p></li>
+</ol>
+</section>
+<section id="references" class="level1" data-number="7">
 
 
 
@@ -5993,7 +6004,7 @@ Note: MCMC diagnostics shown here are from the last round of
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">6 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">7 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Frank1986" class="csl-entry" role="listitem">
 Frank, O, and David Strauss. 1986. <span>“<span class="nocase">Markov graphs</span>.”</span> <em>Journal of the American Statistical Association</em> 81 (395): 832–42. <a href="https://doi.org/10.2307/2289017">https://doi.org/10.2307/2289017</a>.
 </div>

@@ -1,0 +1,32 @@
+---
+title: Solutions to 04-intro-to-ergm
+---
+
+Solution to the challenge
+
+```{r}
+library(ergm)
+data(faux.mesa.high)
+mesa <- faux.mesa.high
+
+y <- as.matrix(mesa)
+diag(y) <- NA
+n <- nrow(y)
+
+mesa_data <- data.frame(
+  y = as.vector(y),
+  race = mesa %v% "Race", check.names = FALSE
+)
+
+res_glm <- glm(y ~ as.factor(race), data = mesa_data, family = binomial(link = "logit"))
+res_ergm <- ergm(mesa ~ edges + nodefactor("Race"))
+
+cbind(
+  glm = res_glm$coefficients,
+  ergm = res_ergm$coef,
+  glm_sd = sqrt(diag(vcov(res_glm))),
+  ergm_sd = sqrt(diag(vcov(res_ergm)))
+)
+```
+
+Observation: The standard error of edges in ergm is twice as big as in glm. Why?
