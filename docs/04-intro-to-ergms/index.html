@@ -4626,7 +4626,7 @@ vertical-align: -.125em;
 <p>Have you ever wondered if the friend of your friend is your friend? Or if the people you consider to be your friends feel the same about you? Or if age is related to whether you seek advice from others? All these (and many others certainly more creative) questions can be answered using Exponential-Family Random Graph Models.</p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>Exponential-Family Random Graph Models, known as ERGMs or ERG Models (<span class="citation" data-cites="Holland1981">Holland and Leinhardt (<a href="#ref-Holland1981" role="doc-biblioref">1981</a>)</span>, <span class="citation" data-cites="Frank1986">Frank and Strauss (<a href="#ref-Frank1986" role="doc-biblioref">1986</a>)</span>, <span class="citation" data-cites="Wasserman1996">Wasserman and Pattison (<a href="#ref-Wasserman1996" role="doc-biblioref">1996</a>)</span>, <span class="citation" data-cites="Snijders2006">Snijders et al. (<a href="#ref-Snijders2006" role="doc-biblioref">2006</a>)</span>, <span class="citation" data-cites="Robins2007">Robins et al. (<a href="#ref-Robins2007" role="doc-biblioref">2007</a>)</span>, and many others) are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Exponential-Family Random Graph Models, known as ERGMs, ERG Models, or <span class="math inline">p^*</span> models (<span class="citation" data-cites="Holland1981">Holland and Leinhardt (<a href="#ref-Holland1981" role="doc-biblioref">1981</a>)</span>, <span class="citation" data-cites="Frank1986">Frank and Strauss (<a href="#ref-Frank1986" role="doc-biblioref">1986</a>)</span>, <span class="citation" data-cites="Wasserman1996">Wasserman and Pattison (<a href="#ref-Wasserman1996" role="doc-biblioref">1996</a>)</span>, <span class="citation" data-cites="Snijders2006">Snijders et al. (<a href="#ref-Snijders2006" role="doc-biblioref">2006</a>)</span>, <span class="citation" data-cites="Robins2007">Robins et al. (<a href="#ref-Robins2007" role="doc-biblioref">2007</a>)</span>, and many others) are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>The most common representation of ERGMs is the following:</p>
 <p><span class="math display">
 P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}} s(y)\right)\kappa(\bm{\theta})^{-1}
@@ -4644,6 +4644,7 @@ P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}
 <p></p><figcaption class="figure-caption">Figure 1: Example ERGM terms from <span class="citation" data-cites="vegayonExponentialRandomGraph2021">Vega Yon, Slaughter, and Haye (<a href="#ref-vegayonExponentialRandomGraph2021" role="doc-biblioref">2021</a>)</span></figcaption><p></p>
 </figure>
 </div>
+<p>The <code>ergm</code> package has many terms we can use to fit these models. You can explore the available terms in the manual <code>ergm.terms</code> in the <code>ergm</code> package. Take a moment to explore the manual and see the different terms available.</p>
 </section>
 <section id="dyadic-independence-p1" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Dyadic independence (p1)</h1>
@@ -4661,7 +4662,7 @@ P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg   =</span> <span class="fu">mean</span>(Y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">qlogis</span>()</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                 logit      ergm       avg</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.209632 -2.209632 -2.209632</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.238298 -2.238298 -2.238298</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we see this, we say that dyads are independent of each other; this is also called <em>p1</em> models <span class="citation" data-cites="Holland1981">(<a href="#ref-Holland1981" role="doc-biblioref">Holland and Leinhardt 1981</a>)</span>. As a second example, imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:</p>
 <p><span class="math display">
@@ -5870,9 +5871,20 @@ Note: MCMC diagnostics shown here are from the last round of
   GOF=~model).</code></pre>
 </div>
 </div>
+<p>Now that we know our model was good enough to represent the observed statistics (sample them, actually,) let’s see how good it is at capturing other features of the network that were not included in the model.</p>
 </section>
 <section id="goodness-of-fit" class="level3" data-number="4.4.2">
 <h3 data-number="4.4.2" class="anchored" data-anchor-id="goodness-of-fit"><span class="header-section-number">4.4.2</span> Goodness-of-fit</h3>
+<p>This would be the last step in the sequence of steps to fit an ERGM. As we mentioned before, the idea of Goodness-of-fit [GOF] in ERG models is to see how well our model captures other properties of the graph that were not included in the model. By default, the <code>gof</code> function from the <code>ergm</code> package computes GOF for:</p>
+<ol type="a">
+<li><p>The model statistics.</p></li>
+<li><p>The outdegree distribution.</p></li>
+<li><p>The indegree distribution.</p></li>
+<li><p>The distribution of edge-wise shared partners.</p></li>
+<li><p>The distribution of the geodesic distances (shortest path).</p></li>
+</ol>
+<p>The process of evaluating GOF is relatively straightforward. Using samples from the posterior distribution, we check whether the observed statistics from above are covered (fall within the CI) of our model. If they do, we say that the model has a good fit. Otherwise, if we observe significant anomalies, we return to the bench and try to improve our model.</p>
+<p>As with all simulated data, our <code>gof()</code> call shows that our selected model was an excellent choice for the observed graph:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gof_final <span class="ot">&lt;-</span> <span class="fu">gof</span>(model_final)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(gof_final)</span>
@@ -5951,6 +5963,7 @@ Note: MCMC diagnostics shown here are from the last round of
 <span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a><span class="do">## nodematch.fav_music 123  90 124.93 165       0.90</span></span>
 <span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a><span class="do">## nodematch.female     72  54  71.71  97       1.00</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>It is easier to see the results using the <code>plot</code> function:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the result (5 figures)</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>))</span>

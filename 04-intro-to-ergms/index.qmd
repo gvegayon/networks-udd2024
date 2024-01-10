@@ -27,7 +27,7 @@ Have you ever wondered if the friend of your friend is your friend? Or if the pe
 
 # Introduction
 
-Exponential-Family Random Graph Models, known as ERGMs or ERG Models (@Holland1981, @Frank1986, @Wasserman1996, @Snijders2006, @Robins2007, and many others) are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties.[^predict]
+Exponential-Family Random Graph Models, known as ERGMs, ERG Models, or $p^*$ models (@Holland1981, @Frank1986, @Wasserman1996, @Snijders2006, @Robins2007, and many others) are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties.[^predict]
 
 [^predict]: While ERG Models can be used to predict individual ties (which is another way of describing them), the focus is on the processes that give origin to the network.
 
@@ -51,6 +51,8 @@ The vector of sufficient statistics dictates the data-generating process of the 
 
 ![Example ERGM terms from @vegayonExponentialRandomGraph2021](ergm-terms-vegayonetal2021.jpg){#fig-ergmterms width="60%"}
 
+
+The `ergm` package has many terms we can use to fit these models. You can explore the available terms in the manual `ergm.terms` in the `ergm` package. Take a moment to explore the manual and see the different terms available.
 
 # Dyadic independence (p1)
 
@@ -398,8 +400,25 @@ Under the hood, the fitting algorithm generates a stream of networks based on th
 mcmc.diagnostics(model_final, which   = c("plots"))
 ```
 
+Now that we know our model was good enough to represent the observed statistics (sample them, actually,) let's see how good it is at capturing other features of the network that were not included in the model.
 
 ### Goodness-of-fit
+
+This would be the last step in the sequence of steps to fit an ERGM. As we mentioned before, the idea of Goodness-of-fit [GOF] in ERG models is to see how well our model captures other properties of the graph that were not included in the model. By default, the `gof` function from the `ergm` package computes GOF for:
+
+a. The model statistics.
+
+b. The outdegree distribution.
+
+c. The indegree distribution.
+
+d. The distribution of edge-wise shared partners.
+
+e. The distribution of the geodesic distances (shortest path).
+
+The process of evaluating GOF is relatively straightforward. Using samples from the posterior distribution, we check whether the observed statistics from above are covered (fall within the CI) of our model. If they do, we say that the model has a good fit. Otherwise, if we observe significant anomalies, we return to the bench and try to improve our model.
+
+As with all simulated data, our `gof()` call shows that our selected model was an excellent choice for the observed graph:
 
 ```{r}
 #| label: gof-calc
@@ -409,6 +428,8 @@ mcmc.diagnostics(model_final, which   = c("plots"))
 gof_final <- gof(model_final)
 print(gof_final)
 ```
+
+It is easier to see the results using the `plot` function:
 
 ```{r}
 #| label: gof-plot
