@@ -28,6 +28,7 @@ website:
       - text: Day II
         menu:
           - text: ERGMs (cont.)
+            href: 05-advanced-ergms/index.qmd
           - text: Odd balls
           - text: ERGM advances
 

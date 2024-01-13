@@ -4553,7 +4553,10 @@ vertical-align: -.125em;
  <span class="menu-text">Day II</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-ii">    
-        <li class="dropdown-header">ERGMs (cont.)</li>
+        <li>
+    <a class="dropdown-item" href="../05-advanced-ergms/index.html" rel target>
+ <span class="dropdown-text">ERGMs (cont.)</span></a>
+  </li>  
         <li class="dropdown-header">Odd balls</li>
         <li class="dropdown-header">ERGM advances</li>
     </ul>
@@ -4594,7 +4597,10 @@ vertical-align: -.125em;
   <li><a href="#code-example-sar" id="toc-code-example-sar" class="nav-link" data-scroll-target="#code-example-sar"><span class="header-section-number">4.1</span> Code example: SAR</a></li>
   <li><a href="#code-example-alaam" id="toc-code-example-alaam" class="nav-link" data-scroll-target="#code-example-alaam"><span class="header-section-number">4.2</span> Code example: ALAAM</a></li>
   </ul></li>
-  <li><a href="#coevolution" id="toc-coevolution" class="nav-link" data-scroll-target="#coevolution"><span class="header-section-number">5</span> Coevolution</a></li>
+  <li><a href="#coevolution" id="toc-coevolution" class="nav-link" data-scroll-target="#coevolution"><span class="header-section-number">5</span> Coevolution</a>
+  <ul class="collapse">
+  <li><a href="#code-example-siena" id="toc-code-example-siena" class="nav-link" data-scroll-target="#code-example-siena"><span class="header-section-number">5.1</span> Code example: Siena</a></li>
+  </ul></li>
   <li><a href="#excercises" id="toc-excercises" class="nav-link" data-scroll-target="#excercises"><span class="header-section-number">6</span> Excercises</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
   </ul>
@@ -4760,7 +4766,7 @@ Number of Fisher Scoring iterations: 2</code></pre>
 </div>
 </div>
 <p>Using the <code>ergm</code> R package <span class="citation" data-cites="Handcock2023 Hunter2008">(<a href="#ref-Handcock2023" role="doc-biblioref">Handcock et al. 2023</a>; <a href="#ref-Hunter2008" role="doc-biblioref">Hunter et al. 2008</a>)</span>, we can extract the associated sufficient statistics of the egocentric networks:</p>
-<div class="cell">
+<div class="cell" data-hash="index_cache/html/egocentric-networks-stats_0980bcf7c1eb696b1e3107a7cec8d659">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">lapply</span>(X, \(x) <span class="fu">summary_formula</span>(x <span class="sc">~</span> density <span class="sc">+</span> mutual))</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -4820,7 +4826,7 @@ Number of Fisher Scoring iterations: 7</code></pre>
 \bm{Wy} \equiv \left\{\sum_{j}y_j w_{ij}\right\}_i
 </span></p>
 <p>Since <span class="math inline">\bm{W}</span> is row-stochastic, <span class="math inline">\bm{Wy}</span> is a weighted average of the outcome of the neighbors of <span class="math inline">i</span>, <em>i.e.</em>, a vector of network exposures.</p>
-<p><strong>ALAAM</strong> While ALAAMs can also be used to estimate network exposure effects, we can use them to build more complex models beyond exposure. The general form is:</p>
+<p><strong>ALAAM</strong> While ALAAMs can also estimate network exposure effects, we can use them to build more complex models beyond exposure. The general form is:</p>
 <p><span class="math display">
 \Pr\left(\bm{Y} = \bm{y}|\bm{W},\bm{X}\right) = \exp{\left(\bm{\theta}^{\mathbf{t}}s(\bm{y},\bm{W}, \bm{X})\right)}\times\eta(\bm{\theta})^{-1}
 </span></p>
@@ -4900,7 +4906,156 @@ test value: 0.051083, p-value: 0.82119</code></pre>
 </section>
 <section id="coevolution" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Coevolution</h1>
-<p>Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs <span class="citation" data-cites="wangUnderstandingNetworksExponentialfamily2023 ernmsFellows2023">(<a href="#ref-wangUnderstandingNetworksExponentialfamily2023" role="doc-biblioref">Wang, Fellows, and Handcock 2023</a>; <a href="#ref-ernmsFellows2023" role="doc-biblioref">Fellows 2012</a>)</span>.</p>
+<p>Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) (first introduced in <span class="citation" data-cites="snijdersStochasticActorOriented1996">T. a. B. Snijders (<a href="#ref-snijdersStochasticActorOriented1996" role="doc-biblioref">1996</a>)</span>; see also <span class="citation" data-cites="snijdersStochasticActorOrientedModels2017">T. A. B. Snijders (<a href="#ref-snijdersStochasticActorOrientedModels2017" role="doc-biblioref">2017</a>)</span>) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs <span class="citation" data-cites="wangUnderstandingNetworksExponentialfamily2023 ernmsFellows2023">(<a href="#ref-wangUnderstandingNetworksExponentialfamily2023" role="doc-biblioref">Wang, Fellows, and Handcock 2023</a>; <a href="#ref-ernmsFellows2023" role="doc-biblioref">Fellows 2012</a>)</span>.</p>
+<p><strong>Siena</strong> Stochastic Actor-Oriented Models [SOAMs] or Siena Models are dynamic models of network and behavior that describe the transition of a network system within two or more time points. The general form of a Siena model is:</p>
+<p><strong>ERNMs</strong> This model is closely related to ERGMs, with the difference that they incorporate a vertex-level output. Conceptually, it is moving from a having a random network, to a model where a given vertex feature and network are random:</p>
+<p><span class="math display">
+\Prergm(\Y=\y|\X=\x) \to \Prergm(\Y=\y, \X=\x)
+</span></p>
+<section id="code-example-siena" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="code-example-siena"><span class="header-section-number">5.1</span> Code example: Siena</h2>
+<div class="cell" data-hash="index_cache/html/siena-code_3c9e7d451c7b07948f462b6bdad74b5d">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSiena)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mynet1 <span class="ot">&lt;-</span> <span class="fu">sienaDependent</span>(<span class="fu">array</span>(<span class="fu">c</span>(tmp3, tmp4), <span class="at">dim=</span><span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">2</span>)))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">sienaDataCreate</span>(mynet1)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>myeff <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>myeff <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff, transTrip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  effectName          include fix   test  initialValue parm
+1 transitive triplets TRUE    FALSE FALSE          0   0   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>myeff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  effectName                  include fix   test  initialValue parm
+1 basic rate parameter mynet1 TRUE    FALSE FALSE    4.80941   0   
+2 outdegree (density)         TRUE    FALSE FALSE   -0.56039   0   
+3 reciprocity                 TRUE    FALSE FALSE    0.00000   0   
+4 transitive triplets         TRUE    FALSE FALSE    0.00000   0   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>myalgorithm <span class="ot">&lt;-</span> <span class="fu">sienaAlgorithmCreate</span>(<span class="at">nsub=</span><span class="dv">3</span>, <span class="at">n3=</span><span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>If you use this algorithm object, siena07 will create/use an output file Siena.txt .</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">siena07</span>(myalgorithm, <span class="at">data=</span>mydata, <span class="at">effects=</span>myeff, <span class="at">batch=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Start phase 0 
+theta: -0.56  0.00  0.00 
+
+Start phase 1 
+Phase 1 Iteration 1 Progress: 0%
+Phase 1 Iteration 2 Progress: 0%
+Phase 1 Iteration 3 Progress: 0%
+Phase 1 Iteration 4 Progress: 0%
+Phase 1 Iteration 5 Progress: 0%
+Phase 1 Iteration 10 Progress: 1%
+Phase 1 Iteration 15 Progress: 1%
+Phase 1 Iteration 20 Progress: 2%
+Phase 1 Iteration 25 Progress: 2%
+Phase 1 Iteration 30 Progress: 2%
+Phase 1 Iteration 35 Progress: 3%
+Phase 1 Iteration 40 Progress: 3%
+Phase 1 Iteration 45 Progress: 4%
+Phase 1 Iteration 50 Progress: 4%
+theta: -0.7001  0.2637  0.0217 
+
+Start phase 2.1
+Phase 2 Subphase 1 Iteration 1 Progress: 16%
+Phase 2 Subphase 1 Iteration 2 Progress: 16%
+theta -0.8123  0.4625  0.0838 
+ac -0.594  1.736  1.837 
+Phase 2 Subphase 1 Iteration 3 Progress: 16%
+Phase 2 Subphase 1 Iteration 4 Progress: 16%
+theta -1.173  0.976  0.209 
+ac -0.0152  1.7432  1.7633 
+Phase 2 Subphase 1 Iteration 5 Progress: 16%
+Phase 2 Subphase 1 Iteration 6 Progress: 17%
+theta -1.496  1.374  0.295 
+ac 0.421 0.951 1.504 
+Phase 2 Subphase 1 Iteration 7 Progress: 17%
+Phase 2 Subphase 1 Iteration 8 Progress: 17%
+theta -1.809  1.582  0.341 
+ac 0.539 0.970 1.326 
+Phase 2 Subphase 1 Iteration 9 Progress: 17%
+Phase 2 Subphase 1 Iteration 10 Progress: 17%
+theta -1.932  1.617  0.367 
+ac 0.467 1.053 1.003 
+theta -1.75  1.35  0.32 
+ac -0.00124 -0.04475 -0.09667 
+theta: -1.75  1.35  0.32 
+
+Start phase 2.2
+Phase 2 Subphase 2 Iteration 1 Progress: 34%
+Phase 2 Subphase 2 Iteration 2 Progress: 34%
+Phase 2 Subphase 2 Iteration 3 Progress: 34%
+Phase 2 Subphase 2 Iteration 4 Progress: 34%
+Phase 2 Subphase 2 Iteration 5 Progress: 35%
+Phase 2 Subphase 2 Iteration 6 Progress: 35%
+Phase 2 Subphase 2 Iteration 7 Progress: 35%
+Phase 2 Subphase 2 Iteration 8 Progress: 35%
+Phase 2 Subphase 2 Iteration 9 Progress: 35%
+Phase 2 Subphase 2 Iteration 10 Progress: 35%
+theta -1.751  1.380  0.317 
+ac -0.037149 -0.000782 -0.066991 
+theta: -1.751  1.380  0.317 
+
+Start phase 2.3
+Phase 2 Subphase 3 Iteration 1 Progress: 55%
+Phase 2 Subphase 3 Iteration 2 Progress: 55%
+Phase 2 Subphase 3 Iteration 3 Progress: 55%
+Phase 2 Subphase 3 Iteration 4 Progress: 56%
+Phase 2 Subphase 3 Iteration 5 Progress: 56%
+Phase 2 Subphase 3 Iteration 6 Progress: 56%
+Phase 2 Subphase 3 Iteration 7 Progress: 56%
+Phase 2 Subphase 3 Iteration 8 Progress: 56%
+Phase 2 Subphase 3 Iteration 9 Progress: 56%
+Phase 2 Subphase 3 Iteration 10 Progress: 56%
+theta -1.739  1.348  0.315 
+ac -0.0932  0.0714 -0.0728 
+theta: -1.739  1.348  0.315 
+
+Start phase 3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                              Estimate   Standard   Convergence 
+                                           Error      t-ratio   
+
+Rate parameters: 
+  0       Rate parameter       3.1101  ( 0.4845   )             
+
+Other parameters: 
+  1. eval outdegree (density) -1.7386  ( 0.2210   )   -0.0341   
+  2. eval reciprocity          1.3484  ( 0.4187   )    0.0555   
+  3. eval transitive triplets  0.3148  ( 0.0795   )   -0.0653   
+
+Overall maximum convergence ratio:    0.1523 
+
+
+Total of 851 iteration steps.
+
+Covariance matrix of estimates (correlations below diagonal)
+
+       0.049       -0.021       -0.011
+      -0.230        0.175       -0.009
+      -0.643       -0.260        0.006
+
+Derivative matrix of expected statistics X by parameters:
+
+      56.960       24.196      176.016
+      14.430       17.842       62.649
+     133.225       76.885      701.313
+
+Covariance matrix of X (correlations below diagonal):
+
+      67.378       32.035      232.516
+       0.637       37.592      150.972
+       0.789        0.685     1290.519</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="excercises" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Excercises</h1>
@@ -4930,6 +5085,12 @@ Robins, Garry, Philippa Pattison, and Peter Elliott. 2001. <span>“Network Mode
 </div>
 <div id="ref-Bivand2022" class="csl-entry" role="listitem">
 Roger Bivand. 2022. <span>“R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.”</span> <em>Geographical Analysis</em> 54 (3): 488–518. <a href="https://doi.org/10.1111/gean.12319">https://doi.org/10.1111/gean.12319</a>.
+</div>
+<div id="ref-snijdersStochasticActorOriented1996" class="csl-entry" role="listitem">
+Snijders, Tom a B. 1996. <span>“Stochastic Actor-Oriented Models for Network Change.”</span> <em>The Journal of Mathematical Sociology</em> 21 (1-2): 149–72. <a href="https://doi.org/10.1080/0022250X.1996.9990178">https://doi.org/10.1080/0022250X.1996.9990178</a>.
+</div>
+<div id="ref-snijdersStochasticActorOrientedModels2017" class="csl-entry" role="listitem">
+Snijders, Tom A. B. 2017. <span>“Stochastic <span>Actor-Oriented Models</span> for <span>Network Dynamics</span>.”</span> <em>Annual Review of Statistics and Its Application</em> 4 (1): 343–63. <a href="https://doi.org/10.1146/annurev-statistics-060116-054035">https://doi.org/10.1146/annurev-statistics-060116-054035</a>.
 </div>
 <div id="ref-wangUnderstandingNetworksExponentialfamily2023" class="csl-entry" role="listitem">
 Wang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. <span>“Understanding Networks with Exponential-Family Random Network Models.”</span> <em>Social Networks</em>, August, S0378873323000497. <a href="https://doi.org/10.1016/j.socnet.2023.07.003">https://doi.org/10.1016/j.socnet.2023.07.003</a>.

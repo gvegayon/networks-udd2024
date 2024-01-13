@@ -112,6 +112,7 @@ Using the `ergm` R package [@Handcock2023; @Hunter2008], we can extract the asso
 #| label: egocentric-networks-stats
 #| message: false
 #| warning: false
+#| cache: true
 library(ergm)
 stats <- lapply(X, \(x) summary_formula(x ~ density + mutual))
 
@@ -153,7 +154,7 @@ $$
 
 Since $\bm{W}$ is row-stochastic, $\bm{Wy}$ is a weighted average of the outcome of the neighbors of $i$, *i.e.*, a vector of network exposures.
 
-**ALAAM** While ALAAMs can also be used to estimate network exposure effects, we can use them to build more complex models beyond exposure. The general form is:
+**ALAAM** While ALAAMs can also estimate network exposure effects, we can use them to build more complex models beyond exposure. The general form is:
 
 $$
 \Pr\left(\bm{Y} = \bm{y}|\bm{W},\bm{X}\right) = \exp{\left(\bm{\theta}^{\mathbf{t}}s(\bm{y},\bm{W}, \bm{X})\right)}\times\eta(\bm{\theta})^{-1}
@@ -222,7 +223,33 @@ Because of the similarities, ALAAMs can be implemented using ERGMs. Because of t
 
 # Coevolution
 
-Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs [@wangUnderstandingNetworksExponentialfamily2023; @ernmsFellows2023].
+Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) (first introduced in @snijdersStochasticActorOriented1996; see also @snijdersStochasticActorOrientedModels2017) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs [@wangUnderstandingNetworksExponentialfamily2023; @ernmsFellows2023].
+
+**Siena** Stochastic Actor-Oriented Models [SOAMs] or Siena Models are dynamic models of network and behavior that describe the transition of a network system within two or more time points. The general form of a Siena model is:
+
+**ERNMs** This model is closely related to ERGMs, with the difference that they incorporate a vertex-level output. Conceptually, it is moving from a having a random network, to a model where a given vertex feature and network are random:
+
+$$
+\Prergm(\Y=\y|\X=\x) \to \Prergm(\Y=\y, \X=\x)
+$$
+
+## Code example: Siena
+
+```{r}
+#| label: siena-code
+#| cache: true
+library(RSiena)
+mynet1 <- sienaDependent(array(c(tmp3, tmp4), dim=c(32, 32, 2)))
+mydata <- sienaDataCreate(mynet1)
+myeff <- getEffects(mydata)
+myeff <- includeEffects(myeff, transTrip)
+myeff
+myalgorithm <- sienaAlgorithmCreate(nsub=3, n3=200)
+ans <- siena07(myalgorithm, data=mydata, effects=myeff, batch=TRUE)
+summary(ans)
+
+```
+
 
 # Excercises
 
