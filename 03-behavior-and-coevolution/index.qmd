@@ -235,20 +235,59 @@ $$
 
 ## Code example: Siena
 
+This example was adapted from the `RSiena` R package (see `?sienaGOF-auxiliary` page).We start by loading the package and taking a look at the data we will use:
+
 ```{r}
-#| label: siena-code
-#| cache: true
+#| label: siena-data-struct
 library(RSiena)
-mynet1 <- sienaDependent(array(c(tmp3, tmp4), dim=c(32, 32, 2)))
-mydata <- sienaDataCreate(mynet1)
+
+# Visualizing the adjacency matrix & behavior
+op <- par(mfrow=c(2, 2))
+image(s501, title = "Net: s501")
+image(s502, title = "Net: s502")
+hist(s50a[,1])
+hist(s50a[,2])
+par(op)
+```
+
+The next step is the data preparation process. `RSiena` does not receive raw data as is. We need to explicitly declare the networks and outcome variable. Siena models can also model network changes
+
+```{r}
+#| label: siena-data-prep
+# Initializing the dependent variable (network)
+mynet1 <- sienaDependent(array(c(s501, s502), dim=c(50, 50, 2)))
+mynet1
+mybeh  <- sienaDependent(s50a[,1:2], type="behavior")
+mybeh
+
+# Node-level covariates (artificial)
+mycov  <- c(rep(1:3,16),1,2)
+
+# Edge-level covariates (also artificial)
+mydycov <- matrix(rep(1:5, 500), 50, 50) 
+```
+
+```{r}
+#| label: siena-model-build
+mydata <- sienaDataCreate(mynet1, mybeh)
 myeff <- getEffects(mydata)
-myeff <- includeEffects(myeff, transTrip)
-myeff
-myalgorithm <- sienaAlgorithmCreate(nsub=3, n3=200)
-ans <- siena07(myalgorithm, data=mydata, effects=myeff, batch=TRUE)
-summary(ans)
+myeff <- includeEffects(myeff, transTies, cycle3)
+```
+
+
+```{r}
+#| label: siena-model-fit
+# Shorter phases 2 and 3, just for example:
+myalgorithm <- sienaAlgorithmCreate(nsub=1, n3=50, seed=122, projname=NULL)
+(ans <- siena07(myalgorithm, data=mydata, effects=myeff, returnDeps=TRUE,
+   batch=TRUE))
 
 ```
+
+
+## Code example: ERNM
+
+
 
 
 # Excercises
