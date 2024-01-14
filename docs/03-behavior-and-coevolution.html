@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.298">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UDD networks 2024 - 4&nbsp; Behavior and coevolution</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-lab-1.html" rel="next">
+<link href="./02-random-graphs.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-overview.html">Day 1</a></li><li class="breadcrumb-item"><a href="./03-behavior-and-coevolution.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Behavior and coevolution</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">UDD networks 2024</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Day 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-random-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Random graphs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-behavior-and-coevolution.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Behavior and coevolution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-lab-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-intro-to-ergms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to ERGMs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Day 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-ergms-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Convergence on ERGMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-odd-balls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Odd balls</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-lab-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-advanced-ergms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced ERGMs: Constraints</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-new-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">New topics in network modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">4.1</span> Introduction</a></li>
+  <li><a href="#lagged-exposure" id="toc-lagged-exposure" class="nav-link" data-scroll-target="#lagged-exposure"><span class="header-section-number">4.2</span> Lagged exposure</a></li>
+  <li><a href="#code-example-lagged-exposure" id="toc-code-example-lagged-exposure" class="nav-link" data-scroll-target="#code-example-lagged-exposure"><span class="header-section-number">4.3</span> Code example: Lagged exposure</a></li>
+  <li><a href="#egocentric-networks" id="toc-egocentric-networks" class="nav-link" data-scroll-target="#egocentric-networks"><span class="header-section-number">4.4</span> Egocentric networks</a></li>
+  <li><a href="#code-example-egocentric-networks" id="toc-code-example-egocentric-networks" class="nav-link" data-scroll-target="#code-example-egocentric-networks"><span class="header-section-number">4.5</span> Code example: Egocentric networks</a></li>
+  <li><a href="#network-effects-are-endogenous" id="toc-network-effects-are-endogenous" class="nav-link" data-scroll-target="#network-effects-are-endogenous"><span class="header-section-number">4.6</span> Network effects are endogenous</a></li>
+  <li><a href="#code-example-sar" id="toc-code-example-sar" class="nav-link" data-scroll-target="#code-example-sar"><span class="header-section-number">4.7</span> Code example: SAR</a></li>
+  <li><a href="#code-example-alaam" id="toc-code-example-alaam" class="nav-link" data-scroll-target="#code-example-alaam"><span class="header-section-number">4.8</span> Code example: ALAAM</a></li>
+  <li><a href="#coevolution" id="toc-coevolution" class="nav-link" data-scroll-target="#coevolution"><span class="header-section-number">4.9</span> Coevolution</a></li>
+  <li><a href="#code-example-siena" id="toc-code-example-siena" class="nav-link" data-scroll-target="#code-example-siena"><span class="header-section-number">4.10</span> Code example: Siena</a></li>
+  <li><a href="#code-example-ernm" id="toc-code-example-ernm" class="nav-link" data-scroll-target="#code-example-ernm"><span class="header-section-number">4.11</span> Code example: ERNM</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4.12</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Behavior and coevolution</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- \newcommand{\bmi}[1]{\bm{{#1}}} -->
+<section id="introduction" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">4.1</span> Introduction</h2>
+<p>This section focuses on inference involving network and a secondary outcome. While there are many ways of studying the coevolution or dependence between network and behavior, this section focuses on two classes of analysis: When the network is fixed and when both network and behavior influence each other.</p>
+<p>Whether we treat the network as given or endogenous sets the complexity of conducting statistical inference. Data analysis becomes much more straightforward if our research focuses on individual-level outcomes embedded in a network and not on the network itself. Here, we will deal with three particular cases: (1) when network effects are lagged, (2) egocentric networks, and (3) when network effects are contemporaneous.</p>
+</section>
+<section id="lagged-exposure" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="lagged-exposure"><span class="header-section-number">4.2</span> Lagged exposure</h2>
+<p>If we assume that network influence in the form of exposure is lagged, we have one of the most straightforward cases for network inference <span class="citation" data-cites="hayeSmokingDiffusionNetworks2019 valenteDiffusionContagionProcesses2020 valenteNetworkInfluencesPolicy2019">(<a href="references.html#ref-hayeSmokingDiffusionNetworks2019" role="doc-biblioref">Haye et al. 2019</a>; <a href="references.html#ref-valenteDiffusionContagionProcesses2020" role="doc-biblioref">Valente and Vega Yon 2020</a>; <a href="references.html#ref-valenteNetworkInfluencesPolicy2019" role="doc-biblioref">Valente, Wipfli, and Vega Yon 2019</a>)</span>. Here, instead of dealing with convoluted statistical models, the problem reduces to estimating a simple linear regression model. Generally, lagged exposure effects look like this:</p>
+<p><span class="math display">
+y_{it} = \rho \left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right) + {\bm{{\theta}}}^{\mathbf{t}}\bm{{w_i}} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
+</span></p>
+<p>where <span class="math inline">y_{it}</span> is the outcome of individual <span class="math inline">i</span> at time <span class="math inline">t</span>, <span class="math inline">X_{ij}</span> is the <span class="math inline">ij</span>-th entry of the adjacency matrix, <span class="math inline">\bm{{\theta}}</span> is a vector of coefficients, <span class="math inline">\bm{{w_i}}</span> is a vector of features/covariates of individual <span class="math inline">i</span>, and <span class="math inline">\varepsilon_i</span> is a normally distributed error. Here, the key component is <span class="math inline">\rho</span>: the coefficient associated with the network exposure effect.</p>
+<p>The exposure statistic, <span class="math inline">\left(\sum_{j\neq i}X_{ij}\right)^{-1}\left(\sum_{j\neq i}y_{jt-1} X_{ij}\right)</span>, is the weighted average of <span class="math inline">i</span>’s neighbors’ outcomes at time <span class="math inline">t-1</span>.</p>
+</section>
+<section id="code-example-lagged-exposure" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="code-example-lagged-exposure"><span class="header-section-number">4.3</span> Code example: Lagged exposure</h2>
+<p>The following code example shows how to estimate a lagged exposure effect using the <code>glm</code> function in R. The model we will simulate and estimate features a Bernoulli graph with 1,000 nodes and a density of 0.01.</p>
+<p><span class="math display">
+y_{it} = \theta_1 + \rho \text{Exposure}_{it} + \theta_2 w_i + \varepsilon
+</span></p>
+<p>where <span class="math inline">\text{Exposure}_{it}</span> is the exposure statistic defined above, and <span class="math inline">w_i</span> is a vector of covariates.</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/lagged-exposure_b569d7afa518dc41d25a1282acd77948">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulating data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>time <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Sampling a bernoilli network</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3132</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, p), <span class="at">nrow =</span> n)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(X) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Covariate</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n), <span class="at">nrow =</span> n)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulating the outcome</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Y0 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rnorm</span>(n))</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">## The lagged exposure</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>expo <span class="ot">&lt;-</span> (X <span class="sc">%*%</span> Y0)<span class="sc">/</span><span class="fu">rowSums</span>(X)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Y1 <span class="ot">&lt;-</span> theta[<span class="dv">1</span>] <span class="sc">+</span> rho <span class="sc">*</span> expo <span class="sc">+</span> W <span class="sc">*</span> theta[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">rnorm</span>(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we fit the model using GLM, in this case, linear Regression</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/lagged-exposure-fit_87ee443a4db6c51745bc62c08861ea84">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">glm</span>(Y1 <span class="sc">~</span> expo <span class="sc">+</span> W, <span class="at">family =</span> <span class="st">"gaussian"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Y1 ~ expo + W, family = "gaussian")
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.07187    0.03284 -32.638  &lt; 2e-16 ***
+expo         0.61170    0.10199   5.998  2.8e-09 ***
+W            3.00316    0.03233  92.891  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 1.071489)
+
+    Null deviance: 10319.3  on 999  degrees of freedom
+Residual deviance:  1068.3  on 997  degrees of freedom
+AIC: 2911.9
+
+Number of Fisher Scoring iterations: 2</code></pre>
+</div>
+</div>
+</section>
+<section id="egocentric-networks" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="egocentric-networks"><span class="header-section-number">4.4</span> Egocentric networks</h2>
+<p>Generally, when we use egocentric networks and egos’ outcomes, we are thinking in a model where one observation is the pair <span class="math inline">(y_i, X_i)</span>, this is, the outcome of individual <span class="math inline">i</span> and the egocentric network of individual <span class="math inline">i</span>. When such is the case, since (a) networks are independent across egos and (b) the networks are fixed, like the previous case, a simple linear regression model is enough to conduct the analyses. A typical model looks like this:</p>
+<p><span class="math display">
+\bm{{y}} = \bm{{\theta}}_{x}^{\mathbf{t}}s(\bm{{X}}) + \bm{{\theta}}^{\mathbf{t}}\bm{{w}} + \varepsilon,\quad \varepsilon \sim \text{N}(0, \sigma^2)
+</span></p>
+<p>Where <span class="math inline">\bm{{y}}</span> is a vector of outcomes, <span class="math inline">\bm{{X}}</span> is a matrix of egocentric networks, <span class="math inline">\bm{{w}}</span> is a vector of covariates, <span class="math inline">\bm{{\theta}}</span> is a vector of coefficients, and <span class="math inline">\varepsilon</span> is a vector of errors. The key component here is <span class="math inline">s(\bm{{X}})</span>, which is a vector of sufficient statistics of the egocentric networks. For example, if we are interested in the number of ties, <span class="math inline">s(\bm{{X}})</span> is a vector of the number of ties of each ego.</p>
+</section>
+<section id="code-example-egocentric-networks" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="code-example-egocentric-networks"><span class="header-section-number">4.5</span> Code example: Egocentric networks</h2>
+<p>For this example, we will simulate a stream of 1,000 Bernoulli graphs looking into the probability of school dropout. Each network will have between 4 and 10 nodes and have a density of 0.4. The data-generating process is as follows:</p>
+<p><span class="math display">
+{\Pr{}}_{\bm{{\theta}}}\left(Y_i=1\right) = \text{logit}^{-1}\left(\bm{{\theta}}_x s(\bm{{X}}_i) \right)
+</span></p>
+<p>Where <span class="math inline">s(X) \equiv \left(\text{density}, \text{n mutual ties}\right)</span>, and <span class="math inline">\bm{{\theta}}_x = (0.5, -1)</span>. This model only features sufficient statistics. We start by simulating the networks</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/egocentric-networks_41dfe4743749c910df81ae29c6a182b4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">331</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulating the networks</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(sizes, <span class="cf">function</span>(x) <span class="fu">matrix</span>(<span class="fu">rbinom</span>(x<span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="fl">0.4</span>), <span class="at">nrow =</span> x))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>(X, \(x) {<span class="fu">diag</span>(x) <span class="ot">&lt;-</span> <span class="dv">0</span>; x})</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Inspecting the first 5</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    1    1    1    0
+[2,]    0    0    0    0    0
+[3,]    0    1    0    0    0
+[4,]    0    0    0    0    0
+[5,]    1    0    0    1    0
+
+[[2]]
+     [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    0    0    0    0
+[3,]    0    0    0    0
+[4,]    1    0    1    0
+
+[[3]]
+     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    0    1    0    1    0    0
+[2,]    0    0    0    0    0    0
+[3,]    0    1    0    0    0    1
+[4,]    0    0    0    0    1    0
+[5,]    0    0    0    0    0    0
+[6,]    0    0    0    0    0    0
+
+[[4]]
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    1    0    1    0
+[2,]    0    0    0    0    1
+[3,]    0    1    0    0    0
+[4,]    0    1    1    0    1
+[5,]    1    0    1    0    0
+
+[[5]]
+     [,1] [,2] [,3] [,4] [,5]
+[1,]    0    0    0    0    0
+[2,]    1    0    0    0    0
+[3,]    1    0    0    0    0
+[4,]    0    0    0    0    0
+[5,]    1    0    0    0    0</code></pre>
+</div>
+</div>
+<p>Using the <code>ergm</code> R package <span class="citation" data-cites="Handcock2023 Hunter2008">(<a href="references.html#ref-Handcock2023" role="doc-biblioref">Handcock et al. 2023</a>; <a href="references.html#ref-Hunter2008" role="doc-biblioref">Hunter et al. 2008</a>)</span>, we can extract the associated sufficient statistics of the egocentric networks:</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/egocentric-networks-stats_40b00e7f3d56c45c672dfa44bcd1189c">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">lapply</span>(X, \(x) <span class="fu">summary_formula</span>(x <span class="sc">~</span> density <span class="sc">+</span> mutual))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Turning the list into a matrix</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>stats <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, stats)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Inspecting the first 5</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stats, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       density mutual
+[1,] 0.3000000      0
+[2,] 0.1666667      0
+[3,] 0.1666667      0
+[4,] 0.4500000      0
+[5,] 0.1500000      0</code></pre>
+</div>
+</div>
+<p>We now simulate the outcomes</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/egocentric-networks-outcomes_5337f321c900c1759fd471a34272d118">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="dv">1</span>, <span class="fu">plogis</span>(stats <span class="sc">%*%</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="dv">1</span>)))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(y <span class="sc">~</span> stats, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = y ~ stats, family = binomial(link = "logit"))
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   0.07319    0.41590   0.176    0.860    
+statsdensity  0.42568    1.26942   0.335    0.737    
+statsmutual  -1.14804    0.12166  -9.436   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 768.96  on 999  degrees of freedom
+Residual deviance: 518.78  on 997  degrees of freedom
+AIC: 524.78
+
+Number of Fisher Scoring iterations: 7</code></pre>
+</div>
+</div>
+</section>
+<section id="network-effects-are-endogenous" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="network-effects-are-endogenous"><span class="header-section-number">4.6</span> Network effects are endogenous</h2>
+<p>Here we have two different approaches: Spatial Autocorrelation [SAR], and Autologistic actor attribute model [ALAAM] <span class="citation" data-cites="robinsNetworkModelsSocial2001b">(<a href="references.html#ref-robinsNetworkModelsSocial2001b" role="doc-biblioref">Robins, Pattison, and Elliott 2001</a>)</span>. The first one is a generalization of the linear regression model that accounts for spatial dependence. The second is a close relative of ERGMs that treats covariates as endogenous and network as exogenous. Overall, ALAAMs are more flexible than SARs, but SARs are easier to estimate.</p>
+<p><strong>SAR</strong> Formally, SAR models <span class="citation" data-cites="lesageIntroductionSpatialEconometrics2008">(see <a href="references.html#ref-lesageIntroductionSpatialEconometrics2008" role="doc-biblioref">LeSage 2008</a>)</span> can be used to estimate network exposure effects. The general form is:</p>
+<p><span class="math display">
+\bm{{y}} = \rho \bm{{W}} \bm{{y}} + \bm{{\theta}}^{\mathbf{t}} \bm{{X}} + \epsilon,\quad \epsilon \sim \text{MVN}(0, \Sigma)
+</span></p>
+<p>where <span class="math inline">\bm{{y}}\equiv \{y_i\}</span> is a vector of outcomes the outcome, <span class="math inline">\rho</span> is an autocorrelation coefficient, <span class="math inline">\bm{{W}} \in \{w_{ij}\}</span> is a row-stochastic square matrix of size <span class="math inline">n</span>, <span class="math inline">\bm{{\theta}}</span> is a vector of model parameters, <span class="math inline">\bm{{X}}</span> is the corresponding matrix with exogenous variables, and <span class="math inline">\epsilon</span> is a vector of errors that distributes multivariate normal with mean 0 and covariance make<span class="math inline">\Sigma</span>.[^notation] The SAR model is a generalization of the linear regression model that accounts for spatial dependence. The SAR model can be estimated using the <code>spatialreg</code> package in R <span class="citation" data-cites="Bivand2022">(<a href="references.html#ref-Bivand2022" role="doc-biblioref">Roger Bivand 2022</a>)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the appropriate network to use in the SAR model? According to <span class="citation" data-cites="lesageBiggestMythSpatial2014">LeSage and Pace (<a href="references.html#ref-lesageBiggestMythSpatial2014" role="doc-biblioref">2014</a>)</span>, it is not very important. Since <span class="math inline">(I_n - \rho \mathbf{W})^{-1} = \rho \mathbf{W} + \rho^2 \mathbf{W}^2 + \dots</span>.</p>
+</div>
+</div>
+<p>Although the SAR model was developed for spatial data, it is easy to apply it to network data. Furthermore, each entry of the vector <span class="math inline">\bm{{Wy}}</span> has the same definition as network exposure, namely</p>
+<p><span class="math display">
+\bm{{Wy}} \equiv \left\{\sum_{j}y_j w_{ij}\right\}_i
+</span></p>
+<p>Since <span class="math inline">\bm{{W}}</span> is row-stochastic, <span class="math inline">\bm{{Wy}}</span> is a weighted average of the outcome of the neighbors of <span class="math inline">i</span>, <em>i.e.</em>, a vector of network exposures.</p>
+<p><strong>ALAAM</strong> The simplest way we can think of this class of models is as if a given covariate switched places with the network in an ERGM, so the network is now fixed and the covariate is the random variable. While ALAAMs can also estimate network exposure effects, we can use them to build more complex models beyond exposure. The general form is:</p>
+<p><span class="math display">
+\Pr\left(\bm{{Y}} = \bm{{y}}|\bm{{W}},\bm{{X}}\right) = \exp{\left(\bm{{\theta}}^{\mathbf{t}}s(\bm{{y}},\bm{{W}}, \bm{{X}})\right)}\times\eta(\bm{{\theta}})^{-1}
+</span></p>
+<p><span class="math display">
+\eta(\bm{{\theta}}) = \sum_{\bm{{y}}}\exp{\left(\bm{{\theta}}^{\mathbf{t}}s(\bm{{y}},\bm{{W}}, \bm{{X}})\right)}
+</span></p>
+<p>Where <span class="math inline">\bm{{Y}}\equiv \{y_i \in (0, 1)\}</span> is a vector of binary individual outcomes, <span class="math inline">\bm{{W}}</span> denotes the social network, <span class="math inline">\bm{{X}}</span> is a matrix of exogenous variables, <span class="math inline">\bm{{\theta}}</span> is a vector of model parameters, <span class="math inline">s(\bm{{y}},\bm{{W}}, \bm{{X}})</span> is a vector of sufficient statistics, and <span class="math inline">\eta(\bm{{\theta}})</span> is a normalizing constant.</p>
+</section>
+<section id="code-example-sar" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="code-example-sar"><span class="header-section-number">4.7</span> Code example: SAR</h2>
+<p>Simulation of SAR models can be done using the following observation: Although the outcome shows on both sides of the equation, we can isolate it in one side and solve for it; formally:</p>
+<p><span class="math display">
+\bm{{y}} = \rho \bm{{X}} \bm{{y}} + \bm{{\theta}}^{\mathbf{t}}\bm{{W}} + \varepsilon \implies \bm{{y}} = \left(\bm{{I}} - \rho \bm{{X}}\right)^{-1}\bm{{\theta}}^{\mathbf{t}}\bm{{W}} + \left(\bm{{I}} - \rho \bm{{X}}\right)^{-1}\varepsilon
+</span></p>
+<p>The following code chunk simulates a SAR model with a Bernoulli graph with 1,000 nodes and a density of 0.01. The data-generating process is as follows:</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/sar_65f9bd93e575cbd5f2064229cb1d1d52">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4114</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulating the network</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rbinom</span>(n<span class="sc">^</span><span class="dv">2</span>, <span class="dv">1</span>, p), <span class="at">nrow =</span> n)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Covariate</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>W <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n), <span class="at">nrow =</span> n)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulating the outcome</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) <span class="co"># For the mvrnorm function</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Identity minus rho * X</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>X_rowstoch <span class="ot">&lt;-</span> X <span class="sc">/</span> <span class="fu">rowSums</span>(X)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>I <span class="ot">&lt;-</span> <span class="fu">diag</span>(n) <span class="sc">-</span> rho <span class="sc">*</span> X_rowstoch</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="do">## The outcome</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">solve</span>(I) <span class="sc">%*%</span> (<span class="dv">2</span> <span class="sc">*</span> W) <span class="sc">+</span> <span class="fu">solve</span>(I) <span class="sc">%*%</span> <span class="fu">mvrnorm</span>(<span class="dv">1</span>, <span class="fu">rep</span>(<span class="dv">0</span>, n), <span class="fu">diag</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using the <code>spatialreg</code> R package, we can fit the model using the <code>lagsarlm</code> function:</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/sar-fit_e4fc7407528dbe31fb18a9263cb908ce">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spdep) <span class="co"># for the function mat2listw</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spatialreg)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lagsarlm</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  Y <span class="sc">~</span> W,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data  =</span> <span class="fu">as.data.frame</span>(X),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">listw =</span> <span class="fu">mat2listw</span>(X_rowstoch)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/sar-fit-summary_dca224037efeeb1ca94c321dc03af155">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Using texreg to get a pretty print</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">screenreg</span>(fit, <span class="at">single.row =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+========================================
+                     Model 1            
+----------------------------------------
+(Intercept)             -0.01 (0.03)    
+W                        1.97 (0.03) ***
+rho                      0.54 (0.04) ***
+----------------------------------------
+Num. obs.             1000              
+Parameters               4              
+Log Likelihood       -1373.02           
+AIC (Linear model)    2920.37           
+AIC (Spatial model)   2754.05           
+LR test: statistic     168.32           
+LR test: p-value         0.00           
+========================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>The interpretation of this model is almost the same as a linear regression, with the difference that we have the autocorrelation effect (<code>rho</code>). As expected, the model got an estimate close enough to the population parameter: <span class="math inline">\rho = 0.5</span>.</p>
+</section>
+<section id="code-example-alaam" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="code-example-alaam"><span class="header-section-number">4.8</span> Code example: ALAAM</h2>
+<p>To date, there is no R package implementing the ALAAM framework. Nevertheless, you can fit ALAAMs using the PNet software developed by the Melnet group at the University of Melbourne (click <a href="https://www.melnet.org.au/pnet/" target="_blank">here</a>).</p>
+<p>Because of the similarities, ALAAMs can be implemented using ERGMs. Because of the novelty of it, the coding example will be left as a potential class project. We will post a fully-featured example after the workshop.</p>
+</section>
+<section id="coevolution" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="coevolution"><span class="header-section-number">4.9</span> Coevolution</h2>
+<p>Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) (first introduced in <span class="citation" data-cites="snijdersStochasticActorOriented1996">T. a. B. Snijders (<a href="references.html#ref-snijdersStochasticActorOriented1996" role="doc-biblioref">1996</a>)</span>; see also <span class="citation" data-cites="snijdersStochasticActorOrientedModels2017">T. A. B. Snijders (<a href="references.html#ref-snijdersStochasticActorOrientedModels2017" role="doc-biblioref">2017</a>)</span>) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs <span class="citation" data-cites="wangUnderstandingNetworksExponentialfamily2023 ernmsFellows2023">(<a href="references.html#ref-wangUnderstandingNetworksExponentialfamily2023" role="doc-biblioref">Wang, Fellows, and Handcock 2023</a>; <a href="references.html#ref-ernmsFellows2023" role="doc-biblioref">Fellows 2012</a>)</span>.</p>
+<p><strong>Siena</strong> Stochastic Actor-Oriented Models [SOAMs] or Siena Models are dynamic models of network and behavior that describe the transition of a network system within two or more time points. The general form of a Siena model is:</p>
+<p><strong>ERNMs</strong> This model is closely related to ERGMs, with the difference that they incorporate a vertex-level output. Conceptually, it is moving from a having a random network, to a model where a given vertex feature and network are random:</p>
+<p><span class="math display">
+P_{\mathcal{Y}, \bm{{\theta}}}(\bm{{Y}}=\bm{{y}}|\bm{{X}}=\bm{{x}}) \to P_{\mathcal{Y}, \bm{{\theta}}}(\bm{{Y}}=\bm{{y}}, \bm{{X}}=\bm{{x}})
+</span></p>
+</section>
+<section id="code-example-siena" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="code-example-siena"><span class="header-section-number">4.10</span> Code example: Siena</h2>
+<p>This example was adapted from the <code>RSiena</code> R package (see <code>?sienaGOF-auxiliary</code> page).We start by loading the package and taking a look at the data we will use:</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/siena-data-struct_17cab764cd0a2205e423b4076126c72c">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSiena)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Visualizing the adjacency matrix &amp; behavior</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(s501, <span class="at">main =</span> <span class="st">"Net: s501"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(s502, <span class="at">main =</span> <span class="st">"Net: s502"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s50a[,<span class="dv">1</span>], <span class="at">main =</span> <span class="st">"Beh1"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(s50a[,<span class="dv">2</span>], <span class="at">main =</span> <span class="st">"Beh2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-behavior-and-coevolution_files/figure-html/siena-data-struct-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The next step is the data preparation process. <code>RSiena</code> does not receive raw data as is. We need to explicitly declare the networks and outcome variable. Siena models can also model network changes</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/siena-data-prep_7a3e93e0edcf5591e5ebf57d76315749">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Initializing the dependent variable (network)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mynet1 <span class="ot">&lt;-</span> <span class="fu">sienaDependent</span>(<span class="fu">array</span>(<span class="fu">c</span>(s501, s502), <span class="at">dim=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">2</span>)))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>mynet1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Type         oneMode             
+Observations 2                   
+Nodeset      Actors (50 elements)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mybeh  <span class="ot">&lt;-</span> <span class="fu">sienaDependent</span>(s50a[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">type=</span><span class="st">"behavior"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mybeh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Type         behavior            
+Observations 2                   
+Nodeset      Actors (50 elements)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Node-level covariates (artificial)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>mycov  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">16</span>),<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Edge-level covariates (also artificial)</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>mydycov <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">500</span>), <span class="dv">50</span>, <span class="dv">50</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/siena-model-build_4a8ea40ee921bdd738691a088bcae2e3">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating the data object</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">sienaDataCreate</span>(mynet1, mybeh)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Adding the effects (first get them!)</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>myeff <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Notice that Siena adds some default effects</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>myeff</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">##   name   effectName                  include fix   test  initialValue parm</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 mynet1 basic rate parameter mynet1 TRUE    FALSE FALSE    4.69604   0   </span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 mynet1 outdegree (density)         TRUE    FALSE FALSE   -1.48852   0   </span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 mynet1 reciprocity                 TRUE    FALSE FALSE    0.00000   0   </span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 mybeh  rate mybeh period 1         TRUE    FALSE FALSE    0.70571   0   </span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 mybeh  mybeh linear shape          TRUE    FALSE FALSE    0.32247   0   </span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 mybeh  mybeh quadratic shape       TRUE    FALSE FALSE    0.00000   0</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Adding a few extra effects (automatically prints them out)</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>myeff <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff, transTies, cycle3)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   effectName      include fix   test  initialValue parm</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 3-cycles        TRUE    FALSE FALSE          0   0   </span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 transitive ties TRUE    FALSE FALSE          0   0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To add more effects, first, call the function <code>effectsDocumentation(myeff)</code>. It will show you explicitly how to add a particular effect. For instance, if we wanted to add network exposure (<code>avExposure</code>,) under the documentation of <code>effectsDocumentation(myeff)</code> we need to pass the following arguments:</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/siena-exposure_3a13051128e55fa47dc5a4a91f5f6911">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## And now, exposure effect</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>myeff <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  myeff,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  avExposure,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># These last three are specified by effectsDocum...</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">name         =</span> <span class="st">"mybeh"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">interaction1 =</span> <span class="st">"mynet1"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">type         =</span> <span class="st">"rate"</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  effectName                            include fix   test  initialValue parm
+1 average exposure effect on rate mybeh TRUE    FALSE FALSE          0   0   </code></pre>
+</div>
+</div>
+<p>The next step involves creating the model with (<code>sienaAlgorithmCreate</code>,) where we specify all the parameters for fitting the model (e.g., MCMC steps.) Here, we modified the values of <code>n3</code> and <code>nsub</code> to half of the default values to reduce the time it would take to fit the model; yet this degrades the quality of the fit.</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/siena-model-fit_7ed894a02ad05e2aaf5cd1bf3a81ebe5">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shorter phases 2 and 3, just for example:</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>myalgorithm <span class="ot">&lt;-</span> <span class="fu">sienaAlgorithmCreate</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsub =</span> <span class="dv">2</span>, <span class="at">n3 =</span> <span class="dv">500</span>, <span class="at">seed =</span> <span class="dv">122</span>, <span class="at">projname =</span> <span class="cn">NULL</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="do">## If you use this algorithm object, siena07 will create/use an output file Siena.txt .</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Fitting and printing the model</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">siena07</span>(</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  myalgorithm,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mydata, <span class="at">effects =</span> myeff,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">returnDeps =</span> <span class="cn">TRUE</span>, <span class="at">batch =</span> <span class="cn">TRUE</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Start phase 0 </span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="do">## theta:  4.696 -1.489  0.000  0.000  0.000  0.706  0.000  0.322  0.000 </span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Start phase 1 </span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 1 Progress: 0%</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 2 Progress: 0%</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 3 Progress: 0%</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 4 Progress: 0%</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 5 Progress: 0%</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 10 Progress: 1%</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 15 Progress: 1%</span></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 20 Progress: 1%</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 25 Progress: 2%</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 30 Progress: 2%</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 35 Progress: 2%</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 40 Progress: 3%</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 45 Progress: 3%</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 1 Iteration 50 Progress: 3%</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="do">## theta:  5.380 -1.734  0.481  0.147  0.166  1.168 -0.340  0.250  0.140 </span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Start phase 2.1</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 1 Progress: 33%</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 2 Progress: 33%</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.044 -1.877  0.840  0.300  0.473  1.096 -0.332  0.112  0.191 </span></span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a><span class="do">## ac  0.375 -0.183  3.835  4.574 23.412  0.922  0.908  0.626  3.302 </span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 3 Progress: 33%</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 4 Progress: 33%</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.1075 -2.0372  1.2512  0.0341  0.5207  1.2593 -0.1534  0.3018  0.1928 </span></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a><span class="do">## ac  0.9859  0.2280 -0.0703 -2.2973 -2.7455  1.1518  1.0749  0.8732  0.5399 </span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 5 Progress: 33%</span></span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 6 Progress: 33%</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.8650 -2.3185  1.7577  0.2694  0.7636  1.1997 -0.0433  0.3000  0.1762 </span></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a><span class="do">## ac  0.4789  0.4883  0.0199 -1.9449 -2.2609  1.1444  1.0397  0.9282  0.6470 </span></span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 7 Progress: 33%</span></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 8 Progress: 33%</span></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.801140 -2.485273  1.966471  0.301197  0.817324  1.228010  0.000627  0.377719  0.072274 </span></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="do">## ac  0.4538  0.4933 -0.0158 -1.9326 -2.2588  1.1102  1.0395  0.9239  0.6905 </span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 9 Progress: 33%</span></span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 10 Progress: 33%</span></span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.1258 -2.5124  1.8704  0.1206  0.6054  1.4538 -0.0145  0.5091 -0.0671 </span></span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a><span class="do">## ac  0.472  0.103 -0.330 -1.625 -1.991  1.152  1.090  0.767  0.514 </span></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 1 Progress: 33%</span></span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 2 Progress: 33%</span></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 3 Progress: 33%</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 4 Progress: 33%</span></span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 5 Progress: 33%</span></span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 6 Progress: 34%</span></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 7 Progress: 34%</span></span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 8 Progress: 34%</span></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 9 Progress: 34%</span></span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 1 Iteration 10 Progress: 34%</span></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.4976 -2.5900  1.9265  0.2750  0.8543  1.0420  0.0446  0.3234 -0.0686 </span></span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a><span class="do">## ac -0.212 -0.697 -0.818 -0.831 -0.765 -0.442 -0.268 -0.240 -0.267 </span></span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a><span class="do">## theta:  6.4976 -2.5900  1.9265  0.2750  0.8543  1.0420  0.0446  0.3234 -0.0686 </span></span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Start phase 2.2</span></span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 1 Progress: 48%</span></span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 2 Progress: 48%</span></span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 3 Progress: 48%</span></span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 4 Progress: 48%</span></span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 5 Progress: 48%</span></span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 6 Progress: 48%</span></span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 7 Progress: 49%</span></span>
+<span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 8 Progress: 49%</span></span>
+<span id="cb24-78"><a href="#cb24-78" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 9 Progress: 49%</span></span>
+<span id="cb24-79"><a href="#cb24-79" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 2 Subphase 2 Iteration 10 Progress: 49%</span></span>
+<span id="cb24-80"><a href="#cb24-80" aria-hidden="true" tabindex="-1"></a><span class="do">## theta  6.7988 -2.5810  1.9335  0.3941  0.7843  1.1111  0.0358  0.3252 -0.0415 </span></span>
+<span id="cb24-81"><a href="#cb24-81" aria-hidden="true" tabindex="-1"></a><span class="do">## ac -0.0757 -0.3672 -0.4025 -0.3676 -0.4157 -0.0166  0.0222 -0.0874  0.0651 </span></span>
+<span id="cb24-82"><a href="#cb24-82" aria-hidden="true" tabindex="-1"></a><span class="do">## theta:  6.7988 -2.5810  1.9335  0.3941  0.7843  1.1111  0.0358  0.3252 -0.0415 </span></span>
+<span id="cb24-83"><a href="#cb24-83" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-84"><a href="#cb24-84" aria-hidden="true" tabindex="-1"></a><span class="do">## Start phase 3 </span></span>
+<span id="cb24-85"><a href="#cb24-85" aria-hidden="true" tabindex="-1"></a><span class="do">## Phase 3 Iteration 500 Progress 100%</span></span>
+<span id="cb24-86"><a href="#cb24-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-87"><a href="#cb24-87" aria-hidden="true" tabindex="-1"></a>ans</span>
+<span id="cb24-88"><a href="#cb24-88" aria-hidden="true" tabindex="-1"></a><span class="do">## Estimates, standard errors and convergence t-ratios</span></span>
+<span id="cb24-89"><a href="#cb24-89" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-90"><a href="#cb24-90" aria-hidden="true" tabindex="-1"></a><span class="do">##                                                 Estimate   Standard   Convergence </span></span>
+<span id="cb24-91"><a href="#cb24-91" aria-hidden="true" tabindex="-1"></a><span class="do">##                                                              Error      t-ratio   </span></span>
+<span id="cb24-92"><a href="#cb24-92" aria-hidden="true" tabindex="-1"></a><span class="do">## Network Dynamics </span></span>
+<span id="cb24-93"><a href="#cb24-93" aria-hidden="true" tabindex="-1"></a><span class="do">##   1. rate basic rate parameter mynet1            6.7988  ( 1.2496   )   -0.0460   </span></span>
+<span id="cb24-94"><a href="#cb24-94" aria-hidden="true" tabindex="-1"></a><span class="do">##   2. eval outdegree (density)                   -2.5810  ( 0.1505   )    0.0113   </span></span>
+<span id="cb24-95"><a href="#cb24-95" aria-hidden="true" tabindex="-1"></a><span class="do">##   3. eval reciprocity                            1.9335  ( 0.2627   )    0.0205   </span></span>
+<span id="cb24-96"><a href="#cb24-96" aria-hidden="true" tabindex="-1"></a><span class="do">##   4. eval 3-cycles                               0.3941  ( 0.2742   )   -0.0658   </span></span>
+<span id="cb24-97"><a href="#cb24-97" aria-hidden="true" tabindex="-1"></a><span class="do">##   5. eval transitive ties                        0.7843  ( 0.2379   )   -0.0014   </span></span>
+<span id="cb24-98"><a href="#cb24-98" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-99"><a href="#cb24-99" aria-hidden="true" tabindex="-1"></a><span class="do">## Behavior Dynamics</span></span>
+<span id="cb24-100"><a href="#cb24-100" aria-hidden="true" tabindex="-1"></a><span class="do">##   6. rate rate mybeh period 1                    1.1111  ( 1.3096   )   -0.0199   </span></span>
+<span id="cb24-101"><a href="#cb24-101" aria-hidden="true" tabindex="-1"></a><span class="do">##   7. rate average exposure effect on rate mybeh  0.0358  ( 0.4373   )   -0.0190   </span></span>
+<span id="cb24-102"><a href="#cb24-102" aria-hidden="true" tabindex="-1"></a><span class="do">##   8. eval mybeh linear shape                     0.3252  ( 0.2329   )   -0.0048   </span></span>
+<span id="cb24-103"><a href="#cb24-103" aria-hidden="true" tabindex="-1"></a><span class="do">##   9. eval mybeh quadratic shape                 -0.0415  ( 0.1139   )    0.0992   </span></span>
+<span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a><span class="do">## Overall maximum convergence ratio:    0.2163 </span></span>
+<span id="cb24-106"><a href="#cb24-106" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-107"><a href="#cb24-107" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb24-108"><a href="#cb24-108" aria-hidden="true" tabindex="-1"></a><span class="do">## Total of 940 iteration steps.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As a rule of thumb, absolute t-values below 0.1 show good convergence, below 0.2 we say “reasonably well,” and above is no convergence. Let’s highlight two of the effects we have in our model</p>
+<ol type="1">
+<li><p>Transitive ties (number five) are positive 0.78 with a t-value of smaller than 0.01. Thus, we say that the network has a tendency towards transitivity (balance) that is significant.</p></li>
+<li><p>Exposure effect (number seven) is also positive, but small, 0.03, but still significant (t-value of -0.01)</p></li>
+</ol>
+<p>:Like with ERGMs, we also do goodness-of-fit:</p>
+<div class="cell" data-hash="03-behavior-and-coevolution_cache/html/siena-gof_3c724230b0d992eec03d7e04c25eaa9a">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sienaGOF</span>(ans, OutdegreeDistribution, <span class="at">varName=</span><span class="st">"mynet1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="03-behavior-and-coevolution_files/figure-html/siena-gof-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sienaGOF</span>(ans, BehaviorDistribution, <span class="at">varName =</span> <span class="st">"mybeh"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Note: some statistics are not plotted because their variance is 0.
+This holds for the statistic: 5.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="03-behavior-and-coevolution_files/figure-html/siena-gof-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="code-example-ernm" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="code-example-ernm"><span class="header-section-number">4.11</span> Code example: ERNM</h2>
+<p>To date, there is no CRAN release for the ERNM model. The only implementation I am aware of is one of the leading authors, which is available on GitHub: <a href="https://github.com/fellstat/ernm" target="_blank">https://github.com/fellstat/ernm</a>. Unfortunately, the current version of the package seems to be broken.</p>
+<p>Just like the ALAAM case, as ERNMs are closely related to ERGMS, building an example using the ERGM package could be a great opportunity for a class project!</p>
+</section>
+<section id="references" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="references"><span class="header-section-number">4.12</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-ernmsFellows2023" class="csl-entry" role="listitem">
+Fellows, Ian E. 2012. <span>“Exponential Family Random Network Models.”</span> <em>ProQuest Dissertations and Theses</em>. PhD thesis. <a href="https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/dissertations-theses/exponential-family-random-network-models/docview/1221548720/se-2">https://login.ezproxy.lib.utah.edu/login?url=https://www.proquest.com/dissertations-theses/exponential-family-random-network-models/docview/1221548720/se-2</a>.
+</div>
+<div id="ref-Handcock2023" class="csl-entry" role="listitem">
+Handcock, Mark S., David R. Hunter, Carter T. Butts, Steven M. Goodreau, Pavel N. Krivitsky, and Martina Morris. 2023. <em>Ergm: Fit, Simulate and Diagnose Exponential-Family Models for Networks</em>. The Statnet Project (<a href="https://statnet.org" class="uri">https://statnet.org</a>). <a href="https://CRAN.R-project.org/package=ergm">https://CRAN.R-project.org/package=ergm</a>.
+</div>
+<div id="ref-hayeSmokingDiffusionNetworks2019" class="csl-entry" role="listitem">
+Haye, Kayla de la, Heesung Shin, George G. Vega Yon, and Thomas W. Valente. 2019. <span>“Smoking <span>Diffusion</span> Through <span>Networks</span> of <span>Diverse</span>, <span>Urban American Adolescents</span> over the <span>High School Period</span>.”</span> <em>Journal of Health and Social Behavior</em>. <a href="https://doi.org/10.1177/0022146519870521">https://doi.org/10.1177/0022146519870521</a>.
+</div>
+<div id="ref-Hunter2008" class="csl-entry" role="listitem">
+Hunter, David R., Mark S. Handcock, Carter T. Butts, Steven M. Goodreau, and Martina Morris. 2008. <span>“<span class="nocase">ergm</span>: A Package to Fit, Simulate and Diagnose Exponential-Family Models for Networks.”</span> <em>Journal of Statistical Software</em> 24 (3): 1–29. <a href="https://doi.org/10.18637/jss.v024.i03">https://doi.org/10.18637/jss.v024.i03</a>.
+</div>
+<div id="ref-lesageIntroductionSpatialEconometrics2008" class="csl-entry" role="listitem">
+LeSage, James P. 2008. <span>“An <span>Introduction</span> to <span>Spatial Econometrics</span>.”</span> <em>Revue d’<span>é</span>conomie Industrielle</em> 123 (123): 19–44. <a href="https://doi.org/10.4000/rei.3887">https://doi.org/10.4000/rei.3887</a>.
+</div>
+<div id="ref-lesageBiggestMythSpatial2014" class="csl-entry" role="listitem">
+LeSage, James P., and R. Kelley Pace. 2014. <span>“The <span>Biggest Myth</span> in <span>Spatial Econometrics</span>.”</span> <em>Econometrics</em> 2 (4): 217–49. <a href="https://doi.org/10.2139/ssrn.1725503">https://doi.org/10.2139/ssrn.1725503</a>.
+</div>
+<div id="ref-lusherExponentialRandomGraph2013" class="csl-entry" role="listitem">
+Lusher, Dean, Johan Koskinen, and Garry Robins. 2013. <em>Exponential <span>Random Graph Models</span> for <span>Social Networks</span>: <span>Theory</span>, <span>Methods</span>, and <span>Applications</span></em>. <span>Cambridge University Press</span>.
+</div>
+<div id="ref-robinsNetworkModelsSocial2001b" class="csl-entry" role="listitem">
+Robins, Garry, Philippa Pattison, and Peter Elliott. 2001. <span>“Network Models for Social Influence Processes.”</span> <em>Psychometrika</em> 66 (2): 161–89. <a href="https://doi.org/10.1007/BF02294834">https://doi.org/10.1007/BF02294834</a>.
+</div>
+<div id="ref-Bivand2022" class="csl-entry" role="listitem">
+Roger Bivand. 2022. <span>“R Packages for Analyzing Spatial Data: A Comparative Case Study with Areal Data.”</span> <em>Geographical Analysis</em> 54 (3): 488–518. <a href="https://doi.org/10.1111/gean.12319">https://doi.org/10.1111/gean.12319</a>.
+</div>
+<div id="ref-snijdersStochasticActorOriented1996" class="csl-entry" role="listitem">
+Snijders, Tom a B. 1996. <span>“Stochastic Actor-Oriented Models for Network Change.”</span> <em>The Journal of Mathematical Sociology</em> 21 (1-2): 149–72. <a href="https://doi.org/10.1080/0022250X.1996.9990178">https://doi.org/10.1080/0022250X.1996.9990178</a>.
+</div>
+<div id="ref-snijdersStochasticActorOrientedModels2017" class="csl-entry" role="listitem">
+Snijders, Tom A. B. 2017. <span>“Stochastic <span>Actor-Oriented Models</span> for <span>Network Dynamics</span>.”</span> <em>Annual Review of Statistics and Its Application</em> 4 (1): 343–63. <a href="https://doi.org/10.1146/annurev-statistics-060116-054035">https://doi.org/10.1146/annurev-statistics-060116-054035</a>.
+</div>
+<div id="ref-valenteDiffusionContagionProcesses2020" class="csl-entry" role="listitem">
+Valente, Thomas W., and George G. Vega Yon. 2020. <span>“Diffusion/<span>Contagion Processes</span> on <span>Social Networks</span>.”</span> <em>Health Education &amp; Behavior</em> 47 (2): 235–48. <a href="https://doi.org/10.1177/1090198120901497">https://doi.org/10.1177/1090198120901497</a>.
+</div>
+<div id="ref-valenteNetworkInfluencesPolicy2019" class="csl-entry" role="listitem">
+Valente, Thomas W., Heather Wipfli, and George G. Vega Yon. 2019. <span>“Network Influences on Policy Implementation: <span>Evidence</span> from a Global Health Treaty.”</span> <em>Social Science and Medicine</em>. <a href="https://doi.org/10.1016/j.socscimed.2019.01.008">https://doi.org/10.1016/j.socscimed.2019.01.008</a>.
+</div>
+<div id="ref-wangUnderstandingNetworksExponentialfamily2023" class="csl-entry" role="listitem">
+Wang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. <span>“Understanding Networks with Exponential-Family Random Network Models.”</span> <em>Social Networks</em>, August, S0378873323000497. <a href="https://doi.org/10.1016/j.socnet.2023.07.003">https://doi.org/10.1016/j.socnet.2023.07.003</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-random-graphs.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Random graphs</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-lab-1.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

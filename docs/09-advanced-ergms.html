@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.298">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UDD networks 2024 - 10&nbsp; Advanced ERGMs: Constraints</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-new-topics.html" rel="next">
+<link href="./08-lab-2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-ergms-cont.html">Day 2</a></li><li class="breadcrumb-item"><a href="./09-advanced-ergms.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced ERGMs: Constraints</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">UDD networks 2024</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Day 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-random-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Random graphs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-behavior-and-coevolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Behavior and coevolution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-lab-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-intro-to-ergms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to ERGMs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Day 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-ergms-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Convergence on ERGMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-odd-balls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Odd balls</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-lab-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-advanced-ergms.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced ERGMs: Constraints</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-new-topics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">New topics in network modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#constraining-ergms" id="toc-constraining-ergms" class="nav-link" data-scroll-target="#constraining-ergms"><span class="header-section-number">10.2</span> Constraining ERGMs</a></li>
+  <li><a href="#example-1-pool-block-diagonalmultilevel-ergm" id="toc-example-1-pool-block-diagonalmultilevel-ergm" class="nav-link" data-scroll-target="#example-1-pool-block-diagonalmultilevel-ergm"><span class="header-section-number">10.3</span> Example 1: Pool (block-diagonal/multilevel) ERGM</a></li>
+  <li><a href="#example-2-interlocking-egos-and-disconnected-alterslaura" id="toc-example-2-interlocking-egos-and-disconnected-alterslaura" class="nav-link" data-scroll-target="#example-2-interlocking-egos-and-disconnected-alterslaura"><span class="header-section-number">10.4</span> Example 2: Interlocking egos and disconnected alters</a></li>
+  <li><a href="#example-3-bi-partite-networks" id="toc-example-3-bi-partite-networks" class="nav-link" data-scroll-target="#example-3-bi-partite-networks"><span class="header-section-number">10.5</span> Example 3: Bi-partite networks</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10.6</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced ERGMs: Constraints</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
+<p>For this section, we will dive in into ERGM constranints. Using constraints, you will be able to modify the sampling space of the model to things such as:</p>
+<ul>
+<li>Pool (multilevel) models.</li>
+<li>Accounting for data generating process.</li>
+<li>Make your model behave (with caution.)</li>
+<li>Even fit Discrete-Exponential Family Models (DEFM.)</li>
+</ul>
+<p>We will start with formally understanding what constraining the space means and then continue with some examples.</p>
+</section>
+<section id="constraining-ergms" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="constraining-ergms"><span class="header-section-number">10.2</span> Constraining ERGMs</h2>
+<p>Exponential Random Graph Models [ERGMs] can represent a variety of network classes. We often look at “regular” social networks like school students, colleagues in the workplace, or families. Nonetheless, some social networks we study have features that restrict how connections can occur. Typical examples are <a href="https://en.wikipedia.org/wiki/Bipartite_graph">bi-partite graphs</a> and <a href="https://cran.r-project.org/web/packages/mlergm/vignettes/mlergm_tutorial.html">multilevel networks</a>. There are two classes of vertices in bi-partite networks, and ties can only occur between classes. On the other hand, multilevel networks may feature multiple classes with inter-class ties that are somewhat restricted. Structural constraints exist in both cases, meaning some configurations may not be plausible.</p>
+<p>Mathematically, what we are trying to do is, instead of assuming that all network configurations are possible:</p>
+<p><span class="math display">
+\left\{\bm{{y}} \in \mathcal{Y}: y_{ij} = 0, \forall i = j\right\}
+</span></p>
+<p>we want to go a bit further avoiding loops, namely:</p>
+<p><span class="math display">
+\left\{\bm{{y}} \in \mathcal{Y}: y_{ij} = 0, \forall i = j; \mathbf{y} \in C\right\},
+</span></p>
+<p>where <span class="math inline">C</span> is a constraint, for example, only networks with no triangles. The <code>ergm</code> R package has built-in capabilities to deal with some of these cases. Nonetheless, we can specify models with arbitrary structural constraints built into the model. The key is in using offset terms.</p>
+</section>
+<section id="example-1-pool-block-diagonalmultilevel-ergm" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="example-1-pool-block-diagonalmultilevel-ergm"><span class="header-section-number">10.3</span> Example 1: Pool (block-diagonal/multilevel) ERGM</h2>
+<p>Nowadays, multi-network studies featuring a large sample of networks are easy to see. When we deal with multiple networks, there are usually two approaches to analyzing them: (a) estimate separate ERGMs and do a meta-analysis like in [ANN CITATION], or (b) fit a pooled ERGM. Here, we will follow the latter.</p>
+<p>Pooled ERGMs resemble typical statistical methods. Assuming that the networks are independent, we can estimate a model like the following:</p>
+<p><span class="math display">
+P_{\mathcal{Y}, \bm{{\theta}}}(\bm{{Y}}_1=\bm{{y}}_1, \bm{{Y}}_2=\bm{{y}}_2, \dots, \bm{{Y}}_1=\bm{{y}}_L) = \prod_l^L \exp\left(\bm{{\theta}}^{\mathbf{t}} s(y_l)\right)\kappa_l(\bm{{\theta}})^{-1}
+</span></p>
+<p>In this case, we assume that all networks have the same data-generating process, meaning they all come from the same <span class="math inline">\mathcal{Y}</span>. If that’s not the case and, like in any regression analysis, we could write a hierarchical model where model parameters come from the same distribution or fit a random effects ERGM as described in <span class="citation" data-cites="Slaughter2016">Slaughter and Koehly (<a href="references.html#ref-Slaughter2016" role="doc-biblioref">2016</a>)</span>.</p>
+<p>We have a handful of different ways of fitting pooled ERGMs. If you are dealing with small networks (about six nodes if directed and eight if undirected,) you can use the <code>ergmito</code> R package <span class="citation" data-cites="vegayonExponentialRandomGraph2021 ergmito">(<a href="references.html#ref-vegayonExponentialRandomGraph2021" role="doc-biblioref">G. G. Vega Yon, Slaughter, and Haye 2021</a>; <a href="references.html#ref-ergmito" role="doc-biblioref">G. Vega Yon 2020</a>)</span>. The <code>ergm</code> package can still assist you with simple models if you have larger networks. But if you want to leverage the power of having multiple networks, the recently published <code>ergm.multi</code> R package should be your choice <span class="citation" data-cites="krivitskyTaleTwoDatasets2023a ergmmulti">(<a href="references.html#ref-krivitskyTaleTwoDatasets2023a" role="doc-biblioref">Krivitsky, Coletti, and Hens 2023</a>; <a href="references.html#ref-ergmmulti" role="doc-biblioref">Krivitsky 2023</a>)</span>. Since we are learning to use constraints, we will use the <code>ergm</code> package. Let’s start with an example from the <code>ergmito</code> R package:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/ergmito-example_dde6f74bc9fde151c016d8de8d4f9881">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sna)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergmito)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading five artificial networks (5 networks)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(fivenets)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Taking a look at the first two </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>fivenets[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">## [[1]]</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  Network attributes:</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##   vertices = 4 </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##   directed = TRUE </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">##   hyper = FALSE </span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">##   loops = FALSE </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">##   multiple = FALSE </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   bipartite = FALSE </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   total edges= 2 </span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">##     missing edges= 0 </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">##     non-missing edges= 2 </span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">##  Vertex attribute names: </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">##     female name </span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">## No edge attributes</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="do">## [[2]]</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">##  Network attributes:</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">##   vertices = 4 </span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">##   directed = TRUE </span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">##   hyper = FALSE </span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">##   loops = FALSE </span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">##   multiple = FALSE </span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">##   bipartite = FALSE </span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">##   total edges= 7 </span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">##     missing edges= 0 </span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">##     non-missing edges= 7 </span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  Vertex attribute names: </span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="do">##     female name </span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="do">## No edge attributes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also visualize these five networks:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/viz-five_f20170e97586c6d9a3c09f0e5393ed91">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Quickly visualizing fine networks</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lapply</span>(fivenets, \(x) {<span class="fu">gplot</span>(x); <span class="fu">box</span>()})</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/viz-five-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>These five networks were generated using an edges+gender homophily model. Since all the graphs in the list are small (five vertices each,) we can fit a pooled ERGM using the <code>ergmito</code> function from the package of the same name:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/fitting-ergmito_9cef4de34478b54fd34c628c77ad817c">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">ergmito</span>(fivenets <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"female"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ERGMito estimates (MLE)
+This model includes 5 networks.
+
+formula:
+  fivenets ~ edges + nodematch("female")
+
+                 Estimate Std. Error z value Pr(&gt;|z|)   
+edges            -1.70475    0.54356 -3.1363 0.001711 **
+nodematch.female  1.58697    0.64305  2.4679 0.013592 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+AIC: 73.34109    BIC: 77.52978    (Smaller is better.) </code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="Who cares about small networks?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Who cares about small networks?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may be wondering why someone would care about small networks. Well, the truth is that small networks are the fabric of societies (think about family nucleous,) and are more complicated than you think. A directed graph with five vertices has about 1,000,000 possible configurations.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon callout-titled" title="HPC in small networks">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+HPC in small networks
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The key of ERGMitos is that, with a small enough support size, we can skip using MCMC and simulation-based approximations and directly calculate likelihoods for pooled models. This is extremely powerful as it opens the door to diverse statistical methods.</p>
+</div>
+</div>
+<p>The question is: How can we use constraints to fit the same model using the <code>ergm</code> package? We have to follow these steps:</p>
+<ol type="1">
+<li><p>We must combine all the networks into a single network object.</p></li>
+<li><p>Specify the constraint via the <code>constraint</code> argument in the <code>ergm</code> function. In this case, use the <code>blockdiag</code> constraint (check out the manual <code>?ergm.constraints</code> to learn more about what’s available with the tool).</p></li>
+<li><p>Fit the model!</p></li>
+</ol>
+<p>The <code>ergmito</code> package has a convenient function that will take any list of network objects (or matrices) and turn it into a single network. The passed networks don’t need to have the same size. After combining the networks, the function creates a new vertex attribute that holds the id of the original group.</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/blockdiagonalize_c2ea2cbb5772869b3d1537c0e0578ba2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Combining the networks</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">&lt;-</span> <span class="fu">blockdiagonalize</span>(fivenets)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>bd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Network attributes:
+  vertices = 20 
+  directed = TRUE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 20 
+    missing edges= 0 
+    non-missing edges= 20 
+
+ Vertex attribute names: 
+    block female name_original vertex.names 
+
+No edge attributes</code></pre>
+</div>
+</div>
+<p>Just out of curiosity, what would we get if we fitted a regular ERGM to this data? Here is the answer:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/bd-attempt1_511ee092de3be625cd0f556a9cd8b5e8">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ergm</span>(bd <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ergm(formula = bd ~ edges + nodematch("female"))
+
+Maximum Likelihood Coefficients:
+           edges  nodematch.female  
+          -3.882             1.542  </code></pre>
+</div>
+</div>
+<p>i.e.*, biased estimates. Although the homophily term is very similar to the original estimate, the edges parameter is twice the size. The estimate is inflated because the support of this model includes networks where there are ties between the groups, yet these networks cannot be connected one another.</p>
+<p>To solve this issue, as we said, we use the constraints:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/bd-attempt2-constraints_35b0310f549d9a96a7a1b41e21ef303b">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ergm</span>(bd <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"female"</span>), <span class="at">constraints =</span> <span class="sc">~</span> <span class="fu">blockdiag</span>(<span class="st">"block"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ergm(formula = bd ~ edges + nodematch("female"), constraints = ~blockdiag("block"))
+
+Maximum Likelihood Coefficients:
+           edges  nodematch.female  
+          -1.705             1.587  </code></pre>
+</div>
+</div>
+<p>Success! This model is now correctly specified. Although it seems like we have a single network, by imposing the blockdiagonal constraint, we are fitting a pooled model. The <code>ergm</code> package comes with more alternatives to restricting the sample space of your model, but there may be a case where you need more. For those cases, the offset comes in handy.</p>
+</section>
+<section id="example-2-interlocking-egos-and-disconnected-alterslaura" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="example-2-interlocking-egos-and-disconnected-alterslaura"><span class="header-section-number">10.4</span> Example 2: Interlocking egos and disconnected alters<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
+<p>Imagine that we have two sets of vertices. The first, group <code>E</code>, are egos in an egocentric study. The second group, called <code>A</code>, is composed of people mentioned by egos in <code>E</code> but were not surveyed. Assume that individuals in <code>A</code> can only connect to individuals in <code>E</code>; moreover, individuals in <code>E</code> have no restrictions on connecting. In other words, only two types of ties exist: <code>E-E</code> and <code>A-E</code>. The question is now, how can we enforce such a constraint in an ERGM?</p>
+<p>Using offsets, and in particular, setting coefficients to <code>-Inf</code> provides an easy way to restrict the support set of ERGMs. For example, if we wanted to constrain the support to include networks with no triangles, we would add the term <code>offset(triangle)</code> and use the option <code>offset.coef = -Inf</code> to indicate that realizations including triangles are not possible. Using R:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ergm</span>(net <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">offset</span>(triangle), <span class="at">offset.coef =</span> <span class="sc">-</span><span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this model, a Bernoulli graph, we reduce the sample space to networks with no triangles. In our example, such a statistic should only take non-zero values whenever ties within the <code>A</code> class happen. We can use the <code>nodematch()</code> term to do that. Formally</p>
+<p><span class="math display">
+\text{NodeMatch}(x) = \sum_{i,j} y_{ij} \mathbf{1}({x_{i} = x_{j}})
+</span></p>
+<p>This statistic will sum over all ties in which source (<span class="math inline">i</span>) and target (<span class="math inline">j</span>)’s <span class="math inline">X</span> attribute is equal. One way to make this happen is by creating an auxiliary variable that equals, e.g., 0 for all vertices in <code>A</code>, and a unique value different from zero otherwise. For example, if we had 2 <code>A</code>s and three <code>E</code>s, the data would look like <span class="math inline">\{0,0,1,2,3\}</span>. The following code block creates an empty graph with 50 nodes, 10 of which are in group <code>E</code> (ego).</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-7_4007752ae33ee2f512e5e9ef1cfc9330">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ergm, <span class="at">quietly =</span>  <span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sna, <span class="at">quietly =</span>  <span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>n_egos <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(<span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol =</span> n, <span class="at">nrow =</span> n), <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Let's assing the groups</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>net <span class="sc">%v%</span> <span class="st">"is.ego"</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="cn">TRUE</span>, n_egos), <span class="fu">rep</span>(<span class="cn">FALSE</span>, n <span class="sc">-</span> n_egos))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>net <span class="sc">%v%</span> <span class="st">"is.ego"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[37] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[49] FALSE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(net, <span class="at">vertex.col =</span> net <span class="sc">%v%</span> <span class="st">"is.ego"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To create the auxiliary variable, we will use the following function:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-8_8edf054c2d5507c3195e21e0fa137de3">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Function that creates an aux variable for the ergm model</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>make_aux_var <span class="ot">&lt;-</span> <span class="cf">function</span>(my_net, is_ego_dummy) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  n_vertex <span class="ot">&lt;-</span> <span class="fu">length</span>(my_net <span class="sc">%v%</span> is_ego_dummy)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  n_ego_   <span class="ot">&lt;-</span> <span class="fu">sum</span>(my_net <span class="sc">%v%</span> is_ego_dummy)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating an auxiliary variable to identify the non-informant non-informant ties</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  my_net <span class="sc">%v%</span> <span class="st">"aux_var"</span> <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span>my_net <span class="sc">%v%</span> is_ego_dummy, <span class="dv">0</span>, <span class="dv">1</span><span class="sc">:</span>(n_vertex <span class="sc">-</span> n_ego_)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  my_net</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calling the function in our data results in the following:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-9_ce2d5846175fb3cf318660a55429fa97">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>net <span class="ot">&lt;-</span> <span class="fu">make_aux_var</span>(net, <span class="st">"is.ego"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Taking a look over the first 15 rows of data</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Is_Ego =</span> net <span class="sc">%v%</span> <span class="st">"is.ego"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Aux    =</span> net <span class="sc">%v%</span> <span class="st">"aux_var"</span>  </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Is_Ego Aux
+ [1,]      1   1
+ [2,]      1   2
+ [3,]      1   3
+ [4,]      1   4
+ [5,]      1   5
+ [6,]      1   6
+ [7,]      1   7
+ [8,]      1   8
+ [9,]      1   9
+[10,]      1  10
+[11,]      0   0
+[12,]      0   0
+[13,]      0   0
+[14,]      0   0
+[15,]      0   0</code></pre>
+</div>
+</div>
+<p>We can now use this data to simulate a network in which ties between <code>A</code>-class vertices are not possible:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-10_124c5fdd8947517f637455e80717ddff">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2828</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>net_sim <span class="ot">&lt;-</span> <span class="fu">simulate</span>(net <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"aux_var"</span>), <span class="at">coef =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">3.0</span>, <span class="sc">-</span><span class="cn">Inf</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(net_sim, <span class="at">vertex.col =</span> net_sim <span class="sc">%v%</span> <span class="st">"is.ego"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As you can see, this network has only ties of the type <code>E-E</code> and <code>A-E</code>. We can double-check by (i) looking at the counts and (ii) visualizing each induced-subgraph separately:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-11_3b3d62720ca61bd9ebc7491c0bee1668">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net_sim <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"aux_var"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            edges nodematch.aux_var 
+               49                 0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>net_of_alters <span class="ot">&lt;-</span> <span class="fu">get.inducedSubgraph</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  net_sim, <span class="fu">which</span>((net_sim <span class="sc">%v%</span> <span class="st">"aux_var"</span>) <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>net_of_egos <span class="ot">&lt;-</span> <span class="fu">get.inducedSubgraph</span>(</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  net_sim, <span class="fu">which</span>((net_sim <span class="sc">%v%</span> <span class="st">"aux_var"</span>) <span class="sc">!=</span> <span class="dv">0</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Counts</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net_of_alters <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"aux_var"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            edges nodematch.aux_var 
+                0                 0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net_of_egos <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">nodematch</span>(<span class="st">"aux_var"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            edges nodematch.aux_var 
+                1                 0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Figures</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(net_of_alters, <span class="at">vertex.col =</span> net_of_alters <span class="sc">%v%</span> <span class="st">"is.ego"</span>, <span class="at">main =</span> <span class="st">"A"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(net_of_egos, <span class="at">vertex.col =</span> net_of_egos <span class="sc">%v%</span> <span class="st">"is.ego"</span>, <span class="at">main =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, to fit an ERGM with this constraint, we simply need to make use of the offset terms. Here is an example:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-12_82fc8f511a2c4f96fd947954963fb4fa">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">ergm</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  net_sim <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">offset</span>(<span class="fu">nodematch</span>(<span class="st">"aux_var"</span>)), <span class="co"># The model (notice the offset)</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset.coef =</span> <span class="sc">-</span><span class="cn">Inf</span>                              <span class="co"># The offset coefficient</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Starting maximum pseudolikelihood estimation (MPLE):</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Obtaining the responsible dyads.</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Evaluating the predictor and response matrix.</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Maximizing the pseudolikelihood.</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Finished MPLE.</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Evaluating log-likelihood at the estimate.</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ans)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ergm(formula = net_sim ~ edges + offset(nodematch("aux_var")), </span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="do">##     offset.coef = -Inf)</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Maximum Likelihood Results:</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="do">##                           Estimate Std. Error MCMC % z value Pr(&gt;|z|)    </span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="do">## edges                       -2.843      0.147      0  -19.34   &lt;1e-04 ***</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a><span class="do">## offset(nodematch.aux_var)     -Inf      0.000      0    -Inf   &lt;1e-04 ***</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="do">##      Null Deviance: 1233.8  on 890  degrees of freedom</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="do">##  Residual Deviance:  379.4  on 888  degrees of freedom</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  </span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="do">## AIC: 381.4  BIC: 386.2  (Smaller is better. MC Std. Err. = 0)</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  The following terms are fixed by offset and are not estimated:</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="do">##   offset(nodematch.aux_var)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This ERGM model–which by the way only featured dyadic-independent terms, and thus can be reduced to a logistic regression–restricts the support by excluding all networks in which ties within the class <code>A</code> exists. To finalize, let’s look at a few simulations based on this model:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/unnamed-chunk-13_df86f2e157c5507dcf4dd35f8eac59dc">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1323</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfcol =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gplot</span>(<span class="fu">simulate</span>(ans), <span class="at">vertex.col =</span> net <span class="sc">%v%</span> <span class="st">"is.ego"</span>, <span class="at">vertex.cex =</span> <span class="dv">2</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">box</span>()</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>All networks with no ties between <code>A</code> nodes.</p>
+</section>
+<section id="example-3-bi-partite-networks" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="example-3-bi-partite-networks"><span class="header-section-number">10.5</span> Example 3: Bi-partite networks</h2>
+<p>In the case of bipartite networks (sometimes called affiliation networks,) we can use <code>ergm</code>’s terms for bipartite graphs to corroborate what we discussed here. For example, the two-star term. Let’s start simulating a bipartite network using the <code>edges</code> and <code>two-star</code> parameters. Since the <code>k-star</code> term is usually complex to fit (tends to generate degenerate models,) we will take advantage of the <code>Log()</code> transformation function in the <code>ergm</code> package to smooth the term.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>The bipartite network that we will be simulating will have 100 actors and 50 entities. Actors, which we will map to the first level of the <code>ergm</code> terms, this is, <code>b1star</code> <code>b1nodematch</code>, etc. will send ties to the entities, the second level of the bipartite ERGM. To create a bipartite network, we will create an empty matrix of size <code>nactors x nentitites</code>; thus, actors are represented by rows and entities by columns.</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-new-bipartite_3d5bd0e94b5db5f325183b8b275ec62f">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Parameters for the simulation</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>nactors   <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>nentities <span class="ot">&lt;-</span> <span class="fu">floor</span>(nactors<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>n         <span class="ot">&lt;-</span> nactors <span class="sc">+</span> nentities</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating an empty bipartite network (baseline)</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>net_b <span class="ot">&lt;-</span> <span class="fu">network</span>(</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> nactors, <span class="at">ncol =</span> nentities), <span class="at">bipartite =</span> <span class="cn">TRUE</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Simulating the bipartite ERGM,</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>net_b <span class="ot">&lt;-</span> <span class="fu">simulate</span>(net_b <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">Log</span>(<span class="sc">~</span><span class="fu">b1star</span>(<span class="dv">2</span>)), <span class="at">coef =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="fl">1.5</span>), <span class="at">seed =</span> <span class="dv">55</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see what we got here:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-example2-simulated-graph_f6510e9c6efb6d2e9d7f4befab5a5611">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net_b <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">Log</span>(<span class="sc">~</span><span class="fu">b1star</span>(<span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      edges Log~b1star2 
+ 245.000000    5.746203 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>netplot<span class="sc">::</span><span class="fu">nplot</span>(net_b, <span class="at">vertex.col =</span> (<span class="dv">1</span><span class="sc">:</span>n <span class="sc">&lt;=</span> nactors) <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/05-example2-simulated-graph-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notice that the first <code>nactors</code> vertices in the network are the actors, and the remaining are the entities. Now, although the <code>ergm</code> package features bipartite network terms, we can still fit a bipartite ERGM without explicitly declaring the graph as such. In such case, the <code>b1star(2)</code> term of a bipartite network is equivalent to an <code>ostar(2)</code> in a directed graph. Likewise, <code>b2star(2)</code> in a bipartite graph matches the <code>istar(2)</code> term in a directed graph. This information will be relevant when fitting the ERGM. Let’s transform the bipartite network into a directed graph. The following code block does so:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-bipartite-maps_d35be83d9c6f6034263fd054f30d98cd">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Identifying the edges</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>net_not_b <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">as.matrix</span>(net_b) <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="do">## We need to offset the endpoint of the ties by nactors</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="do">## so that the ids go from 1 through (nactors + nentitites)</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>net_not_b[,<span class="dv">2</span>] <span class="ot">&lt;-</span> net_not_b[,<span class="dv">2</span>] <span class="sc">+</span> nactors</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="do">## The resulting graph is a directed network</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>net_not_b <span class="ot">&lt;-</span> <span class="fu">network</span>(net_not_b, <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we are almost done. As before, we need to use node-level covariates to put the constraints in our model. For this ERGM to reflect an ERGM on a bipartite network, we need two constraints:</p>
+<ol type="1">
+<li>Only ties from actors to entities are allowed, and</li>
+<li>entities can only receive ties.</li>
+</ol>
+<p>The corresponding offset terms for this model are: <code>nodematch("is.actor") ~ -Inf</code>, and <code>nodeocov("isnot.actor") ~ -Inf</code>. Mathematically:</p>
+<p><span class="math display">\begin{align*}
+\text{NodeMatch(x = "is.actor")} &amp;= \sum_{i&lt;j} y_{ij}\mathbb{1}\left(x_i = x_j\right) \\
+\text{NodeOCov(x = "isnot.actor")} &amp;= \sum_{i} x_i \times \sum_{j&lt;i} y_{ij}
+\end{align*}</span></p>
+<p>In other words, we are setting that ties between nodes of the same class are forbidden, and outgoing ties are forbidden for entities. Let’s create the vertex attributes needed to use the aforementioned terms:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-example2-coloring_d5e67912602f5fa3ea7562895813857f">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>net_not_b <span class="sc">%v%</span> <span class="st">"is.actor"</span> <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="dv">1</span><span class="sc">:</span>n <span class="sc">&lt;=</span> nactors)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>net_not_b <span class="sc">%v%</span> <span class="st">"isnot.actor"</span> <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="dv">1</span><span class="sc">:</span>n <span class="sc">&gt;</span> nactors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, to make sure we have done all well, let’s look how both networks–bipartite and unimodal–look side by side:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-example2-side-by-side_cc5b42ac47d721b857748a71cfeab507">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## First, let's get the layout</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>fig <span class="ot">&lt;-</span> netplot<span class="sc">::</span><span class="fu">nplot</span>(net_b, <span class="at">vertex.col =</span> (<span class="dv">1</span><span class="sc">:</span>n <span class="sc">&lt;=</span> nactors) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  fig,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  netplot<span class="sc">::</span><span class="fu">nplot</span>(</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    net_not_b, <span class="at">vertex.col =</span> (<span class="dv">1</span><span class="sc">:</span>n <span class="sc">&lt;=</span> nactors) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout =</span> fig<span class="sc">$</span>.layout</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>     ),</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">1</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-advanced-ergms_files/figure-html/05-example2-side-by-side-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Looking at the counts</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net_b <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">b1star</span>(<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">b2star</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  edges b1star2 b2star2 
+    245     313     645 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(net_not_b <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">ostar</span>(<span class="dv">2</span>) <span class="sc">+</span> <span class="fu">istar</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> edges ostar2 istar2 
+   245    313    645 </code></pre>
+</div>
+</div>
+<p>With the two networks matching, we can now fit the ERGMs with and without offset terms and compare the results between the two models:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-biparte-ergm1_8f8164255dc976f253a3dac7d2fb0f84">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ERGM with a bipartite graph</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>res_b     <span class="ot">&lt;-</span> <span class="fu">ergm</span>(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Main formula</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  net_b <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">Log</span>(<span class="sc">~</span><span class="fu">b1star</span>(<span class="dv">2</span>)),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Control parameters</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">control.ergm</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ERGM with a digraph with constraints</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>res_not_b <span class="ot">&lt;-</span> <span class="fu">ergm</span>(</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Main formula</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  net_not_b <span class="sc">~</span> edges <span class="sc">+</span> <span class="fu">Log</span>(<span class="sc">~</span><span class="fu">ostar</span>(<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Offset terms </span></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">offset</span>(<span class="fu">nodematch</span>(<span class="st">"is.actor"</span>)) <span class="sc">+</span> <span class="fu">offset</span>(<span class="fu">nodeocov</span>(<span class="st">"isnot.actor"</span>)),</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">offset.coef =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span><span class="cn">Inf</span>),</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Control parameters</span></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">control.ergm</span>(<span class="at">seed =</span> <span class="dv">1</span>)</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here are the estimates (using the <code>texreg</code> R package for a prettier output):</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-bipartite-ergm-res_cf2c26b7fee481e7e954ef2acecff6ce">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>texreg<span class="sc">::</span><span class="fu">screenreg</span>(<span class="fu">list</span>(<span class="at">Bipartite =</span> res_b, <span class="at">Directed =</span> res_not_b))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+======================================================================
+                              Bipartite    Directed                   
+----------------------------------------------------------------------
+edges                           -3.14 ***                    -3.11 ***
+                                (0.15)                       (0.14)   
+Log~b1star2                     21.89                                 
+                               (17.13)                                
+Log~ostar2                                                   19.66    
+                                                            (16.75)   
+offset(nodematch.is.actor)                                    -Inf    
+                                                                      
+offset(nodeocov.isnot.actor)                                  -Inf    
+                                                                      
+----------------------------------------------------------------------
+AIC                           1958.00      -2134192392498170112.00    
+BIC                           1971.03      -2134192392498170112.00    
+Log Likelihood                -977.00       1067096196249085056.00    
+======================================================================
+*** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+</div>
+<p>As expected, both models yield the “same” estimate. The minor differences observed between the models are how the <code>ergm</code> package performs the sampling. In particular, in the bipartite case, <code>ergm</code> has special routines for making the sampling more efficient, having a higher acceptance rate than that of the model in which the bipartite graph was not explicitly declared. We can tell this by inspecting rejection rates:</p>
+<div class="cell" data-hash="09-advanced-ergms_cache/html/05-example2-post-dist_1d4fb15daae2443bb3fe5252c1894300">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Bipartite =</span> coda<span class="sc">::</span><span class="fu">rejectionRate</span>(res_b<span class="sc">$</span>sample[[<span class="dv">1</span>]]) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Directed  =</span> coda<span class="sc">::</span><span class="fu">rejectionRate</span>(res_not_b<span class="sc">$</span>sample[[<span class="dv">1</span>]][, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">caption =</span> <span class="st">"Rejection rate (percent)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Rejection rate (percent)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Bipartite</th>
+<th style="text-align: right;">Directed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">edges</td>
+<td style="text-align: right;">2.48</td>
+<td style="text-align: right;">3.67</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Log~b1star2</td>
+<td style="text-align: right;">1.24</td>
+<td style="text-align: right;">2.04</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The ERGM fitted with the offset terms has a much higher rejection rate than that of the ERGM fitted with the bipartite ERGM.</p>
+<p>Finally, the fact that we can fit ERGMs using offset does not mean that we need to use it ALL the time. Unless there is a very good reason to go around <code>ergm</code>’s capabilities, I wouldn’t recommend fitting bipartite ERGMs as we just did, as the authors of the package have included (MANY) features to make our job easier.</p>
+</section>
+<section id="references" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="references"><span class="header-section-number">10.6</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-ergmmulti" class="csl-entry" role="listitem">
+Krivitsky, Pavel N. 2023. <em>Ergm.multi: Fit, Simulate and Diagnose Exponential-Family Models for Multiple or Multilayer Networks</em>. The Statnet Project (<a href="https://statnet.org" class="uri">https://statnet.org</a>). <a href="https://CRAN.R-project.org/package=ergm.multi">https://CRAN.R-project.org/package=ergm.multi</a>.
+</div>
+<div id="ref-krivitskyTaleTwoDatasets2023a" class="csl-entry" role="listitem">
+Krivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023. <span>“A <span>Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>.”</span> <em>Journal of the American Statistical Association</em> 0 (0): 1–21. <a href="https://doi.org/10.1080/01621459.2023.2242627">https://doi.org/10.1080/01621459.2023.2242627</a>.
+</div>
+<div id="ref-Slaughter2016" class="csl-entry" role="listitem">
+Slaughter, Andrew J., and Laura M. Koehly. 2016. <span>“Multilevel Models for Social Networks: Hierarchical Bayesian Approaches to Exponential Random Graph Modeling.”</span> <em>Social Networks</em> 44: 334–45. <a href="https://doi.org/10.1016/j.socnet.2015.11.002">https://doi.org/10.1016/j.socnet.2015.11.002</a>.
+</div>
+<div id="ref-ergmito" class="csl-entry" role="listitem">
+Vega Yon, George. 2020. <em><span class="nocase">ergmito: Exponential Random Graph Models for Small Networks</span></em>. <span>CRAN</span>. <a href="https://cran.r-project.org/package=ergmito">https://cran.r-project.org/package=ergmito</a>.
+</div>
+<div id="ref-vegayonExponentialRandomGraph2021" class="csl-entry" role="listitem">
+Vega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. <span>“Exponential Random Graph Models for Little Networks.”</span> <em>Social Networks</em> 64 (August 2020): 225–38. <a href="https://doi.org/10.1016/j.socnet.2020.07.005">https://doi.org/10.1016/j.socnet.2020.07.005</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Thanks to Laura Koehly, who devised this complicated model.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>After writing this example, it became apparent the use of the <code>Log()</code> transformation function may not be ideal. Since many terms used in ERGMs can be zero, e.g., triangles, the term <code>Log(~ ostar(2))</code> is undefined when <code>ostar(2) = 0</code>. In practice, the ERGM package sets a lower limit for the log of 0, so, instead of having <code>Log(0) ~ -Inf</code>, they set it to be a really large negative number. This causes all sorts of issues to the estimates; in our example, an overestimation of the population parameter and a positive log-likelihood. Therefore, I wouldn’t recommend using this transformation too often.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-lab-2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab II</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-new-topics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">New topics in network modeling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

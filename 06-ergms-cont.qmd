@@ -20,19 +20,19 @@ We are in the last step. Let's recall what was our final model with the simulate
 #| code-fold: true
 #| message: false
 #| warning: false
-# Loading the packages
+## Loading the packages
 library(ergm)
 library(sna)
 
-# Simulating the covariates (vertex attribute)
+## Simulating the covariates (vertex attribute)
 set.seed(1235)
 
-# Simulating the data
+## Simulating the data
 Y <- network(100, directed = TRUE)
 Y %v% "fav_music" <- sample(c("rock", "jazz", "pop"), 100, replace = TRUE)
 Y %v% "female"    <- rbinom(100, 1, 0.5) 
 
-# Simulating the ERGM
+## Simulating the ERGM
 Y <- ergm::simulate_formula(
   Y ~
     edges +
@@ -55,7 +55,7 @@ summary(model_final)
 ```
 
 
-# Convergence
+## Convergence
 
 As our model was fitted using MCMC, we must ensure the chains converged. We can use the `mcmc.diagnostics` function from the `ergm` package to check model convergence. This function looks at the last set of simulations of the MCMC model and generates various diagnostics for the user.
 
@@ -69,7 +69,7 @@ mcmc.diagnostics(model_final, which   = c("plots"))
 
 Now that we know our model was good enough to represent the observed statistics (sample them, actually,) let's see how good it is at capturing other features of the network that were not included in the model.
 
-# Goodness-of-fit
+## Goodness-of-fit
 
 This would be the last step in the sequence of steps to fit an ERGM. As we mentioned before, the idea of Goodness-of-fit [GOF] in ERG models is to see how well our model captures other properties of the graph that were not included in the model. By default, the `gof` function from the `ergm` package computes GOF for:
 
@@ -102,8 +102,10 @@ It is easier to see the results using the `plot` function:
 #| label: gof-plot
 #| message: false
 #| fig.height: 10
-# Plotting the result (5 figures)
+## Plotting the result (5 figures)
 op <- par(mfrow = c(3,2))
 plot(gof_final)
 par(op)
 ```
+
+## References

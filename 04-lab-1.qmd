@@ -2,7 +2,7 @@
 title: Lab 1
 ---
 
-# Types of problems
+## Types of problems
 
 Overall, we can classify the problems according to two dimensions:
 
@@ -22,7 +22,7 @@ Of the following cases, which ones can be treated with "regular statistical meth
 >
 > e. Phylogenomics: Study a given phenotype in a population of organisms related by a phylogenetic tree. 
 
-# Programming 
+## Programming 
 
 **Simulating convolutions**: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with $(\mu, \sigma^2) = (-3, 1)$ and the other with $(\mu, \sigma^2) = (2, 2)$. Plot the histogram of the results. Draw 1,000 samples.
 

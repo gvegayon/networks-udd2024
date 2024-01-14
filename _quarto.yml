@@ -1,25 +1,31 @@
 project:
   type: book
-  output-dir: _book
+  output-dir: docs
+
+execute: 
+  cache: true
 
 book:
   title: UDD networks 2024
+  author: George G. Vega Yon, Ph.D.
+  date: 2024-01-14
+
   chapters: 
     - index.qmd
     - part: Day 1
       chapters:
-        - 01-overview/index.qmd
-        - 02-random-graphs/index.qmd
-        - 03-behavior-and-coevolution/index.qmd
-        - 04-lab-1/index.qmd
-        - 05-intro-to-ergms/index.qmd
+        - 01-overview.qmd
+        - 02-random-graphs.qmd
+        - 03-behavior-and-coevolution.qmd
+        - 04-lab-1.qmd
+        - 05-intro-to-ergms.qmd
     - part: Day 2
       chapters:
-        - 06-ergms-cont/index.qmd
-        - 07-odd-balls/index.qmd
-        - 08-lab-2/index.qmd
-        - 09-advanced-ergms/index.qmd
-        - 10-new-topics/index.qmd
+        - 06-ergms-cont.qmd
+        - 07-odd-balls.qmd
+        - 08-lab-2.qmd
+        - 09-advanced-ergms.qmd
+        - 10-new-topics.qmd
     - references.qmd
   downloads:
   - epub
@@ -33,4 +39,11 @@ format:
     html-math-method: katex
     toc: true
     number-sections: true
-    embed-resources: true
+  pdf:
+    include-in-header: 
+      - text: |
+          \usepackage{amsmath}
+          \usepackage{amssymb}
+          \usepackage{bm}
+  epub: default
+

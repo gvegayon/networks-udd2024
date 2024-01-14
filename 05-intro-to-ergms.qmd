@@ -8,23 +8,25 @@ title: Introduction to ERGMs
 #| message: false
 #| warning: false
 
-# Prints the number using two decimals
+## Prints the number using two decimals
 pp <- function(x) {
   sprintf("%.2f", x)
 }
 
 ```
 
+::: {.content-hidden when-format="pdf"}
 \newcommand{\tpose}[1]{#1^{\mathbf{t}}}
-\newcommand{\Prergm}[0]{P_{\mathcal{Y}, \bm{\theta}}}
-\newcommand{\Y}[0]{\bm{Y}}
-\newcommand{\y}[0]{\bm{y}}
-\newcommand{\thetas}[0]{\bm{\theta}}
+\newcommand{\Prergm}[0]{P_{\mathcal{Y}, \bm{{\theta}}}}
+\newcommand{\Y}[0]{\bm{{Y}}}
+\newcommand{\y}[0]{\bm{{y}}}
+\newcommand{\thetas}[0]{\bm{{\theta}}}
 \newcommand{\isone}[1]{\mathbb{1}\left(#1\right)}
+:::
 
 Have you ever wondered if the friend of your friend is your friend? Or if the people you consider to be your friends feel the same about you? Or if age is related to whether you seek advice from others? All these (and many others certainly more creative) questions can be answered using Exponential-Family Random Graph Models.
 
-# Introduction
+## Introduction
 
 Exponential-Family Random Graph Models, known as ERGMs, ERG Models, or $p^*$ models (@Holland1981, @Frank1986, @Wasserman1996, @Snijders2006, @Robins2007, and many others) are a large family of statistical distributions for random graphs. In ERGMs, the focus is on the processes that give origin to the network rather than the individual ties.[^predict]
 
@@ -33,13 +35,13 @@ Exponential-Family Random Graph Models, known as ERGMs, ERG Models, or $p^*$ mod
 The most common representation of ERGMs is the following:
 
 $$
-\Prergm(\bm{Y}=\bm{y}) =  \exp\left(\tpose{\bm{\theta}} s(y)\right)\kappa(\bm{\theta})^{-1}
+\Prergm(\bm{{Y}}=\bm{{y}}) =  \exp\left(\tpose{\bm{{\theta}}} s(y)\right)\kappa(\bm{{\theta}})^{-1}
 $$
 
-where $\bm{Y}$ is a random graph, $\bm{y}\in \mathcal{Y}$ is a particular realization of $Y$, $\bm{\theta}$ is a vector of parameters, $s(\bm{y})$ is a vector of sufficient statistics, and $\kappa(\bm{\theta})$ is a normalizing constant. The normalizing constant is defined as:
+where $\bm{{Y}}$ is a random graph, $\bm{{y}}\in \mathcal{Y}$ is a particular realization of $Y$, $\bm{{\theta}}$ is a vector of parameters, $s(\bm{{y}})$ is a vector of sufficient statistics, and $\kappa(\bm{{\theta}})$ is a normalizing constant. The normalizing constant is defined as:
 
 $$
-\kappa(\bm{\theta}) = \sum_{\bm{y} \in \mathcal{Y}} \exp\left(\tpose{\bm{\theta}} s(\bm{y})\right)
+\kappa(\bm{{\theta}}) = \sum_{\bm{{y}} \in \mathcal{Y}} \exp\left(\tpose{\bm{{\theta}}} s(\bm{{y}})\right)
 $$
 
 From the statistical point of view, the normalizing constant makes this model attractive; only cases where $\mathcal{Y}$ is small enough to be enumerated are feasible [@vegayonExponentialRandomGraph2021]. Because of that reason, estimating ERGMs is a challenging task.
@@ -48,12 +50,12 @@ In more simple terms, ERG models resemble Logistic regressions. The term $\tpose
 
 The vector of sufficient statistics dictates the data-generating process of the network. Like the mean and variance characterize the normal distribution, sufficient statistics (and corresponding parameters) characterize the ERG distribution. @fig-ergmterms shows some examples of sufficient statistics with their corresponding parametrizations.
 
-![Example ERGM terms from @vegayonExponentialRandomGraph2021](ergm-terms-vegayonetal2021.jpg){#fig-ergmterms width="60%"}
+![Example ERGM terms from @vegayonExponentialRandomGraph2021](figs/ergm-terms-vegayonetal2021.jpg){#fig-ergmterms width="60%"}
 
 
 The `ergm` package has many terms we can use to fit these models. You can explore the available terms in the manual `ergm.terms` in the `ergm` package. Take a moment to explore the manual and see the different terms available.
 
-# Dyadic independence (p1)
+## Dyadic independence (p1)
 
 The simplest ERG model we can fit is a Bernoulli (Erdos-Renyi) model. Here, the only statistic is the edgecount. Now, if we can write the function computing sufficient statistics as a sum over all edges, *i.e.*, $s(\y) = \sum_{ij}s'(y_{ij})$, the model reduces to a Logistic regression. 
 
@@ -64,7 +66,7 @@ The simplest ERG model we can fit is a Bernoulli (Erdos-Renyi) model. Here, the 
 #| collapse: true
 library(ergm)
 
-# Simulating a Bernoulli network
+## Simulating a Bernoulli network
 Y <- matrix(rbinom(100^2, 1, 0.1), 100, 100)
 diag(Y) <- NA
 
@@ -87,7 +89,7 @@ where $\isone{\cdot}$ is the indicator function, and $X_i$ equals one if the $it
 #| label: simple-example
 #| message: false
 #| warning: false
-# Simulating data
+## Simulating data
 set.seed(7731)
 X <- rbinom(100, 1, 0.5)
 head(X)
@@ -99,16 +101,16 @@ Next, we use the functions from the `ergm` and `network` packages to simulate a 
 #| label: simple-example-simulate
 #| warning: false
 #| message: false
-# Simulating the network with homophily
+## Simulating the network with homophily
 library(ergm)
 
-# A network with 100 vertices
+## A network with 100 vertices
 Y <- network(100) 
 
-# Adding the vertex attribute with the %v% operator
+## Adding the vertex attribute with the %v% operator
 Y %v% "X" <- X
 
-# Simulating the network
+## Simulating the network
 Y <- ergm::simulate_formula(
   # The model
   Y ~ edges + nodematch("X"),
@@ -152,10 +154,10 @@ sstats <- summary_formula(Y ~ edges + nodematch("X"))
 Y_mat <- as.matrix(Y)
 diag(Y_mat) <- NA
 
-# To speedup computations, we pre-compute this value
+## To speedup computations, we pre-compute this value
 X_vec <- outer(X, X, "==") |> as.numeric()
 
-# Function to compute the negative loglikelihood
+## Function to compute the negative loglikelihood
 obj <- \(theta) {
 
   # Compute the probability according to the value of Y
@@ -180,7 +182,7 @@ And, using the `optim` function, we can fit the model:
 
 ```{r}
 #| label: simple-example-logit-fit
-# Fitting the model
+## Fitting the model
 fit_homophily_logit <- optim(c(0,0), obj, hessian = TRUE)
 ```
 
@@ -189,7 +191,7 @@ Now that we have the values let's compare them:
 ```{r}
 #| label: simple-example-fit-glm-coef
 #| message: false
-# The coefficients
+## The coefficients
 cbind(
   theta_ergm  = coef(fit_homophily),
   theta_logit = fit_homophily_logit$par,
@@ -200,7 +202,7 @@ cbind(
 
 As you can see, both models yielded the same estimates because they are the same! Before continuing, let's review a couple of important results in ERGMs.
 
-# The most important results
+## The most important results
 
 If we were able to say what two of the most important results in ERGMs are, I would say the following: (a) conditioning on the rest of the graph, the probability of a tie distributes Logistic (Bernoulli), and (b) the ratio between two loglikelihoods can be approximated through simulation.
 
@@ -208,13 +210,13 @@ If we were able to say what two of the most important results in ERGMs are, I wo
 
 Let's start by stating the result: Conditioning on all graphs that are not $y_{ij}$, the probability of a tie $Y_{ij}$ is distributed Logistic; formally:
 
-\newcommand{\chng}[0]{\delta_{ij}(\bm{y})}
+\newcommand{\chng}[0]{\delta_{ij}(\bm{{y}})}
 
 $$
-\Prergm(Y_{ij}=1 | \bm{y}_{-ij}) = \frac{1}{1 + \exp \left(\tpose{\bm{\theta}}\chng{}\right)},
+\Prergm(Y_{ij}=1 | \bm{{y}}_{-ij}) = \frac{1}{1 + \exp \left(\tpose{\bm{{\theta}}}\chng{}\right)},
 $$
 
-where $\chng{}\equiv s_{ij}^+(\bm{y}) - s_{ij}^-(\bm{y})$ is the change statistic, and $s_{ij}^+(\bm{y})$ and $s_{ij}^-(\bm{y})$ are the statistics of the graph with and without the tie $Y_{ij}$, respectively.
+where $\chng{}\equiv s_{ij}^+(\bm{{y}}) - s_{ij}^-(\bm{{y}})$ is the change statistic, and $s_{ij}^+(\bm{{y}})$ and $s_{ij}^-(\bm{{y}})$ are the statistics of the graph with and without the tie $Y_{ij}$, respectively.
 
 The importance of this result is two-fold: (a) we can use this equation to interpret fitted models in the context of a single graph (like using odds,) and (b) we can use this equation to simulate from the model, **without touching the normalizing constant**. 
 
@@ -223,20 +225,20 @@ The importance of this result is two-fold: (a) we can use this equation to inter
 The second significant result is that the ratio of loglikelihoods can be approximated through simulation. It is based on the following observation by @geyerConstrainedMonteCarlo1992:
 
 $$
-\frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)} = \mathbb{E}_{\mathcal{Y}, \bm{\theta}_0}\left(\tpose{(\bm{\theta} - \bm{\theta}_0)s(\bm{y})}\right),
+\frac{\kappa(\bm{{\theta}})}{\kappa(\bm{{\theta}}_0)} = \mathbb{E}_{\mathcal{Y}, \bm{{\theta}}_0}\left(\tpose{(\bm{{\theta}} - \bm{{\theta}}_0)s(\bm{{y}})}\right),
 $$
 
 Using the latter, we can approximate the following loglikelihood ratio:
 
 \begin{align*}
-l(\bm{\theta}) - l(\bm{\theta}_0) = & \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}) - \log\left[\frac{\kappa(\bm{\theta})}{\kappa(\bm{\theta}_0)}\right]\\
-\approx & \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}) - \log\left[M^{-1}\sum_{\bm{y}^{(m)}} \tpose{(\bm{\theta} - \bm{\theta}_0)}s(\bm{y}^{(m)})\right]
+l(\bm{{\theta}}) - l(\bm{{\theta}}_0) = & \tpose{(\bm{{\theta}} - \bm{{\theta}}_0)}s(\bm{{y}}) - \log\left[\frac{\kappa(\bm{{\theta}})}{\kappa(\bm{{\theta}}_0)}\right]\\
+\approx & \tpose{(\bm{{\theta}} - \bm{{\theta}}_0)}s(\bm{{y}}) - \log\left[M^{-1}\sum_{\bm{{y}}^{(m)}} \tpose{(\bm{{\theta}} - \bm{{\theta}}_0)}s(\bm{{y}}^{(m)})\right]
 \end{align*}
 
 
-Where $\bm{\theta}_0$ is an arbitrary vector of parameters, and $\bm{y}^{(m)}$ are sampled from the distribution $P_{\mathcal{Y}, \bm{\theta}_0}$. In the words of @geyerConstrainedMonteCarlo1992, "[...] it is possible to approximate $\bm{\theta}$ by using simulations from one distribution $P_{\mathcal{Y}, \bm{\theta}_0}$ no matter which $\bm{\theta}_0$ in the parameter space is."
+Where $\bm{{\theta}}_0$ is an arbitrary vector of parameters, and $\bm{{y}}^{(m)}$ are sampled from the distribution $P_{\mathcal{Y}, \bm{{\theta}}_0}$. In the words of @geyerConstrainedMonteCarlo1992, "[...] it is possible to approximate $\bm{{\theta}}$ by using simulations from one distribution $P_{\mathcal{Y}, \bm{{\theta}}_0}$ no matter which $\bm{{\theta}}_0$ in the parameter space is."
 
-# Start to finish example
+## Start to finish example
 
 There is no silver bullet to fit ERGMs. However, the following steps are a good starting point:
 
@@ -260,10 +262,10 @@ The following code chunk illustrates how to do this in R. Notice that, like the 
 ```{r}
 #| label: generating-data
 #| message: false
-# Simulating the covariates (vertex attribute)
+## Simulating the covariates (vertex attribute)
 set.seed(1235)
 
-# Simulating the data
+## Simulating the data
 Y <- network(100, directed = TRUE)
 Y %v% "fav_music" <- sample(c("rock", "jazz", "pop"), 100, replace = TRUE)
 Y %v% "female"    <- rbinom(100, 1, 0.5) 
@@ -283,7 +285,7 @@ Y <- ergm::simulate_formula(
   coef = c(-4, 1, -1, 2)
   )
 
-# And visualize it!
+## And visualize it!
 gplot(Y, vertex.col = c("green", "red")[Y %v% "female" + 1])
 ```
 
@@ -323,9 +325,9 @@ The model starts gaining complexity as we add higher-order terms involving more 
 #| label: model-gwdsp
 #| collapse: true
 #| message: false
-# Fitting two more models (output message suppressed)
+## Fitting two more models (output message suppressed)
 model_3 <- ergm(Y ~ edges + mutual + gwdsp(.5, fixed = TRUE))
-# model_4 <- ergm(Y ~ edges + triangles) # bad idea
+## model_4 <- ergm(Y ~ edges + triangles) # bad idea
 ```
 
 Right after fitting a model, we want to inspect the results. An excellent tool for this is the R package `texreg` [@leifeldTexregConversionStatistical2013]:
@@ -334,9 +336,8 @@ Right after fitting a model, we want to inspect the results. An excellent tool f
 #| label: simples-table
 #| message: false
 #| warning: false
-#| results: asis
 library(texreg)
-knitreg(list(model_1, model_2, model_3))
+screenreg(list(model_1, model_2, model_3))
 ```
 
 So far, `model_2` is winning. We will continue with this model.
@@ -358,6 +359,7 @@ In this context, what would be the different hypotheses behind each decision?
 ```{r}
 #| label: working-homophily
 #| message: false
+#| cache: true
 model_4 <- ergm(Y ~ edges + mutual + nodematch("fav_music"))
 model_5 <- ergm(Y ~ edges + mutual + nodematch("fav_music", diff = TRUE))
 model_6 <- ergm(Y ~ edges + mutual + nodemix("fav_music"))
@@ -369,8 +371,7 @@ Now, let's inspect what we have so far:
 #| label: working-homophily-table
 #| message: false
 #| warning: false
-#| results: asis
-knitreg(list(`2` = model_2, `4` = model_4, `5` = model_5, `6` = model_6))
+screenreg(list(`2` = model_2, `4` = model_4, `5` = model_5, `6` = model_6))
 ```
 
 Although model 5 has a higher loglikelihood, using AIC or BIC suggests model 4 is a better candidate. For the sake of time, we will jump ahead and add `nodematch("female")` as the last term of our model. The next step is to assess (a) convergence and (b) goodness-of-fit.
@@ -378,16 +379,15 @@ Although model 5 has a higher loglikelihood, using AIC or BIC suggests model 4 i
 ```{r}
 #| label: last-model
 #| message: false
-#| results: asis
 model_final <- ergm(Y ~ edges + mutual + nodematch("fav_music") + nodematch("female"))
 
-# Printing the pretty table
-knitreg(list(`2` = model_2, `4` = model_4, `Final` = model_final))
+## Printing the pretty table
+screenreg(list(`2` = model_2, `4` = model_4, `Final` = model_final))
 ```
 
 
 
-# Conclusion
+## Conclusion
 
 We have shown here just a glimpse of what ERG models are. A large, active, collaborative community of social network scientists is working on new extensions and advances. If you want to learn more about ERGMs, I recommend the following resources:
 
@@ -397,14 +397,5 @@ We have shown here just a glimpse of what ERG models are. A large, active, colla
 
 - Melnet's PNEt website [(link)](https://www.melnet.org.au/pnet/).
 
-# Group activity
 
-The `ergm` package comes with a handful of vignettes (extended R examples) that you can use to learn more about the package. The vignette with the same name as the package shows an example fitting a model to the network `faux.mesa.high`. Address the following questions:
-
-a. What type of ERG model is this?
-
-b. Looking at the plot in the vignette, what other term(s) could you consider worth adding to the model? Why? 
-
-c. The vignette did not include a goodness-of-fit analysis. Can you add one? What do you find?
-
-d. **Challenge**: without using `ergm` to fit the model, estimate the following $p1$ model: `~ edges + nodefactor("Race")`. Compare your results with what you get using `ergm`.
+## References

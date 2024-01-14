@@ -1,49 +1,43 @@
 ---
 title: New topics in network modeling
-# subtitle: 1st Chilean Summer School about Social Network Research
-# author: George G. Vega Yon, Ph.D.
-# institute:
-#   - The University of Utah
-#   - Booz Allen Hamilton
-# format: revealjs
-# bibliography: ../references.bib
-# date: 2024-01-12
-# slide-number: true
-# html-math-method: katex
-# footer: New topics in network modeling -- https://ggvy.cl
+## subtitle: 1st Chilean Summer School about Social Network Research
+## author: George G. Vega Yon, Ph.D.
+## institute:
+##   - The University of Utah
+##   - Booz Allen Hamilton
+## format: revealjs
+## bibliography: ../references.bib
+## date: 2024-01-12
+## slide-number: true
+## html-math-method: katex
+## footer: New topics in network modeling -- https://ggvy.cl
 ---
 
 ## Overview
 
+::: {.content-hidden when-format="pdf"}
 \newcommand{\tpose}[1]{#1^{\mathbf{t}}}
-\newcommand{\Prergm}[0]{P_{\mathcal{Y}, \bm{\theta}}}
-\newcommand{\Y}[0]{\bm{Y}}
-\newcommand{\y}[0]{\bm{y}}
-\newcommand{\thetas}[0]{\bm{\theta}}
+\newcommand{\Prergm}[0]{P_{\mathcal{Y}, \bm{{\theta}}}}
+\newcommand{\Y}[0]{\bm{{Y}}}
+\newcommand{\y}[0]{\bm{{y}}}
+\newcommand{\thetas}[0]{\bm{{\theta}}}
 \newcommand{\isone}[1]{\mathbb{1}\left(#1\right)}
-
+:::
 
 - With **more data** and **computing resources**, the things that we can ask and do with networks are becoming increasingly (even more) exciting and complex.
 
 - In this section, I will introduce **some** of the latest advancements and forthcoming topics in network modeling.
 
-# Part I: New models and extensions {background-color="black"}
+## Part I: New models and extensions {background-color="black"}
 
 ## Mutli-ERGMs
 
-::: {.columns}
-
-::: {.column}
 - In @krivitskyTaleTwoDatasets2023a, the authors present a start-to-finish pooled ERGM example featuring heterogeneous data sources.
 
 - They increase power and allow exploring heterogeneous effects across types/classes of networks.
-:::
 
-::: {.column}
-![](networks.png){width=100%}
-:::
+![](figs/networks.png){width=100%}
 
-:::
 
 ## Statistical power of SOAM
 
@@ -51,24 +45,18 @@ title: New topics in network modeling
 - **SOAM** @stadtfeldStatisticalPowerLongitudinal2020 proposes ways to perform power analysis for Siena models. At the center of their six-step approach is simulation.
 :::
 
-![](siena-power-analysis.png)
+![](figs/siena-power-analysis.png)
 
 ## Bayesian ALAAM
 
 Ever wondered how to model influence exclusively?
 
-::: {.columns style="font-size: 0.8em;"}
-::: {.column}
 - The Auto-Logistic Actor Attribute Model [ALAAM] is a model that allows us to do just that.
 - @koskinenBayesianAnalysisSocial2022 extends the ALAAM model to a Bayesian framework.
-:::
 
-::: {.column}
 - It provides greater flexibility to accommodate more complicated models and add extensions such as hierarchical models.
-![Figure 1 reproduced from @stivalaUsingSampledNetwork2020](alaam-diagram)
-:::
 
-:::
+![Figure 1 reproduced from @stivalaUsingSampledNetwork2020](figs/alaam-diagram.png)
 
 ## Relational Event Models
 
@@ -76,25 +64,13 @@ Ever wondered how to model influence exclusively?
 
 -  @buttsRelationalEventModels2023 provides a general overview of Relational Event Models [REMs,] new methods, and future steps.
 
-![Figure 3 reproduced from @brandenbergerInterdependenciesConflictDynamics2020](rem.png)
+![Figure 3 reproduced from @brandenbergerInterdependenciesConflictDynamics2020](figs/rem.png)
 
 ## Big ERGMs
 
-::: {.columns}
-
-::: {.column width=45%}
 - **ERGMs** In @stivalaExponentialRandomGraph2020a, a new method is proposed to estimate large ERGMs (featuring millions of nodes).
-:::
 
-<!-- [^nonet]
-
-[^nonet]: No network visualization in the paper... as it usually happens in SNA papers! -->
-
-::: {.column width=45%}
-![Partial map of the Internet based on the January 15, 2005 data found on opte.org. -- [Wiki](https://en.wikipedia.org/w/index.php?title=File:Internet_map_1024.jpg&oldid=1061830697)](bignet.jpg){width=100%}
-:::
-
-:::
+![Partial map of the Internet based on the January 15, 2005 data found on opte.org. -- [Wiki](figs/https://en.wikipedia.org/w/index.php?title=File:Internet_map_1024.jpg&oldid=1061830697)](figs/bignet.jpg){width=100%}
 
 ## Exponential Random *Network* Models
 
@@ -103,11 +79,11 @@ Ever wondered how to model influence exclusively?
 - ERNMs generalize ERGMs to incorporate behavior and are the cross-sectional causing of SIENA models.
 
 \begin{align*}
-\text{ER\textbf{G}M}: & \Prergm(\bm{Y}=\bm{y} | \bm{X}=\bm{x}) \\
-\text{ER\textbf{N}M}: & \Prergm(\bm{Y}=\bm{y}, \bm{X}=\bm{x})
+\text{ER\textbf{G}M}: & \Prergm(\bm{{Y}}=\bm{{y}} | \bm{{X}}=\bm{{x}}) \\
+\text{ER\textbf{N}M}: & \Prergm(\bm{{Y}}=\bm{{y}}, \bm{{X}}=\bm{{x}})
 \end{align*}
 
-# Part II: Shameless self-promotion {background-color="black"}
+## Part II: Shameless self-promotion {background-color="black"}
 
 ## ERGMitos: Small ERGMs
 
@@ -116,30 +92,22 @@ Ever wondered how to model influence exclusively?
 [^ito]: From the Spanish suffix meaning small.
 
 
-![Five small networks from the `ergmito` R package](littlenet.jpg){width=40%}
+![Five small networks from the `ergmito` R package](figs/littlenet.jpg){width=40%}
 
 ## Discrete Exponential-family Models {style="font-size: 0.8em;"}
 
-::: {.columns}
-
-::: {.column width=40%}
 - ERGMs are a particular case of Random Markov fields.
 
 - We can use the ERGM framework for modeling vectors of binary outcomes, e.g., the consumption of $\{tobacco, MJ, alcohol\}$
-::: 
 
-::: {.column width=60%}
-![](defm.png)
-:::
-:::
-
+![](figs/defm.png)
 
 
 ## Power analysis in ERGMs
 
 - Using conditional ERGMs (closely related to constrained), we can do power analysis for network samples [@vegayonPowerMulticollinearitySmall2023].
 
-![Reproduced from @krivitskyRejoinderDiscussionTale2023](fig1-rejoinder.png)
+![Reproduced from @krivitskyRejoinderDiscussionTale2023](figs/fig1-rejoinder.png)
 
 ## Two-step estimation ERGMs
 
@@ -151,13 +119,14 @@ Ever wondered how to model influence exclusively?
 
 :::
 
-![Simulation study trying to demonstrate the concept (Work in progress)](condergm.png)
+![Simulation study trying to demonstrate the concept (Work in progress)](figs/condergm.png)
 
 ## Thanks!
 
 ## Bonus track: Why network scientists don't use ERGMs?
 
-> Attempts to overcome these problems by extending the blockmodel have focused particularly on the use of (more complicated) p∗ or exponential random graph models, but **while these are conceptually appealing**, they quickly **lose the analytic tractability** of the original blockmodel **as their complexity increases**. 
+> Attempts to overcome these problems by extending the blockmodel have focused particularly on the use of (more complicated) $p^*$ or exponential random graph models, but **while these are conceptually appealing**, they quickly **lose the analytic tractability** of the original blockmodel **as their complexity increases**. 
 >
 > -- @karrerStochasticBlockmodelsCommunity2011
 
+## References

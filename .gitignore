@@ -1,9 +1,25 @@
 /.quarto/
 *_cache
+_freeze
 
-index_files/
+*_files/
 0*/index.html
 
 *docx
 *xlsx
 *.rmarkdown
+
+^./*html
+
+*aux
+*blg
+*idx
+*ind
+*lof
+*log
+*fls
+*gz
+*toc
+index.pdf
+index.tex
+index.fdb_latexmk

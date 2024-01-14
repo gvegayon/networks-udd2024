@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.298">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UDD networks 2024 - 11&nbsp; New topics in network modeling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./09-advanced-ergms.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-ergms-cont.html">Day 2</a></li><li class="breadcrumb-item"><a href="./10-new-topics.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">New topics in network modeling</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">UDD networks 2024</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Day 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-random-graphs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Random graphs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-behavior-and-coevolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Behavior and coevolution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-lab-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-intro-to-ergms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to ERGMs</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Day 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-ergms-cont.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Convergence on ERGMs</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-odd-balls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Odd balls</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-lab-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-advanced-ergms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced ERGMs: Constraints</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-new-topics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">New topics in network modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">11.1</span> Overview</a></li>
+  <li><a href="#part-i-new-models-and-extensions" id="toc-part-i-new-models-and-extensions" class="nav-link" data-scroll-target="#part-i-new-models-and-extensions"><span class="header-section-number">11.2</span> Part I: New models and extensions</a></li>
+  <li><a href="#mutli-ergms" id="toc-mutli-ergms" class="nav-link" data-scroll-target="#mutli-ergms"><span class="header-section-number">11.3</span> Mutli-ERGMs</a></li>
+  <li><a href="#statistical-power-of-soam" id="toc-statistical-power-of-soam" class="nav-link" data-scroll-target="#statistical-power-of-soam"><span class="header-section-number">11.4</span> Statistical power of SOAM</a></li>
+  <li><a href="#bayesian-alaam" id="toc-bayesian-alaam" class="nav-link" data-scroll-target="#bayesian-alaam"><span class="header-section-number">11.5</span> Bayesian ALAAM</a></li>
+  <li><a href="#relational-event-models" id="toc-relational-event-models" class="nav-link" data-scroll-target="#relational-event-models"><span class="header-section-number">11.6</span> Relational Event Models</a></li>
+  <li><a href="#big-ergms" id="toc-big-ergms" class="nav-link" data-scroll-target="#big-ergms"><span class="header-section-number">11.7</span> Big ERGMs</a></li>
+  <li><a href="#exponential-random-network-models" id="toc-exponential-random-network-models" class="nav-link" data-scroll-target="#exponential-random-network-models"><span class="header-section-number">11.8</span> Exponential Random <em>Network</em> Models</a></li>
+  <li><a href="#part-ii-shameless-self-promotion" id="toc-part-ii-shameless-self-promotion" class="nav-link" data-scroll-target="#part-ii-shameless-self-promotion"><span class="header-section-number">11.9</span> Part II: Shameless self-promotion</a></li>
+  <li><a href="#ergmitos-small-ergms" id="toc-ergmitos-small-ergms" class="nav-link" data-scroll-target="#ergmitos-small-ergms"><span class="header-section-number">11.10</span> ERGMitos: Small ERGMs</a></li>
+  <li><a href="#discrete-exponential-family-models" id="toc-discrete-exponential-family-models" class="nav-link" data-scroll-target="#discrete-exponential-family-models"><span class="header-section-number">11.11</span> Discrete Exponential-family Models</a></li>
+  <li><a href="#power-analysis-in-ergms" id="toc-power-analysis-in-ergms" class="nav-link" data-scroll-target="#power-analysis-in-ergms"><span class="header-section-number">11.12</span> Power analysis in ERGMs</a></li>
+  <li><a href="#two-step-estimation-ergms" id="toc-two-step-estimation-ergms" class="nav-link" data-scroll-target="#two-step-estimation-ergms"><span class="header-section-number">11.13</span> Two-step estimation ERGMs</a></li>
+  <li><a href="#thanks" id="toc-thanks" class="nav-link" data-scroll-target="#thanks"><span class="header-section-number">11.14</span> Thanks!</a></li>
+  <li><a href="#bonus-track-why-network-scientists-dont-use-ergms" id="toc-bonus-track-why-network-scientists-dont-use-ergms" class="nav-link" data-scroll-target="#bonus-track-why-network-scientists-dont-use-ergms"><span class="header-section-number">11.15</span> Bonus track: Why network scientists don’t use ERGMs?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">11.16</span> References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">New topics in network modeling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">11.1</span> Overview</h2>
+<ul>
+<li><p>With <strong>more data</strong> and <strong>computing resources</strong>, the things that we can ask and do with networks are becoming increasingly (even more) exciting and complex.</p></li>
+<li><p>In this section, I will introduce <strong>some</strong> of the latest advancements and forthcoming topics in network modeling.</p></li>
+</ul>
+</section>
+<section id="part-i-new-models-and-extensions" class="level2" data-background-color="black" data-number="11.2">
+<h2 data-background-color="black" data-number="11.2" class="anchored" data-anchor-id="part-i-new-models-and-extensions"><span class="header-section-number">11.2</span> Part I: New models and extensions</h2>
+</section>
+<section id="mutli-ergms" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="mutli-ergms"><span class="header-section-number">11.3</span> Mutli-ERGMs</h2>
+<ul>
+<li><p>In <span class="citation" data-cites="krivitskyTaleTwoDatasets2023a">Krivitsky, Coletti, and Hens (<a href="references.html#ref-krivitskyTaleTwoDatasets2023a" role="doc-biblioref">2023a</a>)</span>, the authors present a start-to-finish pooled ERGM example featuring heterogeneous data sources.</p></li>
+<li><p>They increase power and allow exploring heterogeneous effects across types/classes of networks.</p></li>
+</ul>
+<p><img src="figs/networks.png" class="img-fluid" style="width:100.0%"></p>
+</section>
+<section id="statistical-power-of-soam" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="statistical-power-of-soam"><span class="header-section-number">11.4</span> Statistical power of SOAM</h2>
+<div class="fragment" style="font-size: 80%">
+<ul>
+<li><strong>SOAM</strong> <span class="citation" data-cites="stadtfeldStatisticalPowerLongitudinal2020">Stadtfeld et al. (<a href="references.html#ref-stadtfeldStatisticalPowerLongitudinal2020" role="doc-biblioref">2020</a>)</span> proposes ways to perform power analysis for Siena models. At the center of their six-step approach is simulation.</li>
+</ul>
+</div>
+<p><img src="figs/siena-power-analysis.png" class="img-fluid"></p>
+</section>
+<section id="bayesian-alaam" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="bayesian-alaam"><span class="header-section-number">11.5</span> Bayesian ALAAM</h2>
+<p>Ever wondered how to model influence exclusively?</p>
+<ul>
+<li><p>The Auto-Logistic Actor Attribute Model [ALAAM] is a model that allows us to do just that.</p></li>
+<li><p><span class="citation" data-cites="koskinenBayesianAnalysisSocial2022">Koskinen and Daraganova (<a href="references.html#ref-koskinenBayesianAnalysisSocial2022" role="doc-biblioref">2022</a>)</span> extends the ALAAM model to a Bayesian framework.</p></li>
+<li><p>It provides greater flexibility to accommodate more complicated models and add extensions such as hierarchical models.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/alaam-diagram.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure 1 reproduced from <span class="citation" data-cites="stivalaUsingSampledNetwork2020">A. D. Stivala et al. (<a href="references.html#ref-stivalaUsingSampledNetwork2020" role="doc-biblioref">2020</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="relational-event-models" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="relational-event-models"><span class="header-section-number">11.6</span> Relational Event Models</h2>
+<ul>
+<li><p>REMs are great for modeling sequences of ties (instead of panel or cross-sectional.)</p></li>
+<li><p><span class="citation" data-cites="buttsRelationalEventModels2023">Butts et al. (<a href="references.html#ref-buttsRelationalEventModels2023" role="doc-biblioref">2023</a>)</span> provides a general overview of Relational Event Models [REMs,] new methods, and future steps.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/rem.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure 3 reproduced from <span class="citation" data-cites="brandenbergerInterdependenciesConflictDynamics2020">Brandenberger (<a href="references.html#ref-brandenbergerInterdependenciesConflictDynamics2020" role="doc-biblioref">2020</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="big-ergms" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="big-ergms"><span class="header-section-number">11.7</span> Big ERGMs</h2>
+<ul>
+<li><strong>ERGMs</strong> In <span class="citation" data-cites="stivalaExponentialRandomGraph2020a">A. Stivala, Robins, and Lomi (<a href="references.html#ref-stivalaExponentialRandomGraph2020a" role="doc-biblioref">2020</a>)</span>, a new method is proposed to estimate large ERGMs (featuring millions of nodes).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/bignet.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Partial map of the Internet based on the January 15, 2005 data found on opte.org. – <a href="figs/https://en.wikipedia.org/w/index.php?title=File:Internet_map_1024.jpg&amp;oldid=1061830697">Wiki</a></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="exponential-random-network-models" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="exponential-random-network-models"><span class="header-section-number">11.8</span> Exponential Random <em>Network</em> Models</h2>
+<ul>
+<li><p>Wang, Fellows, and Handcock recently published a re-introduction of the ERNM framework <span class="citation" data-cites="wangUnderstandingNetworksExponentialfamily2023">(<a href="references.html#ref-wangUnderstandingNetworksExponentialfamily2023" role="doc-biblioref">Wang, Fellows, and Handcock 2023</a>)</span>.</p></li>
+<li><p>ERNMs generalize ERGMs to incorporate behavior and are the cross-sectional causing of SIENA models.</p></li>
+</ul>
+<p><span class="math display">\begin{align*}
+\text{ER\textbf{G}M}: &amp; P_{\mathcal{Y}, \bm{{\theta}}}(\bm{{Y}}=\bm{{y}} | \bm{{X}}=\bm{{x}}) \\
+\text{ER\textbf{N}M}: &amp; P_{\mathcal{Y}, \bm{{\theta}}}(\bm{{Y}}=\bm{{y}}, \bm{{X}}=\bm{{x}})
+\end{align*}</span></p>
+</section>
+<section id="part-ii-shameless-self-promotion" class="level2" data-background-color="black" data-number="11.9">
+<h2 data-background-color="black" data-number="11.9" class="anchored" data-anchor-id="part-ii-shameless-self-promotion"><span class="header-section-number">11.9</span> Part II: Shameless self-promotion</h2>
+</section>
+<section id="ergmitos-small-ergms" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="ergmitos-small-ergms"><span class="header-section-number">11.10</span> ERGMitos: Small ERGMs</h2>
+<ul>
+<li><strong>ERGMitos</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="citation" data-cites="vegayonExponentialRandomGraph2021">(<a href="references.html#ref-vegayonExponentialRandomGraph2021" role="doc-biblioref">Vega Yon, Slaughter, and Haye 2021</a>)</span> leverage small network sizes to use exact statistics.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/littlenet.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
+<p></p><figcaption class="figure-caption">Five small networks from the <code>ergmito</code> R package</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="discrete-exponential-family-models" class="level2" style="font-size: 0.8em;" data-number="11.11">
+<h2 style="font-size: 0.8em;" data-number="11.11" class="anchored" data-anchor-id="discrete-exponential-family-models"><span class="header-section-number">11.11</span> Discrete Exponential-family Models</h2>
+<ul>
+<li><p>ERGMs are a particular case of Random Markov fields.</p></li>
+<li><p>We can use the ERGM framework for modeling vectors of binary outcomes, e.g., the consumption of <span class="math inline">\{tobacco, MJ, alcohol\}</span></p></li>
+</ul>
+<p><img src="figs/defm.png" class="img-fluid"></p>
+</section>
+<section id="power-analysis-in-ergms" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="power-analysis-in-ergms"><span class="header-section-number">11.12</span> Power analysis in ERGMs</h2>
+<ul>
+<li>Using conditional ERGMs (closely related to constrained), we can do power analysis for network samples <span class="citation" data-cites="vegayonPowerMulticollinearitySmall2023">(<a href="references.html#ref-vegayonPowerMulticollinearitySmall2023" role="doc-biblioref">Vega Yon 2023</a>)</span>.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/fig1-rejoinder.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Reproduced from <span class="citation" data-cites="krivitskyRejoinderDiscussionTale2023">Krivitsky, Coletti, and Hens (<a href="references.html#ref-krivitskyRejoinderDiscussionTale2023" role="doc-biblioref">2023b</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="two-step-estimation-ergms" class="level2" data-number="11.13">
+<h2 data-number="11.13" class="anchored" data-anchor-id="two-step-estimation-ergms"><span class="header-section-number">11.13</span> Two-step estimation ERGMs</h2>
+<div style="font-size: 0.7em;">
+<ul>
+<li><p>Conditioning the ERGM on an observed statistic “drops” the associated coefficient.</p></li>
+<li><p>Hypothesis: As <span class="math inline">n</span> increases, conditional ERGM estimates are consistent with the full model:</p></li>
+</ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/condergm.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Simulation study trying to demonstrate the concept (Work in progress)</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="thanks" class="level2" data-number="11.14">
+<h2 data-number="11.14" class="anchored" data-anchor-id="thanks"><span class="header-section-number">11.14</span> Thanks!</h2>
+</section>
+<section id="bonus-track-why-network-scientists-dont-use-ergms" class="level2" data-number="11.15">
+<h2 data-number="11.15" class="anchored" data-anchor-id="bonus-track-why-network-scientists-dont-use-ergms"><span class="header-section-number">11.15</span> Bonus track: Why network scientists don’t use ERGMs?</h2>
+<blockquote class="blockquote">
+<p>Attempts to overcome these problems by extending the blockmodel have focused particularly on the use of (more complicated) <span class="math inline">p^*</span> or exponential random graph models, but <strong>while these are conceptually appealing</strong>, they quickly <strong>lose the analytic tractability</strong> of the original blockmodel <strong>as their complexity increases</strong>.</p>
+<p>– <span class="citation" data-cites="karrerStochasticBlockmodelsCommunity2011">Karrer and Newman (<a href="references.html#ref-karrerStochasticBlockmodelsCommunity2011" role="doc-biblioref">2011</a>)</span></p>
+</blockquote>
+</section>
+<section id="references" class="level2" data-number="11.16">
+<h2 data-number="11.16" class="anchored" data-anchor-id="references"><span class="header-section-number">11.16</span> References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-brandenbergerInterdependenciesConflictDynamics2020" class="csl-entry" role="listitem">
+Brandenberger, Laurence. 2020. <span>“Interdependencies in <span>Conflict Dynamics</span>: <span>Analyzing Endogenous Patterns</span> in <span>Conflict Event Data Using Relational Event Models</span>.”</span> In <em>Computational <span>Conflict Research</span></em>, edited by Emanuel Deutschmann, Jan Lorenz, Luis G. Nardin, Davide Natalini, and Adalbert F. X. Wilhelm, 67–80. Computational <span>Social Sciences</span>. <span>Cham</span>: <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-030-29333-8_4">https://doi.org/10.1007/978-3-030-29333-8_4</a>.
+</div>
+<div id="ref-buttsRelationalEventModels2023" class="csl-entry" role="listitem">
+Butts, Carter T., Alessandro Lomi, Tom A. B. Snijders, and Christoph Stadtfeld. 2023. <span>“Relational Event Models in Network Science.”</span> <em>Network Science</em> 11 (2): 175–83. <a href="https://doi.org/10.1017/nws.2023.9">https://doi.org/10.1017/nws.2023.9</a>.
+</div>
+<div id="ref-karrerStochasticBlockmodelsCommunity2011" class="csl-entry" role="listitem">
+Karrer, Brian, and M. E. J. Newman. 2011. <span>“Stochastic Blockmodels and Community Structure in Networks.”</span> <em>Physical Review E</em> 83 (1): 016107. <a href="https://doi.org/10.1103/PhysRevE.83.016107">https://doi.org/10.1103/PhysRevE.83.016107</a>.
+</div>
+<div id="ref-koskinenBayesianAnalysisSocial2022" class="csl-entry" role="listitem">
+Koskinen, Johan, and Galina Daraganova. 2022. <span>“Bayesian <span>Analysis</span> of <span>Social Influence</span>.”</span> <em>Journal of the Royal Statistical Society Series A: Statistics in Society</em> 185 (4): 1855–81. <a href="https://doi.org/10.1111/rssa.12844">https://doi.org/10.1111/rssa.12844</a>.
+</div>
+<div id="ref-krivitskyTaleTwoDatasets2023a" class="csl-entry" role="listitem">
+Krivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023a. <span>“A <span>Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>.”</span> <em>Journal of the American Statistical Association</em> 0 (0): 1–21. <a href="https://doi.org/10.1080/01621459.2023.2242627">https://doi.org/10.1080/01621459.2023.2242627</a>.
+</div>
+<div id="ref-krivitskyRejoinderDiscussionTale2023" class="csl-entry" role="listitem">
+———. 2023b. <span>“Rejoinder to <span>Discussion</span> of <span>‘<span>A Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>’</span>.”</span> <em>Journal of the American Statistical Association</em> 118 (544): 2235–38. <a href="https://doi.org/10.1080/01621459.2023.2280383">https://doi.org/10.1080/01621459.2023.2280383</a>.
+</div>
+<div id="ref-stadtfeldStatisticalPowerLongitudinal2020" class="csl-entry" role="listitem">
+Stadtfeld, Christoph, Tom A. B. Snijders, Christian Steglich, and Marijtje van Duijn. 2020. <span>“Statistical <span>Power</span> in <span>Longitudinal Network Studies</span>.”</span> <em>Sociological Methods &amp; Research</em> 49 (4): 1103–32. <a href="https://doi.org/10.1177/0049124118769113">https://doi.org/10.1177/0049124118769113</a>.
+</div>
+<div id="ref-stivalaUsingSampledNetwork2020" class="csl-entry" role="listitem">
+Stivala, Alex D., H. Colin Gallagher, David A. Rolls, Peng Wang, and Garry L. Robins. 2020. <span>“Using <span>Sampled Network Data With The Autologistic Actor Attribute Model</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2002.00849">https://doi.org/10.48550/arXiv.2002.00849</a>.
+</div>
+<div id="ref-stivalaExponentialRandomGraph2020a" class="csl-entry" role="listitem">
+Stivala, Alex, Garry Robins, and Alessandro Lomi. 2020. <span>“Exponential Random Graph Model Parameter Estimation for Very Large Directed Networks.”</span> <em>PLoS ONE</em> 15 (1): 1–23. <a href="https://doi.org/10.1371/journal.pone.0227804">https://doi.org/10.1371/journal.pone.0227804</a>.
+</div>
+<div id="ref-vegayonPowerMulticollinearitySmall2023" class="csl-entry" role="listitem">
+Vega Yon, George G. 2023. <span>“Power and Multicollinearity in Small Networks: <span>A</span> Discussion of <span>‘<span>Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>’</span> by <span>Krivitsky</span>, <span>Coletti</span> &amp; <span>Hens</span>.”</span> <em>Journal Of The American Statistical Association</em>.
+</div>
+<div id="ref-vegayonExponentialRandomGraph2021" class="csl-entry" role="listitem">
+Vega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. <span>“Exponential Random Graph Models for Little Networks.”</span> <em>Social Networks</em> 64 (August 2020): 225–38. <a href="https://doi.org/10.1016/j.socnet.2020.07.005">https://doi.org/10.1016/j.socnet.2020.07.005</a>.
+</div>
+<div id="ref-wangUnderstandingNetworksExponentialfamily2023" class="csl-entry" role="listitem">
+Wang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. <span>“Understanding Networks with Exponential-Family Random Network Models.”</span> <em>Social Networks</em>, August, S0378873323000497. <a href="https://doi.org/10.1016/j.socnet.2023.07.003">https://doi.org/10.1016/j.socnet.2023.07.003</a>.
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>From the Spanish suffix meaning small.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-advanced-ergms.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Advanced ERGMs: Constraints</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -4,7 +4,7 @@ title: Overview
 
 Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you--we will be brief--but I want to ensure we are all on the same page.
 
-# Programming with R
+## Programming with R
 
 The R programming language [@R] is the defacto language for social network analysis[^notfornetsci]. Furthermore, R homes the most comprehensive collection of packages implementing the methods we will cover here. Let's start by the fundamentals
 
@@ -120,7 +120,7 @@ The next type is the vector. A vector is a collection of elements of the same ty
 x_integer <- c(1, 2, 3)
 x_double  <- c(1.0, 2.0, 3.0)
 x_logical <- c(TRUE, FALSE, TRUE)
-# etc.
+## etc.
 ```
 
 R will coerce the data types to the most general type. For example, if we mix integers and doubles, R will coerce the integers into doubles. The coercion order is logical < integer < double < character
@@ -155,7 +155,7 @@ After lists, we have matrices. A matrix is a collection of elements of the same 
 x_matrix <- matrix(1:9, nrow = 3, ncol = 3)
 x_matrix
 
-# We can access elements in a matrix by row column, or position:
+## We can access elements in a matrix by row column, or position:
 x_matrix[1, 2]
 x_matrix[cbind(1, 2)]
 x_matrix[4]
@@ -172,8 +172,8 @@ The two last data structures are arrays and data frames. An array is a collectio
 #| collapse: true
 x_array <- array(1:27, dim = c(3, 3, 3))
 
-# We can access elements in an array by row, column, and dimension, or
-# position:
+## We can access elements in an array by row, column, and dimension, or
+## position:
 x_array[1, 2, 3]
 x_array[cbind(1, 2, 3)]
 x_array[22]
@@ -190,7 +190,7 @@ x_data_frame <- data.frame(
   c = c(TRUE, FALSE, TRUE)
 )
 
-# We can access elements in a data frame by row, column, or position:
+## We can access elements in a data frame by row, column, or position:
 x_data_frame[1, 2]
 x_data_frame[cbind(1, 2)]
 x_data_frame$b[1]    # Like a list
@@ -204,7 +204,7 @@ Functions are the most important building blocks of R. A function is a set of in
 ```{r}
 #| label: functions
 #| collapse: true
-# This function has two arguments (y is optional)
+## This function has two arguments (y is optional)
 f <- function(x, y = 1) {
   x + 1
 }
@@ -229,26 +229,26 @@ Control flow statements allow us to control the execution of the code. The most 
 ```{r}
 #| label: control-flow
 #| collapse: true
-# if
+## if
 if (TRUE) {
   "a"
 } else {
   "b"
 }
 
-# for
+## for
 for (i in 1:3) {
   cat("This is the number ", i, "\n")
 }
 
-# while
+## while
 i <- 1
 while (i <= 3) {
   cat("This is the number ", i, "\n")
   i <- i + 1
 }
 
-# repeat
+## repeat
 i <- 1
 repeat {
   cat("This is the number ", i, "\n")
@@ -274,11 +274,11 @@ library(ergm)
 ```
 
 
-# Statistics
+## Statistics
 
 Generally, statistics are used for two purposes: to describe and to infer. We observe data samples in descriptive statistics, recording and reporting the mean, median, and standard deviation, among other statistics. Statistical inference, on the other hand, is used to infer the properties of a population from a sample, particularly, about population parameters.
 
-![Grad view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](grand-view-stats.jpg){width=70%}
+![Grad view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](figs/grand-view-stats.jpg){width=70%}
 
 From the perspective of network science, descriptive statistics are used to describe the properties of a network, such as the number of nodes and edges, the degree distribution, the clustering coefficient, etc. Statistical inference in network science has to do with addressing questions about the underlying properties of networked systems; some questions include the following:
 
@@ -311,7 +311,7 @@ We usually say that we either *reject the null hypothesis* or *fail to reject it
 
 We will illustrate statistical concepts more concretely in the next section.
 
-# Statistical programming
+## Statistical programming
 
 Statistical programming (or computing) is the science of leveraging modern computing power to solve statistical problems. The R programming language is the defacto language for statistical programming, and so it has an extensive collection of packages implementing statistical methods and functions. 
 
@@ -350,7 +350,7 @@ Random numbers, and more precisely, pseudo-random numbers, are a vital component
 #| collapse: true
 set.seed(1)
 
-# Saving the current graphical parameters
+## Saving the current graphical parameters
 op <- par(mfrow = c(2,2))
 rnorm(1000) |> hist(main = "Normal distribution")
 runif(1000) |> hist(main = "Uniform distribution")
@@ -369,11 +369,11 @@ Simulations are front and center in statistical programming. We can use them to 
 set.seed(1)
 x <- rnorm(1000)
 
-# Bootstrap standard error of the mean
+## Bootstrap standard error of the mean
 n <- length(x)
 B <- 1000
 
-# We will store the results in a vector
+## We will store the results in a vector
 res <- numeric(B)
 
 for (i in 1:B) {
@@ -382,7 +382,7 @@ for (i in 1:B) {
     mean()
 }
 
-# Plot the results
+## Plot the results
 hist(res, main = "Bootstrap standard error of the mean")
 ```
 
@@ -406,3 +406,4 @@ Since the previous example is rather extensive, let us review it in detail.
 
 - `hist(res, main = "Bootstrap standard error of the mean")` plots the histogram of the results.
 
+## References

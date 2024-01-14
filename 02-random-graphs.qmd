@@ -2,11 +2,11 @@
 title: Random graphs
 ---
 
-# Introduction
+## Introduction
 
 In this section, we will focus on reviewing the most common random graph models, how these are used, and what things are important to consider when using them. Later on in the course, we will focus on Exponential-Family Random Graph Models [ERGMs], which are a generalization of the models we will discuss here.
 
-# Erdős–Rényi model
+## Erdős–Rényi model
 
 The Erdős–Rényi model is the simplest random graph model. It is defined by two parameters: $n$ and $p$. The parameter $n$ is the number of nodes in the graph, and $p$ is the probability that any two nodes are connected by an edge. The model is named after Paul Erdős and Alfréd Rényi, who first introduced it in 1959.
 
@@ -24,16 +24,16 @@ Most of the time, the ER is used as a reference distribution for studying real-w
 #| label: 01-er-random
 #| message: false
 
-# Model parameters
+## Model parameters
 n <- 40
 p <- 0.1
 
-# Generating the graph, version 1
+## Generating the graph, version 1
 set.seed(3312)
 g <- matrix(as.integer(runif(n * n) < p), nrow = n, ncol = n)
 diag(g) <- 0
 
-# Visualizing the network
+## Visualizing the network
 library(igraph)
 library(netplot)
 nplot(graph_from_adjacency_matrix(g))
@@ -43,7 +43,7 @@ nplot(graph_from_adjacency_matrix(g))
 
 **Challenge 2**: Using a Generalized-Linear-Model [GLM], estimate $p$ and its variance from the above network.
 
-# Watts-Strogatz model
+## Watts-Strogatz model
 
 The second model in our list is the small-world model, introduced by Duncan Watts and Steven Strogatz in 1998. The model is defined by three parameters: $n$, $k$, and $p$. The parameter $n$ is the number of nodes in the graph, $k$ is the number of neighbors each node is connected to, and $p$ is the probability that an edge is rewired. As its name suggests, the networks sampled from this model hold the small-world property, which means that the average distance between any two nodes is small.
 
@@ -60,7 +60,7 @@ Networks from the WS model are generated as follows:
 ```{r}
 #| label: 02-ws-random
 #| message: false
-# Creating a ring
+## Creating a ring
 n <- 10
 V <- 1:n
 k <- 3
@@ -71,16 +71,16 @@ for (i in 1:k) {
   E <- rbind(E, cbind(V, c(V[-c(1:i)], V[1:i])))
 }
 
-# Generating the ring layout
+## Generating the ring layout
 lo <- layout_in_circle(graph_from_edgelist(E))
 
-# Plotting with netplot
+## Plotting with netplot
 nplot(
   graph_from_edgelist(E),
   layout = lo
   )
 
-# Rewiring
+## Rewiring
 ids <- which(runif(nrow(E)) < p)
 E[ids, 2] <- sample(V, length(ids), replace = TRUE)
 nplot(
@@ -89,7 +89,7 @@ nplot(
   )
 ```
 
-# Scale-free networks
+## Scale-free networks
 
 Scale-free networks are networks where the degree distribution follows a power-law distribution. The power-law distribution is a heavy-tailed distribution, which means that it has a long tail of high-degree nodes. The power-law distribution is defined as follows:
 
@@ -111,17 +111,17 @@ Scale-free networks are generated using the Barabási–Albert model, which was 
 #| label: 03-ba-random
 #| message: false
 
-# Model parameters
+## Model parameters
 n <- 500
 m <- 2
 
-# Generating the graph
+## Generating the graph
 set.seed(3312)
 g <- matrix(0, nrow = n, ncol = n)
 g[1:m, 1:m] <- 1
 diag(g) <- 0
 
-# Adding nodes
+## Adding nodes
 for (i in (m + 1):n) {
 
   # Selecting the nodes to connect to
@@ -139,7 +139,7 @@ for (i in (m + 1):n) {
 
 }
 
-# Visualizing the degree distribution
+## Visualizing the degree distribution
 library(ggplot2)
 data.frame(degree = colSums(g)) |>
   ggplot(aes(degree)) +
@@ -151,3 +151,4 @@ data.frame(degree = colSums(g)) |>
   )
 ```
 
+## References
