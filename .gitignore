@@ -1,2 +1,8 @@
 /.quarto/
 *_cache
+
+index_files/
+0*/index.html
+
+*docx
+*xlsx

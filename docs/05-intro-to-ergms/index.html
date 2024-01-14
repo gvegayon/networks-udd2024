@@ -4532,19 +4532,23 @@ vertical-align: -.125em;
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-i">    
         <li>
     <a class="dropdown-item" href="../01-overview/index.html" rel target>
- <span class="dropdown-text">Overview</span></a>
+ <span class="dropdown-text">1. Overview</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../02-random-graphs/index.html" rel target>
- <span class="dropdown-text">Random graphs</span></a>
+ <span class="dropdown-text">2. Random graphs</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../03-behavior-and-coevolution/index.html" rel target>
- <span class="dropdown-text">Behavior and coevolution</span></a>
+ <span class="dropdown-text">3. Behavior and coevolution</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../04-intro-to-ergms/index.html" rel target>
- <span class="dropdown-text">Intro to ERGMs</span></a>
+    <a class="dropdown-item" href="../04-lab-1/index.html" rel target>
+ <span class="dropdown-text">4. Lab I</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../05-intro-to-ergms/index.html" rel target>
+ <span class="dropdown-text">5. Intro to ERGMs</span></a>
   </li>  
     </ul>
   </li>
@@ -4554,21 +4558,25 @@ vertical-align: -.125em;
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-ii">    
         <li>
-    <a class="dropdown-item" href="../05-advanced-ergms/index.html" rel target>
- <span class="dropdown-text">ERGMs (cont.)</span></a>
+    <a class="dropdown-item" href="../06-advanced-ergms/index.html" rel target>
+ <span class="dropdown-text">6. ERGMs (cont.)</span></a>
   </li>  
-        <li class="dropdown-header">Odd balls</li>
-        <li class="dropdown-header">ERGM advances</li>
+        <li>
+    <a class="dropdown-item" href="../07-odd-balls/index.html" rel target>
+ <span class="dropdown-text">7. Odd balls</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../08-lab-2/index.qmd" rel target>
+ <span class="dropdown-text">8. Lab II</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../09-new-topics/index.html" rel target>
+ <span class="dropdown-text">9. ERGM advances</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../00-fundamentals/index.html" rel target>
- <span class="menu-text">Fundamentals</span></a>
-  </li>  
-</ul>
-            <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools ms-auto">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -4666,7 +4674,7 @@ P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}) =  \exp\left(\bm{\theta}^{\mathbf{t}
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">avg   =</span> <span class="fu">mean</span>(Y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">qlogis</span>()</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##                 logit      ergm       avg</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.189393 -2.189393 -2.189393</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) -2.184939 -2.184939 -2.184939</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we see this, we say that dyads are independent of each other; this is also called <em>p1</em> models <span class="citation" data-cites="Holland1981">(<a href="#ref-Holland1981" role="doc-biblioref">Holland and Leinhardt 1981</a>)</span>. As a second example, imagine that we are interested in assessing whether gender homophily (the tendency between individuals of the same gender to connect) is present in a network. ERG models are the right tool for this task. Moreover, if we assume that gender homophily is the only mechanism that governs the network, the problem reduces to a Logistic regression:</p>
 <p><span class="math display">

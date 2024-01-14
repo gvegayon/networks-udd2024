@@ -9,28 +9,31 @@ website:
   title: UDD networks 2024
   
   navbar: 
-    right:
-      - text: Fundamentals
-        href: 00-fundamentals/index.qmd
     left:
       - text: Home
         href: index.qmd
       - text: Day I
         menu: 
-          - text: Overview
+          - text: 1. Overview
             href: 01-overview/index.qmd
-          - text: Random graphs
+          - text: 2. Random graphs
             href: 02-random-graphs/index.qmd
-          - text: Behavior and coevolution
+          - text: 3. Behavior and coevolution
             href: 03-behavior-and-coevolution/index.qmd
-          - text: Intro to ERGMs
-            href: 04-intro-to-ergms/index.qmd
+          - text: 4. Lab I
+            href: 04-lab-1/index.qmd
+          - text: 5. Intro to ERGMs
+            href: 05-intro-to-ergms/index.qmd
       - text: Day II
         menu:
-          - text: ERGMs (cont.)
-            href: 05-advanced-ergms/index.qmd
-          - text: Odd balls
-          - text: ERGM advances
+          - text: 6. ERGMs (cont.)
+            href: 06-advanced-ergms/index.qmd
+          - text: 7. Odd balls
+            href: 07-odd-balls/index.qmd
+          - text: 8. Lab II
+            href: 08-lab-2/index.qmd
+          - text: 9. ERGM advances
+            href: 09-new-topics/index.qmd
 
 format:
   html:
