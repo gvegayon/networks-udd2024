@@ -1,0 +1,13 @@
+---
+title: Lab II
+---
+
+The `ergm` package comes with a handful of vignettes (extended R examples) that you can use to learn more about the package. The vignette with the same name as the package shows an example fitting a model to the network `faux.mesa.high`. Address the following questions:
+
+a. What type of ERG model is this?
+
+b. Looking at the plot in the vignette, what other term(s) could you consider worth adding to the model? Why? 
+
+c. The vignette did not include a goodness-of-fit analysis. Can you add one? What do you find?
+
+d. **Challenge**: without using `ergm` to fit the model, estimate the following $p1$ model: `~ edges + nodefactor("Race")`. Compare your results with what you get using `ergm`.

@@ -1,6 +1,5 @@
 ---
 title: "Advanced ERGMs: Constraints"
-references: ../references.bib
 ---
 
 \newcommand{\tpose}[1]{#1^{\mathbf{t}}}
@@ -407,6 +406,3 @@ we need to use it ALL the time. Unless there is a very good reason to
 go around `ergm`'s capabilities, I wouldn't recommend fitting bipartite
 ERGMs as we just did, as the authors of the package have included (MANY) 
 features to make our job easier.
-
-
-# References

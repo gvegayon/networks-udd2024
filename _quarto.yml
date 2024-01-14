@@ -1,44 +1,36 @@
 project:
-  type: website
-  output-dir: docs
-  render: 
-    - "*/index.qmd"
-    - "index.qmd"
+  type: book
+  output-dir: _book
 
-website:
+book:
   title: UDD networks 2024
-  
-  navbar: 
-    left:
-      - text: Home
-        href: index.qmd
-      - text: Day I
-        menu: 
-          - text: 1. Overview
-            href: 01-overview/index.qmd
-          - text: 2. Random graphs
-            href: 02-random-graphs/index.qmd
-          - text: 3. Behavior and coevolution
-            href: 03-behavior-and-coevolution/index.qmd
-          - text: 4. Lab I
-            href: 04-lab-1/index.qmd
-          - text: 5. Intro to ERGMs
-            href: 05-intro-to-ergms/index.qmd
-      - text: Day II
-        menu:
-          - text: 6. ERGMs (cont.)
-            href: 06-advanced-ergms/index.qmd
-          - text: 7. Odd balls
-            href: 07-odd-balls/index.qmd
-          - text: 8. Lab II
-            href: 08-lab-2/index.qmd
-          - text: 9. ERGM advances
-            href: 09-new-topics/index.qmd
+  chapters: 
+    - index.qmd
+    - part: Day 1
+      chapters:
+        - 01-overview/index.qmd
+        - 02-random-graphs/index.qmd
+        - 03-behavior-and-coevolution/index.qmd
+        - 04-lab-1/index.qmd
+        - 05-intro-to-ergms/index.qmd
+    - part: Day 2
+      chapters:
+        - 06-ergms-cont/index.qmd
+        - 07-odd-balls/index.qmd
+        - 08-lab-2/index.qmd
+        - 09-advanced-ergms/index.qmd
+        - 10-new-topics/index.qmd
+    - references.qmd
+  downloads:
+  - epub
+  - pdf
+
+
+bibliography: references.bib
 
 format:
   html:
     html-math-method: katex
-    bibliography: ../references.bib
     toc: true
     number-sections: true
     embed-resources: true

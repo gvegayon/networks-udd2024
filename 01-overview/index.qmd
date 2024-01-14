@@ -1,6 +1,5 @@
 ---
 title: Overview
-bibliography: ../references.bib
 ---
 
 Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you--we will be brief--but I want to ensure we are all on the same page.
@@ -407,5 +406,3 @@ Since the previous example is rather extensive, let us review it in detail.
 
 - `hist(res, main = "Bootstrap standard error of the mean")` plots the histogram of the results.
 
-
-# References

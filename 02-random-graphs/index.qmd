@@ -4,7 +4,7 @@ title: Random graphs
 
 # Introduction
 
-In this section, we will focus on reviewing the most common random graph models, how these are used, and what things are important to consider when using them. Later on in the course, we will focus on Exponential-Family Random Graph Models (ERGMs), which are a generalization of the models we will discuss here.
+In this section, we will focus on reviewing the most common random graph models, how these are used, and what things are important to consider when using them. Later on in the course, we will focus on Exponential-Family Random Graph Models [ERGMs], which are a generalization of the models we will discuss here.
 
 # Erdős–Rényi model
 
@@ -151,4 +151,3 @@ data.frame(degree = colSums(g)) |>
   )
 ```
 
-# References

@@ -1,0 +1,109 @@
+---
+title: Convergence on ERGMs
+---
+
+Let's continue what we left off in the previous session: Evaluating our ERGMs. Like most models, ERGMs are a mix between art and science. Here is again a list of steps/considerations to have when fitting ERGMs:
+
+1. **Inspect the data**.
+
+2. **Start with endogenous effects first**.
+
+3. **After structure is controlled**.
+
+4. **Evaluate your results**: Once you have a model you are happy with, the last couple of steps are (a) assess convergence (which is usually done automagically by the `ergm` package,) and (b) assess goodness-of-fit, which in this context means how good was our model to capture (not-controlled for) properties of the network.
+
+We are in the last step. Let's recall what was our final model with the simulated data (code folded intentionally):
+
+```{r}
+#| label: ergm
+#| collapse: true
+#| code-fold: true
+#| message: false
+#| warning: false
+# Loading the packages
+library(ergm)
+library(sna)
+
+# Simulating the covariates (vertex attribute)
+set.seed(1235)
+
+# Simulating the data
+Y <- network(100, directed = TRUE)
+Y %v% "fav_music" <- sample(c("rock", "jazz", "pop"), 100, replace = TRUE)
+Y %v% "female"    <- rbinom(100, 1, 0.5) 
+
+# Simulating the ERGM
+Y <- ergm::simulate_formula(
+  Y ~
+    edges +
+    nodematch("fav_music") + 
+    nodematch("female") +
+    mutual,
+  coef = c(-4, 1, -1, 2)
+  )
+```
+
+```{r}
+#| label: ergm-plot-and-model
+#| message: false
+#| warning: false
+gplot(Y, vertex.col = c("green", "red")[Y %v% "female" + 1])
+
+model_final <- ergm(Y ~ edges + mutual + nodematch("fav_music") + nodematch("female"))
+
+summary(model_final)
+```
+
+
+# Convergence
+
+As our model was fitted using MCMC, we must ensure the chains converged. We can use the `mcmc.diagnostics` function from the `ergm` package to check model convergence. This function looks at the last set of simulations of the MCMC model and generates various diagnostics for the user.
+
+Under the hood, the fitting algorithm generates a stream of networks based on those parameters for each new proposed set of model parameters. The last stream of networks is thus simulated using the final state of the model. The `mcmc.diagnostics` function takes that stream of networks and plots the sequence of the sufficient statistics included in the model. A converged model should show a stationary statistics sequence, moving around a fixed value without (a) becoming stuck at any point and (b) chaining the tendency. This model shows both:
+
+```{r}
+#| label: convergence
+#| message: false
+mcmc.diagnostics(model_final, which   = c("plots"))
+```
+
+Now that we know our model was good enough to represent the observed statistics (sample them, actually,) let's see how good it is at capturing other features of the network that were not included in the model.
+
+# Goodness-of-fit
+
+This would be the last step in the sequence of steps to fit an ERGM. As we mentioned before, the idea of Goodness-of-fit [GOF] in ERG models is to see how well our model captures other properties of the graph that were not included in the model. By default, the `gof` function from the `ergm` package computes GOF for:
+
+a. The model statistics.
+
+b. The outdegree distribution.
+
+c. The indegree distribution.
+
+d. The distribution of edge-wise shared partners.
+
+e. The distribution of the geodesic distances (shortest path).
+
+The process of evaluating GOF is relatively straightforward. Using samples from the posterior distribution, we check whether the observed statistics from above are covered (fall within the CI) of our model. If they do, we say that the model has a good fit. Otherwise, if we observe significant anomalies, we return to the bench and try to improve our model.
+
+As with all simulated data, our `gof()` call shows that our selected model was an excellent choice for the observed graph:
+
+```{r}
+#| label: gof-calc
+#| message: false
+#| warning: false
+#| collapse: true
+gof_final <- gof(model_final)
+print(gof_final)
+```
+
+It is easier to see the results using the `plot` function:
+
+```{r}
+#| label: gof-plot
+#| message: false
+#| fig.height: 10
+# Plotting the result (5 figures)
+op <- par(mfrow = c(3,2))
+plot(gof_final)
+par(op)
+```

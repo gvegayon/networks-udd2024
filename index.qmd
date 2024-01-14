@@ -1,7 +1,4 @@
 ---
-nocite: |
-  @*
-bibliography: references.bib
 title: Home
 ---
 
@@ -24,11 +21,6 @@ If you are reading this, it is because you know that networks are everywhere. Ne
 - Coevolution of networks and behavior.
 
 - Advanced topics (sampling and conditional models).
-
-## References
-
-::: {#refs}
-:::
 
 ## Disclaimer
 

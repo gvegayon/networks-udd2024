@@ -369,7 +369,3 @@ Just like the ALAAM case, as ERNMs are closely related to ERGMS, building an exa
 
 # Excercises
 
-
-
-
-# References

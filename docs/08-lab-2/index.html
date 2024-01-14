@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>UDD networks 2024 - New topics in network modeling</title>
+<title>UDD networks 2024 - Lab II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,26 +19,7 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
-
-div.csl-bib-body { }
-div.csl-entry {
-clear: both;
-}
-.hanging-indent div.csl-entry {
-margin-left:2em;
-text-indent:-2em;
-}
-div.csl-left-margin {
-min-width:2em;
-float:left;
-}
-div.csl-right-inline {
-margin-left:2em;
-padding-left:1em;
-}
-div.csl-indent {
-margin-left: 2em;
-}</style>
+</style>
 
 
 <script>const headroomChanged = new CustomEvent("quarto-hrChanged", {
@@ -4524,7 +4505,7 @@ vertical-align: -.125em;
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-day-ii">    
         <li>
-    <a class="dropdown-item" href="../06-advanced-ergms/index.html" rel target>
+    <a class="dropdown-item" href="../06-ergms-cont/index.html" rel target>
  <span class="dropdown-text">6. ERGMs (cont.)</span></a>
   </li>  
         <li>
@@ -4532,12 +4513,16 @@ vertical-align: -.125em;
  <span class="dropdown-text">7. Odd balls</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../08-lab-2/index.qmd" rel target>
+    <a class="dropdown-item" href="../08-lab-2/index.html" rel target>
  <span class="dropdown-text">8. Lab II</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../09-new-topics/index.html" rel target>
- <span class="dropdown-text">9. ERGM advances</span></a>
+    <a class="dropdown-item" href="../09-advanced-ergms/index.html" rel target>
+ <span class="dropdown-text">9. Advanced ERGMs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../10-new-topics/index.html" rel target>
+ <span class="dropdown-text">10. New topics</span></a>
   </li>  
     </ul>
   </li>
@@ -4553,39 +4538,14 @@ vertical-align: -.125em;
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">0.1</span> Overview</a></li>
-  <li><a href="#part-i-new-models-and-extensions" id="toc-part-i-new-models-and-extensions" class="nav-link" data-scroll-target="#part-i-new-models-and-extensions"><span class="header-section-number">1</span> Part I: New models and extensions</a>
-  <ul class="collapse">
-  <li><a href="#mutli-ergms" id="toc-mutli-ergms" class="nav-link" data-scroll-target="#mutli-ergms"><span class="header-section-number">1.1</span> Mutli-ERGMs</a></li>
-  <li><a href="#statistical-power-of-soam" id="toc-statistical-power-of-soam" class="nav-link" data-scroll-target="#statistical-power-of-soam"><span class="header-section-number">1.2</span> Statistical power of SOAM</a></li>
-  <li><a href="#bayesian-alaam" id="toc-bayesian-alaam" class="nav-link" data-scroll-target="#bayesian-alaam"><span class="header-section-number">1.3</span> Bayesian ALAAM</a></li>
-  <li><a href="#relational-event-models" id="toc-relational-event-models" class="nav-link" data-scroll-target="#relational-event-models"><span class="header-section-number">1.4</span> Relational Event Models</a></li>
-  <li><a href="#big-ergms" id="toc-big-ergms" class="nav-link" data-scroll-target="#big-ergms"><span class="header-section-number">1.5</span> Big ERGMs</a></li>
-  <li><a href="#exponential-random-network-models" id="toc-exponential-random-network-models" class="nav-link" data-scroll-target="#exponential-random-network-models"><span class="header-section-number">1.6</span> Exponential Random <em>Network</em> Models</a></li>
-  </ul></li>
-  <li><a href="#part-ii-shameless-self-promotion" id="toc-part-ii-shameless-self-promotion" class="nav-link" data-scroll-target="#part-ii-shameless-self-promotion"><span class="header-section-number">2</span> Part II: Shameless self-promotion</a>
-  <ul class="collapse">
-  <li><a href="#ergmitos-small-ergms" id="toc-ergmitos-small-ergms" class="nav-link" data-scroll-target="#ergmitos-small-ergms"><span class="header-section-number">2.1</span> ERGMitos: Small ERGMs</a></li>
-  <li><a href="#discrete-exponential-family-models" id="toc-discrete-exponential-family-models" class="nav-link" data-scroll-target="#discrete-exponential-family-models"><span class="header-section-number">2.2</span> Discrete Exponential-family Models</a></li>
-  <li><a href="#power-analysis-in-ergms" id="toc-power-analysis-in-ergms" class="nav-link" data-scroll-target="#power-analysis-in-ergms"><span class="header-section-number">2.3</span> Power analysis in ERGMs</a></li>
-  <li><a href="#two-step-estimation-ergms" id="toc-two-step-estimation-ergms" class="nav-link" data-scroll-target="#two-step-estimation-ergms"><span class="header-section-number">2.4</span> Two-step estimation ERGMs</a></li>
-  <li><a href="#thanks" id="toc-thanks" class="nav-link" data-scroll-target="#thanks"><span class="header-section-number">2.5</span> Thanks!</a></li>
-  <li><a href="#bonus-track-why-network-scientists-dont-use-ergms" id="toc-bonus-track-why-network-scientists-dont-use-ergms" class="nav-link" data-scroll-target="#bonus-track-why-network-scientists-dont-use-ergms"><span class="header-section-number">2.6</span> Bonus track: Why network scientists don’t use ERGMs?</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">2.7</span> References</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">New topics in network modeling</h1>
+<h1 class="title">Lab II</h1>
 </div>
 
 
@@ -4600,213 +4560,17 @@ vertical-align: -.125em;
 
 </header>
 
-<section id="overview" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">0.1</span> Overview</h2>
-<ul>
-<li><p>With <strong>more data</strong> and <strong>computing resources</strong>, the things that we can ask and do with networks are becoming increasingly (even more) exciting and complex.</p></li>
-<li><p>In this section, I will introduce <strong>some</strong> of the latest advancements and forthcoming topics in network modeling.</p></li>
-</ul>
-</section>
-<section id="part-i-new-models-and-extensions" class="level1" data-background-color="black" data-number="1">
-<h1 data-background-color="black" data-number="1"><span class="header-section-number">1</span> Part I: New models and extensions</h1>
-<section id="mutli-ergms" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="mutli-ergms"><span class="header-section-number">1.1</span> Mutli-ERGMs</h2>
-<div class="columns">
-<div class="column">
-<ul>
-<li><p>In <span class="citation" data-cites="krivitskyTaleTwoDatasets2023a">Krivitsky, Coletti, and Hens (<a href="#ref-krivitskyTaleTwoDatasets2023a" role="doc-biblioref">2023a</a>)</span>, the authors present a start-to-finish pooled ERGM example featuring heterogeneous data sources.</p></li>
-<li><p>They increase power and allow exploring heterogeneous effects across types/classes of networks.</p></li>
-</ul>
-</div><div class="column">
-<p><img src="networks.png" class="img-fluid" style="width:100.0%"></p>
-</div>
-</div>
-</section>
-<section id="statistical-power-of-soam" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="statistical-power-of-soam"><span class="header-section-number">1.2</span> Statistical power of SOAM</h2>
-<div class="fragment" style="font-size: 80%">
-<ul>
-<li><strong>SOAM</strong> <span class="citation" data-cites="stadtfeldStatisticalPowerLongitudinal2020">Stadtfeld et al. (<a href="#ref-stadtfeldStatisticalPowerLongitudinal2020" role="doc-biblioref">2020</a>)</span> proposes ways to perform power analysis for Siena models. At the center of their six-step approach is simulation.</li>
-</ul>
-</div>
-<p><img src="siena-power-analysis.png" class="img-fluid"></p>
-</section>
-<section id="bayesian-alaam" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="bayesian-alaam"><span class="header-section-number">1.3</span> Bayesian ALAAM</h2>
-<p>Ever wondered how to model influence exclusively?</p>
-<div class="columns" style="font-size: 0.8em;">
-<div class="column">
-<ul>
-<li>The Auto-Logistic Actor Attribute Model [ALAAM] is a model that allows us to do just that.</li>
-<li><span class="citation" data-cites="koskinenBayesianAnalysisSocial2022">Koskinen and Daraganova (<a href="#ref-koskinenBayesianAnalysisSocial2022" role="doc-biblioref">2022</a>)</span> extends the ALAAM model to a Bayesian framework.</li>
-</ul>
-</div><div class="column">
-<ul>
-<li>It provides greater flexibility to accommodate more complicated models and add extensions such as hierarchical models. <img src="alaam-diagram.png" class="img-fluid" alt="Figure 1 reproduced from A. D. Stivala et al. (2020)"></li>
-</ul>
-</div>
-</div>
-</section>
-<section id="relational-event-models" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="relational-event-models"><span class="header-section-number">1.4</span> Relational Event Models</h2>
-<ul>
-<li><p>REMs are great for modeling sequences of ties (instead of panel or cross-sectional.)</p></li>
-<li><p><span class="citation" data-cites="buttsRelationalEventModels2023">Butts et al. (<a href="#ref-buttsRelationalEventModels2023" role="doc-biblioref">2023</a>)</span> provides a general overview of Relational Event Models [REMs,] new methods, and future steps.</p></li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="rem.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure 3 reproduced from <span class="citation" data-cites="brandenbergerInterdependenciesConflictDynamics2020">Brandenberger (<a href="#ref-brandenbergerInterdependenciesConflictDynamics2020" role="doc-biblioref">2020</a>)</span></figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="big-ergms" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="big-ergms"><span class="header-section-number">1.5</span> Big ERGMs</h2>
-<div class="columns">
-<div class="column" style="width:45%;">
-<ul>
-<li><strong>ERGMs</strong> In <span class="citation" data-cites="stivalaExponentialRandomGraph2020a">A. Stivala, Robins, and Lomi (<a href="#ref-stivalaExponentialRandomGraph2020a" role="doc-biblioref">2020</a>)</span>, a new method is proposed to estimate large ERGMs (featuring millions of nodes).</li>
-</ul>
-</div><!-- [^nonet]
-
-[^nonet]: No network visualization in the paper... as it usually happens in SNA papers! --><div class="column" style="width:45%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="bignet.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Partial map of the Internet based on the January 15, 2005 data found on opte.org. – <a href="https://en.wikipedia.org/w/index.php?title=File:Internet_map_1024.jpg&amp;oldid=1061830697">Wiki</a></figcaption><p></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="exponential-random-network-models" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="exponential-random-network-models"><span class="header-section-number">1.6</span> Exponential Random <em>Network</em> Models</h2>
-<ul>
-<li><p>Wang, Fellows, and Handcock recently published a re-introduction of the ERNM framework <span class="citation" data-cites="wangUnderstandingNetworksExponentialfamily2023">(<a href="#ref-wangUnderstandingNetworksExponentialfamily2023" role="doc-biblioref">Wang, Fellows, and Handcock 2023</a>)</span>.</p></li>
-<li><p>ERNMs generalize ERGMs to incorporate behavior and are the cross-sectional causing of SIENA models.</p></li>
-</ul>
-<p><span class="math display">\begin{align*}
-\text{ER\textbf{G}M}: &amp; P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y} | \bm{X}=\bm{x}) \\
-\text{ER\textbf{N}M}: &amp; P_{\mathcal{Y}, \bm{\theta}}(\bm{Y}=\bm{y}, \bm{X}=\bm{x})
-\end{align*}</span></p>
-</section>
-</section>
-<section id="part-ii-shameless-self-promotion" class="level1" data-background-color="black" data-number="2">
-<h1 data-background-color="black" data-number="2"><span class="header-section-number">2</span> Part II: Shameless self-promotion</h1>
-<section id="ergmitos-small-ergms" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="ergmitos-small-ergms"><span class="header-section-number">2.1</span> ERGMitos: Small ERGMs</h2>
-<ul>
-<li><strong>ERGMitos</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="citation" data-cites="vegayonExponentialRandomGraph2021">(<a href="#ref-vegayonExponentialRandomGraph2021" role="doc-biblioref">Vega Yon, Slaughter, and Haye 2021</a>)</span> leverage small network sizes to use exact statistics.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="littlenet.jpg" class="img-fluid figure-img" style="width:40.0%"></p>
-<p></p><figcaption class="figure-caption">Five small networks from the <code>ergmito</code> R package</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="discrete-exponential-family-models" class="level2" style="font-size: 0.8em;" data-number="2.2">
-<h2 style="font-size: 0.8em;" data-number="2.2" class="anchored" data-anchor-id="discrete-exponential-family-models"><span class="header-section-number">2.2</span> Discrete Exponential-family Models</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<ul>
-<li><p>ERGMs are a particular case of Random Markov fields.</p></li>
-<li><p>We can use the ERGM framework for modeling vectors of binary outcomes, e.g., the consumption of <span class="math inline">\{tobacco, MJ, alcohol\}</span></p></li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p><img src="defm.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="power-analysis-in-ergms" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="power-analysis-in-ergms"><span class="header-section-number">2.3</span> Power analysis in ERGMs</h2>
-<ul>
-<li>Using conditional ERGMs (closely related to constrained), we can do power analysis for network samples <span class="citation" data-cites="vegayonPowerMulticollinearitySmall2023">(<a href="#ref-vegayonPowerMulticollinearitySmall2023" role="doc-biblioref">Vega Yon 2023</a>)</span>.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig1-rejoinder.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Reproduced from <span class="citation" data-cites="krivitskyRejoinderDiscussionTale2023">Krivitsky, Coletti, and Hens (<a href="#ref-krivitskyRejoinderDiscussionTale2023" role="doc-biblioref">2023b</a>)</span></figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="two-step-estimation-ergms" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="two-step-estimation-ergms"><span class="header-section-number">2.4</span> Two-step estimation ERGMs</h2>
-<div style="font-size: 0.7em;">
-<ul>
-<li><p>Conditioning the ERGM on an observed statistic “drops” the associated coefficient.</p></li>
-<li><p>Hypothesis: As <span class="math inline">n</span> increases, conditional ERGM estimates are consistent with the full model:</p></li>
-</ul>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="condergm.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Simulation study trying to demonstrate the concept (Work in progress)</figcaption><p></p>
-</figure>
-</div>
-</section>
-<section id="thanks" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="thanks"><span class="header-section-number">2.5</span> Thanks!</h2>
-</section>
-<section id="bonus-track-why-network-scientists-dont-use-ergms" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="bonus-track-why-network-scientists-dont-use-ergms"><span class="header-section-number">2.6</span> Bonus track: Why network scientists don’t use ERGMs?</h2>
-<blockquote class="blockquote">
-<p>Attempts to overcome these problems by extending the blockmodel have focused particularly on the use of (more complicated) p∗ or exponential random graph models, but <strong>while these are conceptually appealing</strong>, they quickly <strong>lose the analytic tractability</strong> of the original blockmodel <strong>as their complexity increases</strong>.</p>
-<p>– <span class="citation" data-cites="karrerStochasticBlockmodelsCommunity2011">Karrer and Newman (<a href="#ref-karrerStochasticBlockmodelsCommunity2011" role="doc-biblioref">2011</a>)</span></p>
-</blockquote>
-</section>
-<section id="references" class="level2" data-number="2.7">
-
-
-
-
-</section>
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">2.7 References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-brandenbergerInterdependenciesConflictDynamics2020" class="csl-entry" role="listitem">
-Brandenberger, Laurence. 2020. <span>“Interdependencies in <span>Conflict Dynamics</span>: <span>Analyzing Endogenous Patterns</span> in <span>Conflict Event Data Using Relational Event Models</span>.”</span> In <em>Computational <span>Conflict Research</span></em>, edited by Emanuel Deutschmann, Jan Lorenz, Luis G. Nardin, Davide Natalini, and Adalbert F. X. Wilhelm, 67–80. Computational <span>Social Sciences</span>. <span>Cham</span>: <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-030-29333-8_4">https://doi.org/10.1007/978-3-030-29333-8_4</a>.
-</div>
-<div id="ref-buttsRelationalEventModels2023" class="csl-entry" role="listitem">
-Butts, Carter T., Alessandro Lomi, Tom A. B. Snijders, and Christoph Stadtfeld. 2023. <span>“Relational Event Models in Network Science.”</span> <em>Network Science</em> 11 (2): 175–83. <a href="https://doi.org/10.1017/nws.2023.9">https://doi.org/10.1017/nws.2023.9</a>.
-</div>
-<div id="ref-karrerStochasticBlockmodelsCommunity2011" class="csl-entry" role="listitem">
-Karrer, Brian, and M. E. J. Newman. 2011. <span>“Stochastic Blockmodels and Community Structure in Networks.”</span> <em>Physical Review E</em> 83 (1): 016107. <a href="https://doi.org/10.1103/PhysRevE.83.016107">https://doi.org/10.1103/PhysRevE.83.016107</a>.
-</div>
-<div id="ref-koskinenBayesianAnalysisSocial2022" class="csl-entry" role="listitem">
-Koskinen, Johan, and Galina Daraganova. 2022. <span>“Bayesian <span>Analysis</span> of <span>Social Influence</span>.”</span> <em>Journal of the Royal Statistical Society Series A: Statistics in Society</em> 185 (4): 1855–81. <a href="https://doi.org/10.1111/rssa.12844">https://doi.org/10.1111/rssa.12844</a>.
-</div>
-<div id="ref-krivitskyTaleTwoDatasets2023a" class="csl-entry" role="listitem">
-Krivitsky, Pavel N., Pietro Coletti, and Niel Hens. 2023a. <span>“A <span>Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>.”</span> <em>Journal of the American Statistical Association</em> 0 (0): 1–21. <a href="https://doi.org/10.1080/01621459.2023.2242627">https://doi.org/10.1080/01621459.2023.2242627</a>.
-</div>
-<div id="ref-krivitskyRejoinderDiscussionTale2023" class="csl-entry" role="listitem">
-———. 2023b. <span>“Rejoinder to <span>Discussion</span> of <span>‘<span>A Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>’</span>.”</span> <em>Journal of the American Statistical Association</em> 118 (544): 2235–38. <a href="https://doi.org/10.1080/01621459.2023.2280383">https://doi.org/10.1080/01621459.2023.2280383</a>.
-</div>
-<div id="ref-stadtfeldStatisticalPowerLongitudinal2020" class="csl-entry" role="listitem">
-Stadtfeld, Christoph, Tom A. B. Snijders, Christian Steglich, and Marijtje van Duijn. 2020. <span>“Statistical <span>Power</span> in <span>Longitudinal Network Studies</span>.”</span> <em>Sociological Methods &amp; Research</em> 49 (4): 1103–32. <a href="https://doi.org/10.1177/0049124118769113">https://doi.org/10.1177/0049124118769113</a>.
-</div>
-<div id="ref-stivalaUsingSampledNetwork2020" class="csl-entry" role="listitem">
-Stivala, Alex D., H. Colin Gallagher, David A. Rolls, Peng Wang, and Garry L. Robins. 2020. <span>“Using <span>Sampled Network Data With The Autologistic Actor Attribute Model</span>.”</span> <span>arXiv</span>. <a href="https://doi.org/10.48550/arXiv.2002.00849">https://doi.org/10.48550/arXiv.2002.00849</a>.
-</div>
-<div id="ref-stivalaExponentialRandomGraph2020a" class="csl-entry" role="listitem">
-Stivala, Alex, Garry Robins, and Alessandro Lomi. 2020. <span>“Exponential Random Graph Model Parameter Estimation for Very Large Directed Networks.”</span> <em>PLoS ONE</em> 15 (1): 1–23. <a href="https://doi.org/10.1371/journal.pone.0227804">https://doi.org/10.1371/journal.pone.0227804</a>.
-</div>
-<div id="ref-vegayonPowerMulticollinearitySmall2023" class="csl-entry" role="listitem">
-Vega Yon, George G. 2023. <span>“Power and Multicollinearity in Small Networks: <span>A</span> Discussion of <span>‘<span>Tale</span> of <span>Two Datasets</span>: <span>Representativeness</span> and <span>Generalisability</span> of <span>Inference</span> for <span>Samples</span> of <span>Networks</span>’</span> by <span>Krivitsky</span>, <span>Coletti</span> &amp; <span>Hens</span>.”</span> <em>Journal Of The American Statistical Association</em>.
-</div>
-<div id="ref-vegayonExponentialRandomGraph2021" class="csl-entry" role="listitem">
-Vega Yon, George G., Andrew Slaughter, and Kayla de la Haye. 2021. <span>“Exponential Random Graph Models for Little Networks.”</span> <em>Social Networks</em> 64 (August 2020): 225–38. <a href="https://doi.org/10.1016/j.socnet.2020.07.005">https://doi.org/10.1016/j.socnet.2020.07.005</a>.
-</div>
-<div id="ref-wangUnderstandingNetworksExponentialfamily2023" class="csl-entry" role="listitem">
-Wang, Zeyi, Ian E. Fellows, and Mark S. Handcock. 2023. <span>“Understanding Networks with Exponential-Family Random Network Models.”</span> <em>Social Networks</em>, August, S0378873323000497. <a href="https://doi.org/10.1016/j.socnet.2023.07.003">https://doi.org/10.1016/j.socnet.2023.07.003</a>.
-</div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>From the Spanish suffix meaning small.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>The <code>ergm</code> package comes with a handful of vignettes (extended R examples) that you can use to learn more about the package. The vignette with the same name as the package shows an example fitting a model to the network <code>faux.mesa.high</code>. Address the following questions:</p>
+<ol type="a">
+<li><p>What type of ERG model is this?</p></li>
+<li><p>Looking at the plot in the vignette, what other term(s) could you consider worth adding to the model? Why?</p></li>
+<li><p>The vignette did not include a goodness-of-fit analysis. Can you add one? What do you find?</p></li>
+<li><p><strong>Challenge</strong>: without using <code>ergm</code> to fit the model, estimate the following <span class="math inline">p1</span> model: <code>~ edges + nodefactor(&quot;Race&quot;)</code>. Compare your results with what you get using <code>ergm</code>.</p></li>
 </ol>
-</section></div></main> <!-- /main -->
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
