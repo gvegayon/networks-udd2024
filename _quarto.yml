@@ -6,9 +6,20 @@ execute:
   cache: true
 
 book:
-  title: UDD networks 2024
+  title: Statistical Inference in Network Science
+  subtitle: UDD networks 2024
   author: George G. Vega Yon, Ph.D.
   date: 2024-01-14
+  cover-image: figs/ai-image-cover.jpeg
+  cover-image-alt: An AI image generated with Bing representing statistical inference in networks.
+  page-footer: Statistical Inference in Network Science - [https://ggvy.cl](https://ggvy.cl){target="_blank"}
+  navbar:
+    background: light
+    right:
+      - icon: github
+        href: https://github.com/gvegayon/networks-udd2024
+        aria-label: GitHub
+
 
   chapters: 
     - index.qmd
@@ -40,10 +51,16 @@ format:
     toc: true
     number-sections: true
   pdf:
+    geometry: 
+      - top=1in
+      - bottom=1in
+      - left=1in
+      - right=1in
+    fontsize: 12pt
+    fontenc: T1
     include-in-header: 
       - text: |
-          \usepackage{amsmath}
-          \usepackage{amssymb}
+          \allowdisplaybreaks
           \usepackage{bm}
   epub: default
 

@@ -2,7 +2,7 @@
 title: Home
 ---
 
-## Introduction
+## Introduction {.unnumbered}
 
 If you are reading this, it is because you know that networks are everywhere. Network science is a rapidly growing field that has been applied to many different disciplines, from biology to sociology, from computer science to physics. In this course, we will go over advanced network science topics; particularly, statistical inference in networks. The course contents are:
 
@@ -22,10 +22,16 @@ If you are reading this, it is because you know that networks are everywhere. Ne
 
 - Advanced topics (sampling and conditional models).
 
-## Disclaimer
+## About the author {.unnumbered}
+
+[Dr. George G. Vega Yon](https://ggvy.cl){target="_blank"} is an Assistant Professor of Research at the Division of Epidemiology at the University of Utah and a Lead Scientist at Booz Allen Hamilton. He studies Complex Systems using Statistical Computing. George has over ten years of experience developing scientific software focusing on high-performance computing, data visualization, and social network analysis. His training is in Public Policy (M.A. UAI, 2011), Economics (M.Sc. Caltech, 2015), and Biostatistics (Ph.D. USC, 2020).
+
+Dr. Vega Yon obtained his Ph.D. in Biostatistics under the supervision of Prof. Paul Marjoram and Prof. Kayla de la Haye, with his dissertation titled "Essays on Bioinformatics and Social Network Analysis: Statistical and Computational Methods for Complex Systems."
+
+## Disclaimer {.unnumbered}
 
 This is an ongoing project. The course is being developed and will be updated as we go. If you have any comments or suggestions, please let me know. The generation of the course materials was assisted by AI tools, namely, GitHub copilot.
 
-## Code of Conduct
+## Code of Conduct {.unnumbered}
   
 Please note that the networks-udd2024 project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

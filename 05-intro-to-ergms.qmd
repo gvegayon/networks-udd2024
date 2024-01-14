@@ -398,4 +398,3 @@ We have shown here just a glimpse of what ERG models are. A large, active, colla
 - Melnet's PNEt website [(link)](https://www.melnet.org.au/pnet/).
 
 
-## References

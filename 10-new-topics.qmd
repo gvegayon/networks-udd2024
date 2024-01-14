@@ -129,4 +129,4 @@ Ever wondered how to model influence exclusively?
 >
 > -- @karrerStochasticBlockmodelsCommunity2011
 
-## References
+

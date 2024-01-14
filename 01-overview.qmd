@@ -406,4 +406,4 @@ Since the previous example is rather extensive, let us review it in detail.
 
 - `hist(res, main = "Bootstrap standard error of the mean")` plots the histogram of the results.
 
-## References
+

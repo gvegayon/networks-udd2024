@@ -409,4 +409,3 @@ go around `ergm`'s capabilities, I wouldn't recommend fitting bipartite
 ERGMs as we just did, as the authors of the package have included (MANY) 
 features to make our job easier.
 
-## References

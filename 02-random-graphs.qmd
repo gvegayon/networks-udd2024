@@ -151,4 +151,4 @@ data.frame(degree = colSums(g)) |>
   )
 ```
 
-## References
+

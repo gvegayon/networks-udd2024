@@ -7,4 +7,3 @@ Other common scenarios involve more convoluted/complex questions. For instance, 
 
 In @tanakaImaginaryNetworkMotifs2024, we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing.
 
-## References

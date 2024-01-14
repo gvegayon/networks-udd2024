@@ -9,7 +9,7 @@
 <meta name="author" content="George G. Vega Yon, Ph.D.">
 <meta name="dcterms.date" content="2024-01-14">
 
-<title>UDD networks 2024</title>
+<title>Statistical Inference in Network Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -43,11 +43,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -65,10 +65,51 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Statistical Inference in Network Science</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/gvegayon/networks-udd2024" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./Statistical-Inference-in-Network-Science.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="./Statistical-Inference-in-Network-Science.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -84,33 +125,9 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">UDD networks 2024</a> 
-        <div class="sidebar-tools-main">
-    <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
-            Download ePub
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./UDD-networks-2024.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
-            Download PDF
-            </a>
-          </li>
-      </ul>
-    </div>
-</div>
-    </div>
-      </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
@@ -222,9 +239,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">0.1</span> Introduction</a></li>
-  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer"><span class="header-section-number">0.2</span> Disclaimer</a></li>
-  <li><a href="#code-of-conduct" id="toc-code-of-conduct" class="nav-link" data-scroll-target="#code-of-conduct"><span class="header-section-number">0.3</span> Code of Conduct</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#about-the-author" id="toc-about-the-author" class="nav-link" data-scroll-target="#about-the-author">About the author</a></li>
+  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer">Disclaimer</a></li>
+  <li><a href="#code-of-conduct" id="toc-code-of-conduct" class="nav-link" data-scroll-target="#code-of-conduct">Code of Conduct</a></li>
   </ul>
 </nav>
     </div>
@@ -233,7 +251,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">UDD networks 2024</h1>
+<h1 class="title">Home</h1>
+<p class="subtitle lead">UDD networks 2024</p>
 </div>
 
 
@@ -260,8 +279,9 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduction" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">0.1</span> Introduction</h2>
+
+<section id="introduction" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2><p><img src="figs/ai-image-cover.jpeg" title="Statistical Inference in Network Science" class="quarto-cover-image img-fluid" alt="An AI image generated with Bing representing statistical inference in networks."></p>
 <p>If you are reading this, it is because you know that networks are everywhere. Network science is a rapidly growing field that has been applied to many different disciplines, from biology to sociology, from computer science to physics. In this course, we will go over advanced network science topics; particularly, statistical inference in networks. The course contents are:</p>
 <ul>
 <li><p>Overview of statistical inference.</p></li>
@@ -274,12 +294,17 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Advanced topics (sampling and conditional models).</p></li>
 </ul>
 </section>
-<section id="disclaimer" class="level2" data-number="0.2">
-<h2 data-number="0.2" class="anchored" data-anchor-id="disclaimer"><span class="header-section-number">0.2</span> Disclaimer</h2>
+<section id="about-the-author" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="about-the-author">About the author</h2>
+<p><a href="https://ggvy.cl" target="_blank">Dr.&nbsp;George G. Vega Yon</a> is an Assistant Professor of Research at the Division of Epidemiology at the University of Utah and a Lead Scientist at Booz Allen Hamilton. He studies Complex Systems using Statistical Computing. George has over ten years of experience developing scientific software focusing on high-performance computing, data visualization, and social network analysis. His training is in Public Policy (M.A.&nbsp;UAI, 2011), Economics (M.Sc. Caltech, 2015), and Biostatistics (Ph.D.&nbsp;USC, 2020).</p>
+<p>Dr.&nbsp;Vega Yon obtained his Ph.D.&nbsp;in Biostatistics under the supervision of Prof.&nbsp;Paul Marjoram and Prof.&nbsp;Kayla de la Haye, with his dissertation titled “Essays on Bioinformatics and Social Network Analysis: Statistical and Computational Methods for Complex Systems.”</p>
+</section>
+<section id="disclaimer" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="disclaimer">Disclaimer</h2>
 <p>This is an ongoing project. The course is being developed and will be updated as we go. If you have any comments or suggestions, please let me know. The generation of the course materials was assisted by AI tools, namely, GitHub copilot.</p>
 </section>
-<section id="code-of-conduct" class="level2" data-number="0.3">
-<h2 data-number="0.3" class="anchored" data-anchor-id="code-of-conduct"><span class="header-section-number">0.3</span> Code of Conduct</h2>
+<section id="code-of-conduct" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="code-of-conduct">Code of Conduct</h2>
 <p>Please note that the networks-udd2024 project is released with a <a href="https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 
 
@@ -529,6 +554,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">Statistical Inference in Network Science - <a href="https://ggvy.cl" target="_blank">https://ggvy.cl</a></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

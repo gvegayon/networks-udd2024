@@ -365,5 +365,5 @@ To date, there is no CRAN release for the ERNM model. The only implementation I 
 
 Just like the ALAAM case, as ERNMs are closely related to ERGMS, building an example using the ERGM package could be a great opportunity for a class project!
 
-## References
+
 
