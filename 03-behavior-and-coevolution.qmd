@@ -247,7 +247,8 @@ Because of the similarities, ALAAMs can be implemented using ERGMs. Because of t
 
 Finally, we discuss coevolution when both network and behavior are embedded in a feedback loop. Coevolution should be the default assumption when dealing with social networks. Nevertheless, models capable of capturing coevolution are hard to estimate. Here, we will discuss two of such models: Stochastic Actor-Oriented Models (or Siena Models) (first introduced in @snijdersStochasticActorOriented1996; see also @snijdersStochasticActorOrientedModels2017) and Exponential-family Random Exponential-family Random Network Models [ERNMs,] a generalization of ERGMs [@wangUnderstandingNetworksExponentialfamily2023; @ernmsFellows2023].
 
-**Siena** Stochastic Actor-Oriented Models [SOAMs] or Siena Models are dynamic models of network and behavior that describe the transition of a network system within two or more time points. The general form of a Siena model is:
+**Siena** Stochastic Actor-Oriented Models [SOAMs] or Siena Models are dynamic models of network and behavior that describe the transition of a network system within two or more time points. 
+<!-- The general form of a Siena model is: -->
 
 **ERNMs** This model is closely related to ERGMs, with the difference that they incorporate a vertex-level output. Conceptually, it is moving from a having a random network, to a model where a given vertex feature and network are random:
 
