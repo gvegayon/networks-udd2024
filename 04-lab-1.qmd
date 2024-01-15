@@ -4,33 +4,28 @@ title: Lab 1
 
 ## Types of problems
 
-Overall, we can classify the problems according to two dimensions:
+1. **Modeling with networks** Of the following cases, which ones can be treated with "regular statistical methods"? Justify your answers by identifying what is the unit of analysis in your "regression"/"test" and specify whether the units are independent or not.
 
-- **Behavior** Is the individual level behavior random or deterministic?
+a. Egocentric study 1: Analyze how the network structure affects health outcomes.
 
-- **Network** Is the network random or deterministic?
+b. Egocentric study 2: Investigate what network structures are more prevalent in a population sample.
 
-Of the following cases, which ones can be treated with "regular statistical methods"?
+c. Egocentric study 3: Elucidate whether the prevalence of a given network structure is higher in one population than in another.
 
-> a. Egocentric study 1: Analyze how the network structure affects health outcomes.
->
-> b. Egocentric study 2: Investigate what network structures are more prevalent in a population sample.
->
-> c. Egocentric study 3: Elucidate whether the prevalence of a given network structure is higher in one population than in another.
->
-> d. Country-level networks: Analyze whether neighboring countries tend to adopt international treaties at the same time.
->
-> e. Phylogenomics: Study a given phenotype in a population of organisms related by a phylogenetic tree. 
+d. Country-level networks: Analyze whether neighboring countries tend to adopt international treaties at the same time.
+
+e. Phylogenomics: Study a given phenotype in a population of organisms related by a phylogenetic tree. 
+
+
 
 ## Programming 
 
-**Simulating convolutions**: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with $(\mu, \sigma^2) = (-3, 1)$ and the other with $(\mu, \sigma^2) = (2, 2)$. Plot the histogram of the results. Draw 1,000 samples.
+1. **Simulating convolutions**: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with $(\mu, \sigma^2) = (-3, 1)$ and the other with $(\mu, \sigma^2) = (2, 2)$. Plot the histogram of the results. Draw 1,000 samples.
 
 ```{r}
 #| label: simulations-convolutions
 #| eval: false
-#| collapse: true
-#| code-fold: true
+#| echo: false
 set.seed(1)
 x <- rnorm(1000, mean = -3, sd = 1)
 y <- rnorm(1000, mean = 2, sd = 2)
@@ -39,14 +34,18 @@ z <- x + y
 hist(z)
 ```
 
-**Bimodal distribution**: Using the previous two normal distributions, simulate a bimodal distribution where the probability of sampling from the first distribution is 0.3 and the probability of sampling from the second distribution is 0.7. Plot the histogram of the results. (**Hint:** use a combination of `runif()` and `ifelse()`).
+2. **Bimodal distribution**: Using the previous two normal distributions, simulate a bimodal distribution where the probability of sampling from the first distribution is 0.3 and the probability of sampling from the second distribution is 0.7. Plot the histogram of the results. (**Hint:** use a combination of `runif()` and `ifelse()`).
 
 ```{r}
 #| label: simulations-bimodal
 #| eval: false
-#| collapse: true
-#| code-fold: true
+#| echo: false
 z <- ifelse(runif(1000) < 0.3, x, y)
 density(z) |> plot()
 ```
 
+## Random graphs
+
+1. Write a function to simulate Bernoulli graph, but instead of evaluating each $(i,j)$ tie individually like in @er-code, use a binomial random number to identify how many edges the graph will have, and randomly pick which will those be from the set $V\times V$
+
+2. Using a Generalized-Linear-Model [GLM], estimate the density parameter of the previous graph.

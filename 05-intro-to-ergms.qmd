@@ -387,7 +387,7 @@ screenreg(list(`2` = model_2, `4` = model_4, `Final` = model_final))
 
 
 
-## Conclusion
+## More about ERGMs
 
 We have shown here just a glimpse of what ERG models are. A large, active, collaborative community of social network scientists is working on new extensions and advances. If you want to learn more about ERGMs, I recommend the following resources:
 

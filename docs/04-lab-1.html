@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -290,6 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#types-of-problems" id="toc-types-of-problems" class="nav-link active" data-scroll-target="#types-of-problems"><span class="header-section-number">5.1</span> Types of problems</a></li>
   <li><a href="#programming" id="toc-programming" class="nav-link" data-scroll-target="#programming"><span class="header-section-number">5.2</span> Programming</a></li>
+  <li><a href="#random-graphs" id="toc-random-graphs" class="nav-link" data-scroll-target="#random-graphs"><span class="header-section-number">5.3</span> Random graphs</a></li>
   </ul>
 </nav>
     </div>
@@ -315,13 +282,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="types-of-problems" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="types-of-problems"><span class="header-section-number">5.1</span> Types of problems</h2>
-<p>Overall, we can classify the problems according to two dimensions:</p>
-<ul>
-<li><p><strong>Behavior</strong> Is the individual level behavior random or deterministic?</p></li>
-<li><p><strong>Network</strong> Is the network random or deterministic?</p></li>
-</ul>
-<p>Of the following cases, which ones can be treated with “regular statistical methods”?</p>
-<blockquote class="blockquote">
+<ol type="1">
+<li><strong>Modeling with networks</strong> Of the following cases, which ones can be treated with “regular statistical methods”? Justify your answers by identifying what is the unit of analysis in your “regression”/“test” and specify whether the units are independent or not.</li>
+</ol>
 <ol type="a">
 <li><p>Egocentric study 1: Analyze how the network structure affects health outcomes.</p></li>
 <li><p>Egocentric study 2: Investigate what network structures are more prevalent in a population sample.</p></li>
@@ -329,30 +292,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Country-level networks: Analyze whether neighboring countries tend to adopt international treaties at the same time.</p></li>
 <li><p>Phylogenomics: Study a given phenotype in a population of organisms related by a phylogenetic tree.</p></li>
 </ol>
-</blockquote>
 </section>
 <section id="programming" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="programming"><span class="header-section-number">5.2</span> Programming</h2>
-<p><strong>Simulating convolutions</strong>: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with <span class="math inline">(\mu, \sigma^2) = (-3, 1)</span> and the other with <span class="math inline">(\mu, \sigma^2) = (2, 2)</span>. Plot the histogram of the results. Draw 1,000 samples.</p>
-<div class="cell" data-hash="04-lab-1_cache/html/simulations-convolutions_ba5521355d9fb919069977e762c75528">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="sc">-</span><span class="dv">3</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p><strong>Bimodal distribution</strong>: Using the previous two normal distributions, simulate a bimodal distribution where the probability of sampling from the first distribution is 0.3 and the probability of sampling from the second distribution is 0.7. Plot the histogram of the results. (<strong>Hint:</strong> use a combination of <code>runif()</code> and <code>ifelse()</code>).</p>
-<div class="cell" data-hash="04-lab-1_cache/html/simulations-bimodal_7c062979cd4c967d1e5ab317a6e6ab5b">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">runif</span>(<span class="dv">1000</span>) <span class="sc">&lt;</span> <span class="fl">0.3</span>, x, y)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">density</span>(z) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<ol type="1">
+<li><strong>Simulating convolutions</strong>: Using what you have learned about statistical functions in R, simulate the convolution of two normal distributions, one with <span class="math inline">(\mu, \sigma^2) = (-3, 1)</span> and the other with <span class="math inline">(\mu, \sigma^2) = (2, 2)</span>. Plot the histogram of the results. Draw 1,000 samples.</li>
+</ol>
+<ol start="2" type="1">
+<li><strong>Bimodal distribution</strong>: Using the previous two normal distributions, simulate a bimodal distribution where the probability of sampling from the first distribution is 0.3 and the probability of sampling from the second distribution is 0.7. Plot the histogram of the results. (<strong>Hint:</strong> use a combination of <code>runif()</code> and <code>ifelse()</code>).</li>
+</ol>
+</section>
+<section id="random-graphs" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="random-graphs"><span class="header-section-number">5.3</span> Random graphs</h2>
+<ol type="1">
+<li><p>Write a function to simulate Bernoulli graph, but instead of evaluating each <span class="math inline">(i,j)</span> tie individually like in <span class="citation" data-cites="er-code">(<a href="references.html#ref-er-code" role="doc-biblioref"><strong>er-code?</strong></a>)</span>, use a binomial random number to identify how many edges the graph will have, and randomly pick which will those be from the set <span class="math inline">V\times V</span></p></li>
+<li><p>Using a Generalized-Linear-Model [GLM], estimate the density parameter of the previous graph.</p></li>
+</ol>
 
 
 </section>

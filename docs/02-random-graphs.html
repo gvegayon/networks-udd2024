@@ -289,12 +289,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">3.1</span> Introduction</a></li>
-  <li><a href="#erdősrényi-model" id="toc-erdősrényi-model" class="nav-link" data-scroll-target="#erdősrényi-model"><span class="header-section-number">3.2</span> Erdős–Rényi model</a></li>
-  <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example"><span class="header-section-number">3.3</span> Code example</a></li>
-  <li><a href="#watts-strogatz-model" id="toc-watts-strogatz-model" class="nav-link" data-scroll-target="#watts-strogatz-model"><span class="header-section-number">3.4</span> Watts-Strogatz model</a></li>
-  <li><a href="#code-example-1" id="toc-code-example-1" class="nav-link" data-scroll-target="#code-example-1"><span class="header-section-number">3.5</span> Code example</a></li>
-  <li><a href="#scale-free-networks" id="toc-scale-free-networks" class="nav-link" data-scroll-target="#scale-free-networks"><span class="header-section-number">3.6</span> Scale-free networks</a></li>
-  <li><a href="#code-example-2" id="toc-code-example-2" class="nav-link" data-scroll-target="#code-example-2"><span class="header-section-number">3.7</span> Code example</a></li>
+  <li><a href="#erdősrényi-model" id="toc-erdősrényi-model" class="nav-link" data-scroll-target="#erdősrényi-model"><span class="header-section-number">3.2</span> Erdős–Rényi model</a>
+  <ul class="collapse">
+  <li><a href="#er-code" id="toc-er-code" class="nav-link" data-scroll-target="#er-code"><span class="header-section-number">3.2.1</span> Code example</a></li>
+  </ul></li>
+  <li><a href="#watts-strogatz-model" id="toc-watts-strogatz-model" class="nav-link" data-scroll-target="#watts-strogatz-model"><span class="header-section-number">3.3</span> Watts-Strogatz model</a>
+  <ul class="collapse">
+  <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example"><span class="header-section-number">3.3.1</span> Code example</a></li>
+  </ul></li>
+  <li><a href="#scale-free-networks" id="toc-scale-free-networks" class="nav-link" data-scroll-target="#scale-free-networks"><span class="header-section-number">3.4</span> Scale-free networks</a>
+  <ul class="collapse">
+  <li><a href="#code-example-1" id="toc-code-example-1" class="nav-link" data-scroll-target="#code-example-1"><span class="header-section-number">3.4.1</span> Code example</a></li>
+  </ul></li>
+  <li><a href="#motif-discovery" id="toc-motif-discovery" class="nav-link" data-scroll-target="#motif-discovery"><span class="header-section-number">4</span> Motif discovery</a>
+  <ul class="collapse">
+  <li><a href="#code-example-2" id="toc-code-example-2" class="nav-link" data-scroll-target="#code-example-2"><span class="header-section-number">4.1</span> Code example</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -340,9 +350,8 @@ Tip
 </div>
 </div>
 <p>Most of the time, the ER is used as a reference distribution for studying real-world networks. Nevertheless, using the ER model as a null model for a real-world network is not always a good idea, as it may inflate the type two error rate.</p>
-</section>
-<section id="code-example" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="code-example"><span class="header-section-number">3.3</span> Code example</h2>
+<section id="er-code" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="er-code"><span class="header-section-number">3.2.1</span> Code example</h3>
 <div class="cell" data-hash="02-random-graphs_cache/html/01-er-random_4125eefebfc47a5ee83a899fb833713b">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model parameters</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span></span>
@@ -361,11 +370,10 @@ Tip
 <p><img src="02-random-graphs_files/figure-html/01-er-random-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Challenge 1</strong>: How would you generate the graph using the two-step process described above?</p>
-<p><strong>Challenge 2</strong>: Using a Generalized-Linear-Model [GLM], estimate <span class="math inline">p</span> and its variance from the above network.</p>
 </section>
-<section id="watts-strogatz-model" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="watts-strogatz-model"><span class="header-section-number">3.4</span> Watts-Strogatz model</h2>
+</section>
+<section id="watts-strogatz-model" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="watts-strogatz-model"><span class="header-section-number">3.3</span> Watts-Strogatz model</h2>
 <p>The second model in our list is the small-world model, introduced by Duncan Watts and Steven Strogatz in 1998. The model is defined by three parameters: <span class="math inline">n</span>, <span class="math inline">k</span>, and <span class="math inline">p</span>. The parameter <span class="math inline">n</span> is the number of nodes in the graph, <span class="math inline">k</span> is the number of neighbors each node is connected to, and <span class="math inline">p</span> is the probability that an edge is rewired. As its name suggests, the networks sampled from this model hold the small-world property, which means that the average distance between any two nodes is small.</p>
 <p>Networks from the WS model are generated as follows:</p>
 <ol type="1">
@@ -373,9 +381,8 @@ Tip
 <li><p>For each edge <span class="math inline">(u, v)</span>, rewire it with probability <span class="math inline">p</span> by replacing it with a random edge <span class="math inline">(u, w)</span>, where <span class="math inline">w</span> is chosen uniformly at random from the set of all nodes.</p></li>
 </ol>
 <p><strong>Challenge:</strong> How would you generate a WS graph using the two-step process described above?</p>
-</section>
-<section id="code-example-1" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="code-example-1"><span class="header-section-number">3.5</span> Code example</h2>
+<section id="code-example" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="code-example"><span class="header-section-number">3.3.1</span> Code example</h3>
 <div class="cell" data-hash="02-random-graphs_cache/html/02-ws-random_c99498f7fc4ac1d6ac81806a03469a81">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating a ring</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
@@ -411,8 +418,9 @@ Tip
 </div>
 </div>
 </section>
-<section id="scale-free-networks" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="scale-free-networks"><span class="header-section-number">3.6</span> Scale-free networks</h2>
+</section>
+<section id="scale-free-networks" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="scale-free-networks"><span class="header-section-number">3.4</span> Scale-free networks</h2>
 <p>Scale-free networks are networks where the degree distribution follows a power-law distribution. The power-law distribution is a heavy-tailed distribution, which means that it has a long tail of high-degree nodes. The power-law distribution is defined as follows:</p>
 <p><span class="math display">
 p(k) = C k^{-\gamma}
@@ -423,9 +431,8 @@ p(k) = C k^{-\gamma}
 <li><p>Start with a graph of <span class="math inline">m</span> nodes, where each node is connected to all other nodes.</p></li>
 <li><p>At each time step, add a new node to the graph and connect it to <span class="math inline">m</span> existing nodes. The probability that a new node is connected to an existing node <span class="math inline">i</span> is proportional to the degree of <span class="math inline">i</span>.</p></li>
 </ol>
-</section>
-<section id="code-example-2" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="code-example-2"><span class="header-section-number">3.7</span> Code example</h2>
+<section id="code-example-1" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="code-example-1"><span class="header-section-number">3.4.1</span> Code example</h3>
 <div class="cell" data-hash="02-random-graphs_cache/html/03-ba-random_a50ea4cf1bdd70582b56b9bd010d7743">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model parameters</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
@@ -469,8 +476,74 @@ p(k) = C k^{-\gamma}
 <p><img src="02-random-graphs_files/figure-html/03-ba-random-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+</section>
+<section id="motif-discovery" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Motif discovery</h1>
+<p>One important application of random graphs is motif discovery. The principle is simple: we can use random graphs to generate null distributions of observed statistics/motifs. Usually the process is as follows:</p>
+<ol type="1">
+<li><p>Compute the desired set of motifs to assess, for instance, number of triangles, 4 cycles, etc.</p></li>
+<li><p>Using one of the random graph models, generate a null distribution of networks <strong>similar to the observed graph</strong>. This is important, as the null must be relevant to the case. At minimum, must have the same density of the observed graph.</p></li>
+<li><p>For each random graph in the null, compute the same vector of statistics/motifs, and use that as a benchmark to assess the relative prevalence of the network.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Rewiring algorithms">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rewiring algorithms
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One of the most common ways of generating random graphs is using degree sequence preserving algorithm. Implementations of this can be found in <code>netdiffuseR</code> and <code>igraph</code>.</p>
+</div>
+</div>
+<section id="code-example-2" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="code-example-2"><span class="header-section-number">4.1</span> Code example</h2>
+<div class="cell" data-hash="02-random-graphs_cache/html/degseq_39e8d96b432a88bf4e0cd9ac0785668a">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading the R package</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(netdiffuseR)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A graph with known structure (see Milo 2004)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">ncol=</span>n, <span class="at">nrow=</span>n)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as</span>(x, <span class="st">"dgCMatrix"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>,<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span>n)] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span>n),n] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5 x 5 sparse Matrix of class "dgCMatrix"
+              
+[1,] . 1 1 1 .
+[2,] . . . . 1
+[3,] . . . . 1
+[4,] . . . . 1
+[5,] . . . . .</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulations (increase the number for more precision)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8612</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>nsim <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">seq_len</span>(nsim), <span class="cf">function</span>(y) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="co"># Creating the new graph</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> g <span class="ot">&lt;-</span> <span class="fu">rewire_graph</span>(x,<span class="at">p=</span><span class="fu">nlinks</span>(x)<span class="sc">*</span><span class="dv">100</span>, <span class="at">algorithm =</span> <span class="st">"swap"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># Categorizing (tag of the generated structure)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">paste0</span>(<span class="fu">as.vector</span>(g), <span class="at">collapse=</span><span class="st">""</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>coded <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.factor</span>(w))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">table</span>(coded)<span class="sc">/</span>nsim<span class="sc">*</span><span class="dv">100</span>, <span class="at">type=</span><span class="st">"p"</span>, <span class="at">ylab=</span><span class="st">"Frequency %"</span>, <span class="at">xlab=</span><span class="st">"Class of graph"</span>, <span class="at">pch=</span><span class="dv">3</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a> <span class="at">main=</span><span class="st">"Distribution of classes generated by rewiring"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Marking the original structure</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="fu">as.vector</span>(x), <span class="at">collapse=</span><span class="st">""</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x=</span><span class="dv">7</span>,<span class="at">y=</span><span class="fu">table</span>(<span class="fu">as.factor</span>(w))[baseline]<span class="sc">/</span>nsim<span class="sc">*</span><span class="dv">100</span>, <span class="at">pch=</span><span class="dv">3</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="02-random-graphs_files/figure-html/degseq-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
