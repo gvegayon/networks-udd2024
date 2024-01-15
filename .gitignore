@@ -3,6 +3,7 @@
 _freeze
 
 *_files/
+!docs/*_files
 0*/index.html
 
 *docx
