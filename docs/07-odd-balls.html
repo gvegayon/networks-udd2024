@@ -80,6 +80,22 @@ div.csl-indent {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 </head>
 
@@ -253,7 +269,15 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#non-parametric-statistics" id="toc-non-parametric-statistics" class="nav-link active" data-scroll-target="#non-parametric-statistics"><span class="header-section-number">8.1</span> Non-parametric statistics</a></li>
+  <li><a href="#case-1-social-mimicry" id="toc-case-1-social-mimicry" class="nav-link" data-scroll-target="#case-1-social-mimicry"><span class="header-section-number">8.2</span> Case 1: Social mimicry</a></li>
+  <li><a href="#case-2-imaginary-motifs" id="toc-case-2-imaginary-motifs" class="nav-link" data-scroll-target="#case-2-imaginary-motifs"><span class="header-section-number">8.3</span> Case 2: Imaginary motifs</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -275,8 +299,68 @@ div.csl-indent {
 
 </header>
 
-<p>Other common scenarios involve more convoluted/complex questions. For instance, in the case of dyadic behavior <span class="citation" data-cites="bellSensingEatingMimicry2019">Bell et al. (<a href="references.html#ref-bellSensingEatingMimicry2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>Many times the existing methods are not enough to answer the questions we have. Most of the time, non-parametric statistics are the answer. In this section, we will discuss some of the cases where we had to use non-parametric statistics.</p>
+<section id="non-parametric-statistics" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="non-parametric-statistics"><span class="header-section-number">8.1</span> Non-parametric statistics</h2>
+<p>Non-parametric statistics are statistical methods in which parametric assumptions such as probability function or model parameters are not made. In other words, non-parametric statistics are distribution-free methods. With many non-parametric methods, simulation-based methods are the most commonly used. The following papers show a couple of examples using non-parametric methods applied to network inference problems.</p>
+</section>
+<section id="case-1-social-mimicry" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="case-1-social-mimicry"><span class="header-section-number">8.2</span> Case 1: Social mimicry</h2>
+<p>In <span class="citation" data-cites="bellSensingEatingMimicry2019">Bell et al. (<a href="references.html#ref-bellSensingEatingMimicry2019" role="doc-biblioref">2019</a>)</span>, we investigated the prevalence of social mimicry in families while eating. Social mimicry is a widely studied phenomenon. And while some statistical methods try to measure it, we approach the problem differently. Instead of assuming mimicry and measuring it right away, we started by asking if there was mimicry in the first place.</p>
+<p>The study featured an experiment that consisted of the following:</p>
+<ol type="a">
+<li><p>Families were invited to a lab and were asked to eat a meal together.</p></li>
+<li><p>Using accelerometers, we time-stamped the action of taking a bite.</p></li>
+<li><p>Data was then cleaned and processed to obtain the time stamps of each bite (verified using video recordings of the event).</p></li>
+</ol>
+<p>The null hypothesis was then: “The sequence of bites for Person <span class="math inline">i</span> and <span class="math inline">j</span> are independent (<em>i.e.</em>, no mimicry).” To test this hypothesis, we used a permutation test. The test consisted of the following:</p>
+<ol type="1">
+<li><p>For each pair of persons <span class="math inline">i</span> and <span class="math inline">j</span>, we calculated the average time gap between their bites.</p></li>
+<li><p>We then generated a null distribution by shuffling the time blocks of each person, i.e., for each dyad:</p>
+<ol type="a">
+<li><p>For each individual, we computed the sequence of time gaps between bites (time between bites each person took).</p></li>
+<li><p>Using that sequence, we then simulated a new sequence of bites for each individual, fixing the individual level time gap distribution.</p></li>
+<li><p>Once shuffled, we then computed the average time gap per dyad.</p></li>
+</ol></li>
+<li><p>Finally, we used the generated null distribution to assess the prevalence of social mimicry. The next figure shows the results for one dyad:</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/mimicry.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Null distribution of average time gap between person <span class="math inline">i</span> and person <span class="math inline">j</span> – reproduced from <span class="citation" data-cites="bellSensingEatingMimicry2019">Bell et al. (<a href="references.html#ref-bellSensingEatingMimicry2019" role="doc-biblioref">2019</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="case-2-imaginary-motifs" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="case-2-imaginary-motifs"><span class="header-section-number">8.3</span> Case 2: Imaginary motifs</h2>
 <p>In <span class="citation" data-cites="tanakaImaginaryNetworkMotifs2024">Tanaka and Vega Yon (<a href="references.html#ref-tanakaImaginaryNetworkMotifs2024" role="doc-biblioref">2024</a>)</span>, we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing.</p>
+<p><img src="figs/imaginary.png" class="img-fluid"></p>
+<!-- \newcommand{\chng}[1]{\delta\left(#1: 0\to 1\right)} -->
+<p>The process can be described as follows:</p>
+<p><span class="math display">\begin{equation}
+    \text{Pr}\left(\left.\vphantom{t_{ij} = 1}p_{ij} = 1\right|t_{ij} = 1\right) = \left\{\begin{array}{ll}%
+    |\sum_{\oplus(k)}t_{nm}|^{-1}\sum_{\oplus(k)}p_{nm}t_{nm} &amp;\text{if}\; k \in \{i, j\} \\
+    |\sum_{\oplus(k)^{\complement}}t_{nm}|^{-1}\sum_{\oplus(k)^\complement}p_{nm}t_{nm} &amp;\text{otherwise},
+    \end{array}\right.
+\end{equation}</span></p>
+<p><span class="math display">\begin{equation}
+    \text{Pr}\left(\left.\vphantom{t_{ij} = 0}p_{ij} = 0\right|t_{ij} = 0\right) = \left\{\begin{array}{ll}%
+    |\sum_{\oplus(k)}(1-t_{nm})|^{-1}\sum_{\oplus(k)}(1-p_{nm}t_{nm}) &amp;\text{if}\; k \in \{i, j\} \\
+    |\sum_{\oplus(k)^{\complement}}(1-t_{nm})|^{-1}\sum_{\oplus(k)^\complement}(1-p_{nm}t_{nm}) &amp;\text{otherwise},
+    \end{array}\right.
+\end{equation}</span></p>
+<p>where, <span class="math inline">\oplus(k) \equiv \left\{(m,n) : (m = k) \oplus (n = k)\right\}</span> is the set of ties involving <span class="math inline">k</span>, and <span class="math inline">\oplus(k)^\complement</span> is its complement.</p>
+<p>Each sampled perceived graph was <span class="math inline">\mathbf{P}^b_l</span>–-th sampled graph for each individual . We then counted the dyadic imaginary network motifs, <span class="math inline">\tau_l^b \equiv s\left(\mathbf{T}, \mathbf{P}^b\right)</span>; the same was done to the observed graphs, <span class="math inline">\hat{\tau}_l \equiv s\left(\mathbf{T}, \mathbf{P}\right)</span>. Finally, we calculated a -value using the equal-tail nonparametric test drawing <span class="math inline">B = 2,000</span> samples recommend 1,000 minimum) from the null distribution, comparing the observed imaginary motif counts, <span class="math inline">\hat\tau_l</span>, and what we would expect to see by chance, <span class="math inline">\{\tau^b_l\}_{b=1}^B</span>:</p>
+<p><span class="math display">\begin{equation}
+    \hat{p}(\hat{\tau_l}) = 2\times \min\left[\frac{1}{B}\sum_{b}I(\tau^b_l \leq \hat{\tau_l}), \frac{1}{B}\sum_{b}I(\tau^b_l &gt; \hat{\tau_l})\right]
+\end{equation}</span></p>
+<!-- ## Other cases
+
+- Police use of force @ouelletOfficerNetworksFirearm2023
+
+## Case 4: Network bootstrap
+
+## Case 5: Network matching -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -287,6 +371,7 @@ Bell, Brooke M., Donna Spruijt-Metz, George G. Vega Yon, Abu S. Mondol, Ridwan A
 Tanaka, Kyosuke, and George G. Vega Yon. 2024. <span>“Imaginary Network Motifs: <span>Structural</span> Patterns of False Positives and Negatives in Social Networks.”</span> <em>Social Networks</em> 78 (July): 65–80. <a href="https://doi.org/10.1016/j.socnet.2023.11.005">https://doi.org/10.1016/j.socnet.2023.11.005</a>.
 </div>
 </div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

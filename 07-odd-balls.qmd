@@ -6,20 +6,83 @@ Many times the existing methods are not enough to answer the questions we have. 
 
 ## Non-parametric statistics
 
-Non-parametric statistics are statistical methods in which parametric assumptions such as probability function or model parameters are not made. In other words, non-parametric statistics are distribution-free methods. With many non-parametric methods, simulation-based methods are the most commonly used.
+Non-parametric statistics are statistical methods in which parametric assumptions such as probability function or model parameters are not made. In other words, non-parametric statistics are distribution-free methods. With many non-parametric methods, simulation-based methods are the most commonly used. The following papers show a couple of examples using non-parametric methods applied to network inference problems.
 
 ## Case 1: Social mimicry
 
-Other common scenarios involve more convoluted/complex questions. For instance, in the case of dyadic behavior @bellSensingEatingMimicry2019.
+In @bellSensingEatingMimicry2019, we investigated the prevalence of social mimicry in families while eating. Social mimicry is a widely studied phenomenon. And while some statistical methods try to measure it, we approach the problem differently. Instead of assuming mimicry and measuring it right away, we started by asking if there was mimicry in the first place.
+
+The study featured an experiment that consisted of the following:
+
+a. Families were invited to a lab and were asked to eat a meal together. 
+
+b. Using accelerometers, we time-stamped the action of taking a bite.
+
+c. Data was then cleaned and processed to obtain the time stamps of each bite (verified using video recordings of the event).
+
+The null hypothesis was then: "The sequence of bites for Person $i$ and $j$ are independent (*i.e.*, no mimicry)." To test this hypothesis, we used a permutation test. The test consisted of the following:
+
+1. For each pair of persons $i$ and $j$, we calculated the average time gap between their bites.
+
+2. We then generated a null distribution by shuffling the time blocks of each person, i.e., for each dyad:
+
+    a. For each individual, we computed the sequence of time gaps between bites (time between bites each person took).
+
+    b. Using that sequence, we then simulated a new sequence of bites for each individual, fixing the individual level time gap distribution.
+
+    c. Once shuffled, we then computed the average time gap per dyad.
+
+3. Finally, we used the generated null distribution to assess the prevalence of social mimicry. The next figure shows the results for one dyad:
+
+
+![Null distribution of average time gap between person $i$ and person $j$ -- reproduced from @bellSensingEatingMimicry2019](figs/mimicry.png)
 
 ## Case 2: Imaginary motifs
 
 In @tanakaImaginaryNetworkMotifs2024, we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing.
 
-## Case 3: Police use of force
+![](figs/imaginary.png)
 
-@ouelletOfficerNetworksFirearm2023
+\newcommand{\Nett}{\mathbf{T}}
+\newcommand{\nett}[1]{t_{#1}}
+\newcommand{\Netp}{\mathbf{P}}
+\newcommand{\netp}[1]{p_{#1}}
+\newcommand{\stat}[1]{s\left(#1\right)}
+<!-- \newcommand{\chng}[1]{\delta\left(#1: 0\to 1\right)} -->
+
+\renewcommand{\Pr}[1]{\text{Pr}\left(#1\right)}
+\newcommand{\Prcond}[2]{\Pr{\left.\vphantom{#2}#1\right|#2}}
+
+\newcommand{\leftm}[0]{\hspace{.5cm}}
+
+The process can be described as follows:
+
+\begin{equation}
+    \Prcond{\netp{ij} = 1}{\nett{ij} = 1} = \left\{\begin{array}{ll}%
+    |\sum_{\oplus(k)}\nett{nm}|^{-1}\sum_{\oplus(k)}\netp{nm}\nett{nm} &\text{if}\; k \in \{i, j\} \\
+    |\sum_{\oplus(k)^{\complement}}\nett{nm}|^{-1}\sum_{\oplus(k)^\complement}\netp{nm}\nett{nm} &\text{otherwise},
+    \end{array}\right.
+\end{equation}
+
+\begin{equation}
+    \Prcond{\netp{ij} = 0}{\nett{ij} = 0} = \left\{\begin{array}{ll}%
+    |\sum_{\oplus(k)}(1-\nett{nm})|^{-1}\sum_{\oplus(k)}(1-\netp{nm}\nett{nm}) &\text{if}\; k \in \{i, j\} \\
+    |\sum_{\oplus(k)^{\complement}}(1-\nett{nm})|^{-1}\sum_{\oplus(k)^\complement}(1-\netp{nm}\nett{nm}) &\text{otherwise},
+    \end{array}\right.
+\end{equation}
+
+\noindent where, $\oplus(k) \equiv \left\{(m,n) : (m = k) \oplus (n = k)\right\}$ is the set of ties involving $k$, and $\oplus(k)^\complement$ is its complement. 
+
+Each sampled perceived graph was $\Netp^b_l$--\textit{b}-th sampled graph for each individual \textit{l}. We then counted the dyadic imaginary network motifs, $\tau_l^b \equiv \stat{\Nett, \Netp^b}$; the same was done to the observed graphs, $\hat{\tau}_l \equiv \stat{\Nett, \Netp}$. Finally, we calculated a \emph{p}-value using the equal-tail nonparametric test drawing $B = 2,000$ samples recommend 1,000 minimum) from the null distribution, comparing the observed imaginary motif counts, $\hat\tau_l$, and what we would expect to see by chance, $\{\tau^b_l\}_{b=1}^B$:
+
+\begin{equation}
+    \hat{p}(\hat{\tau_l}) = 2\times \min\left[\frac{1}{B}\sum_{b}I(\tau^b_l \leq \hat{\tau_l}), \frac{1}{B}\sum_{b}I(\tau^b_l > \hat{\tau_l})\right]
+\end{equation}
+
+<!-- ## Other cases
+
+- Police use of force @ouelletOfficerNetworksFirearm2023
 
 ## Case 4: Network bootstrap
 
-## Case 5: Network matching
+## Case 5: Network matching -->
