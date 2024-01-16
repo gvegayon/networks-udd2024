@@ -2,8 +2,24 @@
 title: Odd balls
 ---
 
+Many times the existing methods are not enough to answer the questions we have. Most of the time, non-parametric statistics are the answer. In this section, we will discuss some of the cases where we had to use non-parametric statistics.
+
+## Non-parametric statistics
+
+Non-parametric statistics are statistical methods in which parametric assumptions such as probability function or model parameters are not made. In other words, non-parametric statistics are distribution-free methods. With many non-parametric methods, simulation-based methods are the most commonly used.
+
+## Case 1: Social mimicry
 
 Other common scenarios involve more convoluted/complex questions. For instance, in the case of dyadic behavior @bellSensingEatingMimicry2019.
 
+## Case 2: Imaginary motifs
+
 In @tanakaImaginaryNetworkMotifs2024, we study the prevalence of perception-based network motifs. While the ERGM framework would be a natural choice, as a first approach, we used non-parametric tests for hypothesis testing.
 
+## Case 3: Police use of force
+
+@ouelletOfficerNetworksFirearm2023
+
+## Case 4: Network bootstrap
+
+## Case 5: Network matching
