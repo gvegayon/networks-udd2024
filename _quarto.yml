@@ -6,6 +6,7 @@ execute:
   cache: true
 
 book:
+  google-analytics: G-YCY24Z74EY
   title: Statistical Inference in Network Science
   subtitle: UDD networks 2024
   author: George G. Vega Yon, Ph.D.
