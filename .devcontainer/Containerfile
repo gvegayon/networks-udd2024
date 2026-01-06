@@ -20,7 +20,7 @@ libglpk-dev
 RUN apt-get update && apt-get install --no-install-recommends -y pre-commit nano
 
 # Adding R packages
-RUN install2.r --error data.table netplot netdiffuseR \
+RUN install2.r --error data.table netplot netdiffuseR gridExtra \
   devtools decor DiagrammeR igraph statnet spdep spatialreg RSiena ergmito
 
 RUN Rscript --vanilla -e "install.packages( \
