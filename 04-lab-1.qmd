@@ -46,6 +46,6 @@ density(z) |> plot()
 
 ## Random graphs
 
-1. Write a function to simulate Bernoulli graph, but instead of evaluating each $(i,j)$ tie individually like in @er-code, use a binomial random number to identify how many edges the graph will have, and randomly pick which will those be from the set $V\times V$
+1. Write a function to simulate Bernoulli graph, but instead of evaluating each $(i,j)$ tie individually like in @01-er-random, use a binomial random number to identify how many edges the graph will have, and randomly pick which will those be from the set $V\times V$
 
 2. Using a Generalized-Linear-Model [GLM], estimate the density parameter of the previous graph.

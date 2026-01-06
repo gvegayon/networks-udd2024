@@ -8,11 +8,50 @@ title: Overview
 
 Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you--we will be brief--but I want to ensure we are all on the same page.
 
+## Why networks
+
+Networks are a fundamental part—the cornerstone—of complexity science. Most, if not all, questions in complex systems models involve some type of network. As we would expect, dealing with networks can be, well, complex. Unlike other data types, networks are inherently endogenous: the relationships between entities are not independent observations but rather interconnected in ways that influence one another. From the statistical perspective, this means that regular inference methods do not apply in this context. This is precisely why we have an entire field dedicated to understanding and analyzing networks.
+
+Depending on your background (and, to a lesser extent, the question you are trying to answer), there are two main approaches to studying networks. The first is **Network Science**, which largely emerges from the natural sciences. Researchers in this tradition are typically interested in identifying laws or other general patterns governing network structure and dynamics; much of the work focuses on network prediction. The second approach is **Social Network Analysis (SNA)**, which, as the name suggests, comes from the social sciences. While SNA researchers are also interested in general patterns, contextual information and the particular application are highly relevant. Much of the work centers on network-based inference, and although the network itself is key, it often goes hand-in-hand with understanding behavior.
+
+In this course, we will be looking into network inference in general. Although most of the methodologies described here come from SNA, they are easy to port to other fields and types of questions. To illustrate the breadth of network science, consider a few example questions we can try to address: What would be the best strategy to launch a public health campaign in a school? How do two species compare in a given phenotype, and can we do inference directly from their interaction networks? What marks the success of a weight loss program, and how big of a role do social networks play in it?
+
+## Network data
+
+The networks we will be studying here can be formally described as a tuple $G \equiv \{V, E\}$, where $V = \{v_1, v_2, \ldots, v_n\}$ is the set of $n$ vertices (also called actors or nodes) and $E \subseteq V \times V$ is the set of edges (also called ties or links). Each edge $e_{ij} \in E$ represents a connection between nodes $i$ and $j$. Edges can be either binary (present or absent) or weighted, where the weight captures the strength or intensity of the relationship. When the network is directed, we distinguish between the source (or ego)—the node that originates the tie—and the target (or alter)—the node that receives it.
+
+Networks can vary in their structure and complexity. A **unimodal** (or one-mode) network is one where all nodes are of the same type, such as a friendship network among students. In contrast, **multimodal** networks (most commonly bimodal or bipartite) contain nodes of different types; for example, a network connecting authors to papers. Networks can also represent multiple types of ties simultaneously, forming what we call **multiplex networks**. In an organization, for instance, friendship, mentorship, and communication networks coexist among the same set of individuals. Adding further complexity, edges can extend beyond pairs to connect arbitrary sets of nodes, giving rise to **hypergraphs** or hyper-networks.
+
+### Representing network data
+
+Network data can be stored and manipulated in various ways. One of the most common representations is an **edge list**, a simple two-column format where each row describes a tie:
+
+| ego | alter |
+|-----|-------|
+| 0   | 1     |
+| 0   | 2     |
+| 4   | 1     |
+
+The same network can be represented as an **adjacency matrix** $\mathbf{A}$, an $n \times n$ matrix where entry $A_{ij}$ indicates the presence (or weight) of an edge from node $i$ to node $j$. For an undirected, unweighted network, $A_{ij} = 1$ if nodes $i$ and $j$ are connected and $A_{ij} = 0$ otherwise. The adjacency matrix is symmetric for undirected networks ($A_{ij} = A_{ji}$). For the edge list above (assuming 5 nodes labeled 0–4), the adjacency matrix would be:
+
+$$
+\mathbf{A} = \begin{pmatrix}
+0 & 1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0
+\end{pmatrix}
+$$
+
+Although adjacency matrices use more memory than edge lists—$O(n^2)$ versus $O(|E|)$—they are convenient from a mathematical perspective and allow us to leverage linear algebra for network computations.
+
+
 ## Programming with R
 
-The R programming language [@R] is the defacto language for social network analysis[^notfornetsci]. Furthermore, R homes the most comprehensive collection of packages implementing the methods we will cover here. Let's start by the fundamentals
+The R programming language [@R] is the de facto language for social network analysis[^notfornetsci]. Furthermore, R is home to the most comprehensive collection of packages implementing the methods we will cover here. Let's start with the fundamentals.
 
-[^notfornetsci]: Although, not for network science in general.
+[^notfornetsci]: This is less true for network science in general, where Python is more prevalent.
 
 ## Getting help
 
@@ -282,7 +321,7 @@ library(ergm)
 
 Generally, statistics are used for two purposes: to describe and to infer. We observe data samples in descriptive statistics, recording and reporting the mean, median, and standard deviation, among other statistics. Statistical inference, on the other hand, is used to infer the properties of a population from a sample, particularly, about population parameters.
 
-![Grad view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](figs/grand-view-stats.jpg){width=70%}
+![Grand view of statistics -- Reproduced from @BasicDefinitionsConcepts2014](figs/grand-view-stats.jpg){width=70%}
 
 From the perspective of network science, descriptive statistics are used to describe the properties of a network, such as the number of nodes and edges, the degree distribution, the clustering coefficient, etc. Statistical inference in network science has to do with addressing questions about the underlying properties of networked systems; some questions include the following:
 
@@ -311,13 +350,13 @@ In a nutshell, hypothesis testing is performed by following these steps:
 
 4. Report the observed effect and p-value, *i.e.*, $\Pr{t \in H_0}$
 
-We usually say that we either *reject the null hypothesis* or *fail to reject it* (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of "suggests evidence for" or "suggests evidence against."
+We usually say that we either *reject the null hypothesis* or *fail to reject it* (we never accept the null hypothesis), but in my view, it is always better to talk about it in terms of "suggests evidence for" or "suggests evidence against."
 
 We will illustrate statistical concepts more concretely in the next section.
 
 ## Statistical programming
 
-Statistical programming (or computing) is the science of leveraging modern computing power to solve statistical problems. The R programming language is the defacto language for statistical programming, and so it has an extensive collection of packages implementing statistical methods and functions. 
+Statistical programming (or computing) is the science of leveraging modern computing power to solve statistical problems. The R programming language is the de facto language for statistical programming, and so it has an extensive collection of packages implementing statistical methods and functions. 
 
 ## Probability distributions
 
@@ -331,7 +370,7 @@ pnorm(0, mean = 0, sd = 1)
 qnorm(0.5, mean = 0, sd = 1)
 ```
 
-Now, if we wanted to know what is the probability of observing a value smaller than -2 comming from a standard normal distribution, we would do:
+Now, if we wanted to know what is the probability of observing a value smaller than -2 coming from a standard normal distribution, we would do:
 
 ```{r}
 #| label: probability-distributions-pnorm
