@@ -64,6 +64,7 @@ Under the hood, the fitting algorithm generates a stream of networks based on th
 ```{r}
 #| label: convergence
 #| message: false
+#| fig.height: 10
 mcmc.diagnostics(model_final, which   = c("plots"))
 ```
 

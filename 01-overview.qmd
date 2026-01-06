@@ -2,6 +2,10 @@
 title: Overview
 ---
 
+<!-- Some math definitions -->
+\renewcommand{\Pr}[1]{\text{Pr}\left(#1\right)}
+\newcommand{\Prcond}[2]{\Pr{\left.\vphantom{#2}#1\right|#2}}
+
 Before jumping into network science details, we need to cover some fundamentals. I assume that most of the contents here are well known to you--we will be brief--but I want to ensure we are all on the same page.
 
 ## Programming with R
@@ -305,7 +309,7 @@ In a nutshell, hypothesis testing is performed by following these steps:
 
 [^pvaluegelman]: The discussion about interpreting p-values and hypothesis testing is vast and relevant. Although we will not review this here, I recommend looking into the work of Andrew Gelman @gelmanFailureNullHypothesis2018.
 
-4. Report the observed effect and p-value, *i.e.*, $\Pr(t \in H_0)$
+4. Report the observed effect and p-value, *i.e.*, $\Pr{t \in H_0}$
 
 We usually say that we either *reject the null hypothesis* or *fail to reject it* (we never accept the null hypothesis,) but, in my view, it is always better to talk about it in terms of "suggests evidence for" or "suggests evidence against."
 
@@ -343,7 +347,7 @@ How many probability distributions are implemented in R's stats package?
 
 ## Random number generation
 
-Random numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers. These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the `r` function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:
+Random numbers, and more precisely, pseudo-random numbers, are a vital component of statistical programming. Pure randomness is hard to come by, and so we rely on pseudo-random number generators (PRNGs) to generate random numbers (although quantum computing is changing the paradigm). These generators are deterministic algorithms that produce sequences of numbers we can then use to generate random samples from probability distributions. Because of the latter, PRNGs need a starting point called the seed. As a statistical computing program, R has a variety of PRNGs. As suggested in the previous subsection, we can generate random numbers from a probability distribution with the `r` function. In what follows, we will draw random numbers from a few distributions and plot histograms of the results:
 
 ```{r}
 #| label: random-number-generation
