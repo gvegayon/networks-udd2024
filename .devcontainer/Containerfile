@@ -1,0 +1,34 @@
+FROM ghcr.io/rocker-org/devcontainer/geospatial:4.5
+
+# RUN \
+#   echo 'options(repos=c(CRAN="https://packagemanager.posit.co/cran/__linux__/bookworm/latest"))' >> ~/.Rprofile && \
+#   Rscript --vanilla -e 'getOption("repos")'
+
+# # Installing pdflatex via tinytex
+# RUN install2.r --error tinytex && \
+#   Rscript --vanilla -e "tinytex::install_tinytex()" && \
+#   # cat "export PATH=/root/bin:$PATH" >> /root/.bashrc && \
+#   apt-get update && apt-get install --no-install-recommends -y tidy
+
+
+RUN install2.r --error languageserver && \
+installGithub.r nx10/httpgd
+
+RUN apt-get update && apt-get install --no-install-recommends -y \
+libglpk-dev
+
+RUN apt-get update && apt-get install --no-install-recommends -y pre-commit nano
+
+# Adding R packages
+RUN install2.r --error data.table netplot netdiffuseR gridExtra \
+  devtools decor DiagrammeR igraph statnet spdep spatialreg RSiena ergmito
+
+RUN Rscript --vanilla -e "install.packages( \
+  'defm', \
+  repos = c(\
+    'https://uofuepibio.r-universe.dev', \
+    'https://cloud.r-project.org' \
+  ) \
+)"
+
+CMD ["bash"]

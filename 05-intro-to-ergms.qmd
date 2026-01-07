@@ -12,7 +12,6 @@ title: Introduction to ERGMs
 pp <- function(x) {
   sprintf("%.2f", x)
 }
-
 ```
 
 ::: {.content-hidden when-format="pdf"}

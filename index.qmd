@@ -1,8 +1,7 @@
 ---
 title: Home
+date-modified: 2026-01-07
 ---
-
-## Introduction {.unnumbered}
 
 If you are reading this, it is because you know that networks are everywhere. Network science is a rapidly growing field that has been applied to many different disciplines, from biology to sociology, from computer science to physics. In this course, we will go over advanced network science topics; particularly, statistical inference in networks. The course contents are:
 
@@ -24,7 +23,7 @@ If you are reading this, it is because you know that networks are everywhere. Ne
 
 ## About the author {.unnumbered}
 
-[Dr. George G. Vega Yon](https://ggvy.cl){target="_blank"} is an Assistant Professor of Research at the Division of Epidemiology at the University of Utah and a Lead Scientist at Booz Allen Hamilton. He studies Complex Systems using Statistical Computing. George has over ten years of experience developing scientific software focusing on high-performance computing, data visualization, and social network analysis. His training is in Public Policy (M.A. UAI, 2011), Economics (M.Sc. Caltech, 2015), and Biostatistics (Ph.D. USC, 2020).
+[Dr. George G. Vega Yon](https://ggvy.cl){target="_blank"} is an Assistant Professor of Research at the Division of Epidemiology at the University of Utah. He studies Complex Systems using Statistical Computing. George has over fifteen years of experience developing scientific software focusing on high-performance computing, data visualization, and social network analysis. His training is in Public Policy (M.A. UAI, 2011), Economics (M.Sc. Caltech, 2015), and Biostatistics (Ph.D. USC, 2020).
 
 Dr. Vega Yon obtained his Ph.D. in Biostatistics under the supervision of Prof. Paul Marjoram and Prof. Kayla de la Haye, with his dissertation titled "Essays on Bioinformatics and Social Network Analysis: Statistical and Computational Methods for Complex Systems."
 

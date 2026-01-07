@@ -163,6 +163,10 @@ One important application of random graphs is motif discovery. The principle is 
 One of the most common ways of generating random graphs is using degree sequence preserving algorithm. Implementations of this can be found in `netdiffuseR` and `igraph`.
 :::
 
+::: {.callout-note title="When to stop"}
+In @rayAreWeThere2012, the authors provide a simple reference for when to stop the MCMC process that generates random graphs via rewiring. Instead of using $|E|\times 100$, they suggest something closer to $|E|\times 16$.
+:::
+
 ## Code example
 
 ```{r}
@@ -196,7 +200,5 @@ plot(table(coded)/nsim*100, type="p", ylab="Frequency %", xlab="Class of graph",
 # Marking the original structure
 baseline <- paste0(as.vector(x), collapse="")
 points(x=7,y=table(as.factor(w))[baseline]/nsim*100, pch=3, col="red")
-
-
 ```
 
