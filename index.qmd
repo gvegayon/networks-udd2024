@@ -3,8 +3,6 @@ title: Home
 date-modified: 2026-01-07
 ---
 
-## Introduction {.unnumbered}
-
 If you are reading this, it is because you know that networks are everywhere. Network science is a rapidly growing field that has been applied to many different disciplines, from biology to sociology, from computer science to physics. In this course, we will go over advanced network science topics; particularly, statistical inference in networks. The course contents are:
 
 - Overview of statistical inference.
